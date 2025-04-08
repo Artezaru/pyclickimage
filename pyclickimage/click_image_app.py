@@ -564,7 +564,7 @@ class ClickImageApp(QtWidgets.QMainWindow):
                 # Use integer coordinates
                 x = int(x) if x is not None else None
                 y = int(y) if y is not None else None
-            self.table.setItem(row, 0, QtWidgets.QTableWidgetItem(str(row + 1)))  # Index
+            self.table.setItem(row, 0, QtWidgets.QTableWidgetItem(str(row)))  # Index
             self.table.setItem(row, 1, QtWidgets.QTableWidgetItem(str(x)))  # Click X
             self.table.setItem(row, 2, QtWidgets.QTableWidgetItem(str(y)))  # Click Y
 
