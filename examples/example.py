@@ -1,9 +1,9 @@
 import cv2
-from pyclickimage import launch_app, ClickManager
+from pyclickimage import ClickManager, run
 
 img = cv2.imread("example.png")
-launch_app(img, "output.csv")
+run(img)
 
-clicks = ClickManager.load_from_csv("output.csv")
+clicks = ClickManager.load_from_csv("clicks.csv")
 default_clicks = clicks.extract_group("default")
 print(default_clicks)

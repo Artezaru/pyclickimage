@@ -23,6 +23,15 @@ The documentation is divided into the following sections:
    ./api
    ./usage
 
+A terminal commmand is created to run the GUI and collect the points on the image. The command is called `pyclickimage-gui` and can be used as follows:
+
+.. code-block:: bash
+
+    pyclickimage-gui
+
+.. image:: ../../pyclickimage/ressources/app.png
+    :align: center
+
 
 Author
 ------

@@ -21,15 +21,15 @@ Then, go to the directory and run the following command:
 
 Use ``-e .[dev]`` to install it with the development dependencies.
 
-Warning
--------
 
-This package use ``PyQt5`` to display the GUI. 
-If you have ``opencv-python`` installed on your environment, it will should be replaced by ``opencv-python-headless`` to avoid conflicts.
-This package is not compatible with the full ``opencv-python``.
+.. warning::
 
-.. code-block:: bash
+    This package use ``PyQt5`` to display the GUI. 
+    If you have ``opencv-python`` installed on your environment, it will should be replaced by ``opencv-python-headless`` to avoid conflicts.
+    This package is not compatible with the full ``opencv-python``.
 
-    pip uninstall opencv-python
-    pip install opencv-python-headless
+    .. code-block:: bash
+
+        pip uninstall opencv-python
+        pip install opencv-python-headless
 

@@ -1,3 +1,7 @@
+import argparse
+import cv2
+from .run import run
+
 def __main__() -> None:
     r"""
     Main entry point of the package.
@@ -8,7 +12,9 @@ def __main__() -> None:
         pyclickimage
         
     """
-    raise NotImplementedError("The main entry point is not implemented yet.")
+    raise NotImplementedError("This is a placeholder for the main entry point of the package. Use 'pyclickimage-gui' to run the GUI application.")
+
+
 
 def __main_gui__() -> None:
     r"""
@@ -18,7 +24,30 @@ def __main_gui__() -> None:
 
     .. code-block:: console
         pyclickimage-gui
+
+    This will launch the GUI application for image clicking and saving coordinates.
+
+    You can also specify an image file to be displayed ``--image`` or ``-i`` and a CSV file path to save the click coordinates ``--output`` or ``-o``.
         
     """
-    raise NotImplementedError("The graphical user interface entry point is not implemented yet.")
+    # Parser for command line arguments
+    parser = argparse.ArgumentParser(description="PyClickImage GUI application.")
+    parser.add_argument(
+        "-i", "--image", type=str, help="Path to the image file to be displayed."
+    )
+    parser.add_argument(
+        "-o",
+        "--output",
+        type=str,
+        help="Path to save the CSV file with click coordinates.",
+    )
+    args = parser.parse_args()
+
+    if args.image is not None:
+        image = cv2.imread(args.image)
+    else:
+        image = None
+
+    # Launch the GUI application
+    run(image=image, output_csv_path=args.output)
 
