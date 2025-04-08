@@ -1,7 +1,9 @@
 import sys
 from PyQt5 import QtWidgets, QtGui, QtCore
+import numpy
 import cv2
 from .click_manager import ClickManager
+from typing import Optional
 
 
 class ClickImageApp(QtWidgets.QMainWindow):
@@ -11,13 +13,13 @@ class ClickImageApp(QtWidgets.QMainWindow):
 
     Parameters
     ----------
-    image : cv2 Image
-        The input image loaded via OpenCV.
+    image : Optional[numpy.ndarray]
+        The input image to be displayed, loaded in GRAY or BGR format using OpenCV.
     output_csv_path : str
         The path where the output csv file will be saved.
     """
 
-    def __init__(self, image, output_csv_path: str):
+    def __init__(self, image: numpy.ndarray, output_csv_path: str):
         """
         Initialize the application with the given image and output path for CSV.
 
@@ -29,7 +31,9 @@ class ClickImageApp(QtWidgets.QMainWindow):
             Path to save the data of clicks to a CSV file.
         """
         super().__init__()
-        self.image = image
+
+        self.set_image(image)
+
         self.click_manager = ClickManager()
         self.setWindowTitle("Click Image UI")
 
@@ -71,6 +75,19 @@ class ClickImageApp(QtWidgets.QMainWindow):
         side_panel_widget.setMinimumWidth(350)  # Fixed width for the side panel
         layout.addWidget(side_panel_widget)
 
+        # Group 0: Load Image
+        load_image_group = QtWidgets.QGroupBox("Load Image")
+        load_image_layout = QtWidgets.QVBoxLayout()
+        load_image_group.setLayout(load_image_layout)
+        load_image_group.setStyleSheet("font-weight: bold;")
+
+        # Load Image button
+        load_image_button = QtWidgets.QPushButton("Load Image")
+        load_image_button.clicked.connect(self._load_image)
+        load_image_layout.addWidget(load_image_button)
+
+        side_panel.addWidget(load_image_group)
+
         # Group 1: Click settings
         click_settings_group = QtWidgets.QGroupBox("Click Settings")
         click_settings_layout = QtWidgets.QVBoxLayout()
@@ -108,24 +125,47 @@ class ClickImageApp(QtWidgets.QMainWindow):
         display_options_group.setLayout(display_options_layout)
         display_options_group.setStyleSheet("font-weight: bold;")
 
+        # Colormap selector
+        self.colormap_selector = QtWidgets.QComboBox()
+        self.colormap_selector.addItem("Default")
+        self.colormap_selector.addItem("Gray")
+        self.colormap_selector.addItem("Hot")
+        self.colormap_selector.addItem("Jet")
+        self.colormap_selector.addItem("Rainbow")
+        self.colormap_selector.addItem("Cool")
+        self.colormap_selector.addItem("Spring")
+        self.colormap_selector.setCurrentIndex(0)  # Default to "Default"
+        self.colormap_selector.currentIndexChanged.connect(self.update)
+        display_options_layout.addWidget(QtWidgets.QLabel("Colormap:"))
+        display_options_layout.addWidget(self.colormap_selector)
+
         # Color selector
         self.color_selector = QtWidgets.QComboBox()
         self.color_selector.addItem("Red")
         self.color_selector.addItem("Green")
         self.color_selector.addItem("Blue")
         self.color_selector.addItem("Yellow")
+        self.color_selector.addItem("White")
+        self.color_selector.addItem("Black")
+        self.color_selector.addItem("Cyan")
+        self.color_selector.addItem("Magenta")
+        self.color_selector.addItem("Gray")
+        self.color_selector.setCurrentIndex(0)  # Default to "Red"
         self.color_selector.currentIndexChanged.connect(self.update)
         display_options_layout.addWidget(QtWidgets.QLabel("Click Color:"))
         display_options_layout.addWidget(self.color_selector)
 
         # Dropdown to choose circle size
         self.circle_size_selector = QtWidgets.QComboBox()
+        self.circle_size_selector.addItem("Extra Small (XS)")
         self.circle_size_selector.addItem("Tiny")
         self.circle_size_selector.addItem("Small")
         self.circle_size_selector.addItem("Medium")
         self.circle_size_selector.addItem("Large")
+        self.circle_size_selector.addItem("Extra Large (XL)")
+        self.circle_size_selector.addItem("Huge")
         self.circle_size_selector.currentIndexChanged.connect(self.update)
-        self.circle_size_selector.setCurrentIndex(1)  # Default to "Small"
+        self.circle_size_selector.setCurrentIndex(2)  # Default to "Small"
         display_options_layout.addWidget(QtWidgets.QLabel("Circle Size:"))
         display_options_layout.addWidget(self.circle_size_selector)
 
@@ -134,6 +174,12 @@ class ClickImageApp(QtWidgets.QMainWindow):
         self.display_click_checkbox.setChecked(True)  # By default, display clicks
         self.display_click_checkbox.stateChanged.connect(self.update)
         display_options_layout.addWidget(self.display_click_checkbox)
+
+        # Checkbox to control if the clicks should be filled
+        self.fill_click_checkbox = QtWidgets.QCheckBox("Fill Circles")
+        self.fill_click_checkbox.setChecked(False)  # By default, do not fill circles
+        self.fill_click_checkbox.stateChanged.connect(self.update)
+        display_options_layout.addWidget(self.fill_click_checkbox)
 
         side_panel.addWidget(display_options_group)
 
@@ -173,6 +219,11 @@ class ClickImageApp(QtWidgets.QMainWindow):
         self.remove_last_click_button.clicked.connect(self._remove_last_click)
         table_layout.addWidget(self.remove_last_click_button)
 
+        # Button to clear all clicks in the current group
+        self.remove_all_clicks_button = QtWidgets.QPushButton("Clear All Clicks")
+        self.remove_all_clicks_button.clicked.connect(self._remove_all_clicks)
+        table_layout.addWidget(self.remove_all_clicks_button)
+
         side_panel.addWidget(self.table_group)
 
         side_panel.addStretch()  # Allow flexibility to expand vertically as needed
@@ -185,25 +236,78 @@ class ClickImageApp(QtWidgets.QMainWindow):
         """
         if not self.initialization_done:
             return
+        self._update_group_selector()
         self._update_display()
         self._update_table()
+
+    
+    def set_image(self, image: Optional[numpy.ndarray]):
+        """
+        Set the image to be displayed in the application.
+        
+        Parameters
+        ----------
+        image : Optional[numpy.ndarray]
+            The image to be displayed, loaded in BGR format using OpenCV.
+        """
+        if image is None:
+            image = None
+        
+        image = numpy.array(image)
+        if image.ndim == 2:  # If the image is grayscale
+            image = cv2.cvtColor(image, cv2.COLOR_GRAY2BGR)  # Convert to BGR
+        if image.ndim != 3 or image.shape[2] != 3:
+            raise ValueError("Image must be in BGR format with 3 channels.")
+        
+        self.image = image
+
+
+    def _load_image(self):
+        """
+        Open a file dialog to load an image and update the display.
+        """
+        file_dialog = QtWidgets.QFileDialog(self)
+        file_dialog.setNameFilter("Images (*.png *.jpg *.bmp *.tiff)")  # Set file filter for image types
+        file_dialog.setAcceptMode(QtWidgets.QFileDialog.AcceptOpen)
+        file_dialog.setOption(QtWidgets.QFileDialog.ReadOnly)
+
+        if file_dialog.exec_():
+            file_path = file_dialog.selectedFiles()[0]
+            image = cv2.imread(file_path)
+            if image is None:
+                QtWidgets.QMessageBox.warning(self, "Error", "Failed to load image.")
+                return
+            self.set_image(image)
+        
+        self.click_manager = ClickManager()  # Reset click manager for new image
+        self.update()  # Update the display after loading a new image
+
 
     def _update_display(self):
         """
         Convert the OpenCV image to a Qt image and display it scaled.
         Additionally, display the clicks for the current group.
         """
-        rgb_image = cv2.cvtColor(self.image, cv2.COLOR_BGR2RGB)
-        h, w, ch = rgb_image.shape
+        colormap = self._get_selected_colormap()
+        if colormap is not None:
+            # Convert the image to grayscale and apply the colormap
+            image_bw = cv2.cvtColor(self.image, cv2.COLOR_BGR2GRAY)
+            image = cv2.applyColorMap(image_bw, colormap)
+        else:
+            image = self.image
+        image = cv2.cvtColor(image, cv2.COLOR_BGR2RGB)  # Convert BGR to RGB for Qt
+
+        # Set the image to the label
+        h, w, ch = image.shape
         bytes_per_line = ch * w
-        q_image = QtGui.QImage(rgb_image.data, w, h, bytes_per_line, QtGui.QImage.Format_RGB888)
+        q_image = QtGui.QImage(image.data, w, h, bytes_per_line, QtGui.QImage.Format_RGB888)
         pixmap = QtGui.QPixmap.fromImage(q_image)
 
-        # Draw the clicks of the current group on the image
         self._draw_clicks_on_image(pixmap)
 
         self.original_pixmap = pixmap
         self._resize_image()
+
 
     def _resize_image(self):
         """
@@ -220,11 +324,13 @@ class ClickImageApp(QtWidgets.QMainWindow):
 
             self.image_label.setPixmap(scaled_pixmap)
 
+
     def resizeEvent(self, event):
         """
         Triggered when the window is resized. Rescale the image accordingly.
         """
         self._resize_image()
+
 
     def _on_mouse_click(self, event):
         """
@@ -264,6 +370,7 @@ class ClickImageApp(QtWidgets.QMainWindow):
 
         self.update()
 
+
     def _draw_clicks_on_image(self, pixmap: QtGui.QPixmap):
         """
         Draw the clicks on the current image with the selected color and size,
@@ -276,6 +383,9 @@ class ClickImageApp(QtWidgets.QMainWindow):
         color = self._get_selected_color()
         pen = QtGui.QPen(color)
         painter.setPen(pen)
+
+        fill_color = color if self.fill_click_checkbox.isChecked() else QtCore.Qt.transparent
+        painter.setBrush(QtGui.QBrush(fill_color))
 
         # Get the size of the circle
         circle_size = self._get_selected_circle_size()
@@ -290,6 +400,7 @@ class ClickImageApp(QtWidgets.QMainWindow):
 
         painter.end()
 
+
     def _get_selected_circle_size(self):
         """
         Get the selected circle size for drawing clicks.
@@ -300,12 +411,16 @@ class ClickImageApp(QtWidgets.QMainWindow):
             The size of the circle to draw.
         """
         size_map = {
+            "Extra Small (XS)": 2,
             "Tiny": 5,
             "Small": 10,
             "Medium": 15,
             "Large": 20,
+            "Extra Large (XL)": 25,
+            "Huge": 30,
         }
         return size_map.get(self.circle_size_selector.currentText(), 10)  # Default to "Small"
+
 
     def _get_selected_color(self):
         """
@@ -321,8 +436,35 @@ class ClickImageApp(QtWidgets.QMainWindow):
             "Green": QtGui.QColor(0, 255, 0),
             "Blue": QtGui.QColor(0, 0, 255),
             "Yellow": QtGui.QColor(255, 255, 0),
+            "White": QtGui.QColor(255, 255, 255),
+            "Black": QtGui.QColor(0, 0, 0),
+            "Cyan": QtGui.QColor(0, 255, 255),
+            "Magenta": QtGui.QColor(255, 0, 255),
+            "Gray": QtGui.QColor(128, 128, 128),
         }
         return color_map.get(self.color_selector.currentText(), QtGui.QColor(255, 0, 0))
+    
+
+    def _get_selected_colormap(self):
+        """
+        Get the selected colormap for displaying the image.
+
+        Returns
+        -------
+        str
+            The selected colormap.
+        """
+        colormap_map = {
+            "Default": None,
+            "Gray": cv2.COLORMAP_BONE,
+            "Hot": cv2.COLORMAP_HOT,
+            "Jet": cv2.COLORMAP_JET,
+            "Rainbow": cv2.COLORMAP_RAINBOW,
+            "Cool": cv2.COLORMAP_COOL,
+            "Spring": cv2.COLORMAP_SPRING,
+        }
+        return colormap_map.get(self.colormap_selector.currentText(), None)
+
 
     def _on_group_changed(self, text):
         """
@@ -331,15 +473,30 @@ class ClickImageApp(QtWidgets.QMainWindow):
         self.click_manager.set_group(text)
         self.update()
 
+
     def _add_group(self):
         """
         Show dialog to add a new group.
         """
         name, ok = QtWidgets.QInputDialog.getText(self, "Add Group", "Group name:")
         if ok and name and name not in self.click_manager.groups:
-            self.group_selector.addItem(name)
-            self.group_selector.setCurrentText(name)
-        self.update()
+            self.click_manager.set_group(name)
+        self.update()  # Update the display after adding a new group
+
+    
+    def _update_group_selector(self):
+        """
+        Update the group selector with the current groups.
+        """
+        # Disable the signals
+        self.group_selector.blockSignals(True)
+        self.group_selector.clear()
+        for group in self.click_manager.groups:
+            self.group_selector.addItem(group)
+        self.group_selector.setCurrentText(self.click_manager.current_group)
+        self.group_selector.blockSignals(False)
+
+
 
     def _rename_group(self):
         """
@@ -348,32 +505,32 @@ class ClickImageApp(QtWidgets.QMainWindow):
         old_name = self.group_selector.currentText()
         new_name, ok = QtWidgets.QInputDialog.getText(self, "Rename Group", "New name:", text=old_name)
         if ok and new_name and new_name != old_name:
-            try:
-                self.click_manager.rename_group(old_name, new_name)
-                idx = self.group_selector.findText(old_name)
-                self.group_selector.setItemText(idx, new_name)
-                self.group_selector.setCurrentText(new_name)
-            except KeyError:
-                QtWidgets.QMessageBox.warning(self, "Error", f"Group '{old_name}' does not exist.")
+            self.click_manager.rename_group(old_name, new_name)
         self.update()
+
 
     def _remove_last_click(self):
         """
         Remove the last click from the current group.
         """
-        if len(self.click_manager.groups[self.click_manager.current_group]) > 0:
-            # Suppression du dernier clic du groupe actuel
-            self.click_manager.groups[self.click_manager.current_group].pop()
-            self.update()  # Mise à jour de l'interface après suppression
-        else:
-            QtWidgets.QMessageBox.warning(self, "No Clicks", "There are no clicks to remove.")
+        current_group = self.click_manager.extract_group()
+        self.click_manager.remove_click(len(current_group) - 1)
+        self.update()
+
+
+    def _remove_all_clicks(self):
+        """
+        Remove all clicks from the current group.
+        """
+        self.click_manager.clear_group()
+        self.update()
 
 
     def _update_table(self):
         """
         Update the table displaying the clicks in the current group.
         """
-        current_group = self.click_manager.groups[self.click_manager.current_group]
+        current_group = self.click_manager.extract_group()
         self.table.setRowCount(len(current_group))
 
         for row, (x, y) in enumerate(current_group):
