@@ -4,7 +4,7 @@ Welcome to pyclickimage's documentation!
 Description of the package
 --------------------------
 
-UI to collect 2D-coordinates of points on an image
+UI to collect 2D-coordinates of points on an image.
 
 Contents
 --------
