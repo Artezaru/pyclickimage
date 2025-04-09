@@ -7,7 +7,7 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>pyclickimage.click_image_app &#8212; pyclickimage 0.2.2 documentation</title>
+    <title>pyclickimage.click_image_app &#8212; pyclickimage 0.2.3 documentation</title>
   
   
   
@@ -37,7 +37,7 @@
   <link rel="preload" as="script" href="../../_static/scripts/bootstrap.js?digest=8878045cc6db502f8baf" />
 <link rel="preload" as="script" href="../../_static/scripts/pydata-sphinx-theme.js?digest=8878045cc6db502f8baf" />
 
-    <script src="../../_static/documentation_options.js?v=000c92bf"></script>
+    <script src="../../_static/documentation_options.js?v=a47416a6"></script>
     <script src="../../_static/doctools.js?v=9a2dae69"></script>
     <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
     <script>DOCUMENTATION_OPTIONS.pagename = '_modules/pyclickimage/click_image_app';</script>
@@ -107,7 +107,7 @@
   
   
   
-    <p class="title logo__title">pyclickimage 0.2.2 documentation</p>
+    <p class="title logo__title">pyclickimage 0.2.3 documentation</p>
   
 </a></div>
     
@@ -602,7 +602,7 @@
 <span class="sd">        Open a file dialog to load an image and update the display.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="n">file_dialog</span> <span class="o">=</span> <span class="n">QtWidgets</span><span class="o">.</span><span class="n">QFileDialog</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span>
-        <span class="n">file_dialog</span><span class="o">.</span><span class="n">setNameFilter</span><span class="p">(</span><span class="s2">&quot;Images (*.png *.jpg *.bmp *.tiff)&quot;</span><span class="p">)</span>  <span class="c1"># Set file filter for image types</span>
+        <span class="n">file_dialog</span><span class="o">.</span><span class="n">setNameFilter</span><span class="p">(</span><span class="s2">&quot;Images (*.png *.PNG *.jpg *.JPG *.jpeg *.JPEG *.bmp *.BMP *.tiff *.TIFF *.tif *.TIF)&quot;</span><span class="p">)</span>
         <span class="n">file_dialog</span><span class="o">.</span><span class="n">setAcceptMode</span><span class="p">(</span><span class="n">QtWidgets</span><span class="o">.</span><span class="n">QFileDialog</span><span class="o">.</span><span class="n">AcceptOpen</span><span class="p">)</span>
         <span class="n">file_dialog</span><span class="o">.</span><span class="n">setOption</span><span class="p">(</span><span class="n">QtWidgets</span><span class="o">.</span><span class="n">QFileDialog</span><span class="o">.</span><span class="n">ReadOnly</span><span class="p">)</span>
 
@@ -626,7 +626,7 @@
 <span class="sd">        Open a file dialog to load clicks from a CSV file.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="n">file_dialog</span> <span class="o">=</span> <span class="n">QtWidgets</span><span class="o">.</span><span class="n">QFileDialog</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span>
-        <span class="n">file_dialog</span><span class="o">.</span><span class="n">setNameFilter</span><span class="p">(</span><span class="s2">&quot;CSV Files (*.csv)&quot;</span><span class="p">)</span>
+        <span class="n">file_dialog</span><span class="o">.</span><span class="n">setNameFilter</span><span class="p">(</span><span class="s2">&quot;CSV Files (*.csv *.CSV)&quot;</span><span class="p">)</span>
         <span class="n">file_dialog</span><span class="o">.</span><span class="n">setAcceptMode</span><span class="p">(</span><span class="n">QtWidgets</span><span class="o">.</span><span class="n">QFileDialog</span><span class="o">.</span><span class="n">AcceptOpen</span><span class="p">)</span>
         <span class="n">file_dialog</span><span class="o">.</span><span class="n">setOption</span><span class="p">(</span><span class="n">QtWidgets</span><span class="o">.</span><span class="n">QFileDialog</span><span class="o">.</span><span class="n">ReadOnly</span><span class="p">)</span>
 
