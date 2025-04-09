@@ -277,7 +277,7 @@ class ClickImageApp(QtWidgets.QMainWindow):
         Open a file dialog to load an image and update the display.
         """
         file_dialog = QtWidgets.QFileDialog(self)
-        file_dialog.setNameFilter("Images (*.png *.jpg *.bmp *.tiff)")  # Set file filter for image types
+        file_dialog.setNameFilter("Images (*.png *.PNG *.jpg *.JPG *.jpeg *.JPEG *.bmp *.BMP *.tiff *.TIFF *.tif *.TIF)")
         file_dialog.setAcceptMode(QtWidgets.QFileDialog.AcceptOpen)
         file_dialog.setOption(QtWidgets.QFileDialog.ReadOnly)
 
@@ -298,7 +298,7 @@ class ClickImageApp(QtWidgets.QMainWindow):
         Open a file dialog to load clicks from a CSV file.
         """
         file_dialog = QtWidgets.QFileDialog(self)
-        file_dialog.setNameFilter("CSV Files (*.csv)")
+        file_dialog.setNameFilter("CSV Files (*.csv *.CSV)")
         file_dialog.setAcceptMode(QtWidgets.QFileDialog.AcceptOpen)
         file_dialog.setOption(QtWidgets.QFileDialog.ReadOnly)
 
