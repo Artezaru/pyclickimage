@@ -422,6 +422,8 @@ class ClickImageApp(QtWidgets.QMainWindow):
         except Exception as e:
             QtWidgets.QMessageBox.critical(self, "Error", f"Failed to save CSV file: {str(e)}")
 
+        self._append_to_log(f"Clicks saved to {file_path} successfully.")
+
 
     def closeEvent(self, event):
         """
@@ -704,7 +706,18 @@ class ClickImageApp(QtWidgets.QMainWindow):
     def _process_right_click(self, x: int, y: int):
         r"""
         Process a right click event on the image viewer.
+
+        Add a click at (None, None) to the current group, which can be useful to skip a click.
         """
-        pass
+        if not self.initialization_done:
+            return
+        
+        if self.click_manager.current_group is None:
+            QtWidgets.QMessageBox.warning(self, "Warning", "Please select a group before clicking.")
+            return
+        
+        # Add a click at (None, None) to the current group
+        self.click_manager.add_click(None, None)
+        self.update()
 
    

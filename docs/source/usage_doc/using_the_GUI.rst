@@ -14,6 +14,7 @@ Adding Clicks
 -----------------
 
 To add clicks to the image, simply click on the desired points (left-click) in the image displayed in the GUI.
+Right-clicking add a point (None, None) to the image, which can be useful to skip a click.
 
 Managing the Click Groups
 --------------------------

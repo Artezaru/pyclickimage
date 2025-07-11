@@ -356,8 +356,8 @@ class ImageViewer(QtWidgets.QGraphicsView):
             return
 
         # Draw the circle at the specified center
-        circle = QtWidgets.QGraphicsEllipseItem(center.x() - self._circles_radius,
-                                                center.y() - self._circles_radius,
+        circle = QtWidgets.QGraphicsEllipseItem(center.x() - self._circles_radius + 0.5,
+                                                center.y() - self._circles_radius + 0.5,
                                                 2 * self._circles_radius, 2 * self._circles_radius)
         
         # Set the pen color and width for the circle
