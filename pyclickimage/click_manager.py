@@ -289,7 +289,7 @@ class ClickManager:
                 group, index, x, y = row
                 if group not in instance.groups:
                     instance.groups[group] = []
-                x = round(x) if x else None
-                y = round(y) if y else None
+                x = round(int(x)) if x else None
+                y = round(int(y)) if y else None
                 instance.groups[group].append((x, y))
         return instance
