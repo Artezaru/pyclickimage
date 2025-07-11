@@ -31,6 +31,8 @@ class ClickImageApp(QtWidgets.QMainWindow):
         # Detect changes
         self._image_has_changed = True
         self._colormap_has_changed = True
+        self._is_empty_image = True
+        self._is_saved = False
 
         # Initialize the click manager and image viewer
         self.set_image(image)
@@ -317,6 +319,9 @@ class ClickImageApp(QtWidgets.QMainWindow):
         if image is None:
             # Default to a blank image if no image is provided
             image = numpy.zeros((512, 512, 3), dtype=numpy.uint8)  # Create a blank black image
+            self._is_empty_image = True
+        else:
+            self._is_empty_image = False
         
         image = numpy.array(image)
         if image.ndim == 2:  # If the image is grayscale
@@ -418,17 +423,34 @@ class ClickImageApp(QtWidgets.QMainWindow):
         
         # Ensure the path can be a correct CSV file
         try:
+            # Ensure the user when erase previous file if exists
+            if os.path.exists(file_path):
+                reply = QtWidgets.QMessageBox.question(self, "Overwrite File",
+                    f"The file {file_path} already exists. Do you want to overwrite it?",
+                    QtWidgets.QMessageBox.Yes | QtWidgets.QMessageBox.No)
+                if reply == QtWidgets.QMessageBox.No:
+                    return
+            # Save the clicks to the CSV file
             self.click_manager.save_to_csv(file_path)
         except Exception as e:
             QtWidgets.QMessageBox.critical(self, "Error", f"Failed to save CSV file: {str(e)}")
 
         self._append_to_log(f"Clicks saved to {file_path} successfully.")
+        self._is_saved = True
 
 
     def closeEvent(self, event):
         """
         Save click data when the window is closed.
         """
+        # Check if the user wants to save before quitting
+        if not self._is_saved:
+            reply = QtWidgets.QMessageBox.question(self, "Save Changes",
+                "You have unsaved changes. Do you want to continue without saving?",
+                QtWidgets.QMessageBox.Yes | QtWidgets.QMessageBox.No)
+            if reply == QtWidgets.QMessageBox.No:
+                event.ignore()  # Ignore the close event
+                return
         event.accept()
 
 
@@ -540,11 +562,20 @@ class ClickImageApp(QtWidgets.QMainWindow):
                 QtWidgets.QMessageBox.warning(self, "Error", "Failed to load image.")
                 return
             
+            if not self._is_empty_image:
+                reply = QtWidgets.QMessageBox.question(self, "Confirm Action",
+                    "Loading a new image will reset the current clicks. Do you want to continue?",
+                    QtWidgets.QMessageBox.Yes | QtWidgets.QMessageBox.No)
+                if reply == QtWidgets.QMessageBox.No:
+                    self._append_to_log("Image loading cancelled by user.")
+                    return
+            
             self.set_image(image)
             self._append_to_log("Image loaded successfully.")
 
         self.click_manager = ClickManager()  # Reset click manager for new image
         self.update()  # Update the display after loading a new image
+        self._is_saved = False  # Reset the saved state after loading a new image
 
     
     def on_load_clicks(self):
@@ -569,6 +600,7 @@ class ClickImageApp(QtWidgets.QMainWindow):
             self._append_to_log("Clicks loaded successfully.")
         
         self.update()
+        self._is_saved = False  # Reset the saved state after loading new clicks
 
 
     def on_colormap_changed(self, index):
@@ -639,6 +671,7 @@ class ClickImageApp(QtWidgets.QMainWindow):
             QtWidgets.QMessageBox.warning(self, "Warning", "Group name already exists or is invalid.")
             self._append_to_log("Failed to add group: name already exists or is invalid.")
         self.update()  # Update the display after adding a new group
+        self._is_saved = False
 
 
     def on_rename_group(self):
@@ -651,6 +684,7 @@ class ClickImageApp(QtWidgets.QMainWindow):
             self.click_manager.rename_group(old_name, new_name)
             self._append_to_log(f"Group '{old_name}' renamed to '{new_name}'.")
         self.update()
+        self._is_saved = False
 
     
     def on_delete_group(self):
@@ -660,6 +694,7 @@ class ClickImageApp(QtWidgets.QMainWindow):
         self._append_to_log("Deleting the current group...")
         self.click_manager.remove_group()
         self.update()
+        self._is_saved = False
 
 
     def on_remove_last_click(self):
@@ -673,17 +708,24 @@ class ClickImageApp(QtWidgets.QMainWindow):
         self.click_manager.remove_click(len(current_group) - 1)
         self._append_to_log("Removing the last click from the current group.")
         self.update()
+        self._is_saved = False
 
 
     def on_remove_all_clicks(self):
         """
         Remove all clicks from the current group.
         """
+        # Ensure the user confirms the action
+        reply = QtWidgets.QMessageBox.question(self, "Confirm Action", 
+            "Are you sure you want to remove all clicks from the current group?",
+            QtWidgets.QMessageBox.Yes | QtWidgets.QMessageBox.No)
+        if reply == QtWidgets.QMessageBox.No:
+            self._append_to_log("Action cancelled: No clicks removed.")
+            return
         self._append_to_log("Removing all clicks from the current group.")
         self.click_manager.clear_group()
         self.update()
-
-
+        self._is_saved = False
         
     def _process_left_click(self, x: int, y: int):
         r"""
@@ -701,6 +743,7 @@ class ClickImageApp(QtWidgets.QMainWindow):
         # Add the click to the current group
         self.click_manager.add_click(x, y)
         self.update()  # Update the display after adding a click
+        self._is_saved = False
 
 
     def _process_right_click(self, x: int, y: int):
@@ -719,5 +762,6 @@ class ClickImageApp(QtWidgets.QMainWindow):
         # Add a click at (None, None) to the current group
         self.click_manager.add_click(None, None)
         self.update()
+        self._is_saved = False
 
    
