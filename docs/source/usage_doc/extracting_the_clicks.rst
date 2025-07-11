@@ -1,7 +1,7 @@
 Extracting the Clicks from CSV
 ==============================
 
-The clicks stored in the ``.csv`` file can be extracted using the ``ClickManager`` class.
+The clicks stored in the ``.csv`` file can be extracted directly or using the ``ClickManager`` class.
 
 To extract the clicks, follow these steps:
 
@@ -23,7 +23,7 @@ Here’s how you can extract the clicks from a CSV file:
     # Print the extracted clicks
     print(default_clicks)
 
-    # Output: [(276.22847682119203, 97.5673076923077), (242.86754966887418, 109.59615384615385)]
+    # Output: [(276, 97), (242, 109), (317, 144), (253, 169)]
 
 In this example:
 

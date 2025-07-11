@@ -72,4 +72,4 @@ You can also specify the output CSV file path where the clicked points will be s
     image = cv2.imread("example.png")
 
     # Run the application with the image and output file path
-    pyclickimage.run(image=image, output_csv_path="output.csv")
+    pyclickimage.run(image=image, output="output.csv")

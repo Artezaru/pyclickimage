@@ -8,6 +8,7 @@ The package ``pyclickimage`` is composed of the following functions, classes, an
     
     ./api_doc/click_image_app
     ./api_doc/click_manager
+    ./api_doc/image_viewer
     ./api_doc/run
 
 To learn how to use the package effectively, refer to the documentation :doc:`../usage`.

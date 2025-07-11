@@ -1,7 +1,7 @@
 import csv
 from collections import defaultdict
 from typing import Tuple, List, Optional
-from numbers import Number
+from numbers import Integral
 
 
 class ClickManager:
@@ -13,14 +13,14 @@ class ClickManager:
 
     Attributes
     ----------
-    groups : dict[str, list[tuple[Optional[Number], Optional[Number]]]]
+    groups : dict[str, list[tuple[Optional[Integral], Optional[Integral]]]]
         A dictionary where keys are group names and values are lists of (x, y) coordinates.
     current_group : str
         The name of the currently active group for storing points.
     """
 
     def __init__(self) -> None:
-        self.groups: dict[str, List[Tuple[Optional[Number], Optional[Number]]]] = defaultdict(list)
+        self.groups: dict[str, List[Tuple[Optional[Integral], Optional[Integral]]]] = defaultdict(list)
         self.set_group("default")
 
     
@@ -88,7 +88,6 @@ class ClickManager:
                 self.set_group("default")
 
 
-
     def rename_group(self, old_name: str, new_name: str) -> None:
         """
         Rename a group.
@@ -116,8 +115,7 @@ class ClickManager:
             self.current_group = new_name
 
 
-    
-    def extract_group(self, group_name: Optional[str] = None) -> List[Tuple[Optional[Number], Optional[Number]]]:
+    def extract_group(self, group_name: Optional[str] = None) -> List[Tuple[Optional[Integral], Optional[Integral]]]:
         """
         Extracts the clicks for the specified group.
 
@@ -129,7 +127,7 @@ class ClickManager:
 
         Returns
         -------
-        List[Tuple[Optional[Number], Optional[Number]]]
+        List[Tuple[Optional[Integral], Optional[Integral]]]
             A list of tuples with the format (Click X, Click Y) for each click in the group.
         """
         if group_name is None:
@@ -141,16 +139,15 @@ class ClickManager:
         return self.groups[group_name]
     
 
-
-    def add_click(self, x: Optional[Number], y: Optional[Number], group_name: Optional[str] = None) -> None:
+    def add_click(self, x: Optional[Integral], y: Optional[Integral], group_name: Optional[str] = None) -> None:
         """
         Add a click (or a placeholder) to a specific group.
 
         Parameters
         ----------
-        x : Optional[Number]
+        x : Optional[Integral]
             The x-coordinate of the click. Use None for placeholder.
-        y : Optional[Number]
+        y : Optional[Integral]
             The y-coordinate of the click. Use None for placeholder.
         group_name : Optional[str]
             The name of the group to add the click to. If None, uses the current group.
@@ -158,18 +155,17 @@ class ClickManager:
         """
         if group_name is None:
             group_name = self.current_group
-        if x is not None and not isinstance(x, Number):
-            raise ValueError("x must be a number or None.")
-        if y is not None and not isinstance(y, Number):
-            raise ValueError("y must be a number or None.")
+        if x is not None and not isinstance(x, Integral):
+            raise ValueError("x must be a integer or None.")
+        if y is not None and not isinstance(y, Integral):
+            raise ValueError("y must be a integer or None.")
 
         if group_name not in self.groups:
             self.groups[group_name] = []
         self.groups[self.current_group].append((x, y))
 
 
-    
-    def get_click(self, index: int, group_name: Optional[str] = None) -> Optional[Tuple[Optional[Number], Optional[Number]]]:
+    def get_click(self, index: int, group_name: Optional[str] = None) -> Optional[Tuple[Optional[Integral], Optional[Integral]]]:
         """
         Extracts a specific click's data by group and index.
 
@@ -182,7 +178,7 @@ class ClickManager:
 
         Returns
         -------
-        Tuple[float, float] or None
+        Tuple[int, int] or None
             A tuple with (Click X, Click Y) or None if not found.
         """
         if group_name is None:
@@ -195,7 +191,6 @@ class ClickManager:
         click_data = self.groups[group_name][index]
         return click_data
     
-
 
     def remove_click(self, index: int, group_name: Optional[str] = None) -> None:
         """
@@ -221,7 +216,6 @@ class ClickManager:
             raise IndexError(f"Click at index {index} does not exist in group '{group_name}'.")
         
         del self.groups[group_name][index]
-    
 
 
     def clear_group(self, group_name: Optional[str] = None) -> None:
@@ -248,7 +242,6 @@ class ClickManager:
         self.groups[group_name].clear()
 
 
-
     def to_dict(self) -> dict:
         """
         Return the internal data as a serializable dictionary.
@@ -261,8 +254,7 @@ class ClickManager:
         return dict(self.groups)
     
 
-
-    def save_to_csv(self, path: str, as_integer: bool = False) -> None:
+    def save_to_csv(self, path: str) -> None:
         """
         Save the click data to a CSV file with columns: Group, Index, Click X, Click Y.
 
@@ -270,17 +262,12 @@ class ClickManager:
         ----------
         path : str
             Path where the CSV file will be saved.
-        as_integer : bool, optional
-            If True, convert x and y coordinates to integers. Default is False.
         """
         with open(path, 'w', newline='', encoding='utf-8') as csvfile:
             writer = csv.writer(csvfile)
             writer.writerow(["Group", "Index", "Click X", "Click Y"])
             for group, points in self.groups.items():
                 for i, (x, y) in enumerate(points):
-                    if as_integer:
-                        x = int(x) if x is not None else None
-                        y = int(y) if y is not None else None
                     writer.writerow([group, i, x if x is not None else '', y if y is not None else ''])
 
 
@@ -302,7 +289,7 @@ class ClickManager:
                 group, index, x, y = row
                 if group not in instance.groups:
                     instance.groups[group] = []
-                x = float(x) if x else None
-                y = float(y) if y else None
+                x = round(x) if x else None
+                y = round(y) if y else None
                 instance.groups[group].append((x, y))
         return instance

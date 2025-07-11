@@ -49,5 +49,5 @@ def __main_gui__() -> None:
         image = None
 
     # Launch the GUI application
-    run(image=image, output_csv_path=args.output)
+    run(image=image, output=args.output)
 

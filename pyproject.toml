@@ -24,7 +24,7 @@ include = ["pyclickimage", "pyclickimage*"]
 exclude = ["laboratory", "laboratory.*", "tests", "tests*", "examples", "examples*"]
 
 [tool.setuptools.package-data]
-"pyclickimage.ressources" = ["*"]
+"pyclickimage.resources" = ["*"]
 
 [project.scripts]
 pyclickimage = "pyclickimage.__main__:__main__"
