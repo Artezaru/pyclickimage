@@ -8,7 +8,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
-    <title>pyclickimage.ClickImageApp &#8212; pyclickimage 0.2.3 documentation</title>
+    <title>pyclickimage.ClickImageApp &#8212; pyclickimage 1.0.0 documentation</title>
   
   
   
@@ -38,7 +38,7 @@
   <link rel="preload" as="script" href="../_static/scripts/bootstrap.js?digest=8878045cc6db502f8baf" />
 <link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=8878045cc6db502f8baf" />
 
-    <script src="../_static/documentation_options.js?v=a47416a6"></script>
+    <script src="../_static/documentation_options.js?v=8d563738"></script>
     <script src="../_static/doctools.js?v=9a2dae69"></script>
     <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
     <script>DOCUMENTATION_OPTIONS.pagename = 'api_doc/click_image_app';</script>
@@ -110,7 +110,7 @@
   
   
   
-    <p class="title logo__title">pyclickimage 0.2.3 documentation</p>
+    <p class="title logo__title">pyclickimage 1.0.0 documentation</p>
   
 </a></div>
     
@@ -267,6 +267,7 @@
   <div class="bd-toc-item navbar-nav"><ul class="current nav bd-sidenav">
 <li class="toctree-l1 current active"><a class="current reference internal" href="#">pyclickimage.ClickImageApp</a></li>
 <li class="toctree-l1"><a class="reference internal" href="click_manager.html">pyclickimage.ClickManager</a></li>
+<li class="toctree-l1"><a class="reference internal" href="image_viewer.html">pyclickimage.ImageViewer</a></li>
 <li class="toctree-l1"><a class="reference internal" href="run.html">pyclickimage.run</a></li>
 </ul>
 </div>
@@ -332,7 +333,7 @@
 <h1>pyclickimage.ClickImageApp<a class="headerlink" href="#pyclickimage-clickimageapp" title="Link to this heading">#</a></h1>
 <dl class="py class">
 <dt class="sig sig-object py" id="pyclickimage.ClickImageApp">
-<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">pyclickimage.</span></span><span class="sig-name descname"><span class="pre">ClickImageApp</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">image</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">ndarray</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">output_csv_path</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/pyclickimage/click_image_app.html#ClickImageApp"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pyclickimage.ClickImageApp" title="Link to this definition">#</a></dt>
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">pyclickimage.</span></span><span class="sig-name descname"><span class="pre">ClickImageApp</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">image</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">ndarray</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">output</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/pyclickimage/click_image_app.html#ClickImageApp"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pyclickimage.ClickImageApp" title="Link to this definition">#</a></dt>
 <dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">QMainWindow</span></code></p>
 <p>A PyQt application to collect mouse clicks on an image,
 grouping them by user-defined categories.</p>
@@ -340,14 +341,33 @@ grouping them by user-defined categories.</p>
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>image</strong> (<em>Optional</em><em>[</em><em>numpy.ndarray</em><em>]</em>) – The input image to be displayed, loaded in GRAY or BGR format using OpenCV.</p></li>
-<li><p><strong>output_csv_path</strong> (<em>Optional</em><em>[</em><em>str</em><em>]</em>) – The path where the output csv file will be saved.</p></li>
+<li><p><strong>output</strong> (<em>Optional</em><em>[</em><em>str</em><em>]</em>) – The path where the output csv file will be saved.</p></li>
 </ul>
 </dd>
 </dl>
 <dl class="py method">
-<dt class="sig sig-object py" id="pyclickimage.ClickImageApp.add_group">
-<span class="sig-name descname"><span class="pre">add_group</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/pyclickimage/click_image_app.html#ClickImageApp.add_group"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pyclickimage.ClickImageApp.add_group" title="Link to this definition">#</a></dt>
-<dd><p>Show dialog to add a new group.</p>
+<dt class="sig sig-object py" id="pyclickimage.ClickImageApp._append_to_log">
+<span class="sig-name descname"><span class="pre">_append_to_log</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">message</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/pyclickimage/click_image_app.html#ClickImageApp._append_to_log"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pyclickimage.ClickImageApp._append_to_log" title="Link to this definition">#</a></dt>
+<dd><p>Append message to the QTextEdit widget.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="pyclickimage.ClickImageApp._init_ui">
+<span class="sig-name descname"><span class="pre">_init_ui</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">output</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/pyclickimage/click_image_app.html#ClickImageApp._init_ui"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pyclickimage.ClickImageApp._init_ui" title="Link to this definition">#</a></dt>
+<dd><p>Initialize the UI layout, widgets, and connect signals.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="pyclickimage.ClickImageApp._process_left_click">
+<span class="sig-name descname"><span class="pre">_process_left_click</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">x</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">y</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/pyclickimage/click_image_app.html#ClickImageApp._process_left_click"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pyclickimage.ClickImageApp._process_left_click" title="Link to this definition">#</a></dt>
+<dd><p>Process a left click event on the image viewer.</p>
+<p>Add the click to the current group and update the display.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="pyclickimage.ClickImageApp._process_right_click">
+<span class="sig-name descname"><span class="pre">_process_right_click</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">x</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">y</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/pyclickimage/click_image_app.html#ClickImageApp._process_right_click"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pyclickimage.ClickImageApp._process_right_click" title="Link to this definition">#</a></dt>
+<dd><p>Process a right click event on the image viewer.</p>
 </dd></dl>
 
 <dl class="py method">
@@ -358,9 +378,8 @@ grouping them by user-defined categories.</p>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="pyclickimage.ClickImageApp.draw_clicks_on_image">
-<span class="sig-name descname"><span class="pre">draw_clicks_on_image</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">pixmap</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">QPixmap</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/pyclickimage/click_image_app.html#ClickImageApp.draw_clicks_on_image"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pyclickimage.ClickImageApp.draw_clicks_on_image" title="Link to this definition">#</a></dt>
-<dd><p>Draw the clicks on the current image with the selected color and size,
-only if the display clicks checkbox is checked.</p>
+<span class="sig-name descname"><span class="pre">draw_clicks_on_image</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/pyclickimage/click_image_app.html#ClickImageApp.draw_clicks_on_image"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pyclickimage.ClickImageApp.draw_clicks_on_image" title="Link to this definition">#</a></dt>
+<dd><p>Draw the clicks on the image in the viewer.</p>
 </dd></dl>
 
 <dl class="py method">
@@ -406,21 +425,47 @@ only if the display clicks checkbox is checked.</p>
 </dd></dl>
 
 <dl class="py method">
-<dt class="sig sig-object py" id="pyclickimage.ClickImageApp.init_ui">
-<span class="sig-name descname"><span class="pre">init_ui</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">output_csv_path</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/pyclickimage/click_image_app.html#ClickImageApp.init_ui"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pyclickimage.ClickImageApp.init_ui" title="Link to this definition">#</a></dt>
-<dd><p>Initialize the UI layout, widgets, and connect signals.</p>
+<dt class="sig sig-object py" id="pyclickimage.ClickImageApp.get_selected_width">
+<span class="sig-name descname"><span class="pre">get_selected_width</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/pyclickimage/click_image_app.html#ClickImageApp.get_selected_width"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pyclickimage.ClickImageApp.get_selected_width" title="Link to this definition">#</a></dt>
+<dd><p>Get the selected width for drawing circles.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>The width of the circle to draw.</p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p>int</p>
+</dd>
+</dl>
 </dd></dl>
 
 <dl class="py method">
-<dt class="sig sig-object py" id="pyclickimage.ClickImageApp.load_clicks">
-<span class="sig-name descname"><span class="pre">load_clicks</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/pyclickimage/click_image_app.html#ClickImageApp.load_clicks"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pyclickimage.ClickImageApp.load_clicks" title="Link to this definition">#</a></dt>
-<dd><p>Open a file dialog to load clicks from a CSV file.</p>
+<dt class="sig sig-object py" id="pyclickimage.ClickImageApp.on_add_group">
+<span class="sig-name descname"><span class="pre">on_add_group</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/pyclickimage/click_image_app.html#ClickImageApp.on_add_group"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pyclickimage.ClickImageApp.on_add_group" title="Link to this definition">#</a></dt>
+<dd><p>Show dialog to add a new group.</p>
 </dd></dl>
 
 <dl class="py method">
-<dt class="sig sig-object py" id="pyclickimage.ClickImageApp.load_image">
-<span class="sig-name descname"><span class="pre">load_image</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/pyclickimage/click_image_app.html#ClickImageApp.load_image"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pyclickimage.ClickImageApp.load_image" title="Link to this definition">#</a></dt>
-<dd><p>Open a file dialog to load an image and update the display.</p>
+<dt class="sig sig-object py" id="pyclickimage.ClickImageApp.on_color_changed">
+<span class="sig-name descname"><span class="pre">on_color_changed</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">index</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/pyclickimage/click_image_app.html#ClickImageApp.on_color_changed"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pyclickimage.ClickImageApp.on_color_changed" title="Link to this definition">#</a></dt>
+<dd><p>Called when the user selects a different color for the clicks.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="pyclickimage.ClickImageApp.on_colormap_changed">
+<span class="sig-name descname"><span class="pre">on_colormap_changed</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">index</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/pyclickimage/click_image_app.html#ClickImageApp.on_colormap_changed"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pyclickimage.ClickImageApp.on_colormap_changed" title="Link to this definition">#</a></dt>
+<dd><p>Called when the user selects a different colormap.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="pyclickimage.ClickImageApp.on_delete_group">
+<span class="sig-name descname"><span class="pre">on_delete_group</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/pyclickimage/click_image_app.html#ClickImageApp.on_delete_group"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pyclickimage.ClickImageApp.on_delete_group" title="Link to this definition">#</a></dt>
+<dd><p>Show dialog to delete the current group.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="pyclickimage.ClickImageApp.on_display_clicks_changed">
+<span class="sig-name descname"><span class="pre">on_display_clicks_changed</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">state</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/pyclickimage/click_image_app.html#ClickImageApp.on_display_clicks_changed"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pyclickimage.ClickImageApp.on_display_clicks_changed" title="Link to this definition">#</a></dt>
+<dd><p>Called when the user checks or unchecks the display clicks checkbox.</p>
 </dd></dl>
 
 <dl class="py method">
@@ -430,45 +475,45 @@ only if the display clicks checkbox is checked.</p>
 </dd></dl>
 
 <dl class="py method">
-<dt class="sig sig-object py" id="pyclickimage.ClickImageApp.on_mouse_click">
-<span class="sig-name descname"><span class="pre">on_mouse_click</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">event</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/pyclickimage/click_image_app.html#ClickImageApp.on_mouse_click"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pyclickimage.ClickImageApp.on_mouse_click" title="Link to this definition">#</a></dt>
-<dd><p>Handle mouse click events on the image.</p>
-<dl class="field-list simple">
-<dt class="field-odd">Parameters<span class="colon">:</span></dt>
-<dd class="field-odd"><p><strong>event</strong> (<em>QMouseEvent</em>) – The mouse event that occurred.</p>
-</dd>
-</dl>
+<dt class="sig sig-object py" id="pyclickimage.ClickImageApp.on_load_clicks">
+<span class="sig-name descname"><span class="pre">on_load_clicks</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/pyclickimage/click_image_app.html#ClickImageApp.on_load_clicks"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pyclickimage.ClickImageApp.on_load_clicks" title="Link to this definition">#</a></dt>
+<dd><p>Open a file dialog to load clicks from a CSV file.</p>
 </dd></dl>
 
 <dl class="py method">
-<dt class="sig sig-object py" id="pyclickimage.ClickImageApp.remove_all_clicks">
-<span class="sig-name descname"><span class="pre">remove_all_clicks</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/pyclickimage/click_image_app.html#ClickImageApp.remove_all_clicks"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pyclickimage.ClickImageApp.remove_all_clicks" title="Link to this definition">#</a></dt>
+<dt class="sig sig-object py" id="pyclickimage.ClickImageApp.on_load_image">
+<span class="sig-name descname"><span class="pre">on_load_image</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/pyclickimage/click_image_app.html#ClickImageApp.on_load_image"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pyclickimage.ClickImageApp.on_load_image" title="Link to this definition">#</a></dt>
+<dd><p>Open a file dialog to load an image and update the display.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="pyclickimage.ClickImageApp.on_remove_all_clicks">
+<span class="sig-name descname"><span class="pre">on_remove_all_clicks</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/pyclickimage/click_image_app.html#ClickImageApp.on_remove_all_clicks"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pyclickimage.ClickImageApp.on_remove_all_clicks" title="Link to this definition">#</a></dt>
 <dd><p>Remove all clicks from the current group.</p>
 </dd></dl>
 
 <dl class="py method">
-<dt class="sig sig-object py" id="pyclickimage.ClickImageApp.remove_last_click">
-<span class="sig-name descname"><span class="pre">remove_last_click</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/pyclickimage/click_image_app.html#ClickImageApp.remove_last_click"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pyclickimage.ClickImageApp.remove_last_click" title="Link to this definition">#</a></dt>
+<dt class="sig sig-object py" id="pyclickimage.ClickImageApp.on_remove_last_click">
+<span class="sig-name descname"><span class="pre">on_remove_last_click</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/pyclickimage/click_image_app.html#ClickImageApp.on_remove_last_click"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pyclickimage.ClickImageApp.on_remove_last_click" title="Link to this definition">#</a></dt>
 <dd><p>Remove the last click from the current group.</p>
 </dd></dl>
 
 <dl class="py method">
-<dt class="sig sig-object py" id="pyclickimage.ClickImageApp.rename_group">
-<span class="sig-name descname"><span class="pre">rename_group</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/pyclickimage/click_image_app.html#ClickImageApp.rename_group"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pyclickimage.ClickImageApp.rename_group" title="Link to this definition">#</a></dt>
+<dt class="sig sig-object py" id="pyclickimage.ClickImageApp.on_rename_group">
+<span class="sig-name descname"><span class="pre">on_rename_group</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/pyclickimage/click_image_app.html#ClickImageApp.on_rename_group"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pyclickimage.ClickImageApp.on_rename_group" title="Link to this definition">#</a></dt>
 <dd><p>Show dialog to rename the current group.</p>
 </dd></dl>
 
 <dl class="py method">
-<dt class="sig sig-object py" id="pyclickimage.ClickImageApp.resizeEvent">
-<span class="sig-name descname"><span class="pre">resizeEvent</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">event</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/pyclickimage/click_image_app.html#ClickImageApp.resizeEvent"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pyclickimage.ClickImageApp.resizeEvent" title="Link to this definition">#</a></dt>
-<dd><p>Triggered when the window is resized. Rescale the image accordingly.</p>
+<dt class="sig sig-object py" id="pyclickimage.ClickImageApp.on_size_changed">
+<span class="sig-name descname"><span class="pre">on_size_changed</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">index</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/pyclickimage/click_image_app.html#ClickImageApp.on_size_changed"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pyclickimage.ClickImageApp.on_size_changed" title="Link to this definition">#</a></dt>
+<dd><p>Called when the user selects a different size for the circles.</p>
 </dd></dl>
 
 <dl class="py method">
-<dt class="sig sig-object py" id="pyclickimage.ClickImageApp.resize_image">
-<span class="sig-name descname"><span class="pre">resize_image</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/pyclickimage/click_image_app.html#ClickImageApp.resize_image"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pyclickimage.ClickImageApp.resize_image" title="Link to this definition">#</a></dt>
-<dd><p>Resize image to fit within the scroll area while maintaining the aspect ratio.
-Allow the image to shrink and expand based on window size, and allow shrinking when window is resized.</p>
+<dt class="sig sig-object py" id="pyclickimage.ClickImageApp.on_width_changed">
+<span class="sig-name descname"><span class="pre">on_width_changed</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">index</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/pyclickimage/click_image_app.html#ClickImageApp.on_width_changed"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pyclickimage.ClickImageApp.on_width_changed" title="Link to this definition">#</a></dt>
+<dd><p>Called when the user selects a different width for the circles.</p>
 </dd></dl>
 
 <dl class="py method">
@@ -566,22 +611,29 @@ Additionally, display the clicks for the current group.</p>
   <nav class="bd-toc-nav page-toc" aria-labelledby="pst-page-navigation-heading-2">
     <ul class="visible nav section-nav flex-column">
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#pyclickimage.ClickImageApp"><code class="docutils literal notranslate"><span class="pre">ClickImageApp</span></code></a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#pyclickimage.ClickImageApp.add_group"><code class="docutils literal notranslate"><span class="pre">ClickImageApp.add_group()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#pyclickimage.ClickImageApp._append_to_log"><code class="docutils literal notranslate"><span class="pre">ClickImageApp._append_to_log()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#pyclickimage.ClickImageApp._init_ui"><code class="docutils literal notranslate"><span class="pre">ClickImageApp._init_ui()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#pyclickimage.ClickImageApp._process_left_click"><code class="docutils literal notranslate"><span class="pre">ClickImageApp._process_left_click()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#pyclickimage.ClickImageApp._process_right_click"><code class="docutils literal notranslate"><span class="pre">ClickImageApp._process_right_click()</span></code></a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#pyclickimage.ClickImageApp.closeEvent"><code class="docutils literal notranslate"><span class="pre">ClickImageApp.closeEvent()</span></code></a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#pyclickimage.ClickImageApp.draw_clicks_on_image"><code class="docutils literal notranslate"><span class="pre">ClickImageApp.draw_clicks_on_image()</span></code></a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#pyclickimage.ClickImageApp.get_selected_circle_size"><code class="docutils literal notranslate"><span class="pre">ClickImageApp.get_selected_circle_size()</span></code></a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#pyclickimage.ClickImageApp.get_selected_color"><code class="docutils literal notranslate"><span class="pre">ClickImageApp.get_selected_color()</span></code></a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#pyclickimage.ClickImageApp.get_selected_colormap"><code class="docutils literal notranslate"><span class="pre">ClickImageApp.get_selected_colormap()</span></code></a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#pyclickimage.ClickImageApp.init_ui"><code class="docutils literal notranslate"><span class="pre">ClickImageApp.init_ui()</span></code></a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#pyclickimage.ClickImageApp.load_clicks"><code class="docutils literal notranslate"><span class="pre">ClickImageApp.load_clicks()</span></code></a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#pyclickimage.ClickImageApp.load_image"><code class="docutils literal notranslate"><span class="pre">ClickImageApp.load_image()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#pyclickimage.ClickImageApp.get_selected_width"><code class="docutils literal notranslate"><span class="pre">ClickImageApp.get_selected_width()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#pyclickimage.ClickImageApp.on_add_group"><code class="docutils literal notranslate"><span class="pre">ClickImageApp.on_add_group()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#pyclickimage.ClickImageApp.on_color_changed"><code class="docutils literal notranslate"><span class="pre">ClickImageApp.on_color_changed()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#pyclickimage.ClickImageApp.on_colormap_changed"><code class="docutils literal notranslate"><span class="pre">ClickImageApp.on_colormap_changed()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#pyclickimage.ClickImageApp.on_delete_group"><code class="docutils literal notranslate"><span class="pre">ClickImageApp.on_delete_group()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#pyclickimage.ClickImageApp.on_display_clicks_changed"><code class="docutils literal notranslate"><span class="pre">ClickImageApp.on_display_clicks_changed()</span></code></a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#pyclickimage.ClickImageApp.on_group_changed"><code class="docutils literal notranslate"><span class="pre">ClickImageApp.on_group_changed()</span></code></a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#pyclickimage.ClickImageApp.on_mouse_click"><code class="docutils literal notranslate"><span class="pre">ClickImageApp.on_mouse_click()</span></code></a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#pyclickimage.ClickImageApp.remove_all_clicks"><code class="docutils literal notranslate"><span class="pre">ClickImageApp.remove_all_clicks()</span></code></a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#pyclickimage.ClickImageApp.remove_last_click"><code class="docutils literal notranslate"><span class="pre">ClickImageApp.remove_last_click()</span></code></a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#pyclickimage.ClickImageApp.rename_group"><code class="docutils literal notranslate"><span class="pre">ClickImageApp.rename_group()</span></code></a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#pyclickimage.ClickImageApp.resizeEvent"><code class="docutils literal notranslate"><span class="pre">ClickImageApp.resizeEvent()</span></code></a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#pyclickimage.ClickImageApp.resize_image"><code class="docutils literal notranslate"><span class="pre">ClickImageApp.resize_image()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#pyclickimage.ClickImageApp.on_load_clicks"><code class="docutils literal notranslate"><span class="pre">ClickImageApp.on_load_clicks()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#pyclickimage.ClickImageApp.on_load_image"><code class="docutils literal notranslate"><span class="pre">ClickImageApp.on_load_image()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#pyclickimage.ClickImageApp.on_remove_all_clicks"><code class="docutils literal notranslate"><span class="pre">ClickImageApp.on_remove_all_clicks()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#pyclickimage.ClickImageApp.on_remove_last_click"><code class="docutils literal notranslate"><span class="pre">ClickImageApp.on_remove_last_click()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#pyclickimage.ClickImageApp.on_rename_group"><code class="docutils literal notranslate"><span class="pre">ClickImageApp.on_rename_group()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#pyclickimage.ClickImageApp.on_size_changed"><code class="docutils literal notranslate"><span class="pre">ClickImageApp.on_size_changed()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#pyclickimage.ClickImageApp.on_width_changed"><code class="docutils literal notranslate"><span class="pre">ClickImageApp.on_width_changed()</span></code></a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#pyclickimage.ClickImageApp.save_csv"><code class="docutils literal notranslate"><span class="pre">ClickImageApp.save_csv()</span></code></a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#pyclickimage.ClickImageApp.set_image"><code class="docutils literal notranslate"><span class="pre">ClickImageApp.set_image()</span></code></a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#pyclickimage.ClickImageApp.update"><code class="docutils literal notranslate"><span class="pre">ClickImageApp.update()</span></code></a></li>

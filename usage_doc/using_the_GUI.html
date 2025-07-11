@@ -8,7 +8,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
-    <title>Using the GUI &#8212; pyclickimage 0.2.3 documentation</title>
+    <title>Using the GUI &#8212; pyclickimage 1.0.0 documentation</title>
   
   
   
@@ -38,7 +38,7 @@
   <link rel="preload" as="script" href="../_static/scripts/bootstrap.js?digest=8878045cc6db502f8baf" />
 <link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=8878045cc6db502f8baf" />
 
-    <script src="../_static/documentation_options.js?v=a47416a6"></script>
+    <script src="../_static/documentation_options.js?v=8d563738"></script>
     <script src="../_static/doctools.js?v=9a2dae69"></script>
     <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
     <script>DOCUMENTATION_OPTIONS.pagename = 'usage_doc/using_the_GUI';</script>
@@ -110,7 +110,7 @@
   
   
   
-    <p class="title logo__title">pyclickimage 0.2.3 documentation</p>
+    <p class="title logo__title">pyclickimage 1.0.0 documentation</p>
   
 </a></div>
     
@@ -338,6 +338,10 @@
 When a new image is loaded, any previous clicks and groups will be cleared.
 If you wish to load previously saved clicks, you can use the <strong>“Load Clicks”</strong> button and select the <code class="docutils literal notranslate"><span class="pre">.csv</span></code> file containing the saved clicks.</p>
 </section>
+<section id="adding-clicks">
+<h2>Adding Clicks<a class="headerlink" href="#adding-clicks" title="Link to this heading">#</a></h2>
+<p>To add clicks to the image, simply click on the desired points (left-click) in the image displayed in the GUI.</p>
+</section>
 <section id="managing-the-click-groups">
 <h2>Managing the Click Groups<a class="headerlink" href="#managing-the-click-groups" title="Link to this heading">#</a></h2>
 <p>The clicks are organized into groups. Initially, there is one default group called <strong>“default”</strong>. All clicks you make are stored in this group unless you decide to create and select a new group.</p>
@@ -350,17 +354,14 @@ If you wish to load previously saved clicks, you can use the <strong>“Load Cli
 <p>For example, if you start with the default group, the saved file will contain rows with the group name <strong>“default”</strong>. However, if you create a new group (e.g., <strong>“My_New_Group”</strong>) and select it, the subsequent clicks will be saved under this new group.</p>
 <p>Here’s how the data might appear in the CSV file:</p>
 <div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="go">Group,Index,Click X,Click Y</span>
-<span class="go">default,0,276.22847682119203,97.5673076923077</span>
-<span class="go">default,1,242.86754966887418,109.59615384615385</span>
-<span class="go">My_New_Group,0,317.3954248366013,144.27014218009478</span>
-<span class="go">My_New_Group,1,253.52124183006535,169.30331753554503</span>
-<span class="go">My_New_Group,2,158.0392156862745,204.87677725118485</span>
+<span class="go">default,0,276,97</span>
+<span class="go">default,1,242,109</span>
+<span class="go">My_New_Group,0,317,144</span>
+<span class="go">My_New_Group,1,253,169</span>
 </pre></div>
 </div>
-</section>
-<section id="using-integer-coordinates">
-<h2>Using Integer Coordinates<a class="headerlink" href="#using-integer-coordinates" title="Link to this heading">#</a></h2>
-<p>By default, coordinates are stored as floating-point values. If you prefer to work only with integer pixel coordinates, you can enable the <strong>“Use Integer Coordinates”</strong> checkbox.</p>
+<p>The coordinates are in integer format, as PyQt5 does not support float coordinates.
+The <code class="docutils literal notranslate"><span class="pre">X</span></code> coordinate corresponds to the column index in the image, and the <code class="docutils literal notranslate"><span class="pre">Y</span></code> coordinate corresponds to the row index, similar to how you would access pixels in a NumPy array (i.e., <cite>image[Y, X]</cite>).</p>
 </section>
 <section id="removing-clicks">
 <h2>Removing Clicks<a class="headerlink" href="#removing-clicks" title="Link to this heading">#</a></h2>
@@ -379,11 +380,10 @@ If you wish to load previously saved clicks, you can use the <strong>“Load Cli
 </ol>
 <p>The saved <code class="docutils literal notranslate"><span class="pre">.csv</span></code> file will have the following format:</p>
 <div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="go">Group,Index,Click X,Click Y</span>
-<span class="go">default,0,276.22847682119203,97.5673076923077</span>
-<span class="go">default,1,242.86754966887418,109.59615384615385</span>
-<span class="go">My_New_Group,0,317.3954248366013,144.27014218009478</span>
-<span class="go">My_New_Group,1,253.52124183006535,169.30331753554503</span>
-<span class="go">My_New_Group,2,158.0392156862745,204.87677725118485</span>
+<span class="go">default,0,276,97</span>
+<span class="go">default,1,242,109</span>
+<span class="go">My_New_Group,0,317,144</span>
+<span class="go">My_New_Group,1,253,169</span>
 </pre></div>
 </div>
 </section>
@@ -437,8 +437,8 @@ If you wish to load previously saved clicks, you can use the <strong>“Load Cli
   <nav class="bd-toc-nav page-toc" aria-labelledby="pst-page-navigation-heading-2">
     <ul class="visible nav section-nav flex-column">
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#opening-an-image">Opening an Image</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#adding-clicks">Adding Clicks</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#managing-the-click-groups">Managing the Click Groups</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#using-integer-coordinates">Using Integer Coordinates</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#removing-clicks">Removing Clicks</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#saving-the-clicks">Saving the Clicks</a></li>
 </ul>

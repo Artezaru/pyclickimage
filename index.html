@@ -8,7 +8,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
-    <title>Welcome to pyclickimage’s documentation! &#8212; pyclickimage 0.2.3 documentation</title>
+    <title>Welcome to pyclickimage’s documentation! &#8212; pyclickimage 1.0.0 documentation</title>
   
   
   
@@ -38,7 +38,7 @@
   <link rel="preload" as="script" href="_static/scripts/bootstrap.js?digest=8878045cc6db502f8baf" />
 <link rel="preload" as="script" href="_static/scripts/pydata-sphinx-theme.js?digest=8878045cc6db502f8baf" />
 
-    <script src="_static/documentation_options.js?v=a47416a6"></script>
+    <script src="_static/documentation_options.js?v=8d563738"></script>
     <script src="_static/doctools.js?v=9a2dae69"></script>
     <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
     <script>DOCUMENTATION_OPTIONS.pagename = 'index';</script>
@@ -109,7 +109,7 @@
   
   
   
-    <p class="title logo__title">pyclickimage 0.2.3 documentation</p>
+    <p class="title logo__title">pyclickimage 1.0.0 documentation</p>
   
 </a></div>
     
@@ -315,6 +315,26 @@
 </pre></div>
 </div>
 <img alt="_images/app.png" class="align-center" src="_images/app.png" />
+<p>The clicks care in integer coordinates (<code class="docutils literal notranslate"><span class="pre">PyQt5</span></code> does not support float coordinates) and are saved in a CSV file.
+The clicks are saved by groups in their order of creation.</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>Group,Index,Click<span class="w"> </span>X,Click<span class="w"> </span>Y
+default,0,128,102
+default,1,115,153
+default,2,207,181
+default,3,261,134
+default,4,220,83
+default,5,151,37
+Coco,0,201,126
+Coco,1,105,119
+Coco,2,90,80
+Coco,3,126,51
+Coco,4,206,59
+Coco,5,261,93
+Coco,6,212,157
+Coco,7,166,175
+</pre></div>
+</div>
+<p><code class="docutils literal notranslate"><span class="pre">X</span></code> is the column-index of the click in the image and <code class="docutils literal notranslate"><span class="pre">Y</span></code> is the row-index of the click in the image such as for a <code class="docutils literal notranslate"><span class="pre">numpy.ndarray</span></code> the click is at <code class="docutils literal notranslate"><span class="pre">image[Y,</span> <span class="pre">X]</span></code>.</p>
 </section>
 <section id="author">
 <h2>Author<a class="headerlink" href="#author" title="Link to this heading">#</a></h2>

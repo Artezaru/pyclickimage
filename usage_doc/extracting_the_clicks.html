@@ -8,7 +8,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
-    <title>Extracting the Clicks from CSV &#8212; pyclickimage 0.2.3 documentation</title>
+    <title>Extracting the Clicks from CSV &#8212; pyclickimage 1.0.0 documentation</title>
   
   
   
@@ -38,7 +38,7 @@
   <link rel="preload" as="script" href="../_static/scripts/bootstrap.js?digest=8878045cc6db502f8baf" />
 <link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=8878045cc6db502f8baf" />
 
-    <script src="../_static/documentation_options.js?v=a47416a6"></script>
+    <script src="../_static/documentation_options.js?v=8d563738"></script>
     <script src="../_static/doctools.js?v=9a2dae69"></script>
     <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
     <script>DOCUMENTATION_OPTIONS.pagename = 'usage_doc/extracting_the_clicks';</script>
@@ -109,7 +109,7 @@
   
   
   
-    <p class="title logo__title">pyclickimage 0.2.3 documentation</p>
+    <p class="title logo__title">pyclickimage 1.0.0 documentation</p>
   
 </a></div>
     
@@ -330,7 +330,7 @@
                   
   <section id="extracting-the-clicks-from-csv">
 <h1>Extracting the Clicks from CSV<a class="headerlink" href="#extracting-the-clicks-from-csv" title="Link to this heading">#</a></h1>
-<p>The clicks stored in the <code class="docutils literal notranslate"><span class="pre">.csv</span></code> file can be extracted using the <code class="docutils literal notranslate"><span class="pre">ClickManager</span></code> class.</p>
+<p>The clicks stored in the <code class="docutils literal notranslate"><span class="pre">.csv</span></code> file can be extracted directly or using the <code class="docutils literal notranslate"><span class="pre">ClickManager</span></code> class.</p>
 <p>To extract the clicks, follow these steps:</p>
 <ol class="arabic simple">
 <li><p><strong>Load the CSV file</strong>: Use the <code class="docutils literal notranslate"><span class="pre">ClickManager.load_from_csv()</span></code> method to load the clicks from the CSV file.</p></li>
@@ -348,7 +348,7 @@
 <span class="c1"># Print the extracted clicks</span>
 <span class="nb">print</span><span class="p">(</span><span class="n">default_clicks</span><span class="p">)</span>
 
-<span class="c1"># Output: [(276.22847682119203, 97.5673076923077), (242.86754966887418, 109.59615384615385)]</span>
+<span class="c1"># Output: [(276, 97), (242, 109), (317, 144), (253, 169)]</span>
 </pre></div>
 </div>
 <p>In this example:</p>

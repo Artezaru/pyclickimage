@@ -8,7 +8,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
-    <title>pyclickimage.run &#8212; pyclickimage 0.2.3 documentation</title>
+    <title>pyclickimage.run &#8212; pyclickimage 1.0.0 documentation</title>
   
   
   
@@ -38,14 +38,14 @@
   <link rel="preload" as="script" href="../_static/scripts/bootstrap.js?digest=8878045cc6db502f8baf" />
 <link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=8878045cc6db502f8baf" />
 
-    <script src="../_static/documentation_options.js?v=a47416a6"></script>
+    <script src="../_static/documentation_options.js?v=8d563738"></script>
     <script src="../_static/doctools.js?v=9a2dae69"></script>
     <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
     <script>DOCUMENTATION_OPTIONS.pagename = 'api_doc/run';</script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
     <link rel="next" title="Usage" href="../usage.html" />
-    <link rel="prev" title="pyclickimage.ClickManager" href="click_manager.html" />
+    <link rel="prev" title="pyclickimage.ImageViewer" href="image_viewer.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
   <meta name="docsearch:version" content="" />
@@ -110,7 +110,7 @@
   
   
   
-    <p class="title logo__title">pyclickimage 0.2.3 documentation</p>
+    <p class="title logo__title">pyclickimage 1.0.0 documentation</p>
   
 </a></div>
     
@@ -267,6 +267,7 @@
   <div class="bd-toc-item navbar-nav"><ul class="current nav bd-sidenav">
 <li class="toctree-l1"><a class="reference internal" href="click_image_app.html">pyclickimage.ClickImageApp</a></li>
 <li class="toctree-l1"><a class="reference internal" href="click_manager.html">pyclickimage.ClickManager</a></li>
+<li class="toctree-l1"><a class="reference internal" href="image_viewer.html">pyclickimage.ImageViewer</a></li>
 <li class="toctree-l1 current active"><a class="current reference internal" href="#">pyclickimage.run</a></li>
 </ul>
 </div>
@@ -332,14 +333,14 @@
 <h1>pyclickimage.run<a class="headerlink" href="#pyclickimage-run" title="Link to this heading">#</a></h1>
 <dl class="py function">
 <dt class="sig sig-object py" id="pyclickimage.run">
-<span class="sig-prename descclassname"><span class="pre">pyclickimage.</span></span><span class="sig-name descname"><span class="pre">run</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">image</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">ndarray</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">output_csv_path</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="reference internal" href="../_modules/pyclickimage/run.html#run"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pyclickimage.run" title="Link to this definition">#</a></dt>
+<span class="sig-prename descclassname"><span class="pre">pyclickimage.</span></span><span class="sig-name descname"><span class="pre">run</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">image</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">ndarray</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">output</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="reference internal" href="../_modules/pyclickimage/run.html#run"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pyclickimage.run" title="Link to this definition">#</a></dt>
 <dd><p>Launch the ClickImageApp as a standalone application.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>image</strong> (<em>numpy.ndarray</em><em>, </em><em>optional</em>) – The image to be displayed. If None, a blank window will be shown.
 Default is None.</p></li>
-<li><p><strong>output_csv_path</strong> (<em>str</em><em>, </em><em>optional</em>) – The path where the CSV file will be saved. If None, the app will not save to a file.
+<li><p><strong>output</strong> (<em>str</em><em>, </em><em>optional</em>) – The path where the CSV file will be saved. If None, the app will not save to a file.
 Default is None.</p></li>
 </ul>
 </dd>
@@ -359,12 +360,12 @@ Default is None.</p></li>
                   
 <div class="prev-next-area">
     <a class="left-prev"
-       href="click_manager.html"
+       href="image_viewer.html"
        title="previous page">
       <i class="fa-solid fa-angle-left"></i>
       <div class="prev-next-info">
         <p class="prev-next-subtitle">previous</p>
-        <p class="prev-next-title">pyclickimage.ClickManager</p>
+        <p class="prev-next-title">pyclickimage.ImageViewer</p>
       </div>
     </a>
     <a class="right-next"

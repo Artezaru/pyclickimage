@@ -7,7 +7,7 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>pyclickimage.run &#8212; pyclickimage 0.2.3 documentation</title>
+    <title>pyclickimage.run &#8212; pyclickimage 1.0.0 documentation</title>
   
   
   
@@ -37,7 +37,7 @@
   <link rel="preload" as="script" href="../../_static/scripts/bootstrap.js?digest=8878045cc6db502f8baf" />
 <link rel="preload" as="script" href="../../_static/scripts/pydata-sphinx-theme.js?digest=8878045cc6db502f8baf" />
 
-    <script src="../../_static/documentation_options.js?v=a47416a6"></script>
+    <script src="../../_static/documentation_options.js?v=8d563738"></script>
     <script src="../../_static/doctools.js?v=9a2dae69"></script>
     <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
     <script>DOCUMENTATION_OPTIONS.pagename = '_modules/pyclickimage/run';</script>
@@ -107,7 +107,7 @@
   
   
   
-    <p class="title logo__title">pyclickimage 0.2.3 documentation</p>
+    <p class="title logo__title">pyclickimage 1.0.0 documentation</p>
   
 </a></div>
     
@@ -318,7 +318,7 @@
 
 <div class="viewcode-block" id="run">
 <a class="viewcode-back" href="../../api_doc/run.html#pyclickimage.run">[docs]</a>
-<span class="k">def</span><span class="w"> </span><span class="nf">run</span><span class="p">(</span><span class="n">image</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">numpy</span><span class="o">.</span><span class="n">ndarray</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="n">output_csv_path</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">run</span><span class="p">(</span><span class="n">image</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">numpy</span><span class="o">.</span><span class="n">ndarray</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="n">output</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Launch the ClickImageApp as a standalone application.</span>
 
@@ -327,16 +327,15 @@
 <span class="sd">    image : numpy.ndarray, optional</span>
 <span class="sd">        The image to be displayed. If None, a blank window will be shown.</span>
 <span class="sd">        Default is None.</span>
-<span class="sd">    output_csv_path : str, optional</span>
+<span class="sd">    output : str, optional</span>
 <span class="sd">        The path where the CSV file will be saved. If None, the app will not save to a file.</span>
 <span class="sd">        Default is None.</span>
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="n">app</span> <span class="o">=</span> <span class="n">QtWidgets</span><span class="o">.</span><span class="n">QApplication</span><span class="p">(</span><span class="n">sys</span><span class="o">.</span><span class="n">argv</span><span class="p">)</span>
-    <span class="n">window</span> <span class="o">=</span> <span class="n">ClickImageApp</span><span class="p">(</span><span class="n">image</span><span class="p">,</span> <span class="n">output_csv_path</span><span class="p">)</span>
+    <span class="n">window</span> <span class="o">=</span> <span class="n">ClickImageApp</span><span class="p">(</span><span class="n">image</span><span class="p">,</span> <span class="n">output</span><span class="p">)</span>
     <span class="n">window</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
     <span class="c1"># Wait before closing the app</span>
     <span class="n">app</span><span class="o">.</span><span class="n">exec_</span><span class="p">()</span></div>
-
 
 
 </pre></div>

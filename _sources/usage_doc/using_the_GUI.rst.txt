@@ -10,6 +10,11 @@ To open an image, click on the **"Load Image"** button in the GUI.
 When a new image is loaded, any previous clicks and groups will be cleared.
 If you wish to load previously saved clicks, you can use the **"Load Clicks"** button and select the ``.csv`` file containing the saved clicks.
 
+Adding Clicks
+-----------------
+
+To add clicks to the image, simply click on the desired points (left-click) in the image displayed in the GUI.
+
 Managing the Click Groups
 --------------------------
 
@@ -28,16 +33,13 @@ Here’s how the data might appear in the CSV file:
 .. code-block:: console
 
     Group,Index,Click X,Click Y
-    default,0,276.22847682119203,97.5673076923077
-    default,1,242.86754966887418,109.59615384615385
-    My_New_Group,0,317.3954248366013,144.27014218009478
-    My_New_Group,1,253.52124183006535,169.30331753554503
-    My_New_Group,2,158.0392156862745,204.87677725118485
+    default,0,276,97
+    default,1,242,109
+    My_New_Group,0,317,144
+    My_New_Group,1,253,169
 
-Using Integer Coordinates
----------------------------
-
-By default, coordinates are stored as floating-point values. If you prefer to work only with integer pixel coordinates, you can enable the **"Use Integer Coordinates"** checkbox.
+The coordinates are in integer format, as PyQt5 does not support float coordinates.
+The ``X`` coordinate corresponds to the column index in the image, and the ``Y`` coordinate corresponds to the row index, similar to how you would access pixels in a NumPy array (i.e., `image[Y, X]`).
 
 Removing Clicks
 ---------------
@@ -60,8 +62,8 @@ The saved ``.csv`` file will have the following format:
 .. code-block:: console
 
     Group,Index,Click X,Click Y
-    default,0,276.22847682119203,97.5673076923077
-    default,1,242.86754966887418,109.59615384615385
-    My_New_Group,0,317.3954248366013,144.27014218009478
-    My_New_Group,1,253.52124183006535,169.30331753554503
-    My_New_Group,2,158.0392156862745,204.87677725118485
+    default,0,276,97
+    default,1,242,109
+    My_New_Group,0,317,144
+    My_New_Group,1,253,169
+    
