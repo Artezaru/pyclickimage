@@ -73,9 +73,16 @@ class ClickImageApp(QtWidgets.QMainWindow):
         # Side panel widget with a fixed width
         side_panel_widget = QtWidgets.QWidget()
         side_panel_widget.setLayout(side_panel)
-        side_panel_widget.setMinimumWidth(350)  # Fixed width for the side panel
-        side_panel_widget.setMaximumWidth(700)  # Maximum width for the side panel
-        layout.addWidget(side_panel_widget)
+        side_panel_widget.setMinimumWidth(250)  # Fixed width for the side panel
+        side_panel_widget.setMaximumWidth(400)  # Maximum width for the side panel
+
+        side_scroll_area = QtWidgets.QScrollArea()
+        side_scroll_area.setWidgetResizable(True)  # Allow the side panel to resize
+        side_scroll_area.setMinimumWidth(260)  # Minimum width for the scroll area
+        side_scroll_area.setMaximumWidth(410)  # Maximum width for the scroll area
+        side_scroll_area.setWidget(side_panel_widget)
+
+        layout.addWidget(side_scroll_area)
 
         # Tool bar for quick actions
         toolbar = QtWidgets.QToolBar("Toolbar")
@@ -99,7 +106,7 @@ class ClickImageApp(QtWidgets.QMainWindow):
         # ============================================================
         # Group : Load Image
         # ============================================================
-        load_image_group = QtWidgets.QGroupBox("Load Image")
+        load_image_group = QtWidgets.QGroupBox("Load Settings")
         load_image_layout = QtWidgets.QVBoxLayout()
         load_image_group.setLayout(load_image_layout)
         load_image_group.setStyleSheet("font-weight: bold;")
@@ -119,7 +126,7 @@ class ClickImageApp(QtWidgets.QMainWindow):
         # ============================================================
         # Group : Click settings
         # ============================================================
-        click_settings_group = QtWidgets.QGroupBox("Click Settings")
+        click_settings_group = QtWidgets.QGroupBox("Group Management")
         click_settings_layout = QtWidgets.QVBoxLayout()
         click_settings_group.setLayout(click_settings_layout)
         click_settings_group.setStyleSheet("font-weight: bold;")
@@ -167,8 +174,10 @@ class ClickImageApp(QtWidgets.QMainWindow):
         self.colormap_selector.addItem("Spring")
         self.colormap_selector.setCurrentIndex(0)  # Default to "Default"
         self.colormap_selector.currentIndexChanged.connect(self.on_colormap_changed)
-        display_options_layout.addWidget(QtWidgets.QLabel("Colormap:"))
-        display_options_layout.addWidget(self.colormap_selector)
+        Hlayout = QtWidgets.QHBoxLayout()
+        Hlayout.addWidget(QtWidgets.QLabel("Image Colormap:"))
+        Hlayout.addWidget(self.colormap_selector)
+        display_options_layout.addLayout(Hlayout)
 
         # Color selector
         self.color_selector = QtWidgets.QComboBox()
@@ -183,32 +192,40 @@ class ClickImageApp(QtWidgets.QMainWindow):
         self.color_selector.addItem("Magenta")
         self.color_selector.currentIndexChanged.connect(self.on_color_changed)
         self.color_selector.setCurrentIndex(1)  # Default to "Red"
-        display_options_layout.addWidget(QtWidgets.QLabel("Click Color:"))
-        display_options_layout.addWidget(self.color_selector)
+        Hlayout = QtWidgets.QHBoxLayout()
+        Hlayout.addWidget(QtWidgets.QLabel("Circle Click Color:"))
+        Hlayout.addWidget(self.color_selector)
+        display_options_layout.addLayout(Hlayout)
 
         # Dropdown to choose circle size
         self.circle_size_selector = QtWidgets.QComboBox()
-        self.circle_size_selector.addItem("Extra Small (XS)")
-        self.circle_size_selector.addItem("Tiny")
-        self.circle_size_selector.addItem("Small")
-        self.circle_size_selector.addItem("Medium")
-        self.circle_size_selector.addItem("Large")
-        self.circle_size_selector.addItem("Extra Large (XL)")
-        self.circle_size_selector.addItem("Huge")
+        self.circle_size_selector.addItem("Extra Small (2 px)")
+        self.circle_size_selector.addItem("Tiny (5 px)")
+        self.circle_size_selector.addItem("Small (10 px)")
+        self.circle_size_selector.addItem("Medium (15 px)")
+        self.circle_size_selector.addItem("Large (20 px)")
+        self.circle_size_selector.addItem("Extra Large (25 px)")
+        self.circle_size_selector.addItem("Huge (30 px)")
         self.circle_size_selector.currentIndexChanged.connect(self.on_size_changed)
         self.circle_size_selector.setCurrentIndex(2)  # Default to "Small"
-        display_options_layout.addWidget(QtWidgets.QLabel("Circle Size:"))
-        display_options_layout.addWidget(self.circle_size_selector)
+        Hlayout = QtWidgets.QHBoxLayout()
+        Hlayout.addWidget(QtWidgets.QLabel("Circle Size:"))
+        Hlayout.addWidget(self.circle_size_selector)
+        display_options_layout.addLayout(Hlayout)
+
 
         # Dropdown to choose the width of the circles
         self.circle_width_selector = QtWidgets.QComboBox()
-        self.circle_width_selector.addItem("Thin")
-        self.circle_width_selector.addItem("Medium")
-        self.circle_width_selector.addItem("Large")
+        self.circle_width_selector.addItem("Thin (1 px)")
+        self.circle_width_selector.addItem("Medium (2 px)")
+        self.circle_width_selector.addItem("Large (3 px)")
+        self.circle_width_selector.addItem("Extra Large (5 px)")
         self.circle_width_selector.currentIndexChanged.connect(self.on_width_changed)
         self.circle_width_selector.setCurrentIndex(1)  # Default to "Medium"
-        display_options_layout.addWidget(QtWidgets.QLabel("Circle Width:"))
-        display_options_layout.addWidget(self.circle_width_selector)
+        Hlayout = QtWidgets.QHBoxLayout()
+        Hlayout.addWidget(QtWidgets.QLabel("Circle Width:"))
+        Hlayout.addWidget(self.circle_width_selector)
+        display_options_layout.addLayout(Hlayout)
 
         # Checkbox to control whether clicks should be drawn
         self.display_click_checkbox = QtWidgets.QCheckBox("Display Clicks")
@@ -224,6 +241,7 @@ class ClickImageApp(QtWidgets.QMainWindow):
         self.table_group = QtWidgets.QGroupBox("Clicks Table")
         table_layout = QtWidgets.QVBoxLayout()
         self.table_group.setLayout(table_layout)
+        self.table_group.setMinimumHeight(200)
         self.table_group.setStyleSheet("font-weight: bold;")
 
         # Table to show clicks in the current group
@@ -246,7 +264,7 @@ class ClickImageApp(QtWidgets.QMainWindow):
         # ============================================================
         # Group : CSV Save Path
         # ============================================================
-        csv_save_group = QtWidgets.QGroupBox("Save CSV")
+        csv_save_group = QtWidgets.QGroupBox("Save Clicks to CSV")
         csv_save_layout = QtWidgets.QVBoxLayout()
         csv_save_group.setLayout(csv_save_layout)
         csv_save_group.setStyleSheet("font-weight: bold;")
@@ -468,13 +486,13 @@ class ClickImageApp(QtWidgets.QMainWindow):
             The size of the circle to draw.
         """
         size_map = {
-            "Extra Small (XS)": 2,
-            "Tiny": 5,
-            "Small": 10,
-            "Medium": 15,
-            "Large": 20,
-            "Extra Large (XL)": 25,
-            "Huge": 30,
+            "Extra Small (2 px)": 2,
+            "Tiny (5 px)": 5,
+            "Small (10 px)": 10,
+            "Medium (15 px)": 15,
+            "Large (20 px)": 20,
+            "Extra Large (25 px)": 25,
+            "Huge (30 px)": 30,
         }
         return size_map.get(self.circle_size_selector.currentText(), 10)  # Default to "Small"
 
@@ -512,9 +530,10 @@ class ClickImageApp(QtWidgets.QMainWindow):
             The width of the circle to draw.
         """
         width_map = {
-            "Thin": 1,
-            "Medium": 2,
-            "Large": 4,
+            "Thin (1 px)": 1,
+            "Medium (2 px)": 2,
+            "Large (3 px)": 3,
+            "Extra Large (5 px)": 5,
         }
         return width_map.get(self.circle_width_selector.currentText(), 2)
     
