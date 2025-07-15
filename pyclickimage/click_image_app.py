@@ -699,9 +699,14 @@ class ClickImageApp(QtWidgets.QMainWindow):
         """
         old_name = self.group_selector.currentText()
         new_name, ok = QtWidgets.QInputDialog.getText(self, "Rename Group", "New name:", text=old_name)
-        if ok and new_name and new_name != old_name:
+        if ok and new_name and new_name != old_name and new_name not in self.click_manager.groups:
             self.click_manager.rename_group(old_name, new_name)
             self._append_to_log(f"Group '{old_name}' renamed to '{new_name}'.")
+        elif not ok:
+            self._append_to_log("Group renaming cancelled.")
+        else:
+            QtWidgets.QMessageBox.warning(self, "Warning", "Invalid group name or name already exists.")
+            self._append_to_log("Failed to rename group: invalid name or name already exists.")
         self.update()
         self._is_saved = False
 
