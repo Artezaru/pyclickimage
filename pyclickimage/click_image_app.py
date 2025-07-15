@@ -9,6 +9,8 @@ from typing import Optional
 from .click_manager import ClickManager
 from .image_viewer import ImageViewer
 
+from .__version__ import __version__
+
 class ClickImageApp(QtWidgets.QMainWindow):
     r"""
     A PyQt application to collect mouse clicks on an image,
@@ -23,6 +25,9 @@ class ClickImageApp(QtWidgets.QMainWindow):
     """
     def __init__(self, image: Optional[numpy.ndarray] = None, output: Optional[str] = None):
         super().__init__()
+
+        # Set the application title
+        self.setWindowTitle(f"Click Image Application - pyclickimage - Version {__version__}")
 
         # Start logging
         self.log_text_edit = QtWidgets.QTextEdit()
@@ -43,8 +48,6 @@ class ClickImageApp(QtWidgets.QMainWindow):
         self.viewer = ImageViewer()
         self.viewer.left_click_signal.connect(self._process_left_click)
         self.viewer.right_click_signal.connect(self._process_right_click)
-
-        self.setWindowTitle("Click Image UI")
 
         self.initialization_done = False
         self._init_ui(output)
@@ -112,14 +115,20 @@ class ClickImageApp(QtWidgets.QMainWindow):
         load_image_group.setStyleSheet("font-weight: bold;")
 
         # Load Image button
-        load_image_button = QtWidgets.QPushButton("Load Image")
+        load_image_button = QtWidgets.QPushButton("Load Image (Ctrl+O)")
         load_image_button.clicked.connect(self.on_load_image)
         load_image_layout.addWidget(load_image_button)
 
+        shortcut = QtWidgets.QShortcut(QtGui.QKeySequence("Ctrl+O"), self)
+        shortcut.activated.connect(self.on_load_image)
+
         # Load Clicks button
-        load_clicks_button = QtWidgets.QPushButton("Load Clicks")
+        load_clicks_button = QtWidgets.QPushButton("Load Clicks (Ctrl+L)")
         load_clicks_button.clicked.connect(self.on_load_clicks)
         load_image_layout.addWidget(load_clicks_button)
+
+        shortcut = QtWidgets.QShortcut(QtGui.QKeySequence("Ctrl+L"), self)
+        shortcut.activated.connect(self.on_load_clicks)
 
         side_panel.addWidget(load_image_group)
 
@@ -139,19 +148,28 @@ class ClickImageApp(QtWidgets.QMainWindow):
         click_settings_layout.addWidget(self.group_selector)
 
         # Add Group button
-        self.add_group_button = QtWidgets.QPushButton("Add Group")
+        self.add_group_button = QtWidgets.QPushButton("Add Group (Ctrl+N)")
         self.add_group_button.clicked.connect(self.on_add_group)
         click_settings_layout.addWidget(self.add_group_button)
 
+        shortcut = QtWidgets.QShortcut(QtGui.QKeySequence("Ctrl+N"), self)
+        shortcut.activated.connect(self.on_add_group)
+
         # Rename Group button
-        self.rename_group_button = QtWidgets.QPushButton("Rename Group")
+        self.rename_group_button = QtWidgets.QPushButton("Rename Group (Ctrl+R)")
         self.rename_group_button.clicked.connect(self.on_rename_group)
         click_settings_layout.addWidget(self.rename_group_button)
 
+        shortcut = QtWidgets.QShortcut(QtGui.QKeySequence("Ctrl+R"), self)
+        shortcut.activated.connect(self.on_rename_group)
+
         # Delete Group button
-        self.delete_group_button = QtWidgets.QPushButton("Delete Group")
+        self.delete_group_button = QtWidgets.QPushButton("Delete Group (Ctrl+D)")
         self.delete_group_button.clicked.connect(self.on_delete_group)
         click_settings_layout.addWidget(self.delete_group_button)
+
+        shortcut = QtWidgets.QShortcut(QtGui.QKeySequence("Ctrl+D"), self)
+        shortcut.activated.connect(self.on_delete_group)
 
         side_panel.addWidget(click_settings_group)
 
@@ -250,14 +268,20 @@ class ClickImageApp(QtWidgets.QMainWindow):
         table_layout.addWidget(self.table)
 
         # Button to remove the last click in the current group
-        self.remove_last_click_button = QtWidgets.QPushButton("Remove Last Click")
+        self.remove_last_click_button = QtWidgets.QPushButton("Remove Last Click (Ctrl+Z)")
         self.remove_last_click_button.clicked.connect(self.on_remove_last_click)
         table_layout.addWidget(self.remove_last_click_button)
 
+        shortcut = QtWidgets.QShortcut(QtGui.QKeySequence("Ctrl+Z"), self)
+        shortcut.activated.connect(self.on_remove_last_click)
+
         # Button to clear all clicks in the current group
-        self.remove_all_clicks_button = QtWidgets.QPushButton("Clear All Clicks")
+        self.remove_all_clicks_button = QtWidgets.QPushButton("Clear All Clicks (Ctrl+Shift+Z)")
         self.remove_all_clicks_button.clicked.connect(self.on_remove_all_clicks)
         table_layout.addWidget(self.remove_all_clicks_button)
+
+        shortcut = QtWidgets.QShortcut(QtGui.QKeySequence("Ctrl+Shift+Z"), self)
+        shortcut.activated.connect(self.on_remove_all_clicks)
 
         side_panel.addWidget(self.table_group)
 
@@ -277,9 +301,12 @@ class ClickImageApp(QtWidgets.QMainWindow):
         self.csv_path_edit.setPlaceholderText("Enter path or filename...")
         csv_save_layout.addWidget(self.csv_path_edit)
 
-        self.save_button = QtWidgets.QPushButton("Save CSV")
+        self.save_button = QtWidgets.QPushButton("Save CSV (Ctrl+S)")
         self.save_button.clicked.connect(self.save_csv)
         csv_save_layout.addWidget(self.save_button)
+
+        shortcut = QtWidgets.QShortcut(QtGui.QKeySequence("Ctrl+S"), self)
+        shortcut.activated.connect(self.save_csv)
 
         side_panel.addWidget(csv_save_group)
 
@@ -299,6 +326,9 @@ class ClickImageApp(QtWidgets.QMainWindow):
 
 
         side_panel.addStretch()  # Allow flexibility to expand vertically as needed
+
+        shortcut = QtWidgets.QShortcut(QtGui.QKeySequence("Ctrl+Q"), self)
+        shortcut.activated.connect(self.close)  # Close the application with Ctrl+Q
 
 
     # ============================================================
@@ -704,6 +734,8 @@ class ClickImageApp(QtWidgets.QMainWindow):
             self._append_to_log(f"Group '{old_name}' renamed to '{new_name}'.")
         elif not ok:
             self._append_to_log("Group renaming cancelled.")
+        elif new_name == old_name:
+            return  # No change in name, do nothing
         else:
             QtWidgets.QMessageBox.warning(self, "Warning", "Invalid group name or name already exists.")
             self._append_to_log("Failed to rename group: invalid name or name already exists.")
@@ -716,6 +748,12 @@ class ClickImageApp(QtWidgets.QMainWindow):
         Show dialog to delete the current group.
         """
         self._append_to_log("Deleting the current group...")
+        ok = QtWidgets.QMessageBox.question(self, "Confirm Action",
+            "Are you sure you want to delete the current group?",
+            QtWidgets.QMessageBox.Yes | QtWidgets.QMessageBox.No)
+        if ok == QtWidgets.QMessageBox.No:
+            self._append_to_log("Group deletion cancelled by user.")
+            return
         self.click_manager.remove_group()
         self.update()
         self._is_saved = False
