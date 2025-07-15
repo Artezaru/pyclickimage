@@ -7,7 +7,7 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>pyclickimage.click_image_app &#8212; pyclickimage 1.0.3 documentation</title>
+    <title>pyclickimage.click_image_app &#8212; pyclickimage 1.0.4 documentation</title>
   
   
   
@@ -37,7 +37,7 @@
   <link rel="preload" as="script" href="../../_static/scripts/bootstrap.js?digest=8878045cc6db502f8baf" />
 <link rel="preload" as="script" href="../../_static/scripts/pydata-sphinx-theme.js?digest=8878045cc6db502f8baf" />
 
-    <script src="../../_static/documentation_options.js?v=baaebd52"></script>
+    <script src="../../_static/documentation_options.js?v=71272d9f"></script>
     <script src="../../_static/doctools.js?v=9a2dae69"></script>
     <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
     <script>DOCUMENTATION_OPTIONS.pagename = '_modules/pyclickimage/click_image_app';</script>
@@ -107,7 +107,7 @@
   
   
   
-    <p class="title logo__title">pyclickimage 1.0.3 documentation</p>
+    <p class="title logo__title">pyclickimage 1.0.4 documentation</p>
   
 </a></div>
     
@@ -389,9 +389,16 @@
         <span class="c1"># Side panel widget with a fixed width</span>
         <span class="n">side_panel_widget</span> <span class="o">=</span> <span class="n">QtWidgets</span><span class="o">.</span><span class="n">QWidget</span><span class="p">()</span>
         <span class="n">side_panel_widget</span><span class="o">.</span><span class="n">setLayout</span><span class="p">(</span><span class="n">side_panel</span><span class="p">)</span>
-        <span class="n">side_panel_widget</span><span class="o">.</span><span class="n">setMinimumWidth</span><span class="p">(</span><span class="mi">350</span><span class="p">)</span>  <span class="c1"># Fixed width for the side panel</span>
-        <span class="n">side_panel_widget</span><span class="o">.</span><span class="n">setMaximumWidth</span><span class="p">(</span><span class="mi">700</span><span class="p">)</span>  <span class="c1"># Maximum width for the side panel</span>
-        <span class="n">layout</span><span class="o">.</span><span class="n">addWidget</span><span class="p">(</span><span class="n">side_panel_widget</span><span class="p">)</span>
+        <span class="n">side_panel_widget</span><span class="o">.</span><span class="n">setMinimumWidth</span><span class="p">(</span><span class="mi">250</span><span class="p">)</span>  <span class="c1"># Fixed width for the side panel</span>
+        <span class="n">side_panel_widget</span><span class="o">.</span><span class="n">setMaximumWidth</span><span class="p">(</span><span class="mi">400</span><span class="p">)</span>  <span class="c1"># Maximum width for the side panel</span>
+
+        <span class="n">side_scroll_area</span> <span class="o">=</span> <span class="n">QtWidgets</span><span class="o">.</span><span class="n">QScrollArea</span><span class="p">()</span>
+        <span class="n">side_scroll_area</span><span class="o">.</span><span class="n">setWidgetResizable</span><span class="p">(</span><span class="kc">True</span><span class="p">)</span>  <span class="c1"># Allow the side panel to resize</span>
+        <span class="n">side_scroll_area</span><span class="o">.</span><span class="n">setMinimumWidth</span><span class="p">(</span><span class="mi">260</span><span class="p">)</span>  <span class="c1"># Minimum width for the scroll area</span>
+        <span class="n">side_scroll_area</span><span class="o">.</span><span class="n">setMaximumWidth</span><span class="p">(</span><span class="mi">410</span><span class="p">)</span>  <span class="c1"># Maximum width for the scroll area</span>
+        <span class="n">side_scroll_area</span><span class="o">.</span><span class="n">setWidget</span><span class="p">(</span><span class="n">side_panel_widget</span><span class="p">)</span>
+
+        <span class="n">layout</span><span class="o">.</span><span class="n">addWidget</span><span class="p">(</span><span class="n">side_scroll_area</span><span class="p">)</span>
 
         <span class="c1"># Tool bar for quick actions</span>
         <span class="n">toolbar</span> <span class="o">=</span> <span class="n">QtWidgets</span><span class="o">.</span><span class="n">QToolBar</span><span class="p">(</span><span class="s2">&quot;Toolbar&quot;</span><span class="p">)</span>
@@ -415,7 +422,7 @@
         <span class="c1"># ============================================================</span>
         <span class="c1"># Group : Load Image</span>
         <span class="c1"># ============================================================</span>
-        <span class="n">load_image_group</span> <span class="o">=</span> <span class="n">QtWidgets</span><span class="o">.</span><span class="n">QGroupBox</span><span class="p">(</span><span class="s2">&quot;Load Image&quot;</span><span class="p">)</span>
+        <span class="n">load_image_group</span> <span class="o">=</span> <span class="n">QtWidgets</span><span class="o">.</span><span class="n">QGroupBox</span><span class="p">(</span><span class="s2">&quot;Load Settings&quot;</span><span class="p">)</span>
         <span class="n">load_image_layout</span> <span class="o">=</span> <span class="n">QtWidgets</span><span class="o">.</span><span class="n">QVBoxLayout</span><span class="p">()</span>
         <span class="n">load_image_group</span><span class="o">.</span><span class="n">setLayout</span><span class="p">(</span><span class="n">load_image_layout</span><span class="p">)</span>
         <span class="n">load_image_group</span><span class="o">.</span><span class="n">setStyleSheet</span><span class="p">(</span><span class="s2">&quot;font-weight: bold;&quot;</span><span class="p">)</span>
@@ -435,7 +442,7 @@
         <span class="c1"># ============================================================</span>
         <span class="c1"># Group : Click settings</span>
         <span class="c1"># ============================================================</span>
-        <span class="n">click_settings_group</span> <span class="o">=</span> <span class="n">QtWidgets</span><span class="o">.</span><span class="n">QGroupBox</span><span class="p">(</span><span class="s2">&quot;Click Settings&quot;</span><span class="p">)</span>
+        <span class="n">click_settings_group</span> <span class="o">=</span> <span class="n">QtWidgets</span><span class="o">.</span><span class="n">QGroupBox</span><span class="p">(</span><span class="s2">&quot;Group Management&quot;</span><span class="p">)</span>
         <span class="n">click_settings_layout</span> <span class="o">=</span> <span class="n">QtWidgets</span><span class="o">.</span><span class="n">QVBoxLayout</span><span class="p">()</span>
         <span class="n">click_settings_group</span><span class="o">.</span><span class="n">setLayout</span><span class="p">(</span><span class="n">click_settings_layout</span><span class="p">)</span>
         <span class="n">click_settings_group</span><span class="o">.</span><span class="n">setStyleSheet</span><span class="p">(</span><span class="s2">&quot;font-weight: bold;&quot;</span><span class="p">)</span>
@@ -483,8 +490,10 @@
         <span class="bp">self</span><span class="o">.</span><span class="n">colormap_selector</span><span class="o">.</span><span class="n">addItem</span><span class="p">(</span><span class="s2">&quot;Spring&quot;</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">colormap_selector</span><span class="o">.</span><span class="n">setCurrentIndex</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>  <span class="c1"># Default to &quot;Default&quot;</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">colormap_selector</span><span class="o">.</span><span class="n">currentIndexChanged</span><span class="o">.</span><span class="n">connect</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">on_colormap_changed</span><span class="p">)</span>
-        <span class="n">display_options_layout</span><span class="o">.</span><span class="n">addWidget</span><span class="p">(</span><span class="n">QtWidgets</span><span class="o">.</span><span class="n">QLabel</span><span class="p">(</span><span class="s2">&quot;Colormap:&quot;</span><span class="p">))</span>
-        <span class="n">display_options_layout</span><span class="o">.</span><span class="n">addWidget</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">colormap_selector</span><span class="p">)</span>
+        <span class="n">Hlayout</span> <span class="o">=</span> <span class="n">QtWidgets</span><span class="o">.</span><span class="n">QHBoxLayout</span><span class="p">()</span>
+        <span class="n">Hlayout</span><span class="o">.</span><span class="n">addWidget</span><span class="p">(</span><span class="n">QtWidgets</span><span class="o">.</span><span class="n">QLabel</span><span class="p">(</span><span class="s2">&quot;Image Colormap:&quot;</span><span class="p">))</span>
+        <span class="n">Hlayout</span><span class="o">.</span><span class="n">addWidget</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">colormap_selector</span><span class="p">)</span>
+        <span class="n">display_options_layout</span><span class="o">.</span><span class="n">addLayout</span><span class="p">(</span><span class="n">Hlayout</span><span class="p">)</span>
 
         <span class="c1"># Color selector</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">color_selector</span> <span class="o">=</span> <span class="n">QtWidgets</span><span class="o">.</span><span class="n">QComboBox</span><span class="p">()</span>
@@ -499,32 +508,40 @@
         <span class="bp">self</span><span class="o">.</span><span class="n">color_selector</span><span class="o">.</span><span class="n">addItem</span><span class="p">(</span><span class="s2">&quot;Magenta&quot;</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">color_selector</span><span class="o">.</span><span class="n">currentIndexChanged</span><span class="o">.</span><span class="n">connect</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">on_color_changed</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">color_selector</span><span class="o">.</span><span class="n">setCurrentIndex</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>  <span class="c1"># Default to &quot;Red&quot;</span>
-        <span class="n">display_options_layout</span><span class="o">.</span><span class="n">addWidget</span><span class="p">(</span><span class="n">QtWidgets</span><span class="o">.</span><span class="n">QLabel</span><span class="p">(</span><span class="s2">&quot;Click Color:&quot;</span><span class="p">))</span>
-        <span class="n">display_options_layout</span><span class="o">.</span><span class="n">addWidget</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">color_selector</span><span class="p">)</span>
+        <span class="n">Hlayout</span> <span class="o">=</span> <span class="n">QtWidgets</span><span class="o">.</span><span class="n">QHBoxLayout</span><span class="p">()</span>
+        <span class="n">Hlayout</span><span class="o">.</span><span class="n">addWidget</span><span class="p">(</span><span class="n">QtWidgets</span><span class="o">.</span><span class="n">QLabel</span><span class="p">(</span><span class="s2">&quot;Circle Click Color:&quot;</span><span class="p">))</span>
+        <span class="n">Hlayout</span><span class="o">.</span><span class="n">addWidget</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">color_selector</span><span class="p">)</span>
+        <span class="n">display_options_layout</span><span class="o">.</span><span class="n">addLayout</span><span class="p">(</span><span class="n">Hlayout</span><span class="p">)</span>
 
         <span class="c1"># Dropdown to choose circle size</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">circle_size_selector</span> <span class="o">=</span> <span class="n">QtWidgets</span><span class="o">.</span><span class="n">QComboBox</span><span class="p">()</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">circle_size_selector</span><span class="o">.</span><span class="n">addItem</span><span class="p">(</span><span class="s2">&quot;Extra Small (XS)&quot;</span><span class="p">)</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">circle_size_selector</span><span class="o">.</span><span class="n">addItem</span><span class="p">(</span><span class="s2">&quot;Tiny&quot;</span><span class="p">)</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">circle_size_selector</span><span class="o">.</span><span class="n">addItem</span><span class="p">(</span><span class="s2">&quot;Small&quot;</span><span class="p">)</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">circle_size_selector</span><span class="o">.</span><span class="n">addItem</span><span class="p">(</span><span class="s2">&quot;Medium&quot;</span><span class="p">)</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">circle_size_selector</span><span class="o">.</span><span class="n">addItem</span><span class="p">(</span><span class="s2">&quot;Large&quot;</span><span class="p">)</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">circle_size_selector</span><span class="o">.</span><span class="n">addItem</span><span class="p">(</span><span class="s2">&quot;Extra Large (XL)&quot;</span><span class="p">)</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">circle_size_selector</span><span class="o">.</span><span class="n">addItem</span><span class="p">(</span><span class="s2">&quot;Huge&quot;</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">circle_size_selector</span><span class="o">.</span><span class="n">addItem</span><span class="p">(</span><span class="s2">&quot;Extra Small (2 px)&quot;</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">circle_size_selector</span><span class="o">.</span><span class="n">addItem</span><span class="p">(</span><span class="s2">&quot;Tiny (5 px)&quot;</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">circle_size_selector</span><span class="o">.</span><span class="n">addItem</span><span class="p">(</span><span class="s2">&quot;Small (10 px)&quot;</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">circle_size_selector</span><span class="o">.</span><span class="n">addItem</span><span class="p">(</span><span class="s2">&quot;Medium (15 px)&quot;</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">circle_size_selector</span><span class="o">.</span><span class="n">addItem</span><span class="p">(</span><span class="s2">&quot;Large (20 px)&quot;</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">circle_size_selector</span><span class="o">.</span><span class="n">addItem</span><span class="p">(</span><span class="s2">&quot;Extra Large (25 px)&quot;</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">circle_size_selector</span><span class="o">.</span><span class="n">addItem</span><span class="p">(</span><span class="s2">&quot;Huge (30 px)&quot;</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">circle_size_selector</span><span class="o">.</span><span class="n">currentIndexChanged</span><span class="o">.</span><span class="n">connect</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">on_size_changed</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">circle_size_selector</span><span class="o">.</span><span class="n">setCurrentIndex</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span>  <span class="c1"># Default to &quot;Small&quot;</span>
-        <span class="n">display_options_layout</span><span class="o">.</span><span class="n">addWidget</span><span class="p">(</span><span class="n">QtWidgets</span><span class="o">.</span><span class="n">QLabel</span><span class="p">(</span><span class="s2">&quot;Circle Size:&quot;</span><span class="p">))</span>
-        <span class="n">display_options_layout</span><span class="o">.</span><span class="n">addWidget</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">circle_size_selector</span><span class="p">)</span>
+        <span class="n">Hlayout</span> <span class="o">=</span> <span class="n">QtWidgets</span><span class="o">.</span><span class="n">QHBoxLayout</span><span class="p">()</span>
+        <span class="n">Hlayout</span><span class="o">.</span><span class="n">addWidget</span><span class="p">(</span><span class="n">QtWidgets</span><span class="o">.</span><span class="n">QLabel</span><span class="p">(</span><span class="s2">&quot;Circle Size:&quot;</span><span class="p">))</span>
+        <span class="n">Hlayout</span><span class="o">.</span><span class="n">addWidget</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">circle_size_selector</span><span class="p">)</span>
+        <span class="n">display_options_layout</span><span class="o">.</span><span class="n">addLayout</span><span class="p">(</span><span class="n">Hlayout</span><span class="p">)</span>
+
 
         <span class="c1"># Dropdown to choose the width of the circles</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">circle_width_selector</span> <span class="o">=</span> <span class="n">QtWidgets</span><span class="o">.</span><span class="n">QComboBox</span><span class="p">()</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">circle_width_selector</span><span class="o">.</span><span class="n">addItem</span><span class="p">(</span><span class="s2">&quot;Thin&quot;</span><span class="p">)</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">circle_width_selector</span><span class="o">.</span><span class="n">addItem</span><span class="p">(</span><span class="s2">&quot;Medium&quot;</span><span class="p">)</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">circle_width_selector</span><span class="o">.</span><span class="n">addItem</span><span class="p">(</span><span class="s2">&quot;Large&quot;</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">circle_width_selector</span><span class="o">.</span><span class="n">addItem</span><span class="p">(</span><span class="s2">&quot;Thin (1 px)&quot;</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">circle_width_selector</span><span class="o">.</span><span class="n">addItem</span><span class="p">(</span><span class="s2">&quot;Medium (2 px)&quot;</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">circle_width_selector</span><span class="o">.</span><span class="n">addItem</span><span class="p">(</span><span class="s2">&quot;Large (3 px)&quot;</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">circle_width_selector</span><span class="o">.</span><span class="n">addItem</span><span class="p">(</span><span class="s2">&quot;Extra Large (5 px)&quot;</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">circle_width_selector</span><span class="o">.</span><span class="n">currentIndexChanged</span><span class="o">.</span><span class="n">connect</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">on_width_changed</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">circle_width_selector</span><span class="o">.</span><span class="n">setCurrentIndex</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>  <span class="c1"># Default to &quot;Medium&quot;</span>
-        <span class="n">display_options_layout</span><span class="o">.</span><span class="n">addWidget</span><span class="p">(</span><span class="n">QtWidgets</span><span class="o">.</span><span class="n">QLabel</span><span class="p">(</span><span class="s2">&quot;Circle Width:&quot;</span><span class="p">))</span>
-        <span class="n">display_options_layout</span><span class="o">.</span><span class="n">addWidget</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">circle_width_selector</span><span class="p">)</span>
+        <span class="n">Hlayout</span> <span class="o">=</span> <span class="n">QtWidgets</span><span class="o">.</span><span class="n">QHBoxLayout</span><span class="p">()</span>
+        <span class="n">Hlayout</span><span class="o">.</span><span class="n">addWidget</span><span class="p">(</span><span class="n">QtWidgets</span><span class="o">.</span><span class="n">QLabel</span><span class="p">(</span><span class="s2">&quot;Circle Width:&quot;</span><span class="p">))</span>
+        <span class="n">Hlayout</span><span class="o">.</span><span class="n">addWidget</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">circle_width_selector</span><span class="p">)</span>
+        <span class="n">display_options_layout</span><span class="o">.</span><span class="n">addLayout</span><span class="p">(</span><span class="n">Hlayout</span><span class="p">)</span>
 
         <span class="c1"># Checkbox to control whether clicks should be drawn</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">display_click_checkbox</span> <span class="o">=</span> <span class="n">QtWidgets</span><span class="o">.</span><span class="n">QCheckBox</span><span class="p">(</span><span class="s2">&quot;Display Clicks&quot;</span><span class="p">)</span>
@@ -540,6 +557,7 @@
         <span class="bp">self</span><span class="o">.</span><span class="n">table_group</span> <span class="o">=</span> <span class="n">QtWidgets</span><span class="o">.</span><span class="n">QGroupBox</span><span class="p">(</span><span class="s2">&quot;Clicks Table&quot;</span><span class="p">)</span>
         <span class="n">table_layout</span> <span class="o">=</span> <span class="n">QtWidgets</span><span class="o">.</span><span class="n">QVBoxLayout</span><span class="p">()</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">table_group</span><span class="o">.</span><span class="n">setLayout</span><span class="p">(</span><span class="n">table_layout</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">table_group</span><span class="o">.</span><span class="n">setMinimumHeight</span><span class="p">(</span><span class="mi">200</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">table_group</span><span class="o">.</span><span class="n">setStyleSheet</span><span class="p">(</span><span class="s2">&quot;font-weight: bold;&quot;</span><span class="p">)</span>
 
         <span class="c1"># Table to show clicks in the current group</span>
@@ -562,7 +580,7 @@
         <span class="c1"># ============================================================</span>
         <span class="c1"># Group : CSV Save Path</span>
         <span class="c1"># ============================================================</span>
-        <span class="n">csv_save_group</span> <span class="o">=</span> <span class="n">QtWidgets</span><span class="o">.</span><span class="n">QGroupBox</span><span class="p">(</span><span class="s2">&quot;Save CSV&quot;</span><span class="p">)</span>
+        <span class="n">csv_save_group</span> <span class="o">=</span> <span class="n">QtWidgets</span><span class="o">.</span><span class="n">QGroupBox</span><span class="p">(</span><span class="s2">&quot;Save Clicks to CSV&quot;</span><span class="p">)</span>
         <span class="n">csv_save_layout</span> <span class="o">=</span> <span class="n">QtWidgets</span><span class="o">.</span><span class="n">QVBoxLayout</span><span class="p">()</span>
         <span class="n">csv_save_group</span><span class="o">.</span><span class="n">setLayout</span><span class="p">(</span><span class="n">csv_save_layout</span><span class="p">)</span>
         <span class="n">csv_save_group</span><span class="o">.</span><span class="n">setStyleSheet</span><span class="p">(</span><span class="s2">&quot;font-weight: bold;&quot;</span><span class="p">)</span>
@@ -814,13 +832,13 @@
 <span class="sd">            The size of the circle to draw.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="n">size_map</span> <span class="o">=</span> <span class="p">{</span>
-            <span class="s2">&quot;Extra Small (XS)&quot;</span><span class="p">:</span> <span class="mi">2</span><span class="p">,</span>
-            <span class="s2">&quot;Tiny&quot;</span><span class="p">:</span> <span class="mi">5</span><span class="p">,</span>
-            <span class="s2">&quot;Small&quot;</span><span class="p">:</span> <span class="mi">10</span><span class="p">,</span>
-            <span class="s2">&quot;Medium&quot;</span><span class="p">:</span> <span class="mi">15</span><span class="p">,</span>
-            <span class="s2">&quot;Large&quot;</span><span class="p">:</span> <span class="mi">20</span><span class="p">,</span>
-            <span class="s2">&quot;Extra Large (XL)&quot;</span><span class="p">:</span> <span class="mi">25</span><span class="p">,</span>
-            <span class="s2">&quot;Huge&quot;</span><span class="p">:</span> <span class="mi">30</span><span class="p">,</span>
+            <span class="s2">&quot;Extra Small (2 px)&quot;</span><span class="p">:</span> <span class="mi">2</span><span class="p">,</span>
+            <span class="s2">&quot;Tiny (5 px)&quot;</span><span class="p">:</span> <span class="mi">5</span><span class="p">,</span>
+            <span class="s2">&quot;Small (10 px)&quot;</span><span class="p">:</span> <span class="mi">10</span><span class="p">,</span>
+            <span class="s2">&quot;Medium (15 px)&quot;</span><span class="p">:</span> <span class="mi">15</span><span class="p">,</span>
+            <span class="s2">&quot;Large (20 px)&quot;</span><span class="p">:</span> <span class="mi">20</span><span class="p">,</span>
+            <span class="s2">&quot;Extra Large (25 px)&quot;</span><span class="p">:</span> <span class="mi">25</span><span class="p">,</span>
+            <span class="s2">&quot;Huge (30 px)&quot;</span><span class="p">:</span> <span class="mi">30</span><span class="p">,</span>
         <span class="p">}</span>
         <span class="k">return</span> <span class="n">size_map</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">circle_size_selector</span><span class="o">.</span><span class="n">currentText</span><span class="p">(),</span> <span class="mi">10</span><span class="p">)</span>  <span class="c1"># Default to &quot;Small&quot;</span></div>
 
@@ -864,9 +882,10 @@
 <span class="sd">            The width of the circle to draw.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="n">width_map</span> <span class="o">=</span> <span class="p">{</span>
-            <span class="s2">&quot;Thin&quot;</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span>
-            <span class="s2">&quot;Medium&quot;</span><span class="p">:</span> <span class="mi">2</span><span class="p">,</span>
-            <span class="s2">&quot;Large&quot;</span><span class="p">:</span> <span class="mi">4</span><span class="p">,</span>
+            <span class="s2">&quot;Thin (1 px)&quot;</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span>
+            <span class="s2">&quot;Medium (2 px)&quot;</span><span class="p">:</span> <span class="mi">2</span><span class="p">,</span>
+            <span class="s2">&quot;Large (3 px)&quot;</span><span class="p">:</span> <span class="mi">3</span><span class="p">,</span>
+            <span class="s2">&quot;Extra Large (5 px)&quot;</span><span class="p">:</span> <span class="mi">5</span><span class="p">,</span>
         <span class="p">}</span>
         <span class="k">return</span> <span class="n">width_map</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">circle_width_selector</span><span class="o">.</span><span class="n">currentText</span><span class="p">(),</span> <span class="mi">2</span><span class="p">)</span></div>
 
