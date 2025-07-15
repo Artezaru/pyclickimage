@@ -7,7 +7,7 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>pyclickimage.click_image_app &#8212; pyclickimage 1.0.4 documentation</title>
+    <title>pyclickimage.click_image_app &#8212; pyclickimage 1.0.6 documentation</title>
   
   
   
@@ -37,7 +37,7 @@
   <link rel="preload" as="script" href="../../_static/scripts/bootstrap.js?digest=8878045cc6db502f8baf" />
 <link rel="preload" as="script" href="../../_static/scripts/pydata-sphinx-theme.js?digest=8878045cc6db502f8baf" />
 
-    <script src="../../_static/documentation_options.js?v=71272d9f"></script>
+    <script src="../../_static/documentation_options.js?v=e2a723ec"></script>
     <script src="../../_static/doctools.js?v=9a2dae69"></script>
     <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
     <script>DOCUMENTATION_OPTIONS.pagename = '_modules/pyclickimage/click_image_app';</script>
@@ -107,7 +107,7 @@
   
   
   
-    <p class="title logo__title">pyclickimage 1.0.4 documentation</p>
+    <p class="title logo__title">pyclickimage 1.0.6 documentation</p>
   
 </a></div>
     
@@ -1084,9 +1084,14 @@
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="n">old_name</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">group_selector</span><span class="o">.</span><span class="n">currentText</span><span class="p">()</span>
         <span class="n">new_name</span><span class="p">,</span> <span class="n">ok</span> <span class="o">=</span> <span class="n">QtWidgets</span><span class="o">.</span><span class="n">QInputDialog</span><span class="o">.</span><span class="n">getText</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="s2">&quot;Rename Group&quot;</span><span class="p">,</span> <span class="s2">&quot;New name:&quot;</span><span class="p">,</span> <span class="n">text</span><span class="o">=</span><span class="n">old_name</span><span class="p">)</span>
-        <span class="k">if</span> <span class="n">ok</span> <span class="ow">and</span> <span class="n">new_name</span> <span class="ow">and</span> <span class="n">new_name</span> <span class="o">!=</span> <span class="n">old_name</span><span class="p">:</span>
+        <span class="k">if</span> <span class="n">ok</span> <span class="ow">and</span> <span class="n">new_name</span> <span class="ow">and</span> <span class="n">new_name</span> <span class="o">!=</span> <span class="n">old_name</span> <span class="ow">and</span> <span class="n">new_name</span> <span class="ow">not</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">click_manager</span><span class="o">.</span><span class="n">groups</span><span class="p">:</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">click_manager</span><span class="o">.</span><span class="n">rename_group</span><span class="p">(</span><span class="n">old_name</span><span class="p">,</span> <span class="n">new_name</span><span class="p">)</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">_append_to_log</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Group &#39;</span><span class="si">{</span><span class="n">old_name</span><span class="si">}</span><span class="s2">&#39; renamed to &#39;</span><span class="si">{</span><span class="n">new_name</span><span class="si">}</span><span class="s2">&#39;.&quot;</span><span class="p">)</span>
+        <span class="k">elif</span> <span class="ow">not</span> <span class="n">ok</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_append_to_log</span><span class="p">(</span><span class="s2">&quot;Group renaming cancelled.&quot;</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">QtWidgets</span><span class="o">.</span><span class="n">QMessageBox</span><span class="o">.</span><span class="n">warning</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="s2">&quot;Warning&quot;</span><span class="p">,</span> <span class="s2">&quot;Invalid group name or name already exists.&quot;</span><span class="p">)</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_append_to_log</span><span class="p">(</span><span class="s2">&quot;Failed to rename group: invalid name or name already exists.&quot;</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">update</span><span class="p">()</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">_is_saved</span> <span class="o">=</span> <span class="kc">False</span></div>
 
