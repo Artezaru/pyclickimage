@@ -43,6 +43,9 @@ class ClickImageApp(QtWidgets.QMainWindow):
         self.set_image(image)
         if output is None:
             output = "pyclickimage_clicks_defaults.csv"
+        else:
+            output = output
+            load_output = True
 
         self.click_manager = ClickManager()
         self.viewer = ImageViewer()
@@ -53,6 +56,15 @@ class ClickImageApp(QtWidgets.QMainWindow):
         self._init_ui(output)
         self.initialization_done = True
         self._append_to_log("Application initialized successfully.")
+
+        if load_output and image is not None:
+            if os.path.exists(output):
+                try:
+                    self._append_to_log(f"Loading clicks from: {output}")
+                    self.click_manager = ClickManager.load_from_csv(output)
+                    self._append_to_log("Clicks loaded successfully.")
+                except Exception as e:
+                    self._append_to_log(f"Error loading clicks: {e}")
 
         self.update()
 
