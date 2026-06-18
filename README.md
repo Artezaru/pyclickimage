@@ -12,7 +12,7 @@ Run the command:
 pyclickimage-gui
 ```
 
-![App](./pyclickimage/resources/app.png)
+![GUI](https://raw.githubusercontent.com/Artezaru/pyclickimage/master/pyclickimage/resources/app.png)
 
 The output ``csv`` will have the following format (with ``integer`` or ``floating`` precision):
 
