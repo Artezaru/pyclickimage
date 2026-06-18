@@ -8,7 +8,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
-    <title>pyclickimage.ImageViewer &#8212; pyclickimage 2.0.4 documentation</title>
+    <title>pyclickimage.ImageViewer &#8212; pyclickimage 2.1.0 documentation</title>
   
   
   
@@ -38,7 +38,7 @@
   <link rel="preload" as="script" href="../_static/scripts/bootstrap.js?digest=8878045cc6db502f8baf" />
 <link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=8878045cc6db502f8baf" />
 
-    <script src="../_static/documentation_options.js?v=adc66a14"></script>
+    <script src="../_static/documentation_options.js?v=20623aea"></script>
     <script src="../_static/doctools.js?v=9a2dae69"></script>
     <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
     <script>DOCUMENTATION_OPTIONS.pagename = 'api_doc/image_viewer';</script>
@@ -110,7 +110,7 @@
   
   
   
-    <p class="title logo__title">pyclickimage 2.0.4 documentation</p>
+    <p class="title logo__title">pyclickimage 2.1.0 documentation</p>
   
 </a></div>
     
@@ -333,7 +333,7 @@
 <h1>pyclickimage.ImageViewer<a class="headerlink" href="#pyclickimage-imageviewer" title="Link to this heading">#</a></h1>
 <dl class="py class">
 <dt class="sig sig-object py" id="pyclickimage.ImageViewer">
-<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">pyclickimage.</span></span><span class="sig-name descname"><span class="pre">ImageViewer</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">parent</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/pyclickimage/image_viewer.html#ImageViewer"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pyclickimage.ImageViewer" title="Link to this definition">#</a></dt>
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">pyclickimage.</span></span><span class="sig-name descname"><span class="pre">ImageViewer</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">parent</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">half_shift</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/pyclickimage/image_viewer.html#ImageViewer"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pyclickimage.ImageViewer" title="Link to this definition">#</a></dt>
 <dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">QGraphicsView</span></code></p>
 <p>Interactive image viewer with:
 - subpixel cursor tracking
@@ -341,6 +341,11 @@
 - zoom with mouse wheel
 - precise click detection (drag-safe)
 - marker system for annotation</p>
+<p>half-shift :</p>
+<ul class="simple">
+<li><p>True = (0,0) on the center of the first pixel.</p></li>
+<li><p>False = (0,0) on the corner of the first pixel.</p></li>
+</ul>
 <dl class="py method">
 <dt class="sig sig-object py" id="pyclickimage.ImageViewer.add_marker">
 <span class="sig-name descname"><span class="pre">add_marker</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="pre">center:</span> <span class="pre">~typing.Tuple[float,</span> <span class="pre">float],</span> <span class="pre">color:</span> <span class="pre">~PyQt5.QtGui.QColor</span> <span class="pre">=</span> <span class="pre">&lt;PyQt5.QtGui.QColor</span> <span class="pre">object&gt;,</span> <span class="pre">size:</span> <span class="pre">int</span> <span class="pre">=</span> <span class="pre">8</span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="reference internal" href="../_modules/pyclickimage/image_viewer.html#ImageViewer.add_marker"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pyclickimage.ImageViewer.add_marker" title="Link to this definition">#</a></dt>

@@ -8,7 +8,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
-    <title>pyclickimage.ClickManager &#8212; pyclickimage 2.0.4 documentation</title>
+    <title>pyclickimage.ClickManager &#8212; pyclickimage 2.1.0 documentation</title>
   
   
   
@@ -38,7 +38,7 @@
   <link rel="preload" as="script" href="../_static/scripts/bootstrap.js?digest=8878045cc6db502f8baf" />
 <link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=8878045cc6db502f8baf" />
 
-    <script src="../_static/documentation_options.js?v=adc66a14"></script>
+    <script src="../_static/documentation_options.js?v=20623aea"></script>
     <script src="../_static/doctools.js?v=9a2dae69"></script>
     <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
     <script>DOCUMENTATION_OPTIONS.pagename = 'api_doc/click_manager';</script>
@@ -110,7 +110,7 @@
   
   
   
-    <p class="title logo__title">pyclickimage 2.0.4 documentation</p>
+    <p class="title logo__title">pyclickimage 2.1.0 documentation</p>
   
 </a></div>
     
@@ -448,6 +448,12 @@ Default is None.</p></li>
 </dd></dl>
 
 <dl class="py property">
+<dt class="sig sig-object py" id="pyclickimage.ClickManager.n_clicks">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">n_clicks</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">int</span></em><a class="headerlink" href="#pyclickimage.ClickManager.n_clicks" title="Link to this definition">#</a></dt>
+<dd><p>Return the number of clicks</p>
+</dd></dl>
+
+<dl class="py property">
 <dt class="sig sig-object py" id="pyclickimage.ClickManager.precision_mode">
 <em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">precision_mode</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">str</span></em><a class="headerlink" href="#pyclickimage.ClickManager.precision_mode" title="Link to this definition">#</a></dt>
 <dd><p>Get the current precision mode.</p>
@@ -543,6 +549,20 @@ depending on the current precision mode.</p>
 </dl>
 </dd></dl>
 
+<dl class="py method">
+<dt class="sig sig-object py" id="pyclickimage.ClickManager.to_half_shift_off">
+<span class="sig-name descname"><span class="pre">to_half_shift_off</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/pyclickimage/click_manager.html#ClickManager.to_half_shift_off"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pyclickimage.ClickManager.to_half_shift_off" title="Link to this definition">#</a></dt>
+<dd><p>Reverse the half-pixel shift.</p>
+<p>Point (a, b) -&gt; (a + 0.5, b + 0.5)</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="pyclickimage.ClickManager.to_half_shift_on">
+<span class="sig-name descname"><span class="pre">to_half_shift_on</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/pyclickimage/click_manager.html#ClickManager.to_half_shift_on"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pyclickimage.ClickManager.to_half_shift_on" title="Link to this definition">#</a></dt>
+<dd><p>Shift all points by -0.5 to use pixel-centered coordinates.</p>
+<p>Point (a, b) -&gt; (a - 0.5, b - 0.5)</p>
+</dd></dl>
+
 <dl class="py property">
 <dt class="sig sig-object py" id="pyclickimage.ClickManager.use_float_precision">
 <em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">use_float_precision</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">bool</span></em><a class="headerlink" href="#pyclickimage.ClickManager.use_float_precision" title="Link to this definition">#</a></dt>
@@ -615,6 +635,7 @@ depending on the current precision mode.</p>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#pyclickimage.ClickManager.get_click"><code class="docutils literal notranslate"><span class="pre">ClickManager.get_click()</span></code></a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#pyclickimage.ClickManager.groups"><code class="docutils literal notranslate"><span class="pre">ClickManager.groups</span></code></a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#pyclickimage.ClickManager.load_from_csv"><code class="docutils literal notranslate"><span class="pre">ClickManager.load_from_csv()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#pyclickimage.ClickManager.n_clicks"><code class="docutils literal notranslate"><span class="pre">ClickManager.n_clicks</span></code></a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#pyclickimage.ClickManager.precision_mode"><code class="docutils literal notranslate"><span class="pre">ClickManager.precision_mode</span></code></a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#pyclickimage.ClickManager.remove_click"><code class="docutils literal notranslate"><span class="pre">ClickManager.remove_click()</span></code></a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#pyclickimage.ClickManager.remove_group"><code class="docutils literal notranslate"><span class="pre">ClickManager.remove_group()</span></code></a></li>
@@ -622,6 +643,8 @@ depending on the current precision mode.</p>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#pyclickimage.ClickManager.save_to_csv"><code class="docutils literal notranslate"><span class="pre">ClickManager.save_to_csv()</span></code></a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#pyclickimage.ClickManager.set_group"><code class="docutils literal notranslate"><span class="pre">ClickManager.set_group()</span></code></a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#pyclickimage.ClickManager.to_dict"><code class="docutils literal notranslate"><span class="pre">ClickManager.to_dict()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#pyclickimage.ClickManager.to_half_shift_off"><code class="docutils literal notranslate"><span class="pre">ClickManager.to_half_shift_off()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#pyclickimage.ClickManager.to_half_shift_on"><code class="docutils literal notranslate"><span class="pre">ClickManager.to_half_shift_on()</span></code></a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#pyclickimage.ClickManager.use_float_precision"><code class="docutils literal notranslate"><span class="pre">ClickManager.use_float_precision</span></code></a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#pyclickimage.ClickManager.use_int_precision"><code class="docutils literal notranslate"><span class="pre">ClickManager.use_int_precision</span></code></a></li>
 </ul>

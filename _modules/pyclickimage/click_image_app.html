@@ -7,7 +7,7 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>pyclickimage.click_image_app &#8212; pyclickimage 2.0.4 documentation</title>
+    <title>pyclickimage.click_image_app &#8212; pyclickimage 2.1.0 documentation</title>
   
   
   
@@ -37,7 +37,7 @@
   <link rel="preload" as="script" href="../../_static/scripts/bootstrap.js?digest=8878045cc6db502f8baf" />
 <link rel="preload" as="script" href="../../_static/scripts/pydata-sphinx-theme.js?digest=8878045cc6db502f8baf" />
 
-    <script src="../../_static/documentation_options.js?v=adc66a14"></script>
+    <script src="../../_static/documentation_options.js?v=20623aea"></script>
     <script src="../../_static/doctools.js?v=9a2dae69"></script>
     <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
     <script>DOCUMENTATION_OPTIONS.pagename = '_modules/pyclickimage/click_image_app';</script>
@@ -107,7 +107,7 @@
   
   
   
-    <p class="title logo__title">pyclickimage 2.0.4 documentation</p>
+    <p class="title logo__title">pyclickimage 2.1.0 documentation</p>
   
 </a></div>
     
@@ -376,7 +376,7 @@
         <span class="c1"># Core components</span>
         <span class="c1"># -------------------------</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">click_manager</span> <span class="o">=</span> <span class="n">ClickManager</span><span class="p">(</span><span class="n">precision_mode</span><span class="o">=</span><span class="s2">&quot;float&quot;</span><span class="p">)</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">viewer</span> <span class="o">=</span> <span class="n">ImageViewer</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">viewer</span> <span class="o">=</span> <span class="n">ImageViewer</span><span class="p">(</span><span class="n">half_shift</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
 
         <span class="c1"># -------------------------</span>
         <span class="c1"># Logging</span>
@@ -499,6 +499,13 @@
         <span class="bp">self</span><span class="o">.</span><span class="n">precision_checkbox</span><span class="o">.</span><span class="n">stateChanged</span><span class="o">.</span><span class="n">connect</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">on_precision_changed</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">precision_checkbox</span><span class="o">.</span><span class="n">setShortcut</span><span class="p">(</span><span class="s2">&quot;Ctrl+I&quot;</span><span class="p">)</span>
         <span class="n">side</span><span class="o">.</span><span class="n">addWidget</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">precision_checkbox</span><span class="p">)</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">half_shift_checkbox</span> <span class="o">=</span> <span class="n">QtWidgets</span><span class="o">.</span><span class="n">QCheckBox</span><span class="p">(</span>
+            <span class="s2">&quot;Half-Shift: (0,0) on the pixel center.&quot;</span>
+        <span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">half_shift_checkbox</span><span class="o">.</span><span class="n">setChecked</span><span class="p">(</span><span class="kc">True</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">half_shift_checkbox</span><span class="o">.</span><span class="n">stateChanged</span><span class="o">.</span><span class="n">connect</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">on_half_shift_changed</span><span class="p">)</span>
+        <span class="n">side</span><span class="o">.</span><span class="n">addWidget</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">half_shift_checkbox</span><span class="p">)</span>
 
         <span class="c1"># ============================================================</span>
         <span class="c1"># Group selector</span>
@@ -686,6 +693,10 @@
 
         <span class="n">toolbar</span><span class="o">.</span><span class="n">addWidget</span><span class="p">(</span><span class="n">size_widget</span><span class="p">)</span>
 
+        <span class="n">toolbar</span><span class="o">.</span><span class="n">addSeparator</span><span class="p">()</span>
+
+        <span class="n">toolbar</span><span class="o">.</span><span class="n">addAction</span><span class="p">(</span><span class="s2">&quot;Clear Logs&quot;</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">clear_logs</span><span class="p">)</span>
+
         <span class="n">toolbar</span><span class="o">.</span><span class="n">addSeparator</span><span class="p">()</span></div>
 
 
@@ -702,6 +713,39 @@
         <span class="n">INT</span> <span class="o">=</span> <span class="n">state</span> <span class="o">==</span> <span class="n">QtCore</span><span class="o">.</span><span class="n">Qt</span><span class="o">.</span><span class="n">Checked</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">click_manager</span><span class="o">.</span><span class="n">precision_mode</span> <span class="o">=</span> <span class="s2">&quot;int&quot;</span> <span class="k">if</span> <span class="n">INT</span> <span class="k">else</span> <span class="s2">&quot;float&quot;</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">_append_log</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Precision mode: </span><span class="si">{</span><span class="s1">&#39;INT&#39;</span><span class="w"> </span><span class="k">if</span><span class="w"> </span><span class="n">INT</span><span class="w"> </span><span class="k">else</span><span class="w"> </span><span class="s1">&#39;FLOAT&#39;</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">update</span><span class="p">()</span></div>
+
+
+<div class="viewcode-block" id="ClickImageApp.on_half_shift_changed">
+<a class="viewcode-back" href="../../api_doc/click_image_app.html#pyclickimage.ClickImageApp.on_half_shift_changed">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">on_half_shift_changed</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">state</span><span class="p">):</span>
+<span class="w">        </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Toggle half-shift mode.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+
+        <span class="n">half_shift</span> <span class="o">=</span> <span class="n">state</span> <span class="o">==</span> <span class="n">QtCore</span><span class="o">.</span><span class="n">Qt</span><span class="o">.</span><span class="n">Checked</span>
+
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">click_manager</span><span class="o">.</span><span class="n">n_clicks</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span>
+
+            <span class="n">msg</span> <span class="o">=</span> <span class="n">QtWidgets</span><span class="o">.</span><span class="n">QMessageBox</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span>
+            <span class="n">msg</span><span class="o">.</span><span class="n">setWindowTitle</span><span class="p">(</span><span class="s2">&quot;Existing clicks detected&quot;</span><span class="p">)</span>
+            <span class="n">msg</span><span class="o">.</span><span class="n">setText</span><span class="p">(</span>
+                <span class="sa">f</span><span class="s2">&quot;Do you want to shift all previous clicked points by 0.5 to match the new coordinates system ?&quot;</span>
+            <span class="p">)</span>
+            <span class="n">msg</span><span class="o">.</span><span class="n">setInformativeText</span><span class="p">(</span><span class="s2">&quot;No = keep clicks</span><span class="se">\n</span><span class="s2">Yes = shift clicks&quot;</span><span class="p">)</span>
+            <span class="n">msg</span><span class="o">.</span><span class="n">setStandardButtons</span><span class="p">(</span><span class="n">QtWidgets</span><span class="o">.</span><span class="n">QMessageBox</span><span class="o">.</span><span class="n">No</span> <span class="o">|</span> <span class="n">QtWidgets</span><span class="o">.</span><span class="n">QMessageBox</span><span class="o">.</span><span class="n">Yes</span><span class="p">)</span>
+            <span class="n">msg</span><span class="o">.</span><span class="n">setDefaultButton</span><span class="p">(</span><span class="n">QtWidgets</span><span class="o">.</span><span class="n">QMessageBox</span><span class="o">.</span><span class="n">Yes</span><span class="p">)</span>
+
+            <span class="n">choice</span> <span class="o">=</span> <span class="n">msg</span><span class="o">.</span><span class="n">exec_</span><span class="p">()</span>
+
+            <span class="k">if</span> <span class="n">choice</span> <span class="o">==</span> <span class="n">QtWidgets</span><span class="o">.</span><span class="n">QMessageBox</span><span class="o">.</span><span class="n">Yes</span><span class="p">:</span>
+                <span class="k">if</span> <span class="n">half_shift</span><span class="p">:</span>
+                    <span class="bp">self</span><span class="o">.</span><span class="n">click_manager</span><span class="o">.</span><span class="n">to_half_shift_on</span><span class="p">()</span>
+                <span class="k">else</span><span class="p">:</span>
+                    <span class="bp">self</span><span class="o">.</span><span class="n">click_manager</span><span class="o">.</span><span class="n">to_half_shift_off</span><span class="p">()</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">viewer</span><span class="o">.</span><span class="n">half_shift</span> <span class="o">=</span> <span class="n">half_shift</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_append_log</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Half-Shift mode: </span><span class="si">{</span><span class="n">half_shift</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">update</span><span class="p">()</span></div>
 
 
@@ -1268,6 +1312,15 @@
 <span class="sd">        Append log message.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">log_text_edit</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">msg</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="ClickImageApp.clear_logs">
+<a class="viewcode-back" href="../../api_doc/click_image_app.html#pyclickimage.ClickImageApp.clear_logs">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">clear_logs</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Clear log message.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">log_text_edit</span><span class="o">.</span><span class="n">clear</span><span class="p">()</span></div>
 
 
     <span class="c1"># ============================================================</span>
