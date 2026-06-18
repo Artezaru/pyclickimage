@@ -119,7 +119,7 @@ class ClickImageApp(QtWidgets.QMainWindow):
 
         layout = QtWidgets.QHBoxLayout()
         central.setLayout(layout)
-        
+
         quit_action = QtWidgets.QAction("Quit", self)
         quit_action.setShortcut("Ctrl+Q")
         quit_action.triggered.connect(self.close)
@@ -170,7 +170,7 @@ class ClickImageApp(QtWidgets.QMainWindow):
         row.addWidget(self.colormap_selector)
 
         side.addLayout(row)
-        
+
         self.loadc_btn = QtWidgets.QPushButton("Load Clicks")
         self.loadc_btn.clicked.connect(self.on_load_clicks)
         side.addWidget(self.loadc_btn)
@@ -282,7 +282,7 @@ class ClickImageApp(QtWidgets.QMainWindow):
         toolbar.addAction("Reset View", self.viewer.reset_view)
 
         toolbar.addSeparator()
-        
+
         # ============================================================
         # Crosser color (button + preview)
         # ============================================================
@@ -341,7 +341,25 @@ class ClickImageApp(QtWidgets.QMainWindow):
         size_layout.setContentsMargins(0, 0, 0, 0)
 
         self.size_selector = QtWidgets.QComboBox()
-        self.size_selector.addItems(["1", "2", "4", "6", "8", "10", "12", "16", "20", "30", "50"])
+        self.size_selector.addItems(
+            [
+                "0.2",
+                "0.5",
+                "1",
+                "2",
+                "4",
+                "6",
+                "8",
+                "10",
+                "12",
+                "16",
+                "20",
+                "30",
+                "50",
+                "75",
+                "100",
+            ]
+        )
         self.size_selector.setCurrentText("8")
         self.size_selector.currentTextChanged.connect(self.on_marker_size_changed)
 
@@ -470,7 +488,7 @@ class ClickImageApp(QtWidgets.QMainWindow):
         self.update_groups()
         self.update_table()
         self.update_viewer()
-        
+
     def _format_value(self, v):
         if v is None:
             return ""
@@ -516,7 +534,7 @@ class ClickImageApp(QtWidgets.QMainWindow):
             if x is None or y is None:
                 continue
             self.viewer.add_marker((x, y), self.marker_color, self.marker_size)
-            
+
     def update_table(self):
         r"""
         Update table with current group points.
@@ -527,7 +545,7 @@ class ClickImageApp(QtWidgets.QMainWindow):
             self.table.setHorizontalHeaderLabels(["Index", "X (float)", "Y (float)"])
         else:
             self.table.setHorizontalHeaderLabels(["Index", "X (int)", "Y (int)"])
-            
+
         self.table.setRowCount(len(pts))
 
         for i, (x, y) in enumerate(pts):
@@ -628,7 +646,6 @@ class ClickImageApp(QtWidgets.QMainWindow):
                 f"background-color: {color.name()}; border: 1px solid black;"
             )
 
-    
     def choose_color(self):
         color = QtWidgets.QColorDialog.getColor(self.marker_color, self)
 
@@ -646,7 +663,7 @@ class ClickImageApp(QtWidgets.QMainWindow):
         """
 
         try:
-            self.marker_size = int(value)
+            self.marker_size = float(value)
         except ValueError:
             self.marker_size = 8
 
@@ -808,17 +825,14 @@ class ClickImageApp(QtWidgets.QMainWindow):
         self.save_csv()
         if self.output_path is None:
             self.output_path = output_path
-            
+
     def on_load_clicks(self):
         r"""
         Load clicks from CSV and replace current data.
         """
 
         file_path, _ = QtWidgets.QFileDialog.getOpenFileName(
-            self,
-            "Load Clicks",
-            "",
-            "CSV Files (*.csv)"
+            self, "Load Clicks", "", "CSV Files (*.csv)"
         )
 
         if not file_path:
@@ -831,7 +845,7 @@ class ClickImageApp(QtWidgets.QMainWindow):
             self,
             "Load clicks",
             "This will replace current clicks. Continue?",
-            QtWidgets.QMessageBox.Yes | QtWidgets.QMessageBox.No
+            QtWidgets.QMessageBox.Yes | QtWidgets.QMessageBox.No,
         )
 
         if reply == QtWidgets.QMessageBox.No:
