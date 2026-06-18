@@ -41,17 +41,5 @@ pyclickimage = "pyclickimage.__main__:__main__"
 pyclickimage-gui = "pyclickimage.__main__:__main_gui__"
 
 [tool.setuptools.dynamic]
-dependencies = {file = ["requirements.txt"]}
 version = {attr = "pyclickimage.__version__.__version__"}
 
-[project.optional-dependencies]
-dev = [
-    "sphinx",
-    "pydata-sphinx-theme",
-    "numpydoc",
-    "pytest",
-    "pyinstaller",
-    "pytest-cov",
-    "bumpver",
-    "pyinstaller"
-]
