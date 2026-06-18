@@ -24,6 +24,3 @@ build/
 .vscode/
 *.sublime-project
 *.sublime-workspace
-
-dist/
-tests/
