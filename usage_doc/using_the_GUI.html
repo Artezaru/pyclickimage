@@ -8,7 +8,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
-    <title>Using the GUI &#8212; pyclickimage 1.1.2 documentation</title>
+    <title>Using the GUI &#8212; pyclickimage 2.0.0 documentation</title>
   
   
   
@@ -38,7 +38,7 @@
   <link rel="preload" as="script" href="../_static/scripts/bootstrap.js?digest=8878045cc6db502f8baf" />
 <link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=8878045cc6db502f8baf" />
 
-    <script src="../_static/documentation_options.js?v=6f037312"></script>
+    <script src="../_static/documentation_options.js?v=51b770b3"></script>
     <script src="../_static/doctools.js?v=9a2dae69"></script>
     <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
     <script>DOCUMENTATION_OPTIONS.pagename = 'usage_doc/using_the_GUI';</script>
@@ -110,7 +110,7 @@
   
   
   
-    <p class="title logo__title">pyclickimage 1.1.2 documentation</p>
+    <p class="title logo__title">pyclickimage 2.0.0 documentation</p>
   
 </a></div>
     
@@ -354,7 +354,7 @@ Right-clicking add a point (None, None) to the image, which can be useful to ski
 </ul>
 <p>For example, if you start with the default group, the saved file will contain rows with the group name <strong>“default”</strong>. However, if you create a new group (e.g., <strong>“My_New_Group”</strong>) and select it, the subsequent clicks will be saved under this new group.</p>
 <p>Here’s how the data might appear in the CSV file:</p>
-<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="go">Group,Index,Click X,Click Y</span>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="go">Group,Index,X,Y</span>
 <span class="go">default,0,276,97</span>
 <span class="go">default,1,242,109</span>
 <span class="go">My_New_Group,0,317,144</span>
@@ -368,19 +368,18 @@ The <code class="docutils literal notranslate"><span class="pre">X</span></code>
 <h2>Removing Clicks<a class="headerlink" href="#removing-clicks" title="Link to this heading">#</a></h2>
 <p>To remove clicks, you have the following options:</p>
 <ul class="simple">
-<li><p><strong>Remove the last click</strong>: Click the <strong>“Remove Last Click”</strong> button.</p></li>
-<li><p><strong>Remove all clicks</strong>: Click the <strong>“Remove All Clicks”</strong> button.</p></li>
+<li><p><strong>Remove the last click</strong>: Click the <strong>“Undo”</strong> button.</p></li>
+<li><p><strong>Remove all clicks</strong>: Click the <strong>“Clear”</strong> button.</p></li>
 </ul>
 </section>
 <section id="saving-the-clicks">
 <h2>Saving the Clicks<a class="headerlink" href="#saving-the-clicks" title="Link to this heading">#</a></h2>
 <p>To save the clicks to a <code class="docutils literal notranslate"><span class="pre">.csv</span></code> file:</p>
-<ol class="arabic simple">
-<li><p>Set the path for the output <code class="docutils literal notranslate"><span class="pre">.csv</span></code> file in the <strong>“CSV File Path”</strong> field.</p></li>
-<li><p>Click the <strong>“Save Clicks”</strong> button to save the clicks.</p></li>
+<ol class="arabic simple" start="2">
+<li><p>Click the <strong>“Save”</strong> button to save the clicks.</p></li>
 </ol>
 <p>The saved <code class="docutils literal notranslate"><span class="pre">.csv</span></code> file will have the following format:</p>
-<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="go">Group,Index,Click X,Click Y</span>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="go">Group,Index,X,Y</span>
 <span class="go">default,0,276,97</span>
 <span class="go">default,1,242,109</span>
 <span class="go">My_New_Group,0,317,144</span>
@@ -479,7 +478,7 @@ The <code class="docutils literal notranslate"><span class="pre">X</span></code>
 
   <p class="copyright">
     
-      © Copyright 2025-2025, Artezaru.
+      © Copyright 2025-2026, Artezaru.
       <br/>
     
   </p>

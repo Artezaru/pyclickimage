@@ -33,7 +33,7 @@ Here’s how the data might appear in the CSV file:
 
 .. code-block:: console
 
-    Group,Index,Click X,Click Y
+    Group,Index,X,Y
     default,0,276,97
     default,1,242,109
     My_New_Group,0,317,144
@@ -47,22 +47,21 @@ Removing Clicks
 
 To remove clicks, you have the following options:
 
-- **Remove the last click**: Click the **"Remove Last Click"** button.
-- **Remove all clicks**: Click the **"Remove All Clicks"** button.
+- **Remove the last click**: Click the **"Undo"** button.
+- **Remove all clicks**: Click the **"Clear"** button.
 
 Saving the Clicks
 -----------------
 
 To save the clicks to a ``.csv`` file:
 
-1. Set the path for the output ``.csv`` file in the **"CSV File Path"** field.
-2. Click the **"Save Clicks"** button to save the clicks.
+2. Click the **"Save"** button to save the clicks.
 
 The saved ``.csv`` file will have the following format:
 
 .. code-block:: console
 
-    Group,Index,Click X,Click Y
+    Group,Index,X,Y
     default,0,276,97
     default,1,242,109
     My_New_Group,0,317,144

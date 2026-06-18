@@ -7,7 +7,7 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>pyclickimage.image_viewer &#8212; pyclickimage 1.1.2 documentation</title>
+    <title>pyclickimage.image_viewer &#8212; pyclickimage 2.0.0 documentation</title>
   
   
   
@@ -37,7 +37,7 @@
   <link rel="preload" as="script" href="../../_static/scripts/bootstrap.js?digest=8878045cc6db502f8baf" />
 <link rel="preload" as="script" href="../../_static/scripts/pydata-sphinx-theme.js?digest=8878045cc6db502f8baf" />
 
-    <script src="../../_static/documentation_options.js?v=6f037312"></script>
+    <script src="../../_static/documentation_options.js?v=51b770b3"></script>
     <script src="../../_static/doctools.js?v=9a2dae69"></script>
     <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
     <script>DOCUMENTATION_OPTIONS.pagename = '_modules/pyclickimage/image_viewer';</script>
@@ -107,7 +107,7 @@
   
   
   
-    <p class="title logo__title">pyclickimage 1.1.2 documentation</p>
+    <p class="title logo__title">pyclickimage 2.0.0 documentation</p>
   
 </a></div>
     
@@ -310,599 +310,416 @@
                 <article class="bd-article">
                   
   <h1>Source code for pyclickimage.image_viewer</h1><div class="highlight"><pre>
-<span></span><span class="kn">import</span><span class="w"> </span><span class="nn">sys</span>
-<span class="kn">from</span><span class="w"> </span><span class="nn">PyQt5</span><span class="w"> </span><span class="kn">import</span> <span class="n">QtWidgets</span><span class="p">,</span> <span class="n">QtGui</span><span class="p">,</span> <span class="n">QtCore</span>
-<span class="kn">from</span><span class="w"> </span><span class="nn">typing</span><span class="w"> </span><span class="kn">import</span> <span class="n">Tuple</span>
+<span></span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">pyclickimage - Python library to select points on a image [pyqt5 GUI]</span>
+<span class="sd">Copyright (C) 2025-2026 Artezaru, artezaru.github@proton.me</span>
+
+<span class="sd">This program is free software: you can redistribute it and/or modify</span>
+<span class="sd">it under the terms of the GNU General Public License as published by</span>
+<span class="sd">the Free Software Foundation, either version 3 of the License, or</span>
+<span class="sd">(at your option) any later version.</span>
+
+<span class="sd">This program is distributed in the hope that it will be useful,</span>
+<span class="sd">but WITHOUT ANY WARRANTY; without even the implied warranty of</span>
+<span class="sd">MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the</span>
+<span class="sd">GNU General Public License for more details.</span>
+
+<span class="sd">You should have received a copy of the GNU General Public License</span>
+<span class="sd">along with this program.  If not, see &lt;https://www.gnu.org/licenses/&gt;.</span>
+<span class="sd">&quot;&quot;&quot;</span>
+
+<span class="kn">from</span><span class="w"> </span><span class="nn">typing</span><span class="w"> </span><span class="kn">import</span> <span class="n">Tuple</span><span class="p">,</span> <span class="n">List</span><span class="p">,</span> <span class="n">Optional</span>
+
+<span class="kn">from</span><span class="w"> </span><span class="nn">PyQt5</span><span class="w"> </span><span class="kn">import</span> <span class="n">QtCore</span><span class="p">,</span> <span class="n">QtGui</span><span class="p">,</span> <span class="n">QtWidgets</span>
 
 
 <div class="viewcode-block" id="ImageViewer">
 <a class="viewcode-back" href="../../api_doc/image_viewer.html#pyclickimage.ImageViewer">[docs]</a>
 <span class="k">class</span><span class="w"> </span><span class="nc">ImageViewer</span><span class="p">(</span><span class="n">QtWidgets</span><span class="o">.</span><span class="n">QGraphicsView</span><span class="p">):</span>
 <span class="w">    </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">    A class for viewing and interacting with images in a PyQt5 application.    </span>
+<span class="sd">    Interactive image viewer with:</span>
+<span class="sd">    - subpixel cursor tracking</span>
+<span class="sd">    - crosshair overlay</span>
+<span class="sd">    - zoom with mouse wheel</span>
+<span class="sd">    - precise click detection (drag-safe)</span>
+<span class="sd">    - marker system for annotation</span>
 <span class="sd">    &quot;&quot;&quot;</span>
-    
-    <span class="n">left_click_signal</span> <span class="o">=</span> <span class="n">QtCore</span><span class="o">.</span><span class="n">pyqtSignal</span><span class="p">(</span><span class="nb">int</span><span class="p">,</span> <span class="nb">int</span><span class="p">)</span>  <span class="c1"># Signal to emit left-click coordinates</span>
-    <span class="n">right_click_signal</span> <span class="o">=</span> <span class="n">QtCore</span><span class="o">.</span><span class="n">pyqtSignal</span><span class="p">(</span><span class="nb">int</span><span class="p">,</span> <span class="nb">int</span><span class="p">)</span>  <span class="c1"># Signal to emit right-click coordinates</span>
+    <span class="n">left_click_signal</span> <span class="o">=</span> <span class="n">QtCore</span><span class="o">.</span><span class="n">pyqtSignal</span><span class="p">(</span><span class="nb">float</span><span class="p">,</span> <span class="nb">float</span><span class="p">)</span>
+    <span class="n">right_click_signal</span> <span class="o">=</span> <span class="n">QtCore</span><span class="o">.</span><span class="n">pyqtSignal</span><span class="p">(</span><span class="nb">float</span><span class="p">,</span> <span class="nb">float</span><span class="p">)</span>
 
-    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">()</span>
-        
-        <span class="c1"># Create a scene for the graphics view</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">setScene</span><span class="p">(</span><span class="n">QtWidgets</span><span class="o">.</span><span class="n">QGraphicsScene</span><span class="p">(</span><span class="bp">self</span><span class="p">))</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">_pixmap_item</span> <span class="o">=</span> <span class="kc">None</span>  <span class="c1"># Placeholder for the image item</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">_zoom</span> <span class="o">=</span> <span class="mi">0</span>  <span class="c1"># Current zoom level</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">_max_zoom</span> <span class="o">=</span> <span class="mi">20</span>  <span class="c1"># Maximum zoom level</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">_min_zoom</span> <span class="o">=</span> <span class="mi">0</span>  <span class="c1"># Minimum zoom level</span>
+    <span class="c1"># ======================================================================</span>
+    <span class="c1"># INIT</span>
+    <span class="c1"># ======================================================================</span>
 
-        <span class="bp">self</span><span class="o">.</span><span class="n">_minimap_label</span> <span class="o">=</span> <span class="n">QtWidgets</span><span class="o">.</span><span class="n">QLabel</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">_minimap_label</span><span class="o">.</span><span class="n">setStyleSheet</span><span class="p">(</span><span class="s2">&quot;background-color: rgba(0, 0, 0, 128); border: 1px solid white;&quot;</span><span class="p">)</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">_minimap_label</span><span class="o">.</span><span class="n">setVisible</span><span class="p">(</span><span class="kc">False</span><span class="p">)</span>  <span class="c1"># Initially hidden</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">_minimap_size</span> <span class="o">=</span> <span class="mi">150</span>  <span class="c1"># Size of the minimap</span>
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">parent</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+<span class="w">        </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Initialize the ImageViewer.</span>
 
-        <span class="bp">self</span><span class="o">.</span><span class="n">_minimap_timer</span> <span class="o">=</span> <span class="n">QtCore</span><span class="o">.</span><span class="n">QTimer</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">_minimap_timer</span><span class="o">.</span><span class="n">setSingleShot</span><span class="p">(</span><span class="kc">True</span><span class="p">)</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">_minimap_timer</span><span class="o">.</span><span class="n">timeout</span><span class="o">.</span><span class="n">connect</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_hide_minimap</span><span class="p">)</span>
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        parent : QWidget, optional</span>
+<span class="sd">            Parent widget.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="n">parent</span><span class="p">)</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">_scene</span> <span class="o">=</span> <span class="n">QtWidgets</span><span class="o">.</span><span class="n">QGraphicsScene</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">setScene</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_scene</span><span class="p">)</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">_pixmap_item</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">QtWidgets</span><span class="o">.</span><span class="n">QGraphicsPixmapItem</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_press_pos</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">QtCore</span><span class="o">.</span><span class="n">QPoint</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span>
+
+        <span class="c1"># ------------------------------------------------------------------</span>
+        <span class="c1"># Zoom state</span>
+        <span class="c1"># ------------------------------------------------------------------</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_zoom</span> <span class="o">=</span> <span class="mi">0</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_max_zoom</span> <span class="o">=</span> <span class="mi">100</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_min_zoom</span> <span class="o">=</span> <span class="o">-</span><span class="mi">50</span>
 
         <span class="bp">self</span><span class="o">.</span><span class="n">setTransformationAnchor</span><span class="p">(</span><span class="n">QtWidgets</span><span class="o">.</span><span class="n">QGraphicsView</span><span class="o">.</span><span class="n">AnchorUnderMouse</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">setResizeAnchor</span><span class="p">(</span><span class="n">QtWidgets</span><span class="o">.</span><span class="n">QGraphicsView</span><span class="o">.</span><span class="n">AnchorUnderMouse</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">setDragMode</span><span class="p">(</span><span class="n">QtWidgets</span><span class="o">.</span><span class="n">QGraphicsView</span><span class="o">.</span><span class="n">ScrollHandDrag</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">setMouseTracking</span><span class="p">(</span><span class="kc">True</span><span class="p">)</span>
 
-        <span class="c1"># Save the click press position to detect if it is a click or a slice release event</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">_click_press_pos</span> <span class="o">=</span> <span class="kc">None</span>
+        <span class="c1"># ------------------------------------------------------------------</span>
+        <span class="c1"># Crosshair (red guide lines)</span>
+        <span class="c1"># ------------------------------------------------------------------</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_crosshair_color</span> <span class="o">=</span> <span class="n">QtGui</span><span class="o">.</span><span class="n">QColor</span><span class="p">(</span><span class="mi">255</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_create_crosshair</span><span class="p">()</span>
 
-        <span class="c1"># List to store drawn circles</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">_circles</span> <span class="o">=</span> <span class="p">[]</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">_circles_color</span> <span class="o">=</span> <span class="n">QtGui</span><span class="o">.</span><span class="n">QColor</span><span class="p">(</span><span class="mi">255</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>  <span class="c1"># Default circle color is red</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">_circles_radius</span> <span class="o">=</span> <span class="mi">10</span>  <span class="c1"># Default circle radius</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">_circles_width</span> <span class="o">=</span> <span class="mi">2</span>  <span class="c1"># Default circle pen width</span>
+        <span class="c1"># ------------------------------------------------------------------</span>
+        <span class="c1"># Coordinate label</span>
+        <span class="c1"># ------------------------------------------------------------------</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_coord_label</span> <span class="o">=</span> <span class="n">QtWidgets</span><span class="o">.</span><span class="n">QLabel</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_coord_label</span><span class="o">.</span><span class="n">setStyleSheet</span><span class="p">(</span><span class="s2">&quot;&quot;&quot;</span>
+<span class="s2">            background-color: rgba(0,0,0,180);</span>
+<span class="s2">            color: white;</span>
+<span class="s2">            padding: 3px;</span>
+<span class="s2">            border: 1px solid white;</span>
+<span class="s2">        &quot;&quot;&quot;</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_coord_label</span><span class="o">.</span><span class="n">move</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="mi">10</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_coord_label</span><span class="o">.</span><span class="n">hide</span><span class="p">()</span>
 
-    <span class="c1"># ===========================================================================</span>
-    <span class="c1"># Image Loading and Display</span>
-    <span class="c1"># ===========================================================================</span>
-<div class="viewcode-block" id="ImageViewer.reset_scene">
-<a class="viewcode-back" href="../../api_doc/image_viewer.html#pyclickimage.ImageViewer.reset_scene">[docs]</a>
-    <span class="k">def</span><span class="w"> </span><span class="nf">reset_scene</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
-<span class="w">        </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">        Reset the scene by clearing all items, including the image and circles.</span>
-<span class="sd">        Reset also the zoom level and minimap visibility.</span>
-<span class="sd">        &quot;&quot;&quot;</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">scene</span><span class="p">()</span><span class="o">.</span><span class="n">clear</span><span class="p">()</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">_pixmap_item</span> <span class="o">=</span> <span class="kc">None</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">_zoom</span> <span class="o">=</span> <span class="mi">0</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">resetTransform</span><span class="p">()</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">_minimap_label</span><span class="o">.</span><span class="n">setVisible</span><span class="p">(</span><span class="kc">False</span><span class="p">)</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">_circles</span><span class="o">.</span><span class="n">clear</span><span class="p">()</span></div>
+        <span class="c1"># ------------------------------------------------------------------</span>
+        <span class="c1"># Markers storage</span>
+        <span class="c1"># ------------------------------------------------------------------</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_markers</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span>
+            <span class="n">Tuple</span><span class="p">[</span><span class="n">QtWidgets</span><span class="o">.</span><span class="n">QGraphicsLineItem</span><span class="p">,</span> <span class="n">QtWidgets</span><span class="o">.</span><span class="n">QGraphicsLineItem</span><span class="p">]</span>
+        <span class="p">]</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">auto_marker</span> <span class="o">=</span> <span class="kc">True</span>
 
-
-
+    <span class="c1"># ======================================================================</span>
+    <span class="c1"># IMAGE LOADING</span>
+    <span class="c1"># ======================================================================</span>
 <div class="viewcode-block" id="ImageViewer.load_image">
 <a class="viewcode-back" href="../../api_doc/image_viewer.html#pyclickimage.ImageViewer.load_image">[docs]</a>
-    <span class="k">def</span><span class="w"> </span><span class="nf">load_image</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">image_path</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">load_image</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">path</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
 <span class="w">        </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">        Load an image from the specified path into the viewer.</span>
+<span class="sd">        Load an image into the viewer.</span>
 
 <span class="sd">        Parameters</span>
 <span class="sd">        ----------</span>
-<span class="sd">        image_path : str</span>
-<span class="sd">            Path to the image file to be loaded.</span>
+<span class="sd">        path : str</span>
+<span class="sd">            Path to image file.</span>
+
+<span class="sd">        Raises</span>
+<span class="sd">        ------</span>
+<span class="sd">        ValueError</span>
+<span class="sd">            If image cannot be loaded.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
-        <span class="n">pixmap</span> <span class="o">=</span> <span class="n">QtGui</span><span class="o">.</span><span class="n">QPixmap</span><span class="p">(</span><span class="n">image_path</span><span class="p">)</span>
-
-        <span class="k">if</span> <span class="n">pixmap</span><span class="o">.</span><span class="n">isNull</span><span class="p">():</span>
-            <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Failed to load image&quot;</span><span class="p">)</span>
-            <span class="k">return</span>
-        
-        <span class="bp">self</span><span class="o">.</span><span class="n">reset_scene</span><span class="p">()</span>  <span class="c1"># Clear the scene before loading a new image</span>
-
-        <span class="bp">self</span><span class="o">.</span><span class="n">_pixmap_item</span> <span class="o">=</span> <span class="n">QtWidgets</span><span class="o">.</span><span class="n">QGraphicsPixmapItem</span><span class="p">(</span><span class="n">pixmap</span><span class="p">)</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">scene</span><span class="p">()</span><span class="o">.</span><span class="n">addItem</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_pixmap_item</span><span class="p">)</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">setSceneRect</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_pixmap_item</span><span class="o">.</span><span class="n">boundingRect</span><span class="p">())</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">fitInView</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_pixmap_item</span><span class="p">,</span> <span class="n">QtCore</span><span class="o">.</span><span class="n">Qt</span><span class="o">.</span><span class="n">KeepAspectRatio</span><span class="p">)</span></div>
+        <span class="n">pixmap</span> <span class="o">=</span> <span class="n">QtGui</span><span class="o">.</span><span class="n">QPixmap</span><span class="p">(</span><span class="n">path</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">set_image</span><span class="p">(</span><span class="n">pixmap</span><span class="o">=</span><span class="n">pixmap</span><span class="p">)</span></div>
 
 
- 
 <div class="viewcode-block" id="ImageViewer.set_image">
 <a class="viewcode-back" href="../../api_doc/image_viewer.html#pyclickimage.ImageViewer.set_image">[docs]</a>
-    <span class="k">def</span><span class="w"> </span><span class="nf">set_image</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">image</span><span class="p">:</span> <span class="n">QtGui</span><span class="o">.</span><span class="n">QPixmap</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">set_image</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">pixmap</span><span class="p">:</span> <span class="n">QtGui</span><span class="o">.</span><span class="n">QPixmap</span><span class="p">):</span>
 <span class="w">        </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">        Set the image to be displayed in the viewer.</span>
+<span class="sd">        Set the displayed image in the viewer.</span>
 
 <span class="sd">        Parameters</span>
 <span class="sd">        ----------</span>
-<span class="sd">        image : QtGui.QPixmap</span>
-<span class="sd">            The image to be displayed.</span>
+<span class="sd">        pixmap : QtGui.QPixmap</span>
+<span class="sd">            Image already converted for Qt display.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
-        <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">image</span><span class="p">,</span> <span class="n">QtGui</span><span class="o">.</span><span class="n">QPixmap</span><span class="p">):</span>
-            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;Image must be a QPixmap instance.&quot;</span><span class="p">)</span>
-        
-        <span class="bp">self</span><span class="o">.</span><span class="n">reset_scene</span><span class="p">()</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">_pixmap_item</span> <span class="o">=</span> <span class="n">QtWidgets</span><span class="o">.</span><span class="n">QGraphicsPixmapItem</span><span class="p">(</span><span class="n">image</span><span class="p">)</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">scene</span><span class="p">()</span><span class="o">.</span><span class="n">addItem</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_pixmap_item</span><span class="p">)</span>
+
+        <span class="k">if</span> <span class="ow">not</span> <span class="nb">hasattr</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="s2">&quot;_scene&quot;</span><span class="p">):</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_scene</span> <span class="o">=</span> <span class="n">QtWidgets</span><span class="o">.</span><span class="n">QGraphicsScene</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">setScene</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_scene</span><span class="p">)</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">_scene</span><span class="o">.</span><span class="n">clear</span><span class="p">()</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">_pixmap_item</span> <span class="o">=</span> <span class="n">QtWidgets</span><span class="o">.</span><span class="n">QGraphicsPixmapItem</span><span class="p">(</span><span class="n">pixmap</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_scene</span><span class="o">.</span><span class="n">addItem</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_pixmap_item</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_create_crosshair</span><span class="p">()</span>
+
         <span class="bp">self</span><span class="o">.</span><span class="n">setSceneRect</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_pixmap_item</span><span class="o">.</span><span class="n">boundingRect</span><span class="p">())</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">fitInView</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_pixmap_item</span><span class="p">,</span> <span class="n">QtCore</span><span class="o">.</span><span class="n">Qt</span><span class="o">.</span><span class="n">KeepAspectRatio</span><span class="p">)</span></div>
 
+        <span class="bp">self</span><span class="o">.</span><span class="n">resetTransform</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">fitInView</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_pixmap_item</span><span class="p">,</span> <span class="n">QtCore</span><span class="o">.</span><span class="n">Qt</span><span class="o">.</span><span class="n">KeepAspectRatio</span><span class="p">)</span>
 
-
-<div class="viewcode-block" id="ImageViewer.manual_zoom">
-<a class="viewcode-back" href="../../api_doc/image_viewer.html#pyclickimage.ImageViewer.manual_zoom">[docs]</a>
-    <span class="k">def</span><span class="w"> </span><span class="nf">manual_zoom</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">in_</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">True</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
-<span class="w">        </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">        Manually zoom in or out of the image.</span>
-
-<span class="sd">        Parameters</span>
-<span class="sd">        ----------</span>
-<span class="sd">        in_ : bool, optional</span>
-<span class="sd">            If True, zoom in; if False, zoom out. Default is True.</span>
-<span class="sd">        &quot;&quot;&quot;</span>
-        <span class="k">if</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">_pixmap_item</span><span class="p">:</span>
-            <span class="k">return</span>
-
-        <span class="n">factor</span> <span class="o">=</span> <span class="mf">1.25</span> <span class="k">if</span> <span class="n">in_</span> <span class="k">else</span> <span class="mf">0.8</span>
-        <span class="n">new_zoom</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_zoom</span> <span class="o">+</span> <span class="p">(</span><span class="mi">1</span> <span class="k">if</span> <span class="n">in_</span> <span class="k">else</span> <span class="o">-</span><span class="mi">1</span><span class="p">)</span>
-
-        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_min_zoom</span> <span class="o">&lt;=</span> <span class="n">new_zoom</span> <span class="o">&lt;=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_max_zoom</span><span class="p">:</span>
-            <span class="k">if</span> <span class="ow">not</span> <span class="n">in_</span> <span class="ow">and</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">_can_zoom_out</span><span class="p">(</span><span class="n">factor</span><span class="p">):</span>
-                <span class="k">return</span>
-            <span class="bp">self</span><span class="o">.</span><span class="n">_zoom</span> <span class="o">=</span> <span class="n">new_zoom</span>
-            <span class="bp">self</span><span class="o">.</span><span class="n">scale</span><span class="p">(</span><span class="n">factor</span><span class="p">,</span> <span class="n">factor</span><span class="p">)</span>
-            <span class="bp">self</span><span class="o">.</span><span class="n">_clamp_to_image</span><span class="p">()</span>
-            <span class="bp">self</span><span class="o">.</span><span class="n">_show_minimap</span><span class="p">()</span></div>
-
-
-
-<div class="viewcode-block" id="ImageViewer.toggle_drag_mode">
-<a class="viewcode-back" href="../../api_doc/image_viewer.html#pyclickimage.ImageViewer.toggle_drag_mode">[docs]</a>
-    <span class="k">def</span><span class="w"> </span><span class="nf">toggle_drag_mode</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
-<span class="w">        </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">        Toggle the drag mode of the viewer between scroll hand drag and no drag.</span>
-<span class="sd">        &quot;&quot;&quot;</span>
-        <span class="n">mode</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">dragMode</span><span class="p">()</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">setDragMode</span><span class="p">(</span><span class="n">QtWidgets</span><span class="o">.</span><span class="n">QGraphicsView</span><span class="o">.</span><span class="n">NoDrag</span> <span class="k">if</span> <span class="n">mode</span> <span class="o">==</span> <span class="n">QtWidgets</span><span class="o">.</span><span class="n">QGraphicsView</span><span class="o">.</span><span class="n">ScrollHandDrag</span>
-                         <span class="k">else</span> <span class="n">QtWidgets</span><span class="o">.</span><span class="n">QGraphicsView</span><span class="o">.</span><span class="n">ScrollHandDrag</span><span class="p">)</span></div>
+        <span class="c1"># IMPORTANT: reset markers if needed</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_zoom</span> <span class="o">=</span> <span class="mi">0</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_markers</span> <span class="o">=</span> <span class="p">[]</span></div>
 
         
-<div class="viewcode-block" id="ImageViewer.reset_view">
-<a class="viewcode-back" href="../../api_doc/image_viewer.html#pyclickimage.ImageViewer.reset_view">[docs]</a>
-    <span class="k">def</span><span class="w"> </span><span class="nf">reset_view</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+    <span class="c1"># ======================================================================</span>
+    <span class="c1"># CROSSHAIR MANAGEMENT</span>
+    <span class="c1"># ======================================================================</span>
+<div class="viewcode-block" id="ImageViewer.get_crosshair_color">
+<a class="viewcode-back" href="../../api_doc/image_viewer.html#pyclickimage.ImageViewer.get_crosshair_color">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">get_crosshair_color</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">QtGui</span><span class="o">.</span><span class="n">QColor</span><span class="p">:</span>
 <span class="w">        </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">        Reset the view to the original image size and zoom level.</span>
+<span class="sd">        Return current crosshair color.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
-        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_pixmap_item</span><span class="p">:</span>
-            <span class="bp">self</span><span class="o">.</span><span class="n">_zoom</span> <span class="o">=</span> <span class="mi">0</span>
-            <span class="bp">self</span><span class="o">.</span><span class="n">resetTransform</span><span class="p">()</span>
-            <span class="bp">self</span><span class="o">.</span><span class="n">fitInView</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_pixmap_item</span><span class="p">,</span> <span class="n">QtCore</span><span class="o">.</span><span class="n">Qt</span><span class="o">.</span><span class="n">KeepAspectRatio</span><span class="p">)</span>
-            <span class="bp">self</span><span class="o">.</span><span class="n">_clamp_to_image</span><span class="p">()</span>
-            <span class="bp">self</span><span class="o">.</span><span class="n">_show_minimap</span><span class="p">()</span></div>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_crosshair_color</span></div>
 
-
-
-    <span class="k">def</span><span class="w"> </span><span class="nf">_can_zoom_out</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">factor</span><span class="p">:</span> <span class="nb">float</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bool</span><span class="p">:</span>
+        
+        
+<div class="viewcode-block" id="ImageViewer.set_crosshair_color">
+<a class="viewcode-back" href="../../api_doc/image_viewer.html#pyclickimage.ImageViewer.set_crosshair_color">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">set_crosshair_color</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">color</span><span class="p">):</span>
 <span class="w">        </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">        Check if zooming out is possible without exceeding the image bounds.</span>
-
-<span class="sd">        Parameters</span>
-<span class="sd">        ----------</span>
-<span class="sd">        factor : float</span>
-<span class="sd">            The zoom factor to apply.</span>
-
-<span class="sd">        Returns</span>
-<span class="sd">        -------</span>
-<span class="sd">        bool</span>
-<span class="sd">            True if zooming out is possible, False otherwise.</span>
+<span class="sd">        Set the crosshair color</span>
 <span class="sd">        &quot;&quot;&quot;</span>
-        <span class="n">view_rect</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">mapToScene</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">viewport</span><span class="p">()</span><span class="o">.</span><span class="n">rect</span><span class="p">())</span><span class="o">.</span><span class="n">boundingRect</span><span class="p">()</span>
-        <span class="n">image_rect</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_pixmap_item</span><span class="o">.</span><span class="n">sceneBoundingRect</span><span class="p">()</span>
-        <span class="n">predicted_width</span> <span class="o">=</span> <span class="n">view_rect</span><span class="o">.</span><span class="n">width</span><span class="p">()</span> <span class="o">*</span> <span class="n">factor</span>
-        <span class="n">predicted_height</span> <span class="o">=</span> <span class="n">view_rect</span><span class="o">.</span><span class="n">height</span><span class="p">()</span> <span class="o">*</span> <span class="n">factor</span>
-        <span class="k">return</span> <span class="n">predicted_width</span> <span class="o">&lt;=</span> <span class="n">image_rect</span><span class="o">.</span><span class="n">width</span><span class="p">()</span> <span class="o">+</span> <span class="mi">10</span> <span class="ow">and</span> <span class="n">predicted_height</span> <span class="o">&lt;=</span> <span class="n">image_rect</span><span class="o">.</span><span class="n">height</span><span class="p">()</span> <span class="o">+</span> <span class="mi">10</span>
-    
+        <span class="bp">self</span><span class="o">.</span><span class="n">_crosshair_color</span> <span class="o">=</span> <span class="n">QtGui</span><span class="o">.</span><span class="n">QColor</span><span class="p">(</span><span class="n">color</span><span class="p">)</span>
 
-    <span class="k">def</span><span class="w"> </span><span class="nf">_clamp_to_image</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="n">pen</span> <span class="o">=</span> <span class="n">QtGui</span><span class="o">.</span><span class="n">QPen</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_crosshair_color</span><span class="p">)</span>
+        <span class="n">pen</span><span class="o">.</span><span class="n">setWidthF</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">_cross_h</span><span class="o">.</span><span class="n">setPen</span><span class="p">(</span><span class="n">pen</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_cross_v</span><span class="o">.</span><span class="n">setPen</span><span class="p">(</span><span class="n">pen</span><span class="p">)</span></div>
+
+        
+    <span class="k">def</span><span class="w"> </span><span class="nf">_create_crosshair</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
 <span class="w">        </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">        Clamp the view to the image bounds to prevent scrolling outside the image.</span>
+<span class="sd">        Create the crosshair</span>
 <span class="sd">        &quot;&quot;&quot;</span>
-        <span class="k">if</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">_pixmap_item</span><span class="p">:</span>
-            <span class="k">return</span>
+        <span class="n">pen</span> <span class="o">=</span> <span class="n">QtGui</span><span class="o">.</span><span class="n">QPen</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_crosshair_color</span><span class="p">)</span>
+        <span class="n">pen</span><span class="o">.</span><span class="n">setWidthF</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
 
-        <span class="n">view_rect</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">mapToScene</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">viewport</span><span class="p">()</span><span class="o">.</span><span class="n">rect</span><span class="p">())</span><span class="o">.</span><span class="n">boundingRect</span><span class="p">()</span>
-        <span class="n">image_rect</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_pixmap_item</span><span class="o">.</span><span class="n">sceneBoundingRect</span><span class="p">()</span>
-        <span class="n">dx</span> <span class="o">=</span> <span class="n">dy</span> <span class="o">=</span> <span class="mi">0</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_cross_h</span> <span class="o">=</span> <span class="n">QtWidgets</span><span class="o">.</span><span class="n">QGraphicsLineItem</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_cross_v</span> <span class="o">=</span> <span class="n">QtWidgets</span><span class="o">.</span><span class="n">QGraphicsLineItem</span><span class="p">()</span>
 
-        <span class="k">if</span> <span class="n">view_rect</span><span class="o">.</span><span class="n">left</span><span class="p">()</span> <span class="o">&lt;</span> <span class="n">image_rect</span><span class="o">.</span><span class="n">left</span><span class="p">():</span>
-            <span class="n">dx</span> <span class="o">=</span> <span class="n">image_rect</span><span class="o">.</span><span class="n">left</span><span class="p">()</span> <span class="o">-</span> <span class="n">view_rect</span><span class="o">.</span><span class="n">left</span><span class="p">()</span>
-        <span class="k">elif</span> <span class="n">view_rect</span><span class="o">.</span><span class="n">right</span><span class="p">()</span> <span class="o">&gt;</span> <span class="n">image_rect</span><span class="o">.</span><span class="n">right</span><span class="p">():</span>
-            <span class="n">dx</span> <span class="o">=</span> <span class="n">image_rect</span><span class="o">.</span><span class="n">right</span><span class="p">()</span> <span class="o">-</span> <span class="n">view_rect</span><span class="o">.</span><span class="n">right</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_cross_h</span><span class="o">.</span><span class="n">setPen</span><span class="p">(</span><span class="n">pen</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_cross_v</span><span class="o">.</span><span class="n">setPen</span><span class="p">(</span><span class="n">pen</span><span class="p">)</span>
 
-        <span class="k">if</span> <span class="n">view_rect</span><span class="o">.</span><span class="n">top</span><span class="p">()</span> <span class="o">&lt;</span> <span class="n">image_rect</span><span class="o">.</span><span class="n">top</span><span class="p">():</span>
-            <span class="n">dy</span> <span class="o">=</span> <span class="n">image_rect</span><span class="o">.</span><span class="n">top</span><span class="p">()</span> <span class="o">-</span> <span class="n">view_rect</span><span class="o">.</span><span class="n">top</span><span class="p">()</span>
-        <span class="k">elif</span> <span class="n">view_rect</span><span class="o">.</span><span class="n">bottom</span><span class="p">()</span> <span class="o">&gt;</span> <span class="n">image_rect</span><span class="o">.</span><span class="n">bottom</span><span class="p">():</span>
-            <span class="n">dy</span> <span class="o">=</span> <span class="n">image_rect</span><span class="o">.</span><span class="n">bottom</span><span class="p">()</span> <span class="o">-</span> <span class="n">view_rect</span><span class="o">.</span><span class="n">bottom</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_scene</span><span class="o">.</span><span class="n">addItem</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_cross_h</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_scene</span><span class="o">.</span><span class="n">addItem</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_cross_v</span><span class="p">)</span>
 
-        <span class="k">if</span> <span class="n">dx</span> <span class="ow">or</span> <span class="n">dy</span><span class="p">:</span>
-            <span class="bp">self</span><span class="o">.</span><span class="n">translate</span><span class="p">(</span><span class="n">dx</span><span class="p">,</span> <span class="n">dy</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_cross_h</span><span class="o">.</span><span class="n">hide</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_cross_v</span><span class="o">.</span><span class="n">hide</span><span class="p">()</span>
 
-
-    <span class="k">def</span><span class="w"> </span><span class="nf">_show_minimap</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+<div class="viewcode-block" id="ImageViewer.mouseMoveEvent">
+<a class="viewcode-back" href="../../api_doc/image_viewer.html#pyclickimage.ImageViewer.mouseMoveEvent">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">mouseMoveEvent</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">event</span><span class="p">:</span> <span class="n">QtGui</span><span class="o">.</span><span class="n">QMouseEvent</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
 <span class="w">        </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">        Show a minimap of the image in the top-left corner of the viewer.</span>
-<span class="sd">        &quot;&quot;&quot;</span>
-        <span class="k">if</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">_pixmap_item</span><span class="p">:</span>
-            <span class="k">return</span>
-
-        <span class="n">image</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_pixmap_item</span><span class="o">.</span><span class="n">pixmap</span><span class="p">()</span><span class="o">.</span><span class="n">scaled</span><span class="p">(</span>
-            <span class="bp">self</span><span class="o">.</span><span class="n">_minimap_size</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">_minimap_size</span><span class="p">,</span> <span class="n">QtCore</span><span class="o">.</span><span class="n">Qt</span><span class="o">.</span><span class="n">KeepAspectRatio</span><span class="p">)</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">_minimap_label</span><span class="o">.</span><span class="n">setPixmap</span><span class="p">(</span><span class="n">image</span><span class="p">)</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">_minimap_label</span><span class="o">.</span><span class="n">adjustSize</span><span class="p">()</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">_minimap_label</span><span class="o">.</span><span class="n">move</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="mi">10</span><span class="p">)</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">_minimap_label</span><span class="o">.</span><span class="n">setVisible</span><span class="p">(</span><span class="kc">True</span><span class="p">)</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">_update_minimap_viewport</span><span class="p">()</span>
-
-        <span class="c1"># Start a timer to hide the minimap after a short delay</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">_minimap_timer</span><span class="o">.</span><span class="n">start</span><span class="p">(</span><span class="mi">3000</span><span class="p">)</span>
-
-
-    <span class="k">def</span><span class="w"> </span><span class="nf">_hide_minimap</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
-<span class="w">        </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">        Hide the minimap label.</span>
-<span class="sd">        &quot;&quot;&quot;</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">_minimap_label</span><span class="o">.</span><span class="n">setVisible</span><span class="p">(</span><span class="kc">False</span><span class="p">)</span>
-
-    
-    <span class="k">def</span><span class="w"> </span><span class="nf">_update_minimap_viewport</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-<span class="w">        </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">        Update the minimap viewport to reflect the current view in the main window.</span>
-<span class="sd">        &quot;&quot;&quot;</span>
-        <span class="k">if</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">_minimap_label</span><span class="o">.</span><span class="n">isVisible</span><span class="p">():</span>
-            <span class="k">return</span>
-
-        <span class="n">image_rect</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_pixmap_item</span><span class="o">.</span><span class="n">sceneBoundingRect</span><span class="p">()</span>
-        <span class="n">visible_rect</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">mapToScene</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">viewport</span><span class="p">()</span><span class="o">.</span><span class="n">rect</span><span class="p">())</span><span class="o">.</span><span class="n">boundingRect</span><span class="p">()</span>
-        <span class="n">label_pixmap</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_minimap_label</span><span class="o">.</span><span class="n">pixmap</span><span class="p">()</span>
-
-        <span class="k">if</span> <span class="ow">not</span> <span class="n">label_pixmap</span><span class="p">:</span>
-            <span class="k">return</span>
-
-        <span class="n">scale_x</span> <span class="o">=</span> <span class="n">label_pixmap</span><span class="o">.</span><span class="n">width</span><span class="p">()</span> <span class="o">/</span> <span class="n">image_rect</span><span class="o">.</span><span class="n">width</span><span class="p">()</span>
-        <span class="n">scale_y</span> <span class="o">=</span> <span class="n">label_pixmap</span><span class="o">.</span><span class="n">height</span><span class="p">()</span> <span class="o">/</span> <span class="n">image_rect</span><span class="o">.</span><span class="n">height</span><span class="p">()</span>
-        <span class="n">x</span> <span class="o">=</span> <span class="p">(</span><span class="n">visible_rect</span><span class="o">.</span><span class="n">left</span><span class="p">()</span> <span class="o">-</span> <span class="n">image_rect</span><span class="o">.</span><span class="n">left</span><span class="p">())</span> <span class="o">*</span> <span class="n">scale_x</span>
-        <span class="n">y</span> <span class="o">=</span> <span class="p">(</span><span class="n">visible_rect</span><span class="o">.</span><span class="n">top</span><span class="p">()</span> <span class="o">-</span> <span class="n">image_rect</span><span class="o">.</span><span class="n">top</span><span class="p">())</span> <span class="o">*</span> <span class="n">scale_y</span>
-        <span class="n">w</span> <span class="o">=</span> <span class="n">visible_rect</span><span class="o">.</span><span class="n">width</span><span class="p">()</span> <span class="o">*</span> <span class="n">scale_x</span>
-        <span class="n">h</span> <span class="o">=</span> <span class="n">visible_rect</span><span class="o">.</span><span class="n">height</span><span class="p">()</span> <span class="o">*</span> <span class="n">scale_y</span>
-
-        <span class="n">overlay</span> <span class="o">=</span> <span class="n">QtGui</span><span class="o">.</span><span class="n">QPixmap</span><span class="p">(</span><span class="n">label_pixmap</span><span class="o">.</span><span class="n">width</span><span class="p">(),</span> <span class="n">label_pixmap</span><span class="o">.</span><span class="n">height</span><span class="p">())</span>
-        <span class="n">overlay</span><span class="o">.</span><span class="n">fill</span><span class="p">(</span><span class="n">QtCore</span><span class="o">.</span><span class="n">Qt</span><span class="o">.</span><span class="n">transparent</span><span class="p">)</span>
-        <span class="n">painter</span> <span class="o">=</span> <span class="n">QtGui</span><span class="o">.</span><span class="n">QPainter</span><span class="p">(</span><span class="n">overlay</span><span class="p">)</span>
-        <span class="n">painter</span><span class="o">.</span><span class="n">setPen</span><span class="p">(</span><span class="n">QtGui</span><span class="o">.</span><span class="n">QPen</span><span class="p">(</span><span class="n">QtCore</span><span class="o">.</span><span class="n">Qt</span><span class="o">.</span><span class="n">red</span><span class="p">,</span> <span class="mi">2</span><span class="p">))</span>
-        <span class="n">painter</span><span class="o">.</span><span class="n">drawRect</span><span class="p">(</span><span class="nb">int</span><span class="p">(</span><span class="n">x</span><span class="p">),</span> <span class="nb">int</span><span class="p">(</span><span class="n">y</span><span class="p">),</span> <span class="nb">int</span><span class="p">(</span><span class="n">w</span><span class="p">),</span> <span class="nb">int</span><span class="p">(</span><span class="n">h</span><span class="p">))</span>
-        <span class="n">painter</span><span class="o">.</span><span class="n">end</span><span class="p">()</span>
-
-        <span class="n">combined</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_pixmap_item</span><span class="o">.</span><span class="n">pixmap</span><span class="p">()</span><span class="o">.</span><span class="n">scaled</span><span class="p">(</span>
-            <span class="n">label_pixmap</span><span class="o">.</span><span class="n">width</span><span class="p">(),</span> <span class="n">label_pixmap</span><span class="o">.</span><span class="n">height</span><span class="p">(),</span> <span class="n">QtCore</span><span class="o">.</span><span class="n">Qt</span><span class="o">.</span><span class="n">KeepAspectRatio</span><span class="p">)</span>
-        <span class="n">painter</span> <span class="o">=</span> <span class="n">QtGui</span><span class="o">.</span><span class="n">QPainter</span><span class="p">(</span><span class="n">combined</span><span class="p">)</span>
-        <span class="n">painter</span><span class="o">.</span><span class="n">drawPixmap</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="n">overlay</span><span class="p">)</span>
-        <span class="n">painter</span><span class="o">.</span><span class="n">end</span><span class="p">()</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">_minimap_label</span><span class="o">.</span><span class="n">setPixmap</span><span class="p">(</span><span class="n">combined</span><span class="p">)</span>
-
-
-    <span class="c1"># ===========================================================================</span>
-    <span class="c1"># Mouse and Click Events</span>
-    <span class="c1"># ===========================================================================</span>
-<div class="viewcode-block" id="ImageViewer.mousePressEvent">
-<a class="viewcode-back" href="../../api_doc/image_viewer.html#pyclickimage.ImageViewer.mousePressEvent">[docs]</a>
-    <span class="k">def</span><span class="w"> </span><span class="nf">mousePressEvent</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">event</span><span class="p">):</span>
-<span class="w">        </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">        Handle mouse press events to save the current click position in order to detect if it is a click or a slice release Event.</span>
+<span class="sd">        Update crosshair and coordinate display.</span>
 
 <span class="sd">        Parameters</span>
 <span class="sd">        ----------</span>
 <span class="sd">        event : QtGui.QMouseEvent</span>
-<span class="sd">            The mouse event containing the position of the click.</span>
+<span class="sd">            Mouse move event.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
-        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="n">mousePressEvent</span><span class="p">(</span><span class="n">event</span><span class="p">)</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">_click_press_pos</span> <span class="o">=</span> <span class="n">event</span><span class="o">.</span><span class="n">pos</span><span class="p">()</span>  <span class="c1"># Save the click position</span></div>
+        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="n">mouseMoveEvent</span><span class="p">(</span><span class="n">event</span><span class="p">)</span>
+
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_pixmap_item</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="k">return</span>
+
+        <span class="n">scene_pos</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">mapToScene</span><span class="p">(</span><span class="n">event</span><span class="o">.</span><span class="n">pos</span><span class="p">())</span>
+        <span class="n">rect</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_pixmap_item</span><span class="o">.</span><span class="n">sceneBoundingRect</span><span class="p">()</span>
+
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">rect</span><span class="o">.</span><span class="n">contains</span><span class="p">(</span><span class="n">scene_pos</span><span class="p">):</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_cross_h</span><span class="o">.</span><span class="n">hide</span><span class="p">()</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_cross_v</span><span class="o">.</span><span class="n">hide</span><span class="p">()</span>
+            <span class="k">return</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">_cross_h</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_cross_v</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">_cross_h</span><span class="o">.</span><span class="n">setLine</span><span class="p">(</span><span class="n">rect</span><span class="o">.</span><span class="n">left</span><span class="p">(),</span> <span class="n">scene_pos</span><span class="o">.</span><span class="n">y</span><span class="p">(),</span> <span class="n">rect</span><span class="o">.</span><span class="n">right</span><span class="p">(),</span> <span class="n">scene_pos</span><span class="o">.</span><span class="n">y</span><span class="p">())</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">_cross_v</span><span class="o">.</span><span class="n">setLine</span><span class="p">(</span><span class="n">scene_pos</span><span class="o">.</span><span class="n">x</span><span class="p">(),</span> <span class="n">rect</span><span class="o">.</span><span class="n">top</span><span class="p">(),</span> <span class="n">scene_pos</span><span class="o">.</span><span class="n">x</span><span class="p">(),</span> <span class="n">rect</span><span class="o">.</span><span class="n">bottom</span><span class="p">())</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">_coord_label</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_coord_label</span><span class="o">.</span><span class="n">setText</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;X=</span><span class="si">{</span><span class="n">scene_pos</span><span class="o">.</span><span class="n">x</span><span class="p">()</span><span class="si">:</span><span class="s2">.3f</span><span class="si">}</span><span class="s2">  Y=</span><span class="si">{</span><span class="n">scene_pos</span><span class="o">.</span><span class="n">y</span><span class="p">()</span><span class="si">:</span><span class="s2">.3f</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_coord_label</span><span class="o">.</span><span class="n">adjustSize</span><span class="p">()</span></div>
 
 
-       
+
+    <span class="c1"># ======================================================================</span>
+    <span class="c1"># ZOOM</span>
+    <span class="c1"># ======================================================================</span>
+
 <div class="viewcode-block" id="ImageViewer.wheelEvent">
 <a class="viewcode-back" href="../../api_doc/image_viewer.html#pyclickimage.ImageViewer.wheelEvent">[docs]</a>
     <span class="k">def</span><span class="w"> </span><span class="nf">wheelEvent</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">event</span><span class="p">:</span> <span class="n">QtGui</span><span class="o">.</span><span class="n">QWheelEvent</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
 <span class="w">        </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">        Handle mouse wheel events for zooming in or out.</span>
+<span class="sd">        Handle zoom with mouse wheel.</span>
 
 <span class="sd">        Parameters</span>
 <span class="sd">        ----------</span>
 <span class="sd">        event : QtGui.QWheelEvent</span>
-<span class="sd">            The wheel event containing the scroll direction.</span>
+<span class="sd">            Wheel event.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_pixmap_item</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="k">return</span>
+
+        <span class="n">factor</span> <span class="o">=</span> <span class="mf">1.1</span>
+
         <span class="k">if</span> <span class="n">event</span><span class="o">.</span><span class="n">angleDelta</span><span class="p">()</span><span class="o">.</span><span class="n">y</span><span class="p">()</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span>
-            <span class="bp">self</span><span class="o">.</span><span class="n">manual_zoom</span><span class="p">(</span><span class="n">in_</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+            <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_zoom</span> <span class="o">&gt;=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_max_zoom</span><span class="p">:</span>
+                <span class="k">return</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">scale</span><span class="p">(</span><span class="n">factor</span><span class="p">,</span> <span class="n">factor</span><span class="p">)</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_zoom</span> <span class="o">+=</span> <span class="mi">1</span>
         <span class="k">else</span><span class="p">:</span>
-            <span class="bp">self</span><span class="o">.</span><span class="n">manual_zoom</span><span class="p">(</span><span class="n">in_</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span></div>
+            <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_zoom</span> <span class="o">&lt;=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_min_zoom</span><span class="p">:</span>
+                <span class="k">return</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">scale</span><span class="p">(</span><span class="mf">1.0</span> <span class="o">/</span> <span class="n">factor</span><span class="p">,</span> <span class="mf">1.0</span> <span class="o">/</span> <span class="n">factor</span><span class="p">)</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_zoom</span> <span class="o">-=</span> <span class="mi">1</span></div>
 
 
-        
+<div class="viewcode-block" id="ImageViewer.reset_view">
+<a class="viewcode-back" href="../../api_doc/image_viewer.html#pyclickimage.ImageViewer.reset_view">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">reset_view</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+<span class="w">        </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Reset the view to the initial state (no zoom, centered image).</span>
+
+<span class="sd">        This method:</span>
+<span class="sd">        - resets the internal zoom counter</span>
+<span class="sd">        - resets Qt transformation matrix</span>
+<span class="sd">        - re-applies fitInView on the current image</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_pixmap_item</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="k">return</span>
+
+        <span class="c1"># Reset zoom state</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_zoom</span> <span class="o">=</span> <span class="mi">0</span>
+
+        <span class="c1"># Reset transformation (important: clears wheel scaling)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">resetTransform</span><span class="p">()</span>
+
+        <span class="c1"># Re-fit image in view (original behavior)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">fitInView</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_pixmap_item</span><span class="p">,</span> <span class="n">QtCore</span><span class="o">.</span><span class="n">Qt</span><span class="o">.</span><span class="n">KeepAspectRatio</span><span class="p">)</span>
+
+        <span class="c1"># Optional: re-anchor correctly</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">setTransformationAnchor</span><span class="p">(</span><span class="n">QtWidgets</span><span class="o">.</span><span class="n">QGraphicsView</span><span class="o">.</span><span class="n">AnchorUnderMouse</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">setResizeAnchor</span><span class="p">(</span><span class="n">QtWidgets</span><span class="o">.</span><span class="n">QGraphicsView</span><span class="o">.</span><span class="n">AnchorUnderMouse</span><span class="p">)</span></div>
+
+
+    <span class="c1"># ======================================================================</span>
+    <span class="c1"># CLICK HANDLING (SUBPIXEL SAFE)</span>
+    <span class="c1"># ======================================================================</span>
+
+<div class="viewcode-block" id="ImageViewer.mousePressEvent">
+<a class="viewcode-back" href="../../api_doc/image_viewer.html#pyclickimage.ImageViewer.mousePressEvent">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">mousePressEvent</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">event</span><span class="p">:</span> <span class="n">QtGui</span><span class="o">.</span><span class="n">QMouseEvent</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+<span class="w">        </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Store press position for click validation.</span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        event : QtGui.QMouseEvent</span>
+<span class="sd">            Mouse press event.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_press_pos</span> <span class="o">=</span> <span class="n">event</span><span class="o">.</span><span class="n">pos</span><span class="p">()</span>
+        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="n">mousePressEvent</span><span class="p">(</span><span class="n">event</span><span class="p">)</span></div>
+
+
 <div class="viewcode-block" id="ImageViewer.mouseReleaseEvent">
 <a class="viewcode-back" href="../../api_doc/image_viewer.html#pyclickimage.ImageViewer.mouseReleaseEvent">[docs]</a>
     <span class="k">def</span><span class="w"> </span><span class="nf">mouseReleaseEvent</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">event</span><span class="p">:</span> <span class="n">QtGui</span><span class="o">.</span><span class="n">QMouseEvent</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
 <span class="w">        </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">        Handle mouse release events to emit click coordinates and draw a circle.</span>
+<span class="sd">        Detect valid click and emit coordinates.</span>
 
 <span class="sd">        Parameters</span>
 <span class="sd">        ----------</span>
 <span class="sd">        event : QtGui.QMouseEvent</span>
-<span class="sd">            The mouse event containing the position of the click.</span>
+<span class="sd">            Mouse release event.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="n">mouseReleaseEvent</span><span class="p">(</span><span class="n">event</span><span class="p">)</span>
 
-        <span class="bp">self</span><span class="o">.</span><span class="n">_clamp_to_image</span><span class="p">()</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">_show_minimap</span><span class="p">()</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_pixmap_item</span> <span class="ow">is</span> <span class="kc">None</span> <span class="ow">or</span> <span class="bp">self</span><span class="o">.</span><span class="n">_press_pos</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="k">return</span>
 
-        <span class="c1"># compute the distance from the click press position to the release position</span>
-        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_click_press_pos</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
-            <span class="n">distance</span> <span class="o">=</span> <span class="p">(</span><span class="n">event</span><span class="o">.</span><span class="n">pos</span><span class="p">()</span> <span class="o">-</span> <span class="bp">self</span><span class="o">.</span><span class="n">_click_press_pos</span><span class="p">)</span><span class="o">.</span><span class="n">manhattanLength</span><span class="p">()</span>
-            <span class="bp">self</span><span class="o">.</span><span class="n">_click_press_pos</span> <span class="o">=</span> <span class="kc">None</span>  <span class="c1"># Reset the click press position</span>
-        <span class="k">else</span><span class="p">:</span>
-            <span class="n">distance</span> <span class="o">=</span> <span class="mi">0</span>
-        
-        <span class="c1"># If the distance is small, treat it as a click</span>
-        <span class="k">if</span> <span class="n">distance</span> <span class="o">&lt;=</span> <span class="mi">1</span><span class="p">:</span> <span class="c1"># in pixels</span>
-            <span class="c1"># Emit the click coordinates (if left click)</span>
-            <span class="k">if</span> <span class="n">event</span><span class="o">.</span><span class="n">button</span><span class="p">()</span> <span class="o">==</span> <span class="n">QtCore</span><span class="o">.</span><span class="n">Qt</span><span class="o">.</span><span class="n">LeftButton</span><span class="p">:</span>
-                <span class="n">scene_pos</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">mapToScene</span><span class="p">(</span><span class="n">event</span><span class="o">.</span><span class="n">pos</span><span class="p">())</span>
-                <span class="bp">self</span><span class="o">.</span><span class="n">left_click_signal</span><span class="o">.</span><span class="n">emit</span><span class="p">(</span><span class="nb">int</span><span class="p">(</span><span class="n">scene_pos</span><span class="o">.</span><span class="n">x</span><span class="p">()),</span> <span class="nb">int</span><span class="p">(</span><span class="n">scene_pos</span><span class="o">.</span><span class="n">y</span><span class="p">()))</span>
-                <span class="bp">self</span><span class="o">.</span><span class="n">_show_coordinates</span><span class="p">(</span><span class="n">event</span><span class="p">)</span>
+        <span class="n">distance</span> <span class="o">=</span> <span class="p">(</span><span class="n">event</span><span class="o">.</span><span class="n">pos</span><span class="p">()</span> <span class="o">-</span> <span class="bp">self</span><span class="o">.</span><span class="n">_press_pos</span><span class="p">)</span><span class="o">.</span><span class="n">manhattanLength</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_press_pos</span> <span class="o">=</span> <span class="kc">None</span>
 
-            <span class="c1"># Emit the right-click coordinates</span>
-            <span class="k">elif</span> <span class="n">event</span><span class="o">.</span><span class="n">button</span><span class="p">()</span> <span class="o">==</span> <span class="n">QtCore</span><span class="o">.</span><span class="n">Qt</span><span class="o">.</span><span class="n">RightButton</span><span class="p">:</span>
-                <span class="n">scene_pos</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">mapToScene</span><span class="p">(</span><span class="n">event</span><span class="o">.</span><span class="n">pos</span><span class="p">())</span>
-                <span class="bp">self</span><span class="o">.</span><span class="n">right_click_signal</span><span class="o">.</span><span class="n">emit</span><span class="p">(</span><span class="nb">int</span><span class="p">(</span><span class="n">scene_pos</span><span class="o">.</span><span class="n">x</span><span class="p">()),</span> <span class="nb">int</span><span class="p">(</span><span class="n">scene_pos</span><span class="o">.</span><span class="n">y</span><span class="p">()))</span></div>
-
-
-
-    <span class="k">def</span><span class="w"> </span><span class="nf">_show_coordinates</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">event</span><span class="p">:</span> <span class="n">QtGui</span><span class="o">.</span><span class="n">QMouseEvent</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
-<span class="w">        </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">        Show the coordinates of the click in the minimap label.</span>
-
-<span class="sd">        Parameters</span>
-<span class="sd">        ----------</span>
-<span class="sd">        event : QtGui.QMouseEvent</span>
-<span class="sd">            The mouse event containing the position of the click.</span>
-<span class="sd">        &quot;&quot;&quot;</span>
-        <span class="k">if</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">_pixmap_item</span><span class="p">:</span>
+        <span class="c1"># Ignore drag</span>
+        <span class="k">if</span> <span class="n">distance</span> <span class="o">&gt;</span> <span class="mi">2</span><span class="p">:</span>
             <span class="k">return</span>
 
         <span class="n">scene_pos</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">mapToScene</span><span class="p">(</span><span class="n">event</span><span class="o">.</span><span class="n">pos</span><span class="p">())</span>
-        <span class="n">coords</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;Coordinates: (</span><span class="si">{</span><span class="nb">int</span><span class="p">(</span><span class="n">scene_pos</span><span class="o">.</span><span class="n">x</span><span class="p">())</span><span class="si">}</span><span class="s2">, </span><span class="si">{</span><span class="nb">int</span><span class="p">(</span><span class="n">scene_pos</span><span class="o">.</span><span class="n">y</span><span class="p">())</span><span class="si">}</span><span class="s2">)&quot;</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">_minimap_label</span><span class="o">.</span><span class="n">setText</span><span class="p">(</span><span class="n">coords</span><span class="p">)</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">_minimap_label</span><span class="o">.</span><span class="n">adjustSize</span><span class="p">()</span>
+        <span class="n">rect</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_pixmap_item</span><span class="o">.</span><span class="n">sceneBoundingRect</span><span class="p">()</span>
 
-
-    <span class="c1"># ===========================================================================</span>
-    <span class="c1"># Circle Drawing and Management</span>
-    <span class="c1"># ===========================================================================</span>
-    <span class="k">def</span><span class="w"> </span><span class="nf">_draw_circle</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">center</span><span class="p">:</span> <span class="n">QtCore</span><span class="o">.</span><span class="n">QPointF</span><span class="p">,</span> <span class="n">_save</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">True</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
-<span class="w">        </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">        Draw a circle at the specified center with the given radius.</span>
-
-<span class="sd">        Parameters</span>
-<span class="sd">        ----------</span>
-<span class="sd">        center : QtCore.QPointF</span>
-<span class="sd">            The center coordinates of the circle.</span>
-
-<span class="sd">        _save : bool, optional</span>
-<span class="sd">            If True, save the circle to the list of circles. Default is True.</span>
-<span class="sd">        &quot;&quot;&quot;</span>
-        <span class="k">if</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">_pixmap_item</span><span class="p">:</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">rect</span><span class="o">.</span><span class="n">contains</span><span class="p">(</span><span class="n">scene_pos</span><span class="p">):</span>
             <span class="k">return</span>
 
-        <span class="c1"># Draw the circle at the specified center</span>
-        <span class="n">circle</span> <span class="o">=</span> <span class="n">QtWidgets</span><span class="o">.</span><span class="n">QGraphicsEllipseItem</span><span class="p">(</span><span class="n">center</span><span class="o">.</span><span class="n">x</span><span class="p">()</span> <span class="o">-</span> <span class="bp">self</span><span class="o">.</span><span class="n">_circles_radius</span> <span class="o">+</span> <span class="mf">0.5</span><span class="p">,</span>
-                                                <span class="n">center</span><span class="o">.</span><span class="n">y</span><span class="p">()</span> <span class="o">-</span> <span class="bp">self</span><span class="o">.</span><span class="n">_circles_radius</span> <span class="o">+</span> <span class="mf">0.5</span><span class="p">,</span>
-                                                <span class="mi">2</span> <span class="o">*</span> <span class="bp">self</span><span class="o">.</span><span class="n">_circles_radius</span><span class="p">,</span> <span class="mi">2</span> <span class="o">*</span> <span class="bp">self</span><span class="o">.</span><span class="n">_circles_radius</span><span class="p">)</span>
-        
-        <span class="c1"># Set the pen color and width for the circle</span>
-        <span class="n">pen</span> <span class="o">=</span> <span class="n">QtGui</span><span class="o">.</span><span class="n">QPen</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_circles_color</span><span class="p">)</span>
-        <span class="n">pen</span><span class="o">.</span><span class="n">setWidth</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_circles_width</span><span class="p">)</span>
-        <span class="n">circle</span><span class="o">.</span><span class="n">setPen</span><span class="p">(</span><span class="n">pen</span><span class="p">)</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">scene</span><span class="p">()</span><span class="o">.</span><span class="n">addItem</span><span class="p">(</span><span class="n">circle</span><span class="p">)</span>
-        
-        <span class="c1"># Save the circle to the list if required</span>
-        <span class="k">if</span> <span class="n">_save</span><span class="p">:</span>
-            <span class="bp">self</span><span class="o">.</span><span class="n">_circles</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">circle</span><span class="p">)</span>
+        <span class="n">x</span><span class="p">,</span> <span class="n">y</span> <span class="o">=</span> <span class="n">scene_pos</span><span class="o">.</span><span class="n">x</span><span class="p">(),</span> <span class="n">scene_pos</span><span class="o">.</span><span class="n">y</span><span class="p">()</span>
 
-    
-    <span class="k">def</span><span class="w"> </span><span class="nf">_erase_circle</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">circle</span><span class="p">:</span> <span class="n">QtWidgets</span><span class="o">.</span><span class="n">QGraphicsEllipseItem</span><span class="p">,</span> <span class="n">_remove</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">True</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="k">if</span> <span class="n">event</span><span class="o">.</span><span class="n">button</span><span class="p">()</span> <span class="o">==</span> <span class="n">QtCore</span><span class="o">.</span><span class="n">Qt</span><span class="o">.</span><span class="n">LeftButton</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">left_click_signal</span><span class="o">.</span><span class="n">emit</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">)</span>
+
+        <span class="k">elif</span> <span class="n">event</span><span class="o">.</span><span class="n">button</span><span class="p">()</span> <span class="o">==</span> <span class="n">QtCore</span><span class="o">.</span><span class="n">Qt</span><span class="o">.</span><span class="n">RightButton</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">right_click_signal</span><span class="o">.</span><span class="n">emit</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">)</span>
+
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">auto_marker</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">add_marker</span><span class="p">((</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">),</span> <span class="n">QtGui</span><span class="o">.</span><span class="n">QColor</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">255</span><span class="p">))</span></div>
+
+
+    <span class="c1"># ======================================================================</span>
+    <span class="c1"># MARKERS (SUBPIXEL CROSS STYLE)</span>
+    <span class="c1"># ======================================================================</span>
+
+<div class="viewcode-block" id="ImageViewer.add_marker">
+<a class="viewcode-back" href="../../api_doc/image_viewer.html#pyclickimage.ImageViewer.add_marker">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">add_marker</span><span class="p">(</span>
+        <span class="bp">self</span><span class="p">,</span>
+        <span class="n">center</span><span class="p">:</span> <span class="n">Tuple</span><span class="p">[</span><span class="nb">float</span><span class="p">,</span> <span class="nb">float</span><span class="p">],</span>
+        <span class="n">color</span><span class="p">:</span> <span class="n">QtGui</span><span class="o">.</span><span class="n">QColor</span> <span class="o">=</span> <span class="n">QtGui</span><span class="o">.</span><span class="n">QColor</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">255</span><span class="p">),</span>
+        <span class="n">size</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">8</span><span class="p">,</span>
+    <span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
 <span class="w">        </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">        Erase a specific circle from the scene.</span>
-
-<span class="sd">        Parameters</span>
-<span class="sd">        ----------</span>
-<span class="sd">        circle : QtWidgets.QGraphicsEllipseItem</span>
-<span class="sd">            The circle item to be erased.</span>
-
-<span class="sd">        remove : bool, optional</span>
-<span class="sd">            If True, remove the circle from the scene and the circles list. Default is True.</span>
-<span class="sd">        &quot;&quot;&quot;</span>
-        <span class="k">if</span> <span class="n">circle</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">_circles</span><span class="p">:</span>
-            <span class="bp">self</span><span class="o">.</span><span class="n">scene</span><span class="p">()</span><span class="o">.</span><span class="n">removeItem</span><span class="p">(</span><span class="n">circle</span><span class="p">)</span>
-
-            <span class="k">if</span> <span class="n">_remove</span><span class="p">:</span>
-                <span class="bp">self</span><span class="o">.</span><span class="n">_circles</span><span class="o">.</span><span class="n">remove</span><span class="p">(</span><span class="n">circle</span><span class="p">)</span>
-
-
-    <span class="k">def</span><span class="w"> </span><span class="nf">_redraw_circle</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">circle</span><span class="p">:</span> <span class="n">QtWidgets</span><span class="o">.</span><span class="n">QGraphicsEllipseItem</span><span class="p">):</span>
-<span class="w">        </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">        Redraw a specific circle in the scene.</span>
-
-<span class="sd">        Parameters</span>
-<span class="sd">        ----------</span>
-<span class="sd">        circle : QtWidgets.QGraphicsEllipseItem</span>
-<span class="sd">            The circle item to be redrawn.</span>
-<span class="sd">        &quot;&quot;&quot;</span>
-        <span class="k">if</span> <span class="n">circle</span> <span class="ow">not</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">_circles</span><span class="p">:</span>
-            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;Circle not found in the circles list.&quot;</span><span class="p">)</span>
-        
-        <span class="bp">self</span><span class="o">.</span><span class="n">_erase_circle</span><span class="p">(</span><span class="n">circle</span><span class="p">,</span> <span class="n">_remove</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>  <span class="c1"># Remove the circle from the scene without deleting it</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">_draw_circle</span><span class="p">(</span><span class="n">QtCore</span><span class="o">.</span><span class="n">QPointF</span><span class="p">(</span><span class="n">circle</span><span class="o">.</span><span class="n">rect</span><span class="p">()</span><span class="o">.</span><span class="n">center</span><span class="p">()</span><span class="o">.</span><span class="n">x</span><span class="p">(),</span> <span class="n">circle</span><span class="o">.</span><span class="n">rect</span><span class="p">()</span><span class="o">.</span><span class="n">center</span><span class="p">()</span><span class="o">.</span><span class="n">y</span><span class="p">()),</span> <span class="n">_save</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>  <span class="c1"># Redraw the circle at its center</span>
-
-
-    <span class="k">def</span><span class="w"> </span><span class="nf">_redraw_all_circles</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
-<span class="w">        </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">        Redraw all circles in the scene.</span>
-<span class="sd">        &quot;&quot;&quot;</span>
-        <span class="k">for</span> <span class="n">circle</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">_circles</span><span class="p">:</span>
-            <span class="bp">self</span><span class="o">.</span><span class="n">_redraw_circle</span><span class="p">(</span><span class="n">circle</span><span class="p">)</span>
-
-
-<div class="viewcode-block" id="ImageViewer.add_circle">
-<a class="viewcode-back" href="../../api_doc/image_viewer.html#pyclickimage.ImageViewer.add_circle">[docs]</a>
-    <span class="k">def</span><span class="w"> </span><span class="nf">add_circle</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">center</span><span class="p">:</span> <span class="n">Tuple</span><span class="p">[</span><span class="nb">float</span><span class="p">,</span> <span class="nb">float</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
-<span class="w">        </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">        Add a circle to the scene at the specified center with the given radius.</span>
+<span class="sd">        Add a cross-style marker at a given position.</span>
 
 <span class="sd">        Parameters</span>
 <span class="sd">        ----------</span>
 <span class="sd">        center : Tuple[float, float]</span>
-<span class="sd">            The center coordinates of the circle.</span>
-<span class="sd">        radius : int, optional</span>
-<span class="sd">            The radius of the circle. Default is 10.</span>
-<span class="sd">        &quot;&quot;&quot;</span>
-        <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">center</span><span class="p">,</span> <span class="nb">tuple</span><span class="p">)</span> <span class="ow">or</span> <span class="nb">len</span><span class="p">(</span><span class="n">center</span><span class="p">)</span> <span class="o">!=</span> <span class="mi">2</span><span class="p">:</span>
-            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;Center must be a tuple of (x, y) coordinates.&quot;</span><span class="p">)</span>
-        
-        <span class="bp">self</span><span class="o">.</span><span class="n">_draw_circle</span><span class="p">(</span><span class="n">QtCore</span><span class="o">.</span><span class="n">QPointF</span><span class="p">(</span><span class="n">center</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">center</span><span class="p">[</span><span class="mi">1</span><span class="p">]))</span></div>
-
-
-
-<div class="viewcode-block" id="ImageViewer.remove_circle">
-<a class="viewcode-back" href="../../api_doc/image_viewer.html#pyclickimage.ImageViewer.remove_circle">[docs]</a>
-    <span class="k">def</span><span class="w"> </span><span class="nf">remove_circle</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">index</span><span class="p">:</span> <span class="nb">int</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
-<span class="w">        </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">        Remove a circle from the scene by its index.</span>
-
-<span class="sd">        Parameters</span>
-<span class="sd">        ----------</span>
-<span class="sd">        index : int</span>
-<span class="sd">            The index of the circle to remove.</span>
-<span class="sd">        </span>
-<span class="sd">        Raises</span>
-<span class="sd">        ------</span>
-<span class="sd">        IndexError</span>
-<span class="sd">            If the index is out of range for the circles list.</span>
-<span class="sd">        &quot;&quot;&quot;</span>
-        <span class="k">if</span> <span class="n">index</span> <span class="o">&lt;</span> <span class="mi">0</span> <span class="ow">or</span> <span class="n">index</span> <span class="o">&gt;=</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_circles</span><span class="p">):</span>
-            <span class="k">raise</span> <span class="ne">IndexError</span><span class="p">(</span><span class="s2">&quot;Circle index out of range.&quot;</span><span class="p">)</span>
-        
-        <span class="bp">self</span><span class="o">.</span><span class="n">_erase_circle</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_circles</span><span class="p">[</span><span class="n">index</span><span class="p">])</span></div>
-
-
-
-<div class="viewcode-block" id="ImageViewer.remove_all_circles">
-<a class="viewcode-back" href="../../api_doc/image_viewer.html#pyclickimage.ImageViewer.remove_all_circles">[docs]</a>
-    <span class="k">def</span><span class="w"> </span><span class="nf">remove_all_circles</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
-<span class="w">        </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">        Remove all circles from the scene.</span>
-<span class="sd">        &quot;&quot;&quot;</span>
-        <span class="k">for</span> <span class="n">circle</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">_circles</span><span class="p">:</span>
-            <span class="bp">self</span><span class="o">.</span><span class="n">_erase_circle</span><span class="p">(</span><span class="n">circle</span><span class="p">,</span> <span class="n">_remove</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">_circles</span><span class="o">.</span><span class="n">clear</span><span class="p">()</span></div>
-
-
-
-    <span class="nd">@property</span>
-    <span class="k">def</span><span class="w"> </span><span class="nf">circles_color</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">QtGui</span><span class="o">.</span><span class="n">QColor</span><span class="p">:</span>
-<span class="w">        </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">        Get the color of the circles.</span>
-
-<span class="sd">        Returns</span>
-<span class="sd">        -------</span>
-<span class="sd">        QtGui.QColor</span>
-<span class="sd">            The color of the circles.</span>
-<span class="sd">        &quot;&quot;&quot;</span>
-        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_circles_color</span>
-    
-    <span class="nd">@circles_color</span><span class="o">.</span><span class="n">setter</span>
-    <span class="k">def</span><span class="w"> </span><span class="nf">circles_color</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">color</span><span class="p">:</span> <span class="n">QtGui</span><span class="o">.</span><span class="n">QColor</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
-<span class="w">        </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">        Set the color of the circles.</span>
-
-<span class="sd">        Parameters</span>
-<span class="sd">        ----------</span>
+<span class="sd">            (x, y) coordinates.</span>
 <span class="sd">        color : QtGui.QColor</span>
-<span class="sd">            The new color for the circles.</span>
+<span class="sd">            Marker color.</span>
+<span class="sd">        size : int</span>
+<span class="sd">            Half-size of cross arms.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
-        <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">color</span><span class="p">,</span> <span class="n">QtGui</span><span class="o">.</span><span class="n">QColor</span><span class="p">):</span>
-            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;Color must be a QColor instance.&quot;</span><span class="p">)</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">_circles_color</span> <span class="o">=</span> <span class="n">color</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">_redraw_all_circles</span><span class="p">()</span>
+        <span class="n">x</span><span class="p">,</span> <span class="n">y</span> <span class="o">=</span> <span class="n">center</span>
 
-    <span class="nd">@property</span>
-    <span class="k">def</span><span class="w"> </span><span class="nf">circles_radius</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">int</span><span class="p">:</span>
+        <span class="n">pen</span> <span class="o">=</span> <span class="n">QtGui</span><span class="o">.</span><span class="n">QPen</span><span class="p">(</span><span class="n">color</span><span class="p">)</span>
+        <span class="n">pen</span><span class="o">.</span><span class="n">setWidthF</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
+
+        <span class="n">hline</span> <span class="o">=</span> <span class="n">QtWidgets</span><span class="o">.</span><span class="n">QGraphicsLineItem</span><span class="p">(</span><span class="n">x</span> <span class="o">-</span> <span class="n">size</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">x</span> <span class="o">+</span> <span class="n">size</span><span class="p">,</span> <span class="n">y</span><span class="p">)</span>
+        <span class="n">vline</span> <span class="o">=</span> <span class="n">QtWidgets</span><span class="o">.</span><span class="n">QGraphicsLineItem</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span> <span class="o">-</span> <span class="n">size</span><span class="p">,</span> <span class="n">x</span><span class="p">,</span> <span class="n">y</span> <span class="o">+</span> <span class="n">size</span><span class="p">)</span>
+
+        <span class="n">hline</span><span class="o">.</span><span class="n">setPen</span><span class="p">(</span><span class="n">pen</span><span class="p">)</span>
+        <span class="n">vline</span><span class="o">.</span><span class="n">setPen</span><span class="p">(</span><span class="n">pen</span><span class="p">)</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">scene</span><span class="p">()</span><span class="o">.</span><span class="n">addItem</span><span class="p">(</span><span class="n">hline</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">scene</span><span class="p">()</span><span class="o">.</span><span class="n">addItem</span><span class="p">(</span><span class="n">vline</span><span class="p">)</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">_markers</span><span class="o">.</span><span class="n">append</span><span class="p">((</span><span class="n">hline</span><span class="p">,</span> <span class="n">vline</span><span class="p">))</span></div>
+
+
+<div class="viewcode-block" id="ImageViewer.clear_markers">
+<a class="viewcode-back" href="../../api_doc/image_viewer.html#pyclickimage.ImageViewer.clear_markers">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">clear_markers</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
 <span class="w">        </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">        Get the radius of the circles.</span>
-
-<span class="sd">        Returns</span>
-<span class="sd">        -------</span>
-<span class="sd">        int</span>
-<span class="sd">            The radius of the circles.</span>
+<span class="sd">        Remove all markers from the scene.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
-        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_circles_radius</span>
-    
-    <span class="nd">@circles_radius</span><span class="o">.</span><span class="n">setter</span>
-    <span class="k">def</span><span class="w"> </span><span class="nf">circles_radius</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">radius</span><span class="p">:</span> <span class="nb">int</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
-<span class="w">        </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">        Set the radius of the circles.</span>
+        <span class="k">for</span> <span class="n">hline</span><span class="p">,</span> <span class="n">vline</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">_markers</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">scene</span><span class="p">()</span><span class="o">.</span><span class="n">removeItem</span><span class="p">(</span><span class="n">hline</span><span class="p">)</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">scene</span><span class="p">()</span><span class="o">.</span><span class="n">removeItem</span><span class="p">(</span><span class="n">vline</span><span class="p">)</span>
 
-<span class="sd">        Parameters</span>
-<span class="sd">        ----------</span>
-<span class="sd">        radius : int</span>
-<span class="sd">            The new radius for the circles.</span>
-<span class="sd">        </span>
-<span class="sd">        Raises</span>
-<span class="sd">        ------</span>
-<span class="sd">        ValueError</span>
-<span class="sd">            If the radius is not a positive integer.</span>
-<span class="sd">        &quot;&quot;&quot;</span>
-        <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">radius</span><span class="p">,</span> <span class="nb">int</span><span class="p">)</span> <span class="ow">or</span> <span class="n">radius</span> <span class="o">&lt;=</span> <span class="mi">0</span><span class="p">:</span>
-            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;Radius must be a positive integer.&quot;</span><span class="p">)</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">_circles_radius</span> <span class="o">=</span> <span class="n">radius</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">_redraw_all_circles</span><span class="p">()</span>
-
-    <span class="nd">@property</span>
-    <span class="k">def</span><span class="w"> </span><span class="nf">circles_width</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">int</span><span class="p">:</span>
-<span class="w">        </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">        Get the width of the circle pen.</span>
-
-<span class="sd">        Returns</span>
-<span class="sd">        -------</span>
-<span class="sd">        int</span>
-<span class="sd">            The width of the circle pen.</span>
-<span class="sd">        &quot;&quot;&quot;</span>
-        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_circles_width</span>
-    
-    <span class="nd">@circles_width</span><span class="o">.</span><span class="n">setter</span>
-    <span class="k">def</span><span class="w"> </span><span class="nf">circles_width</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">width</span><span class="p">:</span> <span class="nb">int</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
-<span class="w">        </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">        Set the width of the circle pen.</span>
-
-<span class="sd">        Parameters</span>
-<span class="sd">        ----------</span>
-<span class="sd">        width : int</span>
-<span class="sd">            The new width for the circle pen.</span>
-<span class="sd">        </span>
-<span class="sd">        Raises</span>
-<span class="sd">        ------</span>
-<span class="sd">        ValueError</span>
-<span class="sd">            If the width is not a positive integer.</span>
-<span class="sd">        &quot;&quot;&quot;</span>
-        <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">width</span><span class="p">,</span> <span class="nb">int</span><span class="p">)</span> <span class="ow">or</span> <span class="n">width</span> <span class="o">&lt;=</span> <span class="mi">0</span><span class="p">:</span>
-            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;Width must be a positive integer.&quot;</span><span class="p">)</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">_circles_width</span> <span class="o">=</span> <span class="n">width</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">_redraw_all_circles</span><span class="p">()</span></div>
-
-
-
+        <span class="bp">self</span><span class="o">.</span><span class="n">_markers</span><span class="o">.</span><span class="n">clear</span><span class="p">()</span></div>
+</div>
 
 </pre></div>
 
@@ -945,7 +762,7 @@
 
   <p class="copyright">
     
-      © Copyright 2025-2025, Artezaru.
+      © Copyright 2025-2026, Artezaru.
       <br/>
     
   </p>
