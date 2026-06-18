@@ -1,122 +1,250 @@
+"""
+pyclickimage - Python library to select points on a image [pyqt5 GUI]
+Copyright (C) 2025-2026 Artezaru, artezaru.github@proton.me
+
+This program is free software: you can redistribute it and/or modify
+it under the terms of the GNU General Public License as published by
+the Free Software Foundation, either version 3 of the License, or
+(at your option) any later version.
+
+This program is distributed in the hope that it will be useful,
+but WITHOUT ANY WARRANTY; without even the implied warranty of
+MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+GNU General Public License for more details.
+
+You should have received a copy of the GNU General Public License
+along with this program.  If not, see <https://www.gnu.org/licenses/>.
+"""
+
 import csv
 from collections import defaultdict
-from typing import Tuple, List, Optional
-from numbers import Integral
+from typing import Tuple, List, Optional, Union, Dict, Literal
+
+Number = Union[int, float]
+Point = Tuple[Optional[Number], Optional[Number]]
 
 
 class ClickManager:
-    """
+    r"""
     A class to manage user clicks grouped into named categories.
 
     This class stores 2D coordinates of points clicked on an image, grouped by string identifiers.
-    It also handles special markers like right-clicks by storing (None, None) tuples.
-
-    Attributes
-    ----------
-    groups : dict[str, list[tuple[Optional[Integral], Optional[Integral]]]]
-        A dictionary where keys are group names and values are lists of (x, y) coordinates.
-    current_group : str
-        The name of the currently active group for storing points.
+    It supports both float (subpixel) and integer precision modes.
+    Points are all the time saved as float but the precision mode apply on output.
     """
 
-    def __init__(self) -> None:
-        self.groups: dict[str, List[Tuple[Optional[Integral], Optional[Integral]]]] = defaultdict(list)
-        self.set_group("default")
+    __slots__ = ["groups", "current_group", "_precision_mode"]
 
-    
-    def add_group(self, group_name: str) -> None:
+    def __init__(self, precision_mode: Literal["float", "int"] = "float") -> None:
+        r"""
+        Initialize the ClickManager.
+
+        Parameters
+        ----------
+        precision_mode : str
+            Precision mode for stored coordinates. Either "float" or "int".
+            Default is "float".
         """
-        Add a new group with the given name. 
-        If it already exists, it will be ignored.
+        self.groups: Dict[str, List[Point]] = defaultdict(list)
+        self.current_group: str = "default"
+
+        self._precision_mode: Literal["float", "int"] = "float"
+        self.precision_mode = precision_mode
+
+        self.add_group("default")
+
+    # =========================================================
+    # PRECISION MODE
+    # =========================================================
+
+    @property
+    def precision_mode(self) -> str:
+        r"""
+        Get the current precision mode.
+
+        Returns
+        -------
+        str
+            Either "float" or "int".
+        """
+        return self._precision_mode
+
+    @precision_mode.setter
+    def precision_mode(self, mode: str) -> None:
+        r"""
+        Set precision mode.
+
+        Parameters
+        ----------
+        mode : str
+            Either "float" or "int".
+
+        Raises
+        ------
+        ValueError
+            If mode is not valid.
+        """
+        if mode not in ("float", "int"):
+            raise ValueError("precision_mode must be 'float' or 'int'")
+        self._precision_mode = mode
+        
+    @property
+    def use_int_precision(self) -> bool:
+        r"""
+        True if precision mode is integer.
+        """
+        return self._precision_mode == "int"
+
+
+    @use_int_precision.setter
+    def use_int_precision(self, value: bool) -> None:
+        r"""
+        Set precision mode using boolean.
+        """
+        self._precision_mode = "int" if value else "float"
+
+
+    @property
+    def use_float_precision(self) -> bool:
+        r"""
+        True if precision mode is float.
+        """
+        return self._precision_mode == "float"
+
+
+    @use_float_precision.setter
+    def use_float_precision(self, value: bool) -> None:
+        r"""
+        Set float precision mode using boolean.
+        """
+        self._precision_mode = "float" if value else "int"
+
+    def _convert(self, value: Optional[Number]) -> Optional[Number]:
+        r"""
+        Convert value according to precision mode.
+
+        Parameters
+        ----------
+        value : Optional[Number]
+            Input coordinate.
+
+        Returns
+        -------
+        Optional[Number]
+            Converted coordinate.
+        """
+        if value is None:
+            return None
+        if self._precision_mode == "int":
+            return int(round(value))
+        return float(value)
+
+    # =========================================================
+    # GROUPS
+    # =========================================================
+
+    def add_group(self, group_name: str) -> None:
+        r"""
+        Add a new group.
 
         Parameters
         ----------
         group_name : str
-            The name of the group to add.
+            Name of the group to add.
         """
         if not isinstance(group_name, str):
             raise ValueError("Group name must be a string.")
-        if group_name not in self.groups:
-            self.groups[group_name] = []
-
+        self.groups.setdefault(group_name, [])
 
     def set_group(self, group_name: str) -> None:
-        """
-        Set the current group to the given name. 
-        If it doesn't exist, it's created.
+        r"""
+        Set current group.
 
         Parameters
         ----------
         group_name : str
-            The name of the group to switch to or create.
+            Name of the group to activate.
         """
-        if not isinstance(group_name, str):
-            raise ValueError("Group group_name must be a string.")
         self.add_group(group_name)
         self.current_group = group_name
 
-
     def remove_group(self, group_name: Optional[str] = None) -> None:
-        """
-        Remove a group by its name.
-        If the group is the current group, it will switch to the first available group or "default".
-        If group_name is None, it will remove the current group.
+        r"""
+        Remove a group.
 
         Parameters
         ----------
         group_name : Optional[str]
-            The name of the group to remove. If None, removes the current group. 
+            Name of the group to remove. If None, uses current group.
             Default is None.
-
-        Raises
-        ------
-        KeyError
-            If the group does not exist.
         """
-        if group_name is None:
-            group_name = self.current_group
+        group_name = group_name or self.current_group
 
         if group_name not in self.groups:
             raise KeyError(f"Group '{group_name}' does not exist.")
-        
+
         del self.groups[group_name]
 
         if self.current_group == group_name:
-            if len(self.groups) > 0:
-                self.current_group = next(iter(self.groups))
-            else:
-                self.set_group("default")
-
+            self.current_group = next(iter(self.groups), "default")
 
     def rename_group(self, old_name: str, new_name: str) -> None:
-        """
+        r"""
         Rename a group.
 
         Parameters
         ----------
         old_name : str
-            The current name of the group.
+            Existing group name.
         new_name : str
-            The new name for the group.
+            New group name.
 
         Raises
         ------
         KeyError
-            If the old group does not exist.
+            If group does not exist or new name already used.
         """
         if old_name not in self.groups:
             raise KeyError(f"Group '{old_name}' does not exist.")
-        if new_name in self.groups and old_name != new_name:
+        if new_name in self.groups:
             raise KeyError(f"Group '{new_name}' already exists.")
 
-        # Rename the group
         self.groups[new_name] = self.groups.pop(old_name)
+
         if self.current_group == old_name:
             self.current_group = new_name
 
+    # =========================================================
+    # CLICKS
+    # =========================================================
 
-    def extract_group(self, group_name: Optional[str] = None) -> List[Tuple[Optional[Integral], Optional[Integral]]]:
+    def add_click(
+        self, x: Optional[Number], y: Optional[Number], group_name: Optional[str] = None
+    ) -> None:
+        r"""
+        Add a click to a group.
+
+        Parameters
+        ----------
+        x : Optional[Number]
+            X coordinate of the click.
+        y : Optional[Number]
+            Y coordinate of the click.
+        group_name : Optional[str]
+            Group name. If None, uses current group.
+            Default is None.
         """
+        group_name = group_name or self.current_group
+
+        self.add_group(group_name)
+
+        x = float(x) if x is not None else None
+        y = float(y) if y is not None else None
+
+        self.groups[group_name].append((x, y))
+
+    def extract_group(self, group_name: Optional[str] = None) -> List[Point]:
+        r"""
         Extracts the clicks for the specified group.
 
         Parameters
@@ -127,169 +255,137 @@ class ClickManager:
 
         Returns
         -------
-        List[Tuple[Optional[Integral], Optional[Integral]]]
+        List[Point]
             A list of tuples with the format (Click X, Click Y) for each click in the group.
         """
-        if group_name is None:
-            group_name = self.current_group
+        group_name = group_name or self.current_group
 
         if group_name not in self.groups:
             raise KeyError(f"Group '{group_name}' does not exist.")
-        
-        return self.groups[group_name]
-    
 
-    def add_click(self, x: Optional[Integral], y: Optional[Integral], group_name: Optional[str] = None) -> None:
-        """
-        Add a click (or a placeholder) to a specific group.
+        out = [(self._convert(x), self._convert(y)) for x, y in self.groups[group_name]]
 
-        Parameters
-        ----------
-        x : Optional[Integral]
-            The x-coordinate of the click. Use None for placeholder.
-        y : Optional[Integral]
-            The y-coordinate of the click. Use None for placeholder.
-        group_name : Optional[str]
-            The name of the group to add the click to. If None, uses the current group.
-            Default is None.
-        """
-        if group_name is None:
-            group_name = self.current_group
-        if x is not None and not isinstance(x, Integral):
-            raise ValueError("x must be a integer or None.")
-        if y is not None and not isinstance(y, Integral):
-            raise ValueError("y must be a integer or None.")
+        return out
 
-        if group_name not in self.groups:
-            self.groups[group_name] = []
-        self.groups[self.current_group].append((x, y))
-
-
-    def get_click(self, index: int, group_name: Optional[str] = None) -> Optional[Tuple[Optional[Integral], Optional[Integral]]]:
-        """
-        Extracts a specific click's data by group and index.
+    def get_click(self, index: int, group_name: Optional[str] = None) -> Point:
+        r"""
+        Get a specific click.
 
         Parameters
         ----------
-        group_name : str
-            The group name.
         index : int
-            The index of the click.
+            Index of the click.
+        group_name : Optional[str]
+            Group name. If None, uses current group.
+            Default is None.
 
         Returns
         -------
-        Tuple[int, int] or None
-            A tuple with (Click X, Click Y) or None if not found.
+        Tuple[Optional[Number], Optional[Number]]
+            Click coordinates.
         """
-        if group_name is None:
-            group_name = self.current_group
-
-        if group_name not in self.groups or index < 0 or index >= len(self.groups[group_name]):
-            raise IndexError(f"Click at index {index} does not exist in group '{group_name}'.")
-    
-        # Extract the click data
-        click_data = self.groups[group_name][index]
-        return click_data
-    
+        group_name = group_name or self.current_group
+        x, y = self.groups[group_name][index]
+        return self._convert(x), self._convert(y)
 
     def remove_click(self, index: int, group_name: Optional[str] = None) -> None:
-        """
-        Remove a click from a specific group by its index.
+        r"""
+        Remove a click by index.
 
         Parameters
         ----------
         index : int
-            The index of the click to remove.
+            Index of the click.
         group_name : Optional[str]
-            The name of the group to remove the click from. If None, uses the current group.
+            Group name. If None, uses current group.
             Default is None.
-
-        Raises
-        ------
-        IndexError
-            If the index is out of range for the specified group.
         """
-        if group_name is None:
-            group_name = self.current_group
-
-        if group_name not in self.groups or index < 0 or index >= len(self.groups[group_name]):
-            raise IndexError(f"Click at index {index} does not exist in group '{group_name}'.")
-        
+        group_name = group_name or self.current_group
         del self.groups[group_name][index]
 
-
     def clear_group(self, group_name: Optional[str] = None) -> None:
-        """
-        Clear all clicks from a specific group.
+        r"""
+        Clear all clicks in a group.
 
         Parameters
         ----------
-        group_name : str
-            The name of the group to clear. If None, clears the current group.
+        group_name : Optional[str]
+            Group name. If None, uses current group.
             Default is None.
-
-        Raises
-        ------
-        KeyError
-            If the group does not exist.
         """
-        if group_name is None:
-            group_name = self.current_group
-
-        if group_name not in self.groups:
-            raise KeyError(f"Group '{group_name}' does not exist.")
-        
+        group_name = group_name or self.current_group
         self.groups[group_name].clear()
 
+    # =========================================================
+    # EXPORT
+    # =========================================================
 
     def to_dict(self) -> dict:
-        """
-        Return the internal data as a serializable dictionary.
+        r"""
+        Return internal data as dictionary.
 
         Returns
         -------
         dict
-            A dictionary mapping group names to lists of (x, y) coordinates.
+            Dictionary mapping group names to lists of points.
+            Each point is a tuple (x, y) with values converted using `_convert()`
+            depending on the current precision mode.
         """
-        return dict(self.groups)
-    
+        return {
+            group: [(self._convert(x), self._convert(y)) for x, y in points]
+            for group, points in self.groups.items()
+        }
 
     def save_to_csv(self, path: str) -> None:
-        """
-        Save the click data to a CSV file with columns: Group, Index, Click X, Click Y.
+        r"""
+        Save clicks to CSV.
 
         Parameters
         ----------
         path : str
-            Path where the CSV file will be saved.
+            Output file path.
         """
-        with open(path, 'w', newline='', encoding='utf-8') as csvfile:
-            writer = csv.writer(csvfile)
-            writer.writerow(["Group", "Index", "Click X", "Click Y"])
+        with open(path, "w", newline="", encoding="utf-8") as f:
+            writer = csv.writer(f)
+            writer.writerow(["Group", "Index", "X", "Y"])
+
             for group, points in self.groups.items():
                 for i, (x, y) in enumerate(points):
-                    writer.writerow([group, i, x if x is not None else '', y if y is not None else ''])
-
+                    writer.writerow([group, i, self._convert(x), self._convert(y)])
 
     @classmethod
-    def load_from_csv(cls, path: str) -> None:
-        """
-        Load click data from a CSV file. The CSV should have columns: Group, Index, Click X, Click Y.
+    def load_from_csv(
+        cls, path: str, precision_mode: Literal["float", "int"] = "float"
+    ) -> "ClickManager":
+        r"""
+        Load clicks from CSV.
 
         Parameters
         ----------
         path : str
-            Path to the CSV file to load.
+            Path to CSV file.
+
+        precision_mode : str
+            Precision mode to use ("float" or "int").
+
+        Returns
+        -------
+        ClickManager
+            Loaded instance.
         """
-        instance = cls()
-        with open(path, 'r', encoding='utf-8') as csvfile:
-            reader = csv.reader(csvfile)
+        instance = cls(precision_mode=precision_mode)
+
+        with open(path, "r", encoding="utf-8") as f:
+            reader = csv.reader(f)
             next(reader)
-            for row in reader:
-                group, index, x, y = row
-                if group not in instance.groups:
-                    instance.groups[group] = []
-                x = round(int(x)) if x else None
-                y = round(int(y)) if y else None
-                instance.groups[group].append((x, y))
+
+            for group, _, x, y in reader:
+                
+                instance.add_group(group)
+
+                x_val = float(x) if x != "" else None
+                y_val = float(y) if y != "" else None
+
+                instance.groups[group].append((x_val, y_val))
+
         return instance

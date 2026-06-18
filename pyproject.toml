@@ -9,14 +9,22 @@ build-backend = "setuptools.build_meta"
 name = "pyclickimage"
 requires-python = ">= 3.8"
 dynamic = ["dependencies", "version"]
-description = "UI to collect 2D-coordinates of points on an image"
+description = "Python library to select points on a image [pyqt5 GUI]"
 license = {file = "LICENSE"}
 authors = [
 {name = "Artezaru", email = "artezaru.github@proton.me"}
 ]
 classifiers = [
-  "Programming Language :: Python"
+    "Programming Language :: Python :: 3",
+    "License :: OSI Approved :: GNU General Public License v3 or later (GPLv3+)",
+    "Operating System :: OS Independent",
 ]
+dependencies = [
+  pyqt5,
+  numpy,
+  opencv-python-headless,
+]
+
 
 [tool.setuptools.packages.find]
 where = ["."]

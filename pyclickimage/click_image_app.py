@@ -1,199 +1,161 @@
+"""
+pyclickimage - Python library to select points on a image [pyqt5 GUI]
+Copyright (C) 2025-2026 Artezaru, artezaru.github@proton.me
+
+This program is free software: you can redistribute it and/or modify
+it under the terms of the GNU General Public License as published by
+the Free Software Foundation, either version 3 of the License, or
+(at your option) any later version.
+
+This program is distributed in the hope that it will be useful,
+but WITHOUT ANY WARRANTY; without even the implied warranty of
+MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+GNU General Public License for more details.
+
+You should have received a copy of the GNU General Public License
+along with this program.  If not, see <https://www.gnu.org/licenses/>.
+"""
+
 import sys
-from PyQt5 import QtWidgets, QtGui, QtCore
-import numpy
-import cv2
 import os
 from typing import Optional
 
+import numpy as np
+import cv2
+from PyQt5 import QtWidgets, QtGui, QtCore
 
 from .click_manager import ClickManager
 from .image_viewer import ImageViewer
-
 from .__version__ import __version__
+
 
 class ClickImageApp(QtWidgets.QMainWindow):
     r"""
-    A PyQt application to collect mouse clicks on an image,
-    grouping them by user-defined categories.
+    PyQt application for collecting precise mouse clicks on images.
 
-    Parameters
-    ----------
-    image : Optional[numpy.ndarray]
-        The input image to be displayed, loaded in GRAY or BGR format using OpenCV.
-    output : Optional[str]
-        The path where the output csv file will be saved.
+    Features
+    --------
+    - Subpixel precision (float coordinates)
+    - Optional integer rounding mode
+    - Multiple click groups
+    - CSV export/import
+    - Real-time overlay rendering
     """
-    def __init__(self, image: Optional[numpy.ndarray] = None, output: Optional[str] = None):
+
+    def __init__(
+        self, image: Optional[np.ndarray] = None, output: Optional[str] = None
+    ):
         super().__init__()
 
-        # Set the application title
-        self.setWindowTitle(f"Click Image Application - pyclickimage - Version {__version__}")
+        self.setWindowTitle(f"Click Image Application - pyclickimage v{__version__}")
 
-        # Start logging
-        self.log_text_edit = QtWidgets.QTextEdit()
-        self.log_text_edit.setReadOnly(True)  # Make it read-only
-
-        # Detect changes
+        # -------------------------
+        # State flags
+        # -------------------------
+        self.initialization_done = False
+        self._is_saved = False
         self._image_has_changed = True
         self._colormap_has_changed = True
         self._is_empty_image = True
-        self._is_saved = False
 
-        # Initialize the click manager and image viewer
-        self.set_image(image)
-        if output is None:
-            output = "pyclickimage_clicks_defaults.csv"
-        else:
-            output = output
-            load_output = True
-
-        self.click_manager = ClickManager()
+        # -------------------------
+        # Core components
+        # -------------------------
+        self.click_manager = ClickManager(precision_mode="float")
         self.viewer = ImageViewer()
+
+        # -------------------------
+        # Logging
+        # -------------------------
+        self.log_text_edit = QtWidgets.QTextEdit()
+        self.log_text_edit.setReadOnly(True)
+
+        # -------------------------
+        # Output file
+        # -------------------------
+        self.output_path = output
+
+        # -------------------------
+        # Image
+        # -------------------------
+        self.set_image(image)
+
+        # -------------------------
+        # Markers
+        # -------------------------
+        self.marker_color = QtGui.QColor(255, 0, 0)
+        self.marker_size = 8
+
+        # -------------------------
+        # UI
+        # -------------------------
+        self._init_ui()
+
+        # -------------------------
+        # Signals
+        # -------------------------
+        self.viewer.auto_marker = False  # Don't draw directly
         self.viewer.left_click_signal.connect(self._process_left_click)
         self.viewer.right_click_signal.connect(self._process_right_click)
 
-        self.initialization_done = False
-        self._init_ui(output)
         self.initialization_done = True
-        self._append_to_log("Application initialized successfully.")
-
-        if load_output and image is not None:
-            if os.path.exists(output):
-                try:
-                    self._append_to_log(f"Loading clicks from: {output}")
-                    self.click_manager = ClickManager.load_from_csv(output)
-                    self._append_to_log("Clicks loaded successfully.")
-                except Exception as e:
-                    self._append_to_log(f"Error loading clicks: {e}")
+        self._append_log("Application ready.")
+        if self.output_path is not None:
+            self._append_log(f"Output CSV path setted to : {self.output_path}")
 
         self.update()
 
+    # ============================================================
+    # UI
+    # ============================================================
 
-    def _init_ui(self, output: str):
+    def _init_ui(self):
         r"""
-        Initialize the UI layout, widgets, and connect signals.
+        Build full interface layout.
         """
-        central_widget = QtWidgets.QWidget()
-        self.setCentralWidget(central_widget)
+
+        central = QtWidgets.QWidget()
+        self.setCentralWidget(central)
 
         layout = QtWidgets.QHBoxLayout()
-        central_widget.setLayout(layout)
-
-        # Left side: Image viewer
-        layout.addWidget(self.viewer)
-    
-        # Right side: Organize widgets in logical groups
-        side_panel = QtWidgets.QVBoxLayout()
-
-        # Side panel widget with a fixed width
-        side_panel_widget = QtWidgets.QWidget()
-        side_panel_widget.setLayout(side_panel)
-        side_panel_widget.setMinimumWidth(250)  # Fixed width for the side panel
-        side_panel_widget.setMaximumWidth(400)  # Maximum width for the side panel
-
-        side_scroll_area = QtWidgets.QScrollArea()
-        side_scroll_area.setWidgetResizable(True)  # Allow the side panel to resize
-        side_scroll_area.setMinimumWidth(260)  # Minimum width for the scroll area
-        side_scroll_area.setMaximumWidth(410)  # Maximum width for the scroll area
-        side_scroll_area.setWidget(side_panel_widget)
-
-        layout.addWidget(side_scroll_area)
-
-        # Tool bar for quick actions
-        toolbar = QtWidgets.QToolBar("Toolbar")
-        toolbar.setMovable(False)  # Make the toolbar non-movable
-        self.addToolBar(toolbar)
-
-        def add_action(text, shortcut, callback, checkable=False):
-            action = QtWidgets.QAction(text, self)
-            if shortcut:
-                action.setShortcut(shortcut)
-            action.setCheckable(checkable)
-            action.triggered.connect(callback)
-            toolbar.addAction(action)
-            return action
-
-        add_action("Zoom In", "Ctrl++", lambda: self.viewer.manual_zoom(True))
-        add_action("Zoom Out", "Ctrl+-", lambda: self.viewer.manual_zoom(False))
-        add_action("Toggle Drag", None, self.viewer.toggle_drag_mode, checkable=True).setChecked(True)
-        add_action("Reset View", "Ctrl+0", self.viewer.reset_view)
-
-        # ============================================================
-        # Group : Load Image
-        # ============================================================
-        load_image_group = QtWidgets.QGroupBox("Load Settings")
-        load_image_layout = QtWidgets.QVBoxLayout()
-        load_image_group.setLayout(load_image_layout)
-        load_image_group.setStyleSheet("font-weight: bold;")
-
-        # Load Image button
-        load_image_button = QtWidgets.QPushButton("Load Image (Ctrl+O)")
-        load_image_button.clicked.connect(self.on_load_image)
-        load_image_layout.addWidget(load_image_button)
-
-        shortcut = QtWidgets.QShortcut(QtGui.QKeySequence("Ctrl+O"), self)
-        shortcut.activated.connect(self.on_load_image)
-
-        # Load Clicks button
-        load_clicks_button = QtWidgets.QPushButton("Load Clicks (Ctrl+L)")
-        load_clicks_button.clicked.connect(self.on_load_clicks)
-        load_image_layout.addWidget(load_clicks_button)
-
-        shortcut = QtWidgets.QShortcut(QtGui.QKeySequence("Ctrl+L"), self)
-        shortcut.activated.connect(self.on_load_clicks)
-
-        side_panel.addWidget(load_image_group)
-
-        # ============================================================
-        # Group : Click settings
-        # ============================================================
-        click_settings_group = QtWidgets.QGroupBox("Group Management")
-        click_settings_layout = QtWidgets.QVBoxLayout()
-        click_settings_group.setLayout(click_settings_layout)
-        click_settings_group.setStyleSheet("font-weight: bold;")
+        central.setLayout(layout)
         
-        # Group selector
-        self.group_selector = QtWidgets.QComboBox()
-        self.group_selector.addItem("default")
-        self.group_selector.currentTextChanged.connect(self.on_group_changed)
-        click_settings_layout.addWidget(QtWidgets.QLabel("Select Group:"))
-        click_settings_layout.addWidget(self.group_selector)
+        quit_action = QtWidgets.QAction("Quit", self)
+        quit_action.setShortcut("Ctrl+Q")
+        quit_action.triggered.connect(self.close)
 
-        # Add Group button
-        self.add_group_button = QtWidgets.QPushButton("Add Group (Ctrl+N)")
-        self.add_group_button.clicked.connect(self.on_add_group)
-        click_settings_layout.addWidget(self.add_group_button)
+        self.addAction(quit_action)
 
-        shortcut = QtWidgets.QShortcut(QtGui.QKeySequence("Ctrl+N"), self)
-        shortcut.activated.connect(self.on_add_group)
+        # -------------------------
+        # Viewer
+        # -------------------------
+        layout.addWidget(self.viewer)
 
-        # Rename Group button
-        self.rename_group_button = QtWidgets.QPushButton("Rename Group (Ctrl+R)")
-        self.rename_group_button.clicked.connect(self.on_rename_group)
-        click_settings_layout.addWidget(self.rename_group_button)
+        # -------------------------
+        # Side panel
+        # -------------------------
+        side = QtWidgets.QVBoxLayout()
+        side_widget = QtWidgets.QWidget()
+        side_widget.setFixedWidth(340)
+        side_widget.setLayout(side)
 
-        shortcut = QtWidgets.QShortcut(QtGui.QKeySequence("Ctrl+R"), self)
-        shortcut.activated.connect(self.on_rename_group)
+        scroll = QtWidgets.QScrollArea()
+        scroll.setWidgetResizable(True)
+        scroll.setFixedWidth(360)
+        scroll.setWidget(side_widget)
 
-        # Delete Group button
-        self.delete_group_button = QtWidgets.QPushButton("Delete Group (Ctrl+D)")
-        self.delete_group_button.clicked.connect(self.on_delete_group)
-        click_settings_layout.addWidget(self.delete_group_button)
-
-        shortcut = QtWidgets.QShortcut(QtGui.QKeySequence("Ctrl+D"), self)
-        shortcut.activated.connect(self.on_delete_group)
-
-        side_panel.addWidget(click_settings_group)
+        layout.addWidget(scroll)
 
         # ============================================================
-        # Group : Display Options
+        # Load Image
         # ============================================================
-        display_options_group = QtWidgets.QGroupBox("Display Options")
-        display_options_layout = QtWidgets.QVBoxLayout()
-        display_options_group.setLayout(display_options_layout)
-        display_options_group.setStyleSheet("font-weight: bold;")
+        self.load_btn = QtWidgets.QPushButton("Load Image (Ctrl+O)")
+        self.load_btn.clicked.connect(self.on_load_image)
+        self.load_btn.setShortcut("Ctrl+O")
+        side.addWidget(self.load_btn)
 
-        # Colormap selector
+        row = QtWidgets.QHBoxLayout()
+
         self.colormap_selector = QtWidgets.QComboBox()
         self.colormap_selector.addItem("Default")
         self.colormap_selector.addItem("Gray")
@@ -204,381 +166,501 @@ class ClickImageApp(QtWidgets.QMainWindow):
         self.colormap_selector.addItem("Spring")
         self.colormap_selector.setCurrentIndex(0)  # Default to "Default"
         self.colormap_selector.currentIndexChanged.connect(self.on_colormap_changed)
-        Hlayout = QtWidgets.QHBoxLayout()
-        Hlayout.addWidget(QtWidgets.QLabel("Image Colormap:"))
-        Hlayout.addWidget(self.colormap_selector)
-        display_options_layout.addLayout(Hlayout)
+        row.addWidget(QtWidgets.QLabel("Image Colormap:"))
+        row.addWidget(self.colormap_selector)
 
-        # Color selector
-        self.color_selector = QtWidgets.QComboBox()
-        self.color_selector.addItem("Gray")
-        self.color_selector.addItem("Red")
-        self.color_selector.addItem("Green")
-        self.color_selector.addItem("Blue")
-        self.color_selector.addItem("Yellow")
-        self.color_selector.addItem("White")
-        self.color_selector.addItem("Black")
-        self.color_selector.addItem("Cyan")
-        self.color_selector.addItem("Magenta")
-        self.color_selector.currentIndexChanged.connect(self.on_color_changed)
-        self.color_selector.setCurrentIndex(1)  # Default to "Red"
-        Hlayout = QtWidgets.QHBoxLayout()
-        Hlayout.addWidget(QtWidgets.QLabel("Circle Click Color:"))
-        Hlayout.addWidget(self.color_selector)
-        display_options_layout.addLayout(Hlayout)
-
-        # Dropdown to choose circle size
-        self.circle_size_selector = QtWidgets.QComboBox()
-        self.circle_size_selector.addItem("Extra Small (2 px)")
-        self.circle_size_selector.addItem("Tiny (5 px)")
-        self.circle_size_selector.addItem("Small (10 px)")
-        self.circle_size_selector.addItem("Medium (15 px)")
-        self.circle_size_selector.addItem("Large (20 px)")
-        self.circle_size_selector.addItem("Extra Large (25 px)")
-        self.circle_size_selector.addItem("Huge (30 px)")
-        self.circle_size_selector.currentIndexChanged.connect(self.on_size_changed)
-        self.circle_size_selector.setCurrentIndex(2)  # Default to "Small"
-        Hlayout = QtWidgets.QHBoxLayout()
-        Hlayout.addWidget(QtWidgets.QLabel("Circle Size:"))
-        Hlayout.addWidget(self.circle_size_selector)
-        display_options_layout.addLayout(Hlayout)
-
-
-        # Dropdown to choose the width of the circles
-        self.circle_width_selector = QtWidgets.QComboBox()
-        self.circle_width_selector.addItem("Thin (1 px)")
-        self.circle_width_selector.addItem("Medium (2 px)")
-        self.circle_width_selector.addItem("Large (3 px)")
-        self.circle_width_selector.addItem("Extra Large (5 px)")
-        self.circle_width_selector.currentIndexChanged.connect(self.on_width_changed)
-        self.circle_width_selector.setCurrentIndex(1)  # Default to "Medium"
-        Hlayout = QtWidgets.QHBoxLayout()
-        Hlayout.addWidget(QtWidgets.QLabel("Circle Width:"))
-        Hlayout.addWidget(self.circle_width_selector)
-        display_options_layout.addLayout(Hlayout)
-
-        # Checkbox to control whether clicks should be drawn
-        self.display_click_checkbox = QtWidgets.QCheckBox("Display Clicks")
-        self.display_click_checkbox.setChecked(True)  # By default, display clicks
-        self.display_click_checkbox.stateChanged.connect(self.on_display_clicks_changed)
-        display_options_layout.addWidget(self.display_click_checkbox)
-
-        side_panel.addWidget(display_options_group)
-
-        # ============================================================
-        # Group : Clicks Table
-        # ============================================================
-        self.table_group = QtWidgets.QGroupBox("Clicks Table")
-        table_layout = QtWidgets.QVBoxLayout()
-        self.table_group.setLayout(table_layout)
-        self.table_group.setMinimumHeight(200)
-        self.table_group.setStyleSheet("font-weight: bold;")
-
-        # Table to show clicks in the current group
-        self.table = QtWidgets.QTableWidget(0, 3)  # 3 columns: Index, Click X, Click Y
-        self.table.setHorizontalHeaderLabels(["Index", "Click X", "Click Y"])
-        table_layout.addWidget(self.table)
-
-        # Button to remove the last click in the current group
-        self.remove_last_click_button = QtWidgets.QPushButton("Remove Last Click (Ctrl+Z)")
-        self.remove_last_click_button.clicked.connect(self.on_remove_last_click)
-        table_layout.addWidget(self.remove_last_click_button)
-
-        shortcut = QtWidgets.QShortcut(QtGui.QKeySequence("Ctrl+Z"), self)
-        shortcut.activated.connect(self.on_remove_last_click)
-
-        # Button to clear all clicks in the current group
-        self.remove_all_clicks_button = QtWidgets.QPushButton("Clear All Clicks (Ctrl+Shift+Z)")
-        self.remove_all_clicks_button.clicked.connect(self.on_remove_all_clicks)
-        table_layout.addWidget(self.remove_all_clicks_button)
-
-        shortcut = QtWidgets.QShortcut(QtGui.QKeySequence("Ctrl+Shift+Z"), self)
-        shortcut.activated.connect(self.on_remove_all_clicks)
-
-        side_panel.addWidget(self.table_group)
-
-        # ============================================================
-        # Group : CSV Save Path
-        # ============================================================
-        csv_save_group = QtWidgets.QGroupBox("Save Clicks to CSV")
-        csv_save_layout = QtWidgets.QVBoxLayout()
-        csv_save_group.setLayout(csv_save_layout)
-        csv_save_group.setStyleSheet("font-weight: bold;")
-
-        # Add LineEdit for CSV file path and Save button
-        self.csv_path_label = QtWidgets.QLabel("CSV File Path:")
-        csv_save_layout.addWidget(self.csv_path_label)
-
-        self.csv_path_edit = QtWidgets.QLineEdit(str(output))
-        self.csv_path_edit.setPlaceholderText("Enter path or filename...")
-        csv_save_layout.addWidget(self.csv_path_edit)
-
-        self.save_button = QtWidgets.QPushButton("Save CSV (Ctrl+S)")
-        self.save_button.clicked.connect(self.save_csv)
-        csv_save_layout.addWidget(self.save_button)
-
-        shortcut = QtWidgets.QShortcut(QtGui.QKeySequence("Ctrl+S"), self)
-        shortcut.activated.connect(self.save_csv)
-
-        side_panel.addWidget(csv_save_group)
-
-        # =============================================================
-        # Group Log
-        # =============================================================
-        log_group = QtWidgets.QGroupBox("Log")
-        log_layout = QtWidgets.QVBoxLayout()
-        log_group.setLayout(log_layout)
-        log_group.setStyleSheet("font-weight: bold;")
-
-        # Add a TextEdit for logging
-        log_layout.addWidget(self.log_text_edit)
-
-        # Add the log group to the side panel
-        side_panel.addWidget(log_group)
-
-
-        side_panel.addStretch()  # Allow flexibility to expand vertically as needed
-
-        shortcut = QtWidgets.QShortcut(QtGui.QKeySequence("Ctrl+Q"), self)
-        shortcut.activated.connect(self.close)  # Close the application with Ctrl+Q
-
-
-    # ============================================================
-    # Loging
-    # ============================================================
-    def _append_to_log(self, message):
-        r"""
-        Append message to the QTextEdit widget.
-        """
-        self.log_text_edit.append(message)
-
-    # ============================================================
-    # UI Update Methods
-    # ============================================================
-    def update(self):
-        r"""
-        Update the UI: the image, the table of clicks, and the drawing of clicks.
-        This method is called after each relevant action (click, group change, etc.).
-        """
-        if not self.initialization_done:
-            return
-        self.update_group_selector()
-        self.update_display()
-        self.update_table()
-
-    
-    def set_image(self, image: Optional[numpy.ndarray]):
-        r"""
-        Set the image to be displayed in the application.
+        side.addLayout(row)
         
-        Parameters
-        ----------
-        image : Optional[numpy.ndarray]
-            The image to be displayed, loaded in BGR format using OpenCV.
+        self.loadc_btn = QtWidgets.QPushButton("Load Clicks")
+        self.loadc_btn.clicked.connect(self.on_load_clicks)
+        side.addWidget(self.loadc_btn)
+
+        # ============================================================
+        # Precision mode
+        # ============================================================
+        self.precision_checkbox = QtWidgets.QCheckBox("Integer precision mode (Ctrl+I)")
+        self.precision_checkbox.setChecked(False)
+        self.precision_checkbox.stateChanged.connect(self.on_precision_changed)
+        self.precision_checkbox.setShortcut("Ctrl+I")
+        side.addWidget(self.precision_checkbox)
+
+        # ============================================================
+        # Group selector
+        # ============================================================
+        row = QtWidgets.QHBoxLayout()
+
+        row.addWidget(QtWidgets.QLabel("Group"))
+
+        self.group_selector = QtWidgets.QComboBox()
+        self.group_selector.addItem("default")
+        self.group_selector.currentTextChanged.connect(self.on_group_changed)
+
+        row.addWidget(self.group_selector)
+
+        side.addLayout(row)
+
+        # -------------------------
+        # Group management buttons
+        # -------------------------
+        row = QtWidgets.QHBoxLayout()
+
+        self.add_group_btn = QtWidgets.QPushButton("+")
+        self.add_group_btn.setToolTip("Add group (Ctrl+G)")
+        self.add_group_btn.clicked.connect(self.on_add_group)
+        self.add_group_btn.setShortcut("Ctrl+G")
+
+        self.rename_group_btn = QtWidgets.QPushButton("✎")
+        self.rename_group_btn.setToolTip("Rename group (Ctrl+R)")
+        self.rename_group_btn.clicked.connect(self.on_rename_group)
+        self.rename_group_btn.setShortcut("Ctrl+R")
+
+        self.delete_group_btn = QtWidgets.QPushButton("🗑")
+        self.delete_group_btn.setToolTip("Delete group (Ctrl+D)")
+        self.delete_group_btn.clicked.connect(self.on_delete_group)
+        self.delete_group_btn.setShortcut("Ctrl+D")
+
+        row.addWidget(self.add_group_btn)
+        row.addWidget(self.rename_group_btn)
+        row.addWidget(self.delete_group_btn)
+
+        side.addLayout(row)
+
+        # --------------------------
+        # Click Management
+        # --------------------------
+        row = QtWidgets.QHBoxLayout()
+
+        self.undo_btn = QtWidgets.QPushButton("Undo (Ctrl+Z)")
+        self.undo_btn.clicked.connect(self.on_undo_last_click)
+        self.undo_btn.setShortcut("Ctrl+Z")
+
+        self.clear_btn = QtWidgets.QPushButton("Clear (Ctrl+Shift+Z)")
+        self.clear_btn.clicked.connect(self.on_undo_all_click)
+        self.clear_btn.setShortcut("Ctrl+Shift+Z")
+
+        row.addWidget(self.undo_btn)
+        row.addWidget(self.clear_btn)
+
+        side.addLayout(row)
+
+        # ============================================================
+        # Table
+        # ============================================================
+        self.table = QtWidgets.QTableWidget(0, 3)
+        self.table.setHorizontalHeaderLabels(["Index", "X", "Y"])
+        self.table.setMinimumHeight(180)
+        side.addWidget(self.table)
+
+        # ============================================================
+        # Save button
+        # ============================================================
+        row = QtWidgets.QHBoxLayout()
+
+        self.save_btn = QtWidgets.QPushButton("Save CSV (Ctrl+S)")
+        self.save_btn.clicked.connect(self.save_csv)
+        self.save_btn.setShortcut("Ctrl+S")
+        row.addWidget(self.save_btn)
+
+        self.save_as_btn = QtWidgets.QPushButton("Save As CSV (Ctrl+Shift+S)")
+        self.save_as_btn.clicked.connect(self.save_as_csv)
+        self.save_as_btn.setShortcut("Ctrl+Shift+S")
+        row.addWidget(self.save_as_btn)
+
+        side.addLayout(row)
+
+        # ============================================================
+        # Log
+        # ============================================================
+        side.addWidget(self.log_text_edit)
+
+        # ============================================================
+        # Toolbar
+        # ============================================================
+        toolbar = QtWidgets.QToolBar()
+        self.addToolBar(toolbar)
+
+        toolbar.addAction("Reset View", self.viewer.reset_view)
+
+        toolbar.addSeparator()
+        
+        # ============================================================
+        # Crosser color (button + preview)
+        # ============================================================
+        crosshair_color_widget = QtWidgets.QWidget()
+        crosshair_color_layout = QtWidgets.QHBoxLayout()
+        crosshair_color_layout.setContentsMargins(0, 0, 0, 0)
+
+        self.crosshair_color_btn = QtWidgets.QPushButton("Color")
+        self.crosshair_color_btn.clicked.connect(self.crosshair_choose_color)
+
+        self.crosshair_color_preview = QtWidgets.QLabel("   ")
+        self.crosshair_color_preview.setStyleSheet(
+            "background-color: rgb(255,0,0); border: 1px solid black;"
+        )
+
+        crosshair_color_layout.addWidget(QtWidgets.QLabel("Crosshair"))
+        crosshair_color_layout.addWidget(self.crosshair_color_btn)
+        crosshair_color_layout.addWidget(self.crosshair_color_preview)
+
+        crosshair_color_widget.setLayout(crosshair_color_layout)
+
+        toolbar.addWidget(crosshair_color_widget)
+
+        toolbar.addSeparator()
+
+        # ============================================================
+        # Marker color (button + preview)
+        # ============================================================
+        color_widget = QtWidgets.QWidget()
+        color_layout = QtWidgets.QHBoxLayout()
+        color_layout.setContentsMargins(0, 0, 0, 0)
+
+        self.color_btn = QtWidgets.QPushButton("Color")
+        self.color_btn.clicked.connect(self.choose_color)
+
+        self.color_preview = QtWidgets.QLabel("   ")
+        self.color_preview.setStyleSheet(
+            "background-color: rgb(255,0,0); border: 1px solid black;"
+        )
+
+        color_layout.addWidget(QtWidgets.QLabel("Marker"))
+        color_layout.addWidget(self.color_btn)
+        color_layout.addWidget(self.color_preview)
+
+        color_widget.setLayout(color_layout)
+
+        toolbar.addWidget(color_widget)
+
+        toolbar.addSeparator()
+
+        # ============================================================
+        # Marker size selector
+        # ============================================================
+        size_widget = QtWidgets.QWidget()
+        size_layout = QtWidgets.QHBoxLayout()
+        size_layout.setContentsMargins(0, 0, 0, 0)
+
+        self.size_selector = QtWidgets.QComboBox()
+        self.size_selector.addItems(["1", "2", "4", "6", "8", "10", "12", "16", "20", "30", "50"])
+        self.size_selector.setCurrentText("8")
+        self.size_selector.currentTextChanged.connect(self.on_marker_size_changed)
+
+        size_layout.addWidget(QtWidgets.QLabel("Size"))
+        size_layout.addWidget(self.size_selector)
+
+        size_widget.setLayout(size_layout)
+
+        toolbar.addWidget(size_widget)
+
+        toolbar.addSeparator()
+
+    # ============================================================
+    # Precision mode
+    # ============================================================
+
+    def on_precision_changed(self, state):
+        r"""
+        Toggle integer/float precision mode.
         """
+        INT = state == QtCore.Qt.Checked
+        self.click_manager.precision_mode = "int" if INT else "float"
+        self._append_log(f"Precision mode: {'INT' if INT else 'FLOAT'}")
+        self.update()
+
+    # ============================================================
+    # Image
+    # ============================================================
+
+    def set_image(self, image: Optional[np.ndarray]):
+        r"""
+        Set image to display.
+        """
+
         if image is None:
-            # Default to a blank image if no image is provided
-            image = numpy.zeros((512, 512, 3), dtype=numpy.uint8)  # Create a blank black image
+            image = np.zeros((512, 512, 3), dtype=np.uint8)
             self._is_empty_image = True
         else:
             self._is_empty_image = False
-        
-        image = numpy.array(image)
-        if image.ndim == 2:  # If the image is grayscale
-            image = cv2.cvtColor(image, cv2.COLOR_GRAY2BGR)  # Convert to BGR
-        if image.ndim != 3 or image.shape[2] != 3:
-            raise ValueError("Image must be in BGR format with 3 channels.")
-        
+
+        image = np.array(image)
+
+        if image.ndim == 2:
+            image = cv2.cvtColor(image, cv2.COLOR_GRAY2BGR)
+
+        if image.shape[2] != 3:
+            raise ValueError("Image must be BGR 3 channels")
+
         self.image = image
         self._image_has_changed = True
 
+    def on_load_image(self):
+        r"""
+        Load an image from file dialog.
 
-    def update_display(self):
+        If clicks already exist, ask user whether to clear them or keep them.
         """
-        Convert the OpenCV image to a Qt image and display it scaled.
-        Additionally, display the clicks for the current group.
+
+        file_path, _ = QtWidgets.QFileDialog.getOpenFileName(
+            self, "Open Image", "", "Images (*.png *.jpg *.jpeg *.bmp *.tif *.tiff)"
+        )
+
+        if not file_path:
+            return
+
+        # -------------------------
+        # Load image with OpenCV
+        # -------------------------
+        image = cv2.imread(file_path)
+
+        if image is None:
+            QtWidgets.QMessageBox.critical(self, "Error", "Failed to load image.")
+            return
+
+        # -------------------------
+        # Check existing clicks
+        # -------------------------
+        has_clicks = any(len(v) > 0 for v in self.click_manager.groups.values())
+
+        if has_clicks:
+            msg = QtWidgets.QMessageBox(self)
+            msg.setWindowTitle("Existing clicks detected")
+            msg.setText("Do you want to keep existing clicks?")
+            msg.setInformativeText(
+                "Yes = keep clicks\nNo = delete all clicks\nCancel = abort"
+            )
+
+            msg.setStandardButtons(
+                QtWidgets.QMessageBox.Yes
+                | QtWidgets.QMessageBox.No
+                | QtWidgets.QMessageBox.Cancel
+            )
+
+            choice = msg.exec_()
+
+            if choice == QtWidgets.QMessageBox.Cancel:
+                return
+
+            if choice == QtWidgets.QMessageBox.No:
+                self.click_manager = ClickManager()
+                self._append_log("Clicks cleared due to image reload.")
+
+        # -------------------------
+        # Apply image
+        # -------------------------
+        self.set_image(image)
+
+        self._image_has_changed = True
+        self._is_saved = False
+
+        self._append_log(f"Image loaded: {file_path}")
+
+        self.update()
+
+    # ============================================================
+    # Update pipeline
+    # ============================================================
+
+    def update(self):
+        r"""
+        Refresh UI.
+        """
+        if not self.initialization_done:
+            return
+
+        self.update_groups()
+        self.update_table()
+        self.update_viewer()
+        
+    def _format_value(self, v):
+        if v is None:
+            return ""
+
+        if self.click_manager.use_int_precision:
+            return str(int(round(v)))
+
+        return f"{v:.3f}"
+
+    def update_viewer(self):
+        r"""
+        Render image + clicks.
         """
         if self._image_has_changed or self._colormap_has_changed:
             colormap = self.get_selected_colormap()
+            img = self.image  # BGR (OpenCV standard)
+
             if colormap is not None:
-                # Convert the image to grayscale and apply the colormap
-                image_bw = cv2.cvtColor(self.image, cv2.COLOR_BGR2GRAY)
-                image = cv2.applyColorMap(image_bw, colormap)
-            else:
-                image = self.image
-            image = cv2.cvtColor(image, cv2.COLOR_BGR2RGB)  # Convert BGR to RGB for Qt
+                gray = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)
+                img = cv2.applyColorMap(gray, colormap)
 
-            # Set the image to the label
-            h, w, ch = image.shape
+            # conversion unique pour Qt
+            rgb = cv2.cvtColor(img, cv2.COLOR_BGR2RGB)
+
+            h, w, ch = rgb.shape
             bytes_per_line = ch * w
-            q_image = QtGui.QImage(image.data, w, h, bytes_per_line, QtGui.QImage.Format_RGB888)
-            pixmap = QtGui.QPixmap.fromImage(q_image)
 
-            # set the pixmap to the viewer
-            self.viewer.set_image(pixmap)
+            qimg = QtGui.QImage(
+                rgb.data, w, h, bytes_per_line, QtGui.QImage.Format_RGB888
+            )
+            pix = QtGui.QPixmap.fromImage(qimg)
+
+            self.viewer.set_image(pix)
             self._image_has_changed = False
             self._colormap_has_changed = False
 
-        self.draw_clicks_on_image()
+        # redraw clicks
+        self.viewer.clear_markers()
 
+        pts = self.click_manager.extract_group()
 
-    def draw_clicks_on_image(self):
-        """
-        Draw the clicks on the image in the viewer.
-        """
-        if not self.display_click_checkbox.isChecked():
-            self.viewer.remove_all_circles()
-
-        else:
-            self.viewer.remove_all_circles()
-            self.viewer.circles_color = self.get_selected_color()
-            self.viewer.circles_radius = self.get_selected_circle_size()
-            self.viewer.circles_width = self.get_selected_width()
-            current_group = self.click_manager.extract_group()
-            for index, (x, y) in enumerate(current_group):
-                if x is not None and y is not None:
-                    self.viewer.add_circle(center=(x, y))
-
+        for x, y in pts:
+            if x is None or y is None:
+                continue
+            self.viewer.add_marker((x, y), self.marker_color, self.marker_size)
+            
     def update_table(self):
+        r"""
+        Update table with current group points.
         """
-        Update the table displaying the clicks in the current group.
-        """
-        current_group = self.click_manager.extract_group()
-        self.table.setRowCount(len(current_group))
+        pts = self.click_manager.extract_group()
 
-        for row, (x, y) in enumerate(current_group):
-            x = x if x is not None else ''
-            y = y if y is not None else ''
-            self.table.setItem(row, 0, QtWidgets.QTableWidgetItem(str(row)))  # Index
-            self.table.setItem(row, 1, QtWidgets.QTableWidgetItem(str(x)))  # Click X
-            self.table.setItem(row, 2, QtWidgets.QTableWidgetItem(str(y)))  # Click Y
+        if self.click_manager.use_float_precision:
+            self.table.setHorizontalHeaderLabels(["Index", "X (float)", "Y (float)"])
+        else:
+            self.table.setHorizontalHeaderLabels(["Index", "X (int)", "Y (int)"])
+            
+        self.table.setRowCount(len(pts))
 
+        for i, (x, y) in enumerate(pts):
+            self.table.setItem(i, 0, QtWidgets.QTableWidgetItem(str(i)))
+            self.table.setItem(i, 1, QtWidgets.QTableWidgetItem(self._format_value(x)))
+            self.table.setItem(i, 2, QtWidgets.QTableWidgetItem(self._format_value(y)))
 
-    def update_group_selector(self):
+    def update_groups(self):
+        r"""
+        Sync group selector.
         """
-        Update the group selector with the current groups.
-        """
-        # Disable the signals
         self.group_selector.blockSignals(True)
         self.group_selector.clear()
-        for group in self.click_manager.groups:
-            self.group_selector.addItem(group)
+
+        for g in self.click_manager.groups:
+            self.group_selector.addItem(g)
+
         self.group_selector.setCurrentText(self.click_manager.current_group)
         self.group_selector.blockSignals(False)
 
-
     # ============================================================
-    # Save CSV and quit
-    # ===========================================================
-    def save_csv(self):
-        """
-        Save the coordinates of the clicks to the specified CSV file.
-        """
-        # Get the path from the QLineEdit
-        file_path = self.csv_path_edit.text()
+    # Click handling
+    # ============================================================
 
-        if not file_path:
-            QtWidgets.QMessageBox.warning(self, "Warning", "Please enter a valid file path.")
+    def _process_left_click(self, x: float, y: float):
+        r"""
+        Store click.
+        """
+        if not self.initialization_done:
             return
-        
-        # Ensure the path can be a correct CSV file
-        try:
-            # Ensure the user when erase previous file if exists
-            if os.path.exists(file_path):
-                reply = QtWidgets.QMessageBox.question(self, "Overwrite File",
-                    f"The file {file_path} already exists. Do you want to overwrite it?",
-                    QtWidgets.QMessageBox.Yes | QtWidgets.QMessageBox.No)
-                if reply == QtWidgets.QMessageBox.No:
-                    return
-            # Save the clicks to the CSV file
-            self.click_manager.save_to_csv(file_path)
-        except Exception as e:
-            QtWidgets.QMessageBox.critical(self, "Error", f"Failed to save CSV file: {str(e)}")
 
-        self._append_to_log(f"Clicks saved to {file_path} successfully.")
-        self._is_saved = True
+        self.click_manager.add_click(x, y)
+        self._is_saved = False
+        self.update()
 
-
-    def closeEvent(self, event):
+    def _process_right_click(self, x: float, y: float):
+        r"""
+        Store placeholder click.
         """
-        Save click data when the window is closed.
+        if not self.initialization_done:
+            return
+
+        self.click_manager.add_click(None, None)
+        self._is_saved = False
+        self.update()
+
+    def on_undo_last_click(self):
+        r"""
+        Remove last click from current group.
         """
-        # Check if the user wants to save before quitting
-        if not self._is_saved:
-            reply = QtWidgets.QMessageBox.question(self, "Save Changes",
-                "You have unsaved changes. Do you want to continue without saving?",
-                QtWidgets.QMessageBox.Yes | QtWidgets.QMessageBox.No)
-            if reply == QtWidgets.QMessageBox.No:
-                event.ignore()  # Ignore the close event
-                return
-        event.accept()
 
+        group = self.click_manager.current_group
+        pts = self.click_manager.extract_group()
 
+        if not pts:
+            QtWidgets.QMessageBox.information(self, "Undo", "No clicks to remove.")
+            return
+
+        # Remove last point
+        self.click_manager.remove_click(len(pts) - 1)
+
+        self._append_log(f"Removed last click from group '{group}'")
+
+        self._is_saved = False
+        self.update()
+
+    def on_undo_all_click(self):
+        r"""
+        Remove all click from current group.
+        """
+
+        group = self.click_manager.current_group
+        pts = self.click_manager.extract_group()
+
+        if not pts:
+            QtWidgets.QMessageBox.information(self, "Undo", "No clicks to remove.")
+            return
+
+        # Remove last point
+        self.click_manager.clear_group()
+
+        self._append_log(f"Removed all clicks from group '{group}'")
+
+        self._is_saved = False
+        self.update()
 
     # ============================================================
-    # Dictionary Methods
-    # ===========================================================
-    def get_selected_circle_size(self):
-        """
-        Get the selected circle size for drawing clicks.
+    # Design
+    # ============================================================
+    def crosshair_choose_color(self):
+        color = QtWidgets.QColorDialog.getColor(self.viewer.get_crosshair_color(), self)
 
-        Returns
-        -------
-        int
-            The size of the circle to draw.
-        """
-        size_map = {
-            "Extra Small (2 px)": 2,
-            "Tiny (5 px)": 5,
-            "Small (10 px)": 10,
-            "Medium (15 px)": 15,
-            "Large (20 px)": 20,
-            "Extra Large (25 px)": 25,
-            "Huge (30 px)": 30,
-        }
-        return size_map.get(self.circle_size_selector.currentText(), 10)  # Default to "Small"
+        if color.isValid():
+            self.viewer.set_crosshair_color(color)
+            self.update()
 
+            self.crosshair_color_preview.setStyleSheet(
+                f"background-color: {color.name()}; border: 1px solid black;"
+            )
 
-    def get_selected_color(self):
-        """
-        Get the color selected in the color combo box.
-
-        Returns
-        -------
-        QtGui.QColor
-            The selected color.
-        """
-        color_map = {
-            "Red": QtGui.QColor(255, 0, 0),
-            "Green": QtGui.QColor(0, 255, 0),
-            "Blue": QtGui.QColor(0, 0, 255),
-            "Yellow": QtGui.QColor(255, 255, 0),
-            "White": QtGui.QColor(255, 255, 255),
-            "Black": QtGui.QColor(0, 0, 0),
-            "Cyan": QtGui.QColor(0, 255, 255),
-            "Magenta": QtGui.QColor(255, 0, 255),
-            "Gray": QtGui.QColor(128, 128, 128),
-        }
-        return color_map.get(self.color_selector.currentText(), QtGui.QColor(255, 0, 0))
     
+    def choose_color(self):
+        color = QtWidgets.QColorDialog.getColor(self.marker_color, self)
 
-    def get_selected_width(self):
-        """
-        Get the selected width for drawing circles.
+        if color.isValid():
+            self.marker_color = color
+            self.update()
 
-        Returns
-        -------
-        int
-            The width of the circle to draw.
+            self.color_preview.setStyleSheet(
+                f"background-color: {color.name()}; border: 1px solid black;"
+            )
+
+    def on_marker_size_changed(self, value: str):
+        r"""
+        Update marker size.
         """
-        width_map = {
-            "Thin (1 px)": 1,
-            "Medium (2 px)": 2,
-            "Large (3 px)": 3,
-            "Extra Large (5 px)": 5,
-        }
-        return width_map.get(self.circle_width_selector.currentText(), 2)
-    
+
+        try:
+            self.marker_size = int(value)
+        except ValueError:
+            self.marker_size = 8
+
+        self._append_log(f"Marker size set to {self.marker_size}")
+
+        self.update()
+
+    def on_colormap_changed(self, index):
+        """
+        Called when the user selects a different colormap.
+        """
+        self._append_log(f"Colormap changed to: {self.colormap_selector.currentText()}")
+        self._colormap_has_changed = True
+        self.update()
 
     def get_selected_colormap(self):
         """
@@ -600,242 +682,205 @@ class ClickImageApp(QtWidgets.QMainWindow):
         }
         return colormap_map.get(self.colormap_selector.currentText(), None)
 
-
     # ============================================================
-    # Event Handlers
+    # Groups
     # ============================================================
-    def on_load_image(self):
+
+    def on_group_changed(self, name):
+        r"""
+        Switch active group.
         """
-        Open a file dialog to load an image and update the display.
-        """
-        self._append_to_log("Opening file dialog to load image...")
-        file_dialog = QtWidgets.QFileDialog(self)
-        file_dialog.setNameFilter("Images (*.png *.PNG *.jpg *.JPG *.jpeg *.JPEG *.bmp *.BMP *.tiff *.TIFF *.tif *.TIF)")
-        file_dialog.setAcceptMode(QtWidgets.QFileDialog.AcceptOpen)
-        file_dialog.setOption(QtWidgets.QFileDialog.ReadOnly)
-
-        if file_dialog.exec_():
-            file_path = file_dialog.selectedFiles()[0]
-            self._append_to_log(f"Loading image from: {file_path}")
-
-            image = cv2.imread(file_path)
-            if image is None:
-                QtWidgets.QMessageBox.warning(self, "Error", "Failed to load image.")
-                return
-            
-            if not self._is_empty_image:
-                reply = QtWidgets.QMessageBox.question(self, "Confirm Action",
-                    "Loading a new image will reset the current clicks. Do you want to continue?",
-                    QtWidgets.QMessageBox.Yes | QtWidgets.QMessageBox.No)
-                if reply == QtWidgets.QMessageBox.No:
-                    self._append_to_log("Image loading cancelled by user.")
-                    return
-            
-            self.set_image(image)
-            self._append_to_log("Image loaded successfully.")
-
-        self.click_manager = ClickManager()  # Reset click manager for new image
-        self.update()  # Update the display after loading a new image
-        self._is_saved = False  # Reset the saved state after loading a new image
-
-    
-    def on_load_clicks(self):
-        """
-        Open a file dialog to load clicks from a CSV file.
-        """
-        self._append_to_log("Opening file dialog to load clicks...")
-        file_dialog = QtWidgets.QFileDialog(self)
-        file_dialog.setNameFilter("CSV Files (*.csv *.CSV)")
-        file_dialog.setAcceptMode(QtWidgets.QFileDialog.AcceptOpen)
-        file_dialog.setOption(QtWidgets.QFileDialog.ReadOnly)
-
-        if file_dialog.exec_():
-            file_path = file_dialog.selectedFiles()[0]
-            self._append_to_log(f"Loading clicks from: {file_path}")
-
-            if not os.path.exists(file_path):
-                QtWidgets.QMessageBox.warning(self, "Error", "File does not exist.")
-                return
-            
-            self.click_manager = ClickManager.load_from_csv(file_path)
-            self._append_to_log("Clicks loaded successfully.")
-        
+        self.click_manager.set_group(name)
         self.update()
-        self._is_saved = False  # Reset the saved state after loading new clicks
-
-
-    def on_colormap_changed(self, index):
-        """
-        Called when the user selects a different colormap.
-        """
-        self._append_to_log(f"Colormap changed to: {self.colormap_selector.currentText()}")
-        self._colormap_has_changed = True
-        self.update()
-
-    
-    def on_color_changed(self, index):
-        """
-        Called when the user selects a different color for the clicks.
-        """
-        self._append_to_log(f"Click color changed to: {self.color_selector.currentText()}")
-        self.update()
-
-
-    def on_size_changed(self, index):
-        """
-        Called when the user selects a different size for the circles.
-        """
-        self._append_to_log(f"Circle size changed to: {self.circle_size_selector.currentText()}")
-        self.update()
-
-
-    def on_width_changed(self, index):
-        """
-        Called when the user selects a different width for the circles.
-        """
-        self._append_to_log(f"Circle width changed to: {self.circle_width_selector.currentText()}")
-        self.update()
-
-    
-    def on_display_clicks_changed(self, state):
-        """
-        Called when the user checks or unchecks the display clicks checkbox.
-        """
-        if state == QtCore.Qt.Checked:
-            self._append_to_log("Displaying clicks on the image.")
-        else:
-            self._append_to_log("Hiding clicks on the image.")
-        self.update()
-
-
-    def on_group_changed(self, text):
-        """
-        Called when the user selects a different group.
-        """
-        self._append_to_log(f"Group changed to: {text}")
-        self.click_manager.set_group(text)
-        self.update()
-
 
     def on_add_group(self):
+        r"""
+        Create a new click group.
         """
-        Show dialog to add a new group.
-        """
-        self._append_to_log("Adding a new group...")
-        name, ok = QtWidgets.QInputDialog.getText(self, "Add Group", "Group name:")
-        if ok and name and name not in self.click_manager.groups:
-            self.click_manager.set_group(name)
-            self._append_to_log(f"Group '{name}' added successfully.")
-        elif not ok:
-            self._append_to_log("Group addition cancelled.")
-        else:
-            QtWidgets.QMessageBox.warning(self, "Warning", "Group name already exists or is invalid.")
-            self._append_to_log("Failed to add group: name already exists or is invalid.")
-        self.update()  # Update the display after adding a new group
-        self._is_saved = False
 
+        name, ok = QtWidgets.QInputDialog.getText(self, "New Group", "Group name:")
+
+        if not ok or not name:
+            return
+
+        if name in self.click_manager.groups:
+            QtWidgets.QMessageBox.warning(self, "Error", "Group already exists.")
+            return
+
+        self.click_manager.set_group(name)
+        self._append_log(f"Group created: {name}")
+        self._is_saved = False
+        self.update()
 
     def on_rename_group(self):
+        r"""
+        Rename current group.
         """
-        Show dialog to rename the current group.
-        """
-        old_name = self.group_selector.currentText()
-        new_name, ok = QtWidgets.QInputDialog.getText(self, "Rename Group", "New name:", text=old_name)
-        if ok and new_name and new_name != old_name and new_name not in self.click_manager.groups:
-            self.click_manager.rename_group(old_name, new_name)
-            self._append_to_log(f"Group '{old_name}' renamed to '{new_name}'.")
-        elif not ok:
-            self._append_to_log("Group renaming cancelled.")
-        elif new_name == old_name:
-            return  # No change in name, do nothing
-        else:
-            QtWidgets.QMessageBox.warning(self, "Warning", "Invalid group name or name already exists.")
-            self._append_to_log("Failed to rename group: invalid name or name already exists.")
-        self.update()
-        self._is_saved = False
 
-    
+        old_name = self.click_manager.current_group
+
+        new_name, ok = QtWidgets.QInputDialog.getText(
+            self, "Rename Group", "New name:", text=old_name
+        )
+
+        if not ok or not new_name:
+            return
+
+        if new_name in self.click_manager.groups:
+            QtWidgets.QMessageBox.warning(self, "Error", "Name already exists.")
+            return
+
+        self.click_manager.rename_group(old_name, new_name)
+
+        self._append_log(f"Renamed group {old_name} → {new_name}")
+        self._is_saved = False
+        self.update()
+
     def on_delete_group(self):
+        r"""
+        Delete current group with safety checks.
         """
-        Show dialog to delete the current group.
-        """
-        self._append_to_log("Deleting the current group...")
-        ok = QtWidgets.QMessageBox.question(self, "Confirm Action",
-            "Are you sure you want to delete the current group?",
-            QtWidgets.QMessageBox.Yes | QtWidgets.QMessageBox.No)
-        if ok == QtWidgets.QMessageBox.No:
-            self._append_to_log("Group deletion cancelled by user.")
+
+        current = self.click_manager.current_group
+
+        if len(self.click_manager.groups) <= 1:
+            QtWidgets.QMessageBox.warning(
+                self, "Error", "You cannot delete the last remaining group."
+            )
             return
-        self.click_manager.remove_group()
-        self.update()
+
+        reply = QtWidgets.QMessageBox.question(
+            self,
+            "Delete Group",
+            f"Delete group '{current}' ?",
+            QtWidgets.QMessageBox.Yes | QtWidgets.QMessageBox.No,
+        )
+
+        if reply != QtWidgets.QMessageBox.Yes:
+            return
+
+        self.click_manager.remove_group(current)
+
+        self._append_log(f"Deleted group: {current}")
         self._is_saved = False
 
-
-    def on_remove_last_click(self):
-        """
-        Remove the last click from the current group.
-        """
-        current_group = self.click_manager.extract_group()
-        if current_group is None or len(current_group) == 0:
-            QtWidgets.QMessageBox.warning(self, "Warning", "No clicks to remove.")
-            return
-        self.click_manager.remove_click(len(current_group) - 1)
-        self._append_to_log("Removing the last click from the current group.")
         self.update()
-        self._is_saved = False
 
+    # ============================================================
+    # Save
+    # ============================================================
+    def save_csv(self):
+        r"""
+        Save clicks to CSV.
+        """
+        try:
+            # -------------------------------------------------
+            # If no output path -> ask user
+            # -------------------------------------------------
+            if self.output_path is None:
+                file_path, _ = QtWidgets.QFileDialog.getSaveFileName(
+                    self, "Save CSV", "", "CSV Files (*.csv)"
+                )
 
-    def on_remove_all_clicks(self):
+                if not file_path:
+                    self._append_log("Save cancelled.")
+                    return
+
+                self.output_path = file_path
+
+                if self.output_path is not None:
+                    self._append_log(f"Output CSV path setted to : {self.output_path}")
+
+            # -------------------------------------------------
+            # Save
+            # -------------------------------------------------
+            self.click_manager.save_to_csv(self.output_path)
+
+            self._append_log(f"Saved to {self.output_path}")
+            self._is_saved = True
+
+        except Exception as e:
+            QtWidgets.QMessageBox.critical(self, "Error", str(e))
+
+    def save_as_csv(self):
+        output_path = self.output_path
+        self.output_path = None
+        self.save_csv()
+        if self.output_path is None:
+            self.output_path = output_path
+            
+    def on_load_clicks(self):
+        r"""
+        Load clicks from CSV and replace current data.
         """
-        Remove all clicks from the current group.
-        """
-        # Ensure the user confirms the action
-        reply = QtWidgets.QMessageBox.question(self, "Confirm Action", 
-            "Are you sure you want to remove all clicks from the current group?",
-            QtWidgets.QMessageBox.Yes | QtWidgets.QMessageBox.No)
+
+        file_path, _ = QtWidgets.QFileDialog.getOpenFileName(
+            self,
+            "Load Clicks",
+            "",
+            "CSV Files (*.csv)"
+        )
+
+        if not file_path:
+            return
+
+        # -------------------------
+        # Warning
+        # -------------------------
+        reply = QtWidgets.QMessageBox.question(
+            self,
+            "Load clicks",
+            "This will replace current clicks. Continue?",
+            QtWidgets.QMessageBox.Yes | QtWidgets.QMessageBox.No
+        )
+
         if reply == QtWidgets.QMessageBox.No:
-            self._append_to_log("Action cancelled: No clicks removed.")
             return
-        self._append_to_log("Removing all clicks from the current group.")
-        self.click_manager.clear_group()
-        self.update()
-        self._is_saved = False
-        
-    def _process_left_click(self, x: int, y: int):
+
+        try:
+            # -------------------------
+            # Load ClickManager
+            # -------------------------
+            self.click_manager = ClickManager.load_from_csv(file_path)
+
+            self._append_log(f"Clicks loaded from {file_path}")
+
+            # -------------------------
+            # Refresh UI
+            # -------------------------
+            self._is_saved = False
+            self.update()
+
+        except Exception as e:
+            QtWidgets.QMessageBox.critical(self, "Error", str(e))
+
+    # ============================================================
+    # Utils
+    # ============================================================
+
+    def _append_log(self, msg: str):
         r"""
-        Process a left click event on the image viewer.
-
-        Add the click to the current group and update the display.
+        Append log message.
         """
-        if not self.initialization_done:
-            return
+        self.log_text_edit.append(msg)
 
-        if self.click_manager.current_group is None:
-            QtWidgets.QMessageBox.warning(self, "Warning", "Please select a group before clicking.")
-            return
-        
-        # Add the click to the current group
-        self.click_manager.add_click(x, y)
-        self.update()  # Update the display after adding a click
-        self._is_saved = False
+    # ============================================================
+    # Close event
+    # ============================================================
 
-
-    def _process_right_click(self, x: int, y: int):
+    def closeEvent(self, event):
         r"""
-        Process a right click event on the image viewer.
-
-        Add a click at (None, None) to the current group, which can be useful to skip a click.
+        Confirm exit if unsaved.
         """
-        if not self.initialization_done:
-            return
-        
-        if self.click_manager.current_group is None:
-            QtWidgets.QMessageBox.warning(self, "Warning", "Please select a group before clicking.")
-            return
-        
-        # Add a click at (None, None) to the current group
-        self.click_manager.add_click(None, None)
-        self.update()
-        self._is_saved = False
+        if not self._is_saved:
+            res = QtWidgets.QMessageBox.question(
+                self,
+                "Exit",
+                "Unsaved changes. Quit anyway?",
+                QtWidgets.QMessageBox.Yes | QtWidgets.QMessageBox.No,
+            )
+            if res == QtWidgets.QMessageBox.No:
+                event.ignore()
+                return
 
-   
+        event.accept()
