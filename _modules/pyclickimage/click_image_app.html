@@ -7,7 +7,7 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>pyclickimage.click_image_app &#8212; pyclickimage 2.0.3 documentation</title>
+    <title>pyclickimage.click_image_app &#8212; pyclickimage 2.0.4 documentation</title>
   
   
   
@@ -37,7 +37,7 @@
   <link rel="preload" as="script" href="../../_static/scripts/bootstrap.js?digest=8878045cc6db502f8baf" />
 <link rel="preload" as="script" href="../../_static/scripts/pydata-sphinx-theme.js?digest=8878045cc6db502f8baf" />
 
-    <script src="../../_static/documentation_options.js?v=664ffad9"></script>
+    <script src="../../_static/documentation_options.js?v=adc66a14"></script>
     <script src="../../_static/doctools.js?v=9a2dae69"></script>
     <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
     <script>DOCUMENTATION_OPTIONS.pagename = '_modules/pyclickimage/click_image_app';</script>
@@ -107,7 +107,7 @@
   
   
   
-    <p class="title logo__title">pyclickimage 2.0.3 documentation</p>
+    <p class="title logo__title">pyclickimage 2.0.4 documentation</p>
   
 </a></div>
     
@@ -435,7 +435,7 @@
 
         <span class="n">layout</span> <span class="o">=</span> <span class="n">QtWidgets</span><span class="o">.</span><span class="n">QHBoxLayout</span><span class="p">()</span>
         <span class="n">central</span><span class="o">.</span><span class="n">setLayout</span><span class="p">(</span><span class="n">layout</span><span class="p">)</span>
-        
+
         <span class="n">quit_action</span> <span class="o">=</span> <span class="n">QtWidgets</span><span class="o">.</span><span class="n">QAction</span><span class="p">(</span><span class="s2">&quot;Quit&quot;</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span>
         <span class="n">quit_action</span><span class="o">.</span><span class="n">setShortcut</span><span class="p">(</span><span class="s2">&quot;Ctrl+Q&quot;</span><span class="p">)</span>
         <span class="n">quit_action</span><span class="o">.</span><span class="n">triggered</span><span class="o">.</span><span class="n">connect</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">close</span><span class="p">)</span>
@@ -486,7 +486,7 @@
         <span class="n">row</span><span class="o">.</span><span class="n">addWidget</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">colormap_selector</span><span class="p">)</span>
 
         <span class="n">side</span><span class="o">.</span><span class="n">addLayout</span><span class="p">(</span><span class="n">row</span><span class="p">)</span>
-        
+
         <span class="bp">self</span><span class="o">.</span><span class="n">loadc_btn</span> <span class="o">=</span> <span class="n">QtWidgets</span><span class="o">.</span><span class="n">QPushButton</span><span class="p">(</span><span class="s2">&quot;Load Clicks&quot;</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">loadc_btn</span><span class="o">.</span><span class="n">clicked</span><span class="o">.</span><span class="n">connect</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">on_load_clicks</span><span class="p">)</span>
         <span class="n">side</span><span class="o">.</span><span class="n">addWidget</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">loadc_btn</span><span class="p">)</span>
@@ -598,7 +598,7 @@
         <span class="n">toolbar</span><span class="o">.</span><span class="n">addAction</span><span class="p">(</span><span class="s2">&quot;Reset View&quot;</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">viewer</span><span class="o">.</span><span class="n">reset_view</span><span class="p">)</span>
 
         <span class="n">toolbar</span><span class="o">.</span><span class="n">addSeparator</span><span class="p">()</span>
-        
+
         <span class="c1"># ============================================================</span>
         <span class="c1"># Crosser color (button + preview)</span>
         <span class="c1"># ============================================================</span>
@@ -657,7 +657,25 @@
         <span class="n">size_layout</span><span class="o">.</span><span class="n">setContentsMargins</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>
 
         <span class="bp">self</span><span class="o">.</span><span class="n">size_selector</span> <span class="o">=</span> <span class="n">QtWidgets</span><span class="o">.</span><span class="n">QComboBox</span><span class="p">()</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">size_selector</span><span class="o">.</span><span class="n">addItems</span><span class="p">([</span><span class="s2">&quot;1&quot;</span><span class="p">,</span> <span class="s2">&quot;2&quot;</span><span class="p">,</span> <span class="s2">&quot;4&quot;</span><span class="p">,</span> <span class="s2">&quot;6&quot;</span><span class="p">,</span> <span class="s2">&quot;8&quot;</span><span class="p">,</span> <span class="s2">&quot;10&quot;</span><span class="p">,</span> <span class="s2">&quot;12&quot;</span><span class="p">,</span> <span class="s2">&quot;16&quot;</span><span class="p">,</span> <span class="s2">&quot;20&quot;</span><span class="p">,</span> <span class="s2">&quot;30&quot;</span><span class="p">,</span> <span class="s2">&quot;50&quot;</span><span class="p">])</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">size_selector</span><span class="o">.</span><span class="n">addItems</span><span class="p">(</span>
+            <span class="p">[</span>
+                <span class="s2">&quot;0.2&quot;</span><span class="p">,</span>
+                <span class="s2">&quot;0.5&quot;</span><span class="p">,</span>
+                <span class="s2">&quot;1&quot;</span><span class="p">,</span>
+                <span class="s2">&quot;2&quot;</span><span class="p">,</span>
+                <span class="s2">&quot;4&quot;</span><span class="p">,</span>
+                <span class="s2">&quot;6&quot;</span><span class="p">,</span>
+                <span class="s2">&quot;8&quot;</span><span class="p">,</span>
+                <span class="s2">&quot;10&quot;</span><span class="p">,</span>
+                <span class="s2">&quot;12&quot;</span><span class="p">,</span>
+                <span class="s2">&quot;16&quot;</span><span class="p">,</span>
+                <span class="s2">&quot;20&quot;</span><span class="p">,</span>
+                <span class="s2">&quot;30&quot;</span><span class="p">,</span>
+                <span class="s2">&quot;50&quot;</span><span class="p">,</span>
+                <span class="s2">&quot;75&quot;</span><span class="p">,</span>
+                <span class="s2">&quot;100&quot;</span><span class="p">,</span>
+            <span class="p">]</span>
+        <span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">size_selector</span><span class="o">.</span><span class="n">setCurrentText</span><span class="p">(</span><span class="s2">&quot;8&quot;</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">size_selector</span><span class="o">.</span><span class="n">currentTextChanged</span><span class="o">.</span><span class="n">connect</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">on_marker_size_changed</span><span class="p">)</span>
 
@@ -799,7 +817,7 @@
         <span class="bp">self</span><span class="o">.</span><span class="n">update_table</span><span class="p">()</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">update_viewer</span><span class="p">()</span></div>
 
-        
+
 <div class="viewcode-block" id="ClickImageApp._format_value">
 <a class="viewcode-back" href="../../api_doc/click_image_app.html#pyclickimage.ClickImageApp._format_value">[docs]</a>
     <span class="k">def</span><span class="w"> </span><span class="nf">_format_value</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">v</span><span class="p">):</span>
@@ -851,7 +869,7 @@
                 <span class="k">continue</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">viewer</span><span class="o">.</span><span class="n">add_marker</span><span class="p">((</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">),</span> <span class="bp">self</span><span class="o">.</span><span class="n">marker_color</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">marker_size</span><span class="p">)</span></div>
 
-            
+
 <div class="viewcode-block" id="ClickImageApp.update_table">
 <a class="viewcode-back" href="../../api_doc/click_image_app.html#pyclickimage.ClickImageApp.update_table">[docs]</a>
     <span class="k">def</span><span class="w"> </span><span class="nf">update_table</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
@@ -864,7 +882,7 @@
             <span class="bp">self</span><span class="o">.</span><span class="n">table</span><span class="o">.</span><span class="n">setHorizontalHeaderLabels</span><span class="p">([</span><span class="s2">&quot;Index&quot;</span><span class="p">,</span> <span class="s2">&quot;X (float)&quot;</span><span class="p">,</span> <span class="s2">&quot;Y (float)&quot;</span><span class="p">])</span>
         <span class="k">else</span><span class="p">:</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">table</span><span class="o">.</span><span class="n">setHorizontalHeaderLabels</span><span class="p">([</span><span class="s2">&quot;Index&quot;</span><span class="p">,</span> <span class="s2">&quot;X (int)&quot;</span><span class="p">,</span> <span class="s2">&quot;Y (int)&quot;</span><span class="p">])</span>
-            
+
         <span class="bp">self</span><span class="o">.</span><span class="n">table</span><span class="o">.</span><span class="n">setRowCount</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">pts</span><span class="p">))</span>
 
         <span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">)</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">pts</span><span class="p">):</span>
@@ -984,7 +1002,6 @@
             <span class="p">)</span></div>
 
 
-    
 <div class="viewcode-block" id="ClickImageApp.choose_color">
 <a class="viewcode-back" href="../../api_doc/click_image_app.html#pyclickimage.ClickImageApp.choose_color">[docs]</a>
     <span class="k">def</span><span class="w"> </span><span class="nf">choose_color</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
@@ -1007,7 +1024,7 @@
 <span class="sd">        &quot;&quot;&quot;</span>
 
         <span class="k">try</span><span class="p">:</span>
-            <span class="bp">self</span><span class="o">.</span><span class="n">marker_size</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">value</span><span class="p">)</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">marker_size</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="n">value</span><span class="p">)</span>
         <span class="k">except</span> <span class="ne">ValueError</span><span class="p">:</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">marker_size</span> <span class="o">=</span> <span class="mi">8</span>
 
@@ -1194,7 +1211,7 @@
         <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">output_path</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">output_path</span> <span class="o">=</span> <span class="n">output_path</span></div>
 
-            
+
 <div class="viewcode-block" id="ClickImageApp.on_load_clicks">
 <a class="viewcode-back" href="../../api_doc/click_image_app.html#pyclickimage.ClickImageApp.on_load_clicks">[docs]</a>
     <span class="k">def</span><span class="w"> </span><span class="nf">on_load_clicks</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
@@ -1203,10 +1220,7 @@
 <span class="sd">        &quot;&quot;&quot;</span>
 
         <span class="n">file_path</span><span class="p">,</span> <span class="n">_</span> <span class="o">=</span> <span class="n">QtWidgets</span><span class="o">.</span><span class="n">QFileDialog</span><span class="o">.</span><span class="n">getOpenFileName</span><span class="p">(</span>
-            <span class="bp">self</span><span class="p">,</span>
-            <span class="s2">&quot;Load Clicks&quot;</span><span class="p">,</span>
-            <span class="s2">&quot;&quot;</span><span class="p">,</span>
-            <span class="s2">&quot;CSV Files (*.csv)&quot;</span>
+            <span class="bp">self</span><span class="p">,</span> <span class="s2">&quot;Load Clicks&quot;</span><span class="p">,</span> <span class="s2">&quot;&quot;</span><span class="p">,</span> <span class="s2">&quot;CSV Files (*.csv)&quot;</span>
         <span class="p">)</span>
 
         <span class="k">if</span> <span class="ow">not</span> <span class="n">file_path</span><span class="p">:</span>
@@ -1219,7 +1233,7 @@
             <span class="bp">self</span><span class="p">,</span>
             <span class="s2">&quot;Load clicks&quot;</span><span class="p">,</span>
             <span class="s2">&quot;This will replace current clicks. Continue?&quot;</span><span class="p">,</span>
-            <span class="n">QtWidgets</span><span class="o">.</span><span class="n">QMessageBox</span><span class="o">.</span><span class="n">Yes</span> <span class="o">|</span> <span class="n">QtWidgets</span><span class="o">.</span><span class="n">QMessageBox</span><span class="o">.</span><span class="n">No</span>
+            <span class="n">QtWidgets</span><span class="o">.</span><span class="n">QMessageBox</span><span class="o">.</span><span class="n">Yes</span> <span class="o">|</span> <span class="n">QtWidgets</span><span class="o">.</span><span class="n">QMessageBox</span><span class="o">.</span><span class="n">No</span><span class="p">,</span>
         <span class="p">)</span>
 
         <span class="k">if</span> <span class="n">reply</span> <span class="o">==</span> <span class="n">QtWidgets</span><span class="o">.</span><span class="n">QMessageBox</span><span class="o">.</span><span class="n">No</span><span class="p">:</span>
