@@ -25,7 +25,7 @@ jobs:
 
     - name: Install dependencies
       run: |
-        pip install -e .
+        pip install .
         pip install sphinx pydata-sphinx-theme
 
     - name: Build documentation

@@ -5,6 +5,13 @@
 UI to collect 2D-coordinates of points on an image.
 The points can be separated into various groups.
 
+
+Run the command:
+
+```
+pyclickimage-gui
+```
+
 ![App](./pyclickimage/resources/app.png)
 
 The output ``csv`` will have the following format (with ``integer`` or ``floating`` precision):
