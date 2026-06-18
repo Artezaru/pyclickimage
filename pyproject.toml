@@ -25,6 +25,11 @@ dependencies = [
   "opencv-python-headless"
 ]
 
+[project.urls]
+Homepage = "https://github.com/Artezaru/pygraphs"
+Documentation = "https://Artezaru.github.io/pygraphs"
+Source = "https://github.com/Artezaru/pygraphs"
+Tracker = "https://github.com/Artezaru/pygraphs/issues"
 
 [tool.setuptools.packages.find]
 where = ["."]
@@ -43,3 +48,6 @@ pyclickimage-gui = "pyclickimage.__main__:__main_gui__"
 [tool.setuptools.dynamic]
 version = {attr = "pyclickimage.__version__.__version__"}
 
+[project.readme]
+file = "README.md"
+content-type = "text/markdown"
