@@ -56,7 +56,6 @@ class ClickManager:
     # =========================================================
     # PRECISION MODE
     # =========================================================
-
     @property
     def precision_mode(self) -> str:
         r"""
@@ -87,14 +86,13 @@ class ClickManager:
         if mode not in ("float", "int"):
             raise ValueError("precision_mode must be 'float' or 'int'")
         self._precision_mode = mode
-        
+
     @property
     def use_int_precision(self) -> bool:
         r"""
         True if precision mode is integer.
         """
         return self._precision_mode == "int"
-
 
     @use_int_precision.setter
     def use_int_precision(self, value: bool) -> None:
@@ -103,14 +101,12 @@ class ClickManager:
         """
         self._precision_mode = "int" if value else "float"
 
-
     @property
     def use_float_precision(self) -> bool:
         r"""
         True if precision mode is float.
         """
         return self._precision_mode == "float"
-
 
     @use_float_precision.setter
     def use_float_precision(self, value: bool) -> None:
@@ -217,6 +213,12 @@ class ClickManager:
     # =========================================================
     # CLICKS
     # =========================================================
+    @property
+    def n_clicks(self) -> int:
+        r"""
+        Return the number of clicks
+        """
+        return sum(len(g) for _, g in self.groups.items())
 
     def add_click(
         self, x: Optional[Number], y: Optional[Number], group_name: Optional[str] = None
@@ -242,6 +244,36 @@ class ClickManager:
         y = float(y) if y is not None else None
 
         self.groups[group_name].append((x, y))
+
+    def to_half_shift_on(self):
+        r"""
+        Shift all points by -0.5 to use pixel-centered coordinates.
+
+        Point (a, b) -> (a - 0.5, b - 0.5)
+        """
+        for group_name, points in self.groups.items():
+            self.groups[group_name] = [
+                (
+                    (x - 0.5) if x is not None else None,
+                    (y - 0.5) if y is not None else None,
+                )
+                for (x, y) in points
+            ]
+
+    def to_half_shift_off(self):
+        r"""
+        Reverse the half-pixel shift.
+
+        Point (a, b) -> (a + 0.5, b + 0.5)
+        """
+        for group_name, points in self.groups.items():
+            self.groups[group_name] = [
+                (
+                    (x + 0.5) if x is not None else None,
+                    (y + 0.5) if y is not None else None,
+                )
+                for (x, y) in points
+            ]
 
     def extract_group(self, group_name: Optional[str] = None) -> List[Point]:
         r"""
@@ -380,7 +412,7 @@ class ClickManager:
             next(reader)
 
             for group, _, x, y in reader:
-                
+
                 instance.add_group(group)
 
                 x_val = float(x) if x != "" else None

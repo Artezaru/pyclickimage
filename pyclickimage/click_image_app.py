@@ -62,7 +62,7 @@ class ClickImageApp(QtWidgets.QMainWindow):
         # Core components
         # -------------------------
         self.click_manager = ClickManager(precision_mode="float")
-        self.viewer = ImageViewer()
+        self.viewer = ImageViewer(half_shift=True)
 
         # -------------------------
         # Logging
@@ -183,6 +183,13 @@ class ClickImageApp(QtWidgets.QMainWindow):
         self.precision_checkbox.stateChanged.connect(self.on_precision_changed)
         self.precision_checkbox.setShortcut("Ctrl+I")
         side.addWidget(self.precision_checkbox)
+
+        self.half_shift_checkbox = QtWidgets.QCheckBox(
+            "Half-Shift: (0,0) on the pixel center."
+        )
+        self.half_shift_checkbox.setChecked(True)
+        self.half_shift_checkbox.stateChanged.connect(self.on_half_shift_changed)
+        side.addWidget(self.half_shift_checkbox)
 
         # ============================================================
         # Group selector
@@ -372,6 +379,10 @@ class ClickImageApp(QtWidgets.QMainWindow):
 
         toolbar.addSeparator()
 
+        toolbar.addAction("Clear Logs", self.clear_logs)
+
+        toolbar.addSeparator()
+
     # ============================================================
     # Precision mode
     # ============================================================
@@ -383,6 +394,36 @@ class ClickImageApp(QtWidgets.QMainWindow):
         INT = state == QtCore.Qt.Checked
         self.click_manager.precision_mode = "int" if INT else "float"
         self._append_log(f"Precision mode: {'INT' if INT else 'FLOAT'}")
+        self.update()
+
+    def on_half_shift_changed(self, state):
+        r"""
+        Toggle half-shift mode.
+        """
+
+        half_shift = state == QtCore.Qt.Checked
+
+        if self.click_manager.n_clicks > 0:
+
+            msg = QtWidgets.QMessageBox(self)
+            msg.setWindowTitle("Existing clicks detected")
+            msg.setText(
+                f"Do you want to shift all previous clicked points by 0.5 to match the new coordinates system ?"
+            )
+            msg.setInformativeText("No = keep clicks\nYes = shift clicks")
+            msg.setStandardButtons(QtWidgets.QMessageBox.No | QtWidgets.QMessageBox.Yes)
+            msg.setDefaultButton(QtWidgets.QMessageBox.Yes)
+
+            choice = msg.exec_()
+
+            if choice == QtWidgets.QMessageBox.Yes:
+                if half_shift:
+                    self.click_manager.to_half_shift_on()
+                else:
+                    self.click_manager.to_half_shift_off()
+
+        self.viewer.half_shift = half_shift
+        self._append_log(f"Half-Shift mode: {half_shift}")
         self.update()
 
     # ============================================================
@@ -877,6 +918,12 @@ class ClickImageApp(QtWidgets.QMainWindow):
         Append log message.
         """
         self.log_text_edit.append(msg)
+
+    def clear_logs(self):
+        r"""
+        Clear log message.
+        """
+        self.log_text_edit.clear()
 
     # ============================================================
     # Close event

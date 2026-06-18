@@ -29,7 +29,14 @@ class ImageViewer(QtWidgets.QGraphicsView):
     - zoom with mouse wheel
     - precise click detection (drag-safe)
     - marker system for annotation
+
+    half-shift :
+
+    - True = (0,0) on the center of the first pixel.
+    - False = (0,0) on the corner of the first pixel.
+
     """
+
     left_click_signal = QtCore.pyqtSignal(float, float)
     right_click_signal = QtCore.pyqtSignal(float, float)
 
@@ -37,7 +44,7 @@ class ImageViewer(QtWidgets.QGraphicsView):
     # INIT
     # ======================================================================
 
-    def __init__(self, parent=None):
+    def __init__(self, parent=None, half_shift=True):
         r"""
         Initialize the ImageViewer.
 
@@ -92,6 +99,7 @@ class ImageViewer(QtWidgets.QGraphicsView):
             Tuple[QtWidgets.QGraphicsLineItem, QtWidgets.QGraphicsLineItem]
         ] = []
         self.auto_marker = True
+        self.half_shift = bool(half_shift)
 
     # ======================================================================
     # IMAGE LOADING
@@ -141,7 +149,7 @@ class ImageViewer(QtWidgets.QGraphicsView):
         # IMPORTANT: reset markers if needed
         self._zoom = 0
         self._markers = []
-        
+
     # ======================================================================
     # CROSSHAIR MANAGEMENT
     # ======================================================================
@@ -150,8 +158,7 @@ class ImageViewer(QtWidgets.QGraphicsView):
         Return current crosshair color.
         """
         return self._crosshair_color
-        
-        
+
     def set_crosshair_color(self, color):
         r"""
         Set the crosshair color
@@ -163,7 +170,7 @@ class ImageViewer(QtWidgets.QGraphicsView):
 
         self._cross_h.setPen(pen)
         self._cross_v.setPen(pen)
-        
+
     def _create_crosshair(self):
         r"""
         Create the crosshair
@@ -212,10 +219,14 @@ class ImageViewer(QtWidgets.QGraphicsView):
 
         self._cross_v.setLine(scene_pos.x(), rect.top(), scene_pos.x(), rect.bottom())
 
-        self._coord_label.show()
-        self._coord_label.setText(f"X={scene_pos.x():.3f}  Y={scene_pos.y():.3f}")
-        self._coord_label.adjustSize()
+        x, y = scene_pos.x(), scene_pos.y()
+        if self.half_shift:
+            x = x - 0.5
+            y = y - 0.5
 
+        self._coord_label.show()
+        self._coord_label.setText(f"X={x:.3f}  Y={y:.3f}")
+        self._coord_label.adjustSize()
 
     # ======================================================================
     # ZOOM
@@ -317,6 +328,10 @@ class ImageViewer(QtWidgets.QGraphicsView):
 
         x, y = scene_pos.x(), scene_pos.y()
 
+        if self.half_shift:
+            x = x - 0.5
+            y = y - 0.5
+
         if event.button() == QtCore.Qt.LeftButton:
             self.left_click_signal.emit(x, y)
 
@@ -349,6 +364,10 @@ class ImageViewer(QtWidgets.QGraphicsView):
             Half-size of cross arms.
         """
         x, y = center
+
+        if self.half_shift:
+            x = x + 0.5
+            y = y + 0.5
 
         pen = QtGui.QPen(color)
         pen.setWidthF(0)
