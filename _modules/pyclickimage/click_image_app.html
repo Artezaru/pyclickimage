@@ -7,7 +7,7 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>pyclickimage.click_image_app &#8212; pyclickimage 2.2.1 documentation</title>
+    <title>pyclickimage.click_image_app &#8212; pyclickimage 2.4.0 documentation</title>
   
   
   
@@ -37,7 +37,7 @@
   <link rel="preload" as="script" href="../../_static/scripts/bootstrap.js?digest=8878045cc6db502f8baf" />
 <link rel="preload" as="script" href="../../_static/scripts/pydata-sphinx-theme.js?digest=8878045cc6db502f8baf" />
 
-    <script src="../../_static/documentation_options.js?v=16656018"></script>
+    <script src="../../_static/documentation_options.js?v=4d935f96"></script>
     <script src="../../_static/doctools.js?v=9a2dae69"></script>
     <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
     <script>DOCUMENTATION_OPTIONS.pagename = '_modules/pyclickimage/click_image_app';</script>
@@ -107,7 +107,7 @@
   
   
   
-    <p class="title logo__title">pyclickimage 2.2.1 documentation</p>
+    <p class="title logo__title">pyclickimage 2.4.0 documentation</p>
   
 </a></div>
     
@@ -372,11 +372,26 @@
         <span class="bp">self</span><span class="o">.</span><span class="n">_colormap_has_changed</span> <span class="o">=</span> <span class="kc">True</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">_is_empty_image</span> <span class="o">=</span> <span class="kc">True</span>
 
+        <span class="c1"># --------------------------</span>
+        <span class="c1"># States</span>
+        <span class="c1"># --------------------------</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">alpha</span> <span class="o">=</span> <span class="mf">1.0</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">beta_pc</span> <span class="o">=</span> <span class="mi">0</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">display_min_pc</span> <span class="o">=</span> <span class="mi">0</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">display_max_pc</span> <span class="o">=</span> <span class="mi">100</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">show_clicks</span> <span class="o">=</span> <span class="kc">True</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">marker_color</span> <span class="o">=</span> <span class="n">QtGui</span><span class="o">.</span><span class="n">QColor</span><span class="p">(</span><span class="mi">255</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">marker_size</span> <span class="o">=</span> <span class="mi">8</span>
+
         <span class="c1"># -------------------------</span>
         <span class="c1"># Core components</span>
         <span class="c1"># -------------------------</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">click_manager</span> <span class="o">=</span> <span class="n">ClickManager</span><span class="p">(</span><span class="n">precision_mode</span><span class="o">=</span><span class="s2">&quot;float&quot;</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">viewer</span> <span class="o">=</span> <span class="n">ImageViewer</span><span class="p">(</span><span class="n">half_shift</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">viewer</span><span class="o">.</span><span class="n">auto_marker</span> <span class="o">=</span> <span class="kc">False</span>  <span class="c1"># Don&#39;t draw directly</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">viewer</span><span class="o">.</span><span class="n">left_click_signal</span><span class="o">.</span><span class="n">connect</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_process_left_click</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">viewer</span><span class="o">.</span><span class="n">right_click_signal</span><span class="o">.</span><span class="n">connect</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_process_right_click</span><span class="p">)</span>
 
         <span class="c1"># -------------------------</span>
         <span class="c1"># Logging</span>
@@ -395,23 +410,31 @@
         <span class="bp">self</span><span class="o">.</span><span class="n">set_image</span><span class="p">(</span><span class="n">image</span><span class="p">)</span>
 
         <span class="c1"># -------------------------</span>
-        <span class="c1"># Markers</span>
-        <span class="c1"># -------------------------</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">marker_color</span> <span class="o">=</span> <span class="n">QtGui</span><span class="o">.</span><span class="n">QColor</span><span class="p">(</span><span class="mi">255</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">marker_size</span> <span class="o">=</span> <span class="mi">8</span>
-
-        <span class="c1"># -------------------------</span>
         <span class="c1"># UI</span>
         <span class="c1"># -------------------------</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">_init_ui</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">central</span> <span class="o">=</span> <span class="n">QtWidgets</span><span class="o">.</span><span class="n">QWidget</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">setCentralWidget</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">central</span><span class="p">)</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">layout</span> <span class="o">=</span> <span class="n">QtWidgets</span><span class="o">.</span><span class="n">QHBoxLayout</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">central</span><span class="o">.</span><span class="n">setLayout</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">layout</span><span class="p">)</span>
+
+        <span class="n">quit_action</span> <span class="o">=</span> <span class="n">QtWidgets</span><span class="o">.</span><span class="n">QAction</span><span class="p">(</span><span class="s2">&quot;Quit&quot;</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span>
+        <span class="n">quit_action</span><span class="o">.</span><span class="n">setShortcut</span><span class="p">(</span><span class="s2">&quot;Ctrl+Q&quot;</span><span class="p">)</span>
+        <span class="n">quit_action</span><span class="o">.</span><span class="n">triggered</span><span class="o">.</span><span class="n">connect</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">close</span><span class="p">)</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">addAction</span><span class="p">(</span><span class="n">quit_action</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">layout</span><span class="o">.</span><span class="n">addWidget</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">viewer</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">side</span> <span class="o">=</span> <span class="n">QtWidgets</span><span class="o">.</span><span class="n">QVBoxLayout</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">side_widget</span> <span class="o">=</span> <span class="n">QtWidgets</span><span class="o">.</span><span class="n">QWidget</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">side_widget</span><span class="o">.</span><span class="n">setFixedWidth</span><span class="p">(</span><span class="mi">340</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">side_widget</span><span class="o">.</span><span class="n">setLayout</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">side</span><span class="p">)</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">_init_left_panel</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_init_toolbar</span><span class="p">()</span>
 
         <span class="c1"># -------------------------</span>
         <span class="c1"># Signals</span>
         <span class="c1"># -------------------------</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">viewer</span><span class="o">.</span><span class="n">auto_marker</span> <span class="o">=</span> <span class="kc">False</span>  <span class="c1"># Don&#39;t draw directly</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">viewer</span><span class="o">.</span><span class="n">left_click_signal</span><span class="o">.</span><span class="n">connect</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_process_left_click</span><span class="p">)</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">viewer</span><span class="o">.</span><span class="n">right_click_signal</span><span class="o">.</span><span class="n">connect</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_process_right_click</span><span class="p">)</span>
-
         <span class="bp">self</span><span class="o">.</span><span class="n">initialization_done</span> <span class="o">=</span> <span class="kc">True</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">_append_log</span><span class="p">(</span><span class="s2">&quot;Application ready.&quot;</span><span class="p">)</span>
         <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">output_path</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
@@ -422,74 +445,31 @@
     <span class="c1"># ============================================================</span>
     <span class="c1"># UI</span>
     <span class="c1"># ============================================================</span>
-
-<div class="viewcode-block" id="ClickImageApp._init_ui">
-<a class="viewcode-back" href="../../api_doc/click_image_app.html#pyclickimage.ClickImageApp._init_ui">[docs]</a>
-    <span class="k">def</span><span class="w"> </span><span class="nf">_init_ui</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-<span class="w">        </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">        Build full interface layout.</span>
-<span class="sd">        &quot;&quot;&quot;</span>
-
-        <span class="n">central</span> <span class="o">=</span> <span class="n">QtWidgets</span><span class="o">.</span><span class="n">QWidget</span><span class="p">()</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">setCentralWidget</span><span class="p">(</span><span class="n">central</span><span class="p">)</span>
-
-        <span class="n">layout</span> <span class="o">=</span> <span class="n">QtWidgets</span><span class="o">.</span><span class="n">QHBoxLayout</span><span class="p">()</span>
-        <span class="n">central</span><span class="o">.</span><span class="n">setLayout</span><span class="p">(</span><span class="n">layout</span><span class="p">)</span>
-
-        <span class="n">quit_action</span> <span class="o">=</span> <span class="n">QtWidgets</span><span class="o">.</span><span class="n">QAction</span><span class="p">(</span><span class="s2">&quot;Quit&quot;</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span>
-        <span class="n">quit_action</span><span class="o">.</span><span class="n">setShortcut</span><span class="p">(</span><span class="s2">&quot;Ctrl+Q&quot;</span><span class="p">)</span>
-        <span class="n">quit_action</span><span class="o">.</span><span class="n">triggered</span><span class="o">.</span><span class="n">connect</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">close</span><span class="p">)</span>
-
-        <span class="bp">self</span><span class="o">.</span><span class="n">addAction</span><span class="p">(</span><span class="n">quit_action</span><span class="p">)</span>
-
-        <span class="c1"># -------------------------</span>
-        <span class="c1"># Viewer</span>
-        <span class="c1"># -------------------------</span>
-        <span class="n">layout</span><span class="o">.</span><span class="n">addWidget</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">viewer</span><span class="p">)</span>
-
-        <span class="c1"># -------------------------</span>
-        <span class="c1"># Side panel</span>
-        <span class="c1"># -------------------------</span>
-        <span class="n">side</span> <span class="o">=</span> <span class="n">QtWidgets</span><span class="o">.</span><span class="n">QVBoxLayout</span><span class="p">()</span>
-        <span class="n">side_widget</span> <span class="o">=</span> <span class="n">QtWidgets</span><span class="o">.</span><span class="n">QWidget</span><span class="p">()</span>
-        <span class="n">side_widget</span><span class="o">.</span><span class="n">setFixedWidth</span><span class="p">(</span><span class="mi">340</span><span class="p">)</span>
-        <span class="n">side_widget</span><span class="o">.</span><span class="n">setLayout</span><span class="p">(</span><span class="n">side</span><span class="p">)</span>
-
+<div class="viewcode-block" id="ClickImageApp._init_left_panel">
+<a class="viewcode-back" href="../../api_doc/click_image_app.html#pyclickimage.ClickImageApp._init_left_panel">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">_init_left_panel</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;Build the left interface&quot;&quot;&quot;</span>
+        <span class="c1"># ============================================================</span>
+        <span class="c1"># Scroll Area</span>
+        <span class="c1"># ============================================================</span>
         <span class="n">scroll</span> <span class="o">=</span> <span class="n">QtWidgets</span><span class="o">.</span><span class="n">QScrollArea</span><span class="p">()</span>
         <span class="n">scroll</span><span class="o">.</span><span class="n">setWidgetResizable</span><span class="p">(</span><span class="kc">True</span><span class="p">)</span>
         <span class="n">scroll</span><span class="o">.</span><span class="n">setFixedWidth</span><span class="p">(</span><span class="mi">360</span><span class="p">)</span>
-        <span class="n">scroll</span><span class="o">.</span><span class="n">setWidget</span><span class="p">(</span><span class="n">side_widget</span><span class="p">)</span>
+        <span class="n">scroll</span><span class="o">.</span><span class="n">setWidget</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">side_widget</span><span class="p">)</span>
 
-        <span class="n">layout</span><span class="o">.</span><span class="n">addWidget</span><span class="p">(</span><span class="n">scroll</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">layout</span><span class="o">.</span><span class="n">addWidget</span><span class="p">(</span><span class="n">scroll</span><span class="p">)</span>
 
         <span class="c1"># ============================================================</span>
         <span class="c1"># Load Image</span>
         <span class="c1"># ============================================================</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">load_btn</span> <span class="o">=</span> <span class="n">QtWidgets</span><span class="o">.</span><span class="n">QPushButton</span><span class="p">(</span><span class="s2">&quot;Load Image (Ctrl+O)&quot;</span><span class="p">)</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">load_btn</span><span class="o">.</span><span class="n">clicked</span><span class="o">.</span><span class="n">connect</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">on_load_image</span><span class="p">)</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">load_btn</span><span class="o">.</span><span class="n">setShortcut</span><span class="p">(</span><span class="s2">&quot;Ctrl+O&quot;</span><span class="p">)</span>
-        <span class="n">side</span><span class="o">.</span><span class="n">addWidget</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">load_btn</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">load_image_btn</span> <span class="o">=</span> <span class="n">QtWidgets</span><span class="o">.</span><span class="n">QPushButton</span><span class="p">(</span><span class="s2">&quot;Load Image (Ctrl+O)&quot;</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">load_image_btn</span><span class="o">.</span><span class="n">clicked</span><span class="o">.</span><span class="n">connect</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">on_load_image</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">load_image_btn</span><span class="o">.</span><span class="n">setShortcut</span><span class="p">(</span><span class="s2">&quot;Ctrl+O&quot;</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">side</span><span class="o">.</span><span class="n">addWidget</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">load_image_btn</span><span class="p">)</span>
 
-        <span class="n">row</span> <span class="o">=</span> <span class="n">QtWidgets</span><span class="o">.</span><span class="n">QHBoxLayout</span><span class="p">()</span>
-
-        <span class="bp">self</span><span class="o">.</span><span class="n">colormap_selector</span> <span class="o">=</span> <span class="n">QtWidgets</span><span class="o">.</span><span class="n">QComboBox</span><span class="p">()</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">colormap_selector</span><span class="o">.</span><span class="n">addItem</span><span class="p">(</span><span class="s2">&quot;Default&quot;</span><span class="p">)</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">colormap_selector</span><span class="o">.</span><span class="n">addItem</span><span class="p">(</span><span class="s2">&quot;Gray&quot;</span><span class="p">)</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">colormap_selector</span><span class="o">.</span><span class="n">addItem</span><span class="p">(</span><span class="s2">&quot;Hot&quot;</span><span class="p">)</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">colormap_selector</span><span class="o">.</span><span class="n">addItem</span><span class="p">(</span><span class="s2">&quot;Jet&quot;</span><span class="p">)</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">colormap_selector</span><span class="o">.</span><span class="n">addItem</span><span class="p">(</span><span class="s2">&quot;Rainbow&quot;</span><span class="p">)</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">colormap_selector</span><span class="o">.</span><span class="n">addItem</span><span class="p">(</span><span class="s2">&quot;Cool&quot;</span><span class="p">)</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">colormap_selector</span><span class="o">.</span><span class="n">addItem</span><span class="p">(</span><span class="s2">&quot;Spring&quot;</span><span class="p">)</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">colormap_selector</span><span class="o">.</span><span class="n">setCurrentIndex</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>  <span class="c1"># Default to &quot;Default&quot;</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">colormap_selector</span><span class="o">.</span><span class="n">currentIndexChanged</span><span class="o">.</span><span class="n">connect</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">on_colormap_changed</span><span class="p">)</span>
-        <span class="n">row</span><span class="o">.</span><span class="n">addWidget</span><span class="p">(</span><span class="n">QtWidgets</span><span class="o">.</span><span class="n">QLabel</span><span class="p">(</span><span class="s2">&quot;Image Colormap:&quot;</span><span class="p">))</span>
-        <span class="n">row</span><span class="o">.</span><span class="n">addWidget</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">colormap_selector</span><span class="p">)</span>
-
-        <span class="n">side</span><span class="o">.</span><span class="n">addLayout</span><span class="p">(</span><span class="n">row</span><span class="p">)</span>
-
-        <span class="bp">self</span><span class="o">.</span><span class="n">loadc_btn</span> <span class="o">=</span> <span class="n">QtWidgets</span><span class="o">.</span><span class="n">QPushButton</span><span class="p">(</span><span class="s2">&quot;Load Clicks&quot;</span><span class="p">)</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">loadc_btn</span><span class="o">.</span><span class="n">clicked</span><span class="o">.</span><span class="n">connect</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">on_load_clicks</span><span class="p">)</span>
-        <span class="n">side</span><span class="o">.</span><span class="n">addWidget</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">loadc_btn</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">load_click_btn</span> <span class="o">=</span> <span class="n">QtWidgets</span><span class="o">.</span><span class="n">QPushButton</span><span class="p">(</span><span class="s2">&quot;Load Clicks&quot;</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">load_click_btn</span><span class="o">.</span><span class="n">clicked</span><span class="o">.</span><span class="n">connect</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">on_load_clicks</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">side</span><span class="o">.</span><span class="n">addWidget</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">load_click_btn</span><span class="p">)</span>
 
         <span class="c1"># ============================================================</span>
         <span class="c1"># Precision mode</span>
@@ -498,21 +478,20 @@
         <span class="bp">self</span><span class="o">.</span><span class="n">precision_checkbox</span><span class="o">.</span><span class="n">setChecked</span><span class="p">(</span><span class="kc">False</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">precision_checkbox</span><span class="o">.</span><span class="n">stateChanged</span><span class="o">.</span><span class="n">connect</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">on_precision_changed</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">precision_checkbox</span><span class="o">.</span><span class="n">setShortcut</span><span class="p">(</span><span class="s2">&quot;Ctrl+I&quot;</span><span class="p">)</span>
-        <span class="n">side</span><span class="o">.</span><span class="n">addWidget</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">precision_checkbox</span><span class="p">)</span>
-
+        <span class="bp">self</span><span class="o">.</span><span class="n">side</span><span class="o">.</span><span class="n">addWidget</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">precision_checkbox</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">half_shift_checkbox</span> <span class="o">=</span> <span class="n">QtWidgets</span><span class="o">.</span><span class="n">QCheckBox</span><span class="p">(</span>
             <span class="s2">&quot;Half-Shift: (0,0) on the pixel center.&quot;</span>
         <span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">half_shift_checkbox</span><span class="o">.</span><span class="n">setChecked</span><span class="p">(</span><span class="kc">True</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">half_shift_checkbox</span><span class="o">.</span><span class="n">stateChanged</span><span class="o">.</span><span class="n">connect</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">on_half_shift_changed</span><span class="p">)</span>
-        <span class="n">side</span><span class="o">.</span><span class="n">addWidget</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">half_shift_checkbox</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">side</span><span class="o">.</span><span class="n">addWidget</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">half_shift_checkbox</span><span class="p">)</span>
 
         <span class="bp">self</span><span class="o">.</span><span class="n">display_clicks_checkbox</span> <span class="o">=</span> <span class="n">QtWidgets</span><span class="o">.</span><span class="n">QCheckBox</span><span class="p">(</span><span class="s2">&quot;Display clicks&quot;</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">display_clicks_checkbox</span><span class="o">.</span><span class="n">setChecked</span><span class="p">(</span><span class="kc">True</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">display_clicks_checkbox</span><span class="o">.</span><span class="n">stateChanged</span><span class="o">.</span><span class="n">connect</span><span class="p">(</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">on_display_clicks_changed</span>
         <span class="p">)</span>
-        <span class="n">side</span><span class="o">.</span><span class="n">addWidget</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">display_clicks_checkbox</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">side</span><span class="o">.</span><span class="n">addWidget</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">display_clicks_checkbox</span><span class="p">)</span>
 
         <span class="c1"># ============================================================</span>
         <span class="c1"># Group selector</span>
@@ -527,7 +506,7 @@
 
         <span class="n">row</span><span class="o">.</span><span class="n">addWidget</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">group_selector</span><span class="p">)</span>
 
-        <span class="n">side</span><span class="o">.</span><span class="n">addLayout</span><span class="p">(</span><span class="n">row</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">side</span><span class="o">.</span><span class="n">addLayout</span><span class="p">(</span><span class="n">row</span><span class="p">)</span>
 
         <span class="c1"># -------------------------</span>
         <span class="c1"># Group management buttons</span>
@@ -553,7 +532,7 @@
         <span class="n">row</span><span class="o">.</span><span class="n">addWidget</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">rename_group_btn</span><span class="p">)</span>
         <span class="n">row</span><span class="o">.</span><span class="n">addWidget</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">delete_group_btn</span><span class="p">)</span>
 
-        <span class="n">side</span><span class="o">.</span><span class="n">addLayout</span><span class="p">(</span><span class="n">row</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">side</span><span class="o">.</span><span class="n">addLayout</span><span class="p">(</span><span class="n">row</span><span class="p">)</span>
 
         <span class="c1"># --------------------------</span>
         <span class="c1"># Click Management</span>
@@ -571,7 +550,7 @@
         <span class="n">row</span><span class="o">.</span><span class="n">addWidget</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">undo_btn</span><span class="p">)</span>
         <span class="n">row</span><span class="o">.</span><span class="n">addWidget</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">clear_btn</span><span class="p">)</span>
 
-        <span class="n">side</span><span class="o">.</span><span class="n">addLayout</span><span class="p">(</span><span class="n">row</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">side</span><span class="o">.</span><span class="n">addLayout</span><span class="p">(</span><span class="n">row</span><span class="p">)</span>
 
         <span class="c1"># ============================================================</span>
         <span class="c1"># Table</span>
@@ -579,7 +558,7 @@
         <span class="bp">self</span><span class="o">.</span><span class="n">table</span> <span class="o">=</span> <span class="n">QtWidgets</span><span class="o">.</span><span class="n">QTableWidget</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">3</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">table</span><span class="o">.</span><span class="n">setHorizontalHeaderLabels</span><span class="p">([</span><span class="s2">&quot;Index&quot;</span><span class="p">,</span> <span class="s2">&quot;X&quot;</span><span class="p">,</span> <span class="s2">&quot;Y&quot;</span><span class="p">])</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">table</span><span class="o">.</span><span class="n">setMinimumHeight</span><span class="p">(</span><span class="mi">180</span><span class="p">)</span>
-        <span class="n">side</span><span class="o">.</span><span class="n">addWidget</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">table</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">side</span><span class="o">.</span><span class="n">addWidget</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">table</span><span class="p">)</span>
 
         <span class="c1"># ============================================================</span>
         <span class="c1"># Save button</span>
@@ -596,81 +575,219 @@
         <span class="bp">self</span><span class="o">.</span><span class="n">save_as_btn</span><span class="o">.</span><span class="n">setShortcut</span><span class="p">(</span><span class="s2">&quot;Ctrl+Shift+S&quot;</span><span class="p">)</span>
         <span class="n">row</span><span class="o">.</span><span class="n">addWidget</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">save_as_btn</span><span class="p">)</span>
 
-        <span class="n">side</span><span class="o">.</span><span class="n">addLayout</span><span class="p">(</span><span class="n">row</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">side</span><span class="o">.</span><span class="n">addLayout</span><span class="p">(</span><span class="n">row</span><span class="p">)</span>
 
         <span class="c1"># ============================================================</span>
         <span class="c1"># Log</span>
         <span class="c1"># ============================================================</span>
-        <span class="n">side</span><span class="o">.</span><span class="n">addWidget</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">log_text_edit</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">side</span><span class="o">.</span><span class="n">addWidget</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">log_text_edit</span><span class="p">)</span></div>
 
+
+<div class="viewcode-block" id="ClickImageApp._init_toolbar">
+<a class="viewcode-back" href="../../api_doc/click_image_app.html#pyclickimage.ClickImageApp._init_toolbar">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">_init_toolbar</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;Build toolbar&quot;&quot;&quot;</span>
         <span class="c1"># ============================================================</span>
         <span class="c1"># Toolbar</span>
         <span class="c1"># ============================================================</span>
+
         <span class="n">toolbar</span> <span class="o">=</span> <span class="n">QtWidgets</span><span class="o">.</span><span class="n">QToolBar</span><span class="p">()</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">addToolBar</span><span class="p">(</span><span class="n">toolbar</span><span class="p">)</span>
+
+        <span class="c1"># ============================================================</span>
+        <span class="c1"># RESET</span>
+        <span class="c1"># ============================================================</span>
 
         <span class="n">toolbar</span><span class="o">.</span><span class="n">addAction</span><span class="p">(</span><span class="s2">&quot;Reset View&quot;</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">viewer</span><span class="o">.</span><span class="n">reset_view</span><span class="p">)</span>
 
         <span class="n">toolbar</span><span class="o">.</span><span class="n">addSeparator</span><span class="p">()</span>
 
         <span class="c1"># ============================================================</span>
-        <span class="c1"># Crosser color (button + preview)</span>
+        <span class="c1"># IMAGE</span>
         <span class="c1"># ============================================================</span>
-        <span class="n">crosshair_color_widget</span> <span class="o">=</span> <span class="n">QtWidgets</span><span class="o">.</span><span class="n">QWidget</span><span class="p">()</span>
-        <span class="n">crosshair_color_layout</span> <span class="o">=</span> <span class="n">QtWidgets</span><span class="o">.</span><span class="n">QHBoxLayout</span><span class="p">()</span>
-        <span class="n">crosshair_color_layout</span><span class="o">.</span><span class="n">setContentsMargins</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>
 
-        <span class="bp">self</span><span class="o">.</span><span class="n">crosshair_color_btn</span> <span class="o">=</span> <span class="n">QtWidgets</span><span class="o">.</span><span class="n">QPushButton</span><span class="p">(</span><span class="s2">&quot;Color&quot;</span><span class="p">)</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">crosshair_color_btn</span><span class="o">.</span><span class="n">clicked</span><span class="o">.</span><span class="n">connect</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">crosshair_choose_color</span><span class="p">)</span>
+        <span class="n">image_btn</span> <span class="o">=</span> <span class="n">QtWidgets</span><span class="o">.</span><span class="n">QToolButton</span><span class="p">()</span>
+        <span class="n">image_btn</span><span class="o">.</span><span class="n">setText</span><span class="p">(</span><span class="s2">&quot;⚙ Image&quot;</span><span class="p">)</span>
+        <span class="n">image_btn</span><span class="o">.</span><span class="n">setPopupMode</span><span class="p">(</span><span class="n">QtWidgets</span><span class="o">.</span><span class="n">QToolButton</span><span class="o">.</span><span class="n">InstantPopup</span><span class="p">)</span>
 
-        <span class="bp">self</span><span class="o">.</span><span class="n">crosshair_color_preview</span> <span class="o">=</span> <span class="n">QtWidgets</span><span class="o">.</span><span class="n">QLabel</span><span class="p">(</span><span class="s2">&quot;   &quot;</span><span class="p">)</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">crosshair_color_preview</span><span class="o">.</span><span class="n">setStyleSheet</span><span class="p">(</span>
-            <span class="s2">&quot;background-color: rgb(255,0,0); border: 1px solid black;&quot;</span>
+        <span class="n">image_menu</span> <span class="o">=</span> <span class="n">QtWidgets</span><span class="o">.</span><span class="n">QMenu</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span>
+
+        <span class="n">image_panel</span> <span class="o">=</span> <span class="n">QtWidgets</span><span class="o">.</span><span class="n">QWidget</span><span class="p">()</span>
+        <span class="n">image_layout</span> <span class="o">=</span> <span class="n">QtWidgets</span><span class="o">.</span><span class="n">QFormLayout</span><span class="p">(</span><span class="n">image_panel</span><span class="p">)</span>
+
+        <span class="c1"># -------------------------</span>
+        <span class="c1"># Colormap</span>
+        <span class="c1"># -------------------------</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">colormap_selector</span> <span class="o">=</span> <span class="n">QtWidgets</span><span class="o">.</span><span class="n">QComboBox</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">colormap_selector</span><span class="o">.</span><span class="n">addItems</span><span class="p">(</span>
+            <span class="p">[</span>
+                <span class="s2">&quot;Default&quot;</span><span class="p">,</span>
+                <span class="s2">&quot;Gray&quot;</span><span class="p">,</span>
+                <span class="s2">&quot;Hot&quot;</span><span class="p">,</span>
+                <span class="s2">&quot;Jet&quot;</span><span class="p">,</span>
+                <span class="s2">&quot;Rainbow&quot;</span><span class="p">,</span>
+                <span class="s2">&quot;Cool&quot;</span><span class="p">,</span>
+                <span class="s2">&quot;Spring&quot;</span><span class="p">,</span>
+            <span class="p">]</span>
         <span class="p">)</span>
 
-        <span class="n">crosshair_color_layout</span><span class="o">.</span><span class="n">addWidget</span><span class="p">(</span><span class="n">QtWidgets</span><span class="o">.</span><span class="n">QLabel</span><span class="p">(</span><span class="s2">&quot;Crosshair&quot;</span><span class="p">))</span>
-        <span class="n">crosshair_color_layout</span><span class="o">.</span><span class="n">addWidget</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">crosshair_color_btn</span><span class="p">)</span>
-        <span class="n">crosshair_color_layout</span><span class="o">.</span><span class="n">addWidget</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">crosshair_color_preview</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">colormap_selector</span><span class="o">.</span><span class="n">currentIndexChanged</span><span class="o">.</span><span class="n">connect</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">on_colormap_changed</span><span class="p">)</span>
 
-        <span class="n">crosshair_color_widget</span><span class="o">.</span><span class="n">setLayout</span><span class="p">(</span><span class="n">crosshair_color_layout</span><span class="p">)</span>
+        <span class="n">image_layout</span><span class="o">.</span><span class="n">addRow</span><span class="p">(</span><span class="s2">&quot;Colormap&quot;</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">colormap_selector</span><span class="p">)</span>
 
-        <span class="n">toolbar</span><span class="o">.</span><span class="n">addWidget</span><span class="p">(</span><span class="n">crosshair_color_widget</span><span class="p">)</span>
+        <span class="c1"># -------------------------</span>
+        <span class="c1"># Alpha</span>
+        <span class="c1"># -------------------------</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">alpha_slider</span> <span class="o">=</span> <span class="n">QtWidgets</span><span class="o">.</span><span class="n">QSlider</span><span class="p">(</span><span class="n">QtCore</span><span class="o">.</span><span class="n">Qt</span><span class="o">.</span><span class="n">Horizontal</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">alpha_slider</span><span class="o">.</span><span class="n">setRange</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">500</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">alpha_slider</span><span class="o">.</span><span class="n">setValue</span><span class="p">(</span><span class="mi">100</span><span class="p">)</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">alpha_value_label</span> <span class="o">=</span> <span class="n">QtWidgets</span><span class="o">.</span><span class="n">QLabel</span><span class="p">(</span><span class="s2">&quot;1.00&quot;</span><span class="p">)</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">alpha_slider</span><span class="o">.</span><span class="n">valueChanged</span><span class="o">.</span><span class="n">connect</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">on_contrast_changed</span><span class="p">)</span>
+
+        <span class="n">alpha_widget</span> <span class="o">=</span> <span class="n">QtWidgets</span><span class="o">.</span><span class="n">QWidget</span><span class="p">()</span>
+        <span class="n">alpha_layout</span> <span class="o">=</span> <span class="n">QtWidgets</span><span class="o">.</span><span class="n">QHBoxLayout</span><span class="p">(</span><span class="n">alpha_widget</span><span class="p">)</span>
+        <span class="n">alpha_layout</span><span class="o">.</span><span class="n">setContentsMargins</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>
+
+        <span class="n">alpha_layout</span><span class="o">.</span><span class="n">addWidget</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">alpha_slider</span><span class="p">)</span>
+        <span class="n">alpha_layout</span><span class="o">.</span><span class="n">addWidget</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">alpha_value_label</span><span class="p">)</span>
+
+        <span class="n">image_layout</span><span class="o">.</span><span class="n">addRow</span><span class="p">(</span><span class="s2">&quot;Alpha&quot;</span><span class="p">,</span> <span class="n">alpha_widget</span><span class="p">)</span>
+
+        <span class="c1"># -------------------------</span>
+        <span class="c1"># Beta</span>
+        <span class="c1"># -------------------------</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">beta_slider</span> <span class="o">=</span> <span class="n">QtWidgets</span><span class="o">.</span><span class="n">QSlider</span><span class="p">(</span><span class="n">QtCore</span><span class="o">.</span><span class="n">Qt</span><span class="o">.</span><span class="n">Horizontal</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">beta_slider</span><span class="o">.</span><span class="n">setRange</span><span class="p">(</span><span class="o">-</span><span class="mi">100</span><span class="p">,</span> <span class="mi">100</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">beta_slider</span><span class="o">.</span><span class="n">setValue</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">beta_value_label</span> <span class="o">=</span> <span class="n">QtWidgets</span><span class="o">.</span><span class="n">QLabel</span><span class="p">(</span><span class="s2">&quot;0%&quot;</span><span class="p">)</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">beta_slider</span><span class="o">.</span><span class="n">valueChanged</span><span class="o">.</span><span class="n">connect</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">on_contrast_changed</span><span class="p">)</span>
+
+        <span class="n">beta_widget</span> <span class="o">=</span> <span class="n">QtWidgets</span><span class="o">.</span><span class="n">QWidget</span><span class="p">()</span>
+        <span class="n">beta_layout</span> <span class="o">=</span> <span class="n">QtWidgets</span><span class="o">.</span><span class="n">QHBoxLayout</span><span class="p">(</span><span class="n">beta_widget</span><span class="p">)</span>
+        <span class="n">beta_layout</span><span class="o">.</span><span class="n">setContentsMargins</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>
+
+        <span class="n">beta_layout</span><span class="o">.</span><span class="n">addWidget</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">beta_slider</span><span class="p">)</span>
+        <span class="n">beta_layout</span><span class="o">.</span><span class="n">addWidget</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">beta_value_label</span><span class="p">)</span>
+
+        <span class="n">image_layout</span><span class="o">.</span><span class="n">addRow</span><span class="p">(</span><span class="s2">&quot;Beta&quot;</span><span class="p">,</span> <span class="n">beta_widget</span><span class="p">)</span>
+
+        <span class="c1"># -------------------------</span>
+        <span class="c1"># Min</span>
+        <span class="c1"># -------------------------</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">min_slider</span> <span class="o">=</span> <span class="n">QtWidgets</span><span class="o">.</span><span class="n">QSlider</span><span class="p">(</span><span class="n">QtCore</span><span class="o">.</span><span class="n">Qt</span><span class="o">.</span><span class="n">Horizontal</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">min_slider</span><span class="o">.</span><span class="n">setRange</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">100</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">min_slider</span><span class="o">.</span><span class="n">setValue</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">min_value_label</span> <span class="o">=</span> <span class="n">QtWidgets</span><span class="o">.</span><span class="n">QLabel</span><span class="p">(</span><span class="s2">&quot;0%&quot;</span><span class="p">)</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">min_slider</span><span class="o">.</span><span class="n">valueChanged</span><span class="o">.</span><span class="n">connect</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">on_contrast_changed</span><span class="p">)</span>
+
+        <span class="n">min_widget</span> <span class="o">=</span> <span class="n">QtWidgets</span><span class="o">.</span><span class="n">QWidget</span><span class="p">()</span>
+        <span class="n">min_layout</span> <span class="o">=</span> <span class="n">QtWidgets</span><span class="o">.</span><span class="n">QHBoxLayout</span><span class="p">(</span><span class="n">min_widget</span><span class="p">)</span>
+        <span class="n">min_layout</span><span class="o">.</span><span class="n">setContentsMargins</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>
+
+        <span class="n">min_layout</span><span class="o">.</span><span class="n">addWidget</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">min_slider</span><span class="p">)</span>
+        <span class="n">min_layout</span><span class="o">.</span><span class="n">addWidget</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">min_value_label</span><span class="p">)</span>
+
+        <span class="n">image_layout</span><span class="o">.</span><span class="n">addRow</span><span class="p">(</span><span class="s2">&quot;Min&quot;</span><span class="p">,</span> <span class="n">min_widget</span><span class="p">)</span>
+
+        <span class="c1"># -------------------------</span>
+        <span class="c1"># Max</span>
+        <span class="c1"># -------------------------</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">max_slider</span> <span class="o">=</span> <span class="n">QtWidgets</span><span class="o">.</span><span class="n">QSlider</span><span class="p">(</span><span class="n">QtCore</span><span class="o">.</span><span class="n">Qt</span><span class="o">.</span><span class="n">Horizontal</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">max_slider</span><span class="o">.</span><span class="n">setRange</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">100</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">max_slider</span><span class="o">.</span><span class="n">setValue</span><span class="p">(</span><span class="mi">100</span><span class="p">)</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">max_value_label</span> <span class="o">=</span> <span class="n">QtWidgets</span><span class="o">.</span><span class="n">QLabel</span><span class="p">(</span><span class="s2">&quot;100%&quot;</span><span class="p">)</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">max_slider</span><span class="o">.</span><span class="n">valueChanged</span><span class="o">.</span><span class="n">connect</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">on_contrast_changed</span><span class="p">)</span>
+
+        <span class="n">max_widget</span> <span class="o">=</span> <span class="n">QtWidgets</span><span class="o">.</span><span class="n">QWidget</span><span class="p">()</span>
+        <span class="n">max_layout</span> <span class="o">=</span> <span class="n">QtWidgets</span><span class="o">.</span><span class="n">QHBoxLayout</span><span class="p">(</span><span class="n">max_widget</span><span class="p">)</span>
+        <span class="n">max_layout</span><span class="o">.</span><span class="n">setContentsMargins</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>
+
+        <span class="n">max_layout</span><span class="o">.</span><span class="n">addWidget</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">max_slider</span><span class="p">)</span>
+        <span class="n">max_layout</span><span class="o">.</span><span class="n">addWidget</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">max_value_label</span><span class="p">)</span>
+
+        <span class="n">image_layout</span><span class="o">.</span><span class="n">addRow</span><span class="p">(</span><span class="s2">&quot;Max&quot;</span><span class="p">,</span> <span class="n">max_widget</span><span class="p">)</span>
+
+        <span class="c1"># -------------------------</span>
+        <span class="c1"># Reset contrast</span>
+        <span class="c1"># -------------------------</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">reset_contrast_btn</span> <span class="o">=</span> <span class="n">QtWidgets</span><span class="o">.</span><span class="n">QPushButton</span><span class="p">(</span><span class="s2">&quot;Reset&quot;</span><span class="p">)</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">reset_contrast_btn</span><span class="o">.</span><span class="n">clicked</span><span class="o">.</span><span class="n">connect</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">on_reset_contrast</span><span class="p">)</span>
+
+        <span class="n">image_layout</span><span class="o">.</span><span class="n">addRow</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">reset_contrast_btn</span><span class="p">)</span>
+
+        <span class="n">image_action</span> <span class="o">=</span> <span class="n">QtWidgets</span><span class="o">.</span><span class="n">QWidgetAction</span><span class="p">(</span><span class="n">image_menu</span><span class="p">)</span>
+        <span class="n">image_action</span><span class="o">.</span><span class="n">setDefaultWidget</span><span class="p">(</span><span class="n">image_panel</span><span class="p">)</span>
+
+        <span class="n">image_menu</span><span class="o">.</span><span class="n">addAction</span><span class="p">(</span><span class="n">image_action</span><span class="p">)</span>
+
+        <span class="n">image_btn</span><span class="o">.</span><span class="n">setMenu</span><span class="p">(</span><span class="n">image_menu</span><span class="p">)</span>
+
+        <span class="n">toolbar</span><span class="o">.</span><span class="n">addWidget</span><span class="p">(</span><span class="n">image_btn</span><span class="p">)</span>
+
+        <span class="c1"># ============================================================</span>
+        <span class="c1"># CLICKS</span>
+        <span class="c1"># ============================================================</span>
 
         <span class="n">toolbar</span><span class="o">.</span><span class="n">addSeparator</span><span class="p">()</span>
 
-        <span class="c1"># ============================================================</span>
-        <span class="c1"># Marker color (button + preview)</span>
-        <span class="c1"># ============================================================</span>
-        <span class="n">color_widget</span> <span class="o">=</span> <span class="n">QtWidgets</span><span class="o">.</span><span class="n">QWidget</span><span class="p">()</span>
-        <span class="n">color_layout</span> <span class="o">=</span> <span class="n">QtWidgets</span><span class="o">.</span><span class="n">QHBoxLayout</span><span class="p">()</span>
-        <span class="n">color_layout</span><span class="o">.</span><span class="n">setContentsMargins</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>
+        <span class="n">clicks_btn</span> <span class="o">=</span> <span class="n">QtWidgets</span><span class="o">.</span><span class="n">QToolButton</span><span class="p">()</span>
+        <span class="n">clicks_btn</span><span class="o">.</span><span class="n">setText</span><span class="p">(</span><span class="s2">&quot;⚙ Clicks&quot;</span><span class="p">)</span>
+        <span class="n">clicks_btn</span><span class="o">.</span><span class="n">setPopupMode</span><span class="p">(</span><span class="n">QtWidgets</span><span class="o">.</span><span class="n">QToolButton</span><span class="o">.</span><span class="n">InstantPopup</span><span class="p">)</span>
+
+        <span class="n">clicks_menu</span> <span class="o">=</span> <span class="n">QtWidgets</span><span class="o">.</span><span class="n">QMenu</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span>
+
+        <span class="n">clicks_panel</span> <span class="o">=</span> <span class="n">QtWidgets</span><span class="o">.</span><span class="n">QWidget</span><span class="p">()</span>
+        <span class="n">clicks_layout</span> <span class="o">=</span> <span class="n">QtWidgets</span><span class="o">.</span><span class="n">QFormLayout</span><span class="p">(</span><span class="n">clicks_panel</span><span class="p">)</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">display_clicks_checkbox</span> <span class="o">=</span> <span class="n">QtWidgets</span><span class="o">.</span><span class="n">QCheckBox</span><span class="p">(</span><span class="s2">&quot;Display clicks&quot;</span><span class="p">)</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">display_clicks_checkbox</span><span class="o">.</span><span class="n">setChecked</span><span class="p">(</span><span class="kc">True</span><span class="p">)</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">display_clicks_checkbox</span><span class="o">.</span><span class="n">stateChanged</span><span class="o">.</span><span class="n">connect</span><span class="p">(</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">on_display_clicks_changed</span>
+        <span class="p">)</span>
+
+        <span class="n">clicks_layout</span><span class="o">.</span><span class="n">addRow</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">display_clicks_checkbox</span><span class="p">)</span>
+
+        <span class="c1"># Marker color</span>
+
+        <span class="n">marker_widget</span> <span class="o">=</span> <span class="n">QtWidgets</span><span class="o">.</span><span class="n">QWidget</span><span class="p">()</span>
+        <span class="n">marker_layout</span> <span class="o">=</span> <span class="n">QtWidgets</span><span class="o">.</span><span class="n">QHBoxLayout</span><span class="p">(</span><span class="n">marker_widget</span><span class="p">)</span>
+        <span class="n">marker_layout</span><span class="o">.</span><span class="n">setContentsMargins</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>
 
         <span class="bp">self</span><span class="o">.</span><span class="n">color_btn</span> <span class="o">=</span> <span class="n">QtWidgets</span><span class="o">.</span><span class="n">QPushButton</span><span class="p">(</span><span class="s2">&quot;Color&quot;</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">color_btn</span><span class="o">.</span><span class="n">clicked</span><span class="o">.</span><span class="n">connect</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">choose_color</span><span class="p">)</span>
 
         <span class="bp">self</span><span class="o">.</span><span class="n">color_preview</span> <span class="o">=</span> <span class="n">QtWidgets</span><span class="o">.</span><span class="n">QLabel</span><span class="p">(</span><span class="s2">&quot;   &quot;</span><span class="p">)</span>
+
         <span class="bp">self</span><span class="o">.</span><span class="n">color_preview</span><span class="o">.</span><span class="n">setStyleSheet</span><span class="p">(</span>
             <span class="s2">&quot;background-color: rgb(255,0,0); border: 1px solid black;&quot;</span>
         <span class="p">)</span>
 
-        <span class="n">color_layout</span><span class="o">.</span><span class="n">addWidget</span><span class="p">(</span><span class="n">QtWidgets</span><span class="o">.</span><span class="n">QLabel</span><span class="p">(</span><span class="s2">&quot;Marker&quot;</span><span class="p">))</span>
-        <span class="n">color_layout</span><span class="o">.</span><span class="n">addWidget</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">color_btn</span><span class="p">)</span>
-        <span class="n">color_layout</span><span class="o">.</span><span class="n">addWidget</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">color_preview</span><span class="p">)</span>
+        <span class="n">marker_layout</span><span class="o">.</span><span class="n">addWidget</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">color_btn</span><span class="p">)</span>
+        <span class="n">marker_layout</span><span class="o">.</span><span class="n">addWidget</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">color_preview</span><span class="p">)</span>
 
-        <span class="n">color_widget</span><span class="o">.</span><span class="n">setLayout</span><span class="p">(</span><span class="n">color_layout</span><span class="p">)</span>
+        <span class="n">clicks_layout</span><span class="o">.</span><span class="n">addRow</span><span class="p">(</span><span class="s2">&quot;Marker&quot;</span><span class="p">,</span> <span class="n">marker_widget</span><span class="p">)</span>
 
-        <span class="n">toolbar</span><span class="o">.</span><span class="n">addWidget</span><span class="p">(</span><span class="n">color_widget</span><span class="p">)</span>
-
-        <span class="n">toolbar</span><span class="o">.</span><span class="n">addSeparator</span><span class="p">()</span>
-
-        <span class="c1"># ============================================================</span>
-        <span class="c1"># Marker size selector</span>
-        <span class="c1"># ============================================================</span>
-        <span class="n">size_widget</span> <span class="o">=</span> <span class="n">QtWidgets</span><span class="o">.</span><span class="n">QWidget</span><span class="p">()</span>
-        <span class="n">size_layout</span> <span class="o">=</span> <span class="n">QtWidgets</span><span class="o">.</span><span class="n">QHBoxLayout</span><span class="p">()</span>
-        <span class="n">size_layout</span><span class="o">.</span><span class="n">setContentsMargins</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>
+        <span class="c1"># Marker size</span>
 
         <span class="bp">self</span><span class="o">.</span><span class="n">size_selector</span> <span class="o">=</span> <span class="n">QtWidgets</span><span class="o">.</span><span class="n">QComboBox</span><span class="p">()</span>
+
         <span class="bp">self</span><span class="o">.</span><span class="n">size_selector</span><span class="o">.</span><span class="n">addItems</span><span class="p">(</span>
             <span class="p">[</span>
                 <span class="s2">&quot;0.2&quot;</span><span class="p">,</span>
@@ -690,87 +807,214 @@
                 <span class="s2">&quot;100&quot;</span><span class="p">,</span>
             <span class="p">]</span>
         <span class="p">)</span>
+
         <span class="bp">self</span><span class="o">.</span><span class="n">size_selector</span><span class="o">.</span><span class="n">setCurrentText</span><span class="p">(</span><span class="s2">&quot;8&quot;</span><span class="p">)</span>
+
         <span class="bp">self</span><span class="o">.</span><span class="n">size_selector</span><span class="o">.</span><span class="n">currentTextChanged</span><span class="o">.</span><span class="n">connect</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">on_marker_size_changed</span><span class="p">)</span>
 
-        <span class="n">size_layout</span><span class="o">.</span><span class="n">addWidget</span><span class="p">(</span><span class="n">QtWidgets</span><span class="o">.</span><span class="n">QLabel</span><span class="p">(</span><span class="s2">&quot;Size&quot;</span><span class="p">))</span>
-        <span class="n">size_layout</span><span class="o">.</span><span class="n">addWidget</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">size_selector</span><span class="p">)</span>
+        <span class="n">clicks_layout</span><span class="o">.</span><span class="n">addRow</span><span class="p">(</span>
+            <span class="s2">&quot;Size&quot;</span><span class="p">,</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">size_selector</span><span class="p">,</span>
+        <span class="p">)</span>
 
-        <span class="n">size_widget</span><span class="o">.</span><span class="n">setLayout</span><span class="p">(</span><span class="n">size_layout</span><span class="p">)</span>
+        <span class="n">clicks_action</span> <span class="o">=</span> <span class="n">QtWidgets</span><span class="o">.</span><span class="n">QWidgetAction</span><span class="p">(</span><span class="n">clicks_menu</span><span class="p">)</span>
+        <span class="n">clicks_action</span><span class="o">.</span><span class="n">setDefaultWidget</span><span class="p">(</span><span class="n">clicks_panel</span><span class="p">)</span>
 
-        <span class="n">toolbar</span><span class="o">.</span><span class="n">addWidget</span><span class="p">(</span><span class="n">size_widget</span><span class="p">)</span>
+        <span class="n">clicks_menu</span><span class="o">.</span><span class="n">addAction</span><span class="p">(</span><span class="n">clicks_action</span><span class="p">)</span>
+
+        <span class="n">clicks_btn</span><span class="o">.</span><span class="n">setMenu</span><span class="p">(</span><span class="n">clicks_menu</span><span class="p">)</span>
+
+        <span class="n">toolbar</span><span class="o">.</span><span class="n">addWidget</span><span class="p">(</span><span class="n">clicks_btn</span><span class="p">)</span>
+
+        <span class="c1"># ============================================================</span>
+        <span class="c1"># CROSSHAIR</span>
+        <span class="c1"># ============================================================</span>
 
         <span class="n">toolbar</span><span class="o">.</span><span class="n">addSeparator</span><span class="p">()</span>
 
-        <span class="n">toolbar</span><span class="o">.</span><span class="n">addAction</span><span class="p">(</span><span class="s2">&quot;Clear Logs&quot;</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">clear_logs</span><span class="p">)</span>
+        <span class="n">crosshair_btn</span> <span class="o">=</span> <span class="n">QtWidgets</span><span class="o">.</span><span class="n">QToolButton</span><span class="p">()</span>
+        <span class="n">crosshair_btn</span><span class="o">.</span><span class="n">setText</span><span class="p">(</span><span class="s2">&quot;⚙ Crosshair&quot;</span><span class="p">)</span>
+        <span class="n">crosshair_btn</span><span class="o">.</span><span class="n">setPopupMode</span><span class="p">(</span><span class="n">QtWidgets</span><span class="o">.</span><span class="n">QToolButton</span><span class="o">.</span><span class="n">InstantPopup</span><span class="p">)</span>
 
-        <span class="n">toolbar</span><span class="o">.</span><span class="n">addSeparator</span><span class="p">()</span></div>
+        <span class="n">crosshair_menu</span> <span class="o">=</span> <span class="n">QtWidgets</span><span class="o">.</span><span class="n">QMenu</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span>
+
+        <span class="n">crosshair_panel</span> <span class="o">=</span> <span class="n">QtWidgets</span><span class="o">.</span><span class="n">QWidget</span><span class="p">()</span>
+        <span class="n">crosshair_layout</span> <span class="o">=</span> <span class="n">QtWidgets</span><span class="o">.</span><span class="n">QFormLayout</span><span class="p">(</span><span class="n">crosshair_panel</span><span class="p">)</span>
+
+        <span class="n">crosshair_widget</span> <span class="o">=</span> <span class="n">QtWidgets</span><span class="o">.</span><span class="n">QWidget</span><span class="p">()</span>
+        <span class="n">crosshair_widget_layout</span> <span class="o">=</span> <span class="n">QtWidgets</span><span class="o">.</span><span class="n">QHBoxLayout</span><span class="p">(</span><span class="n">crosshair_widget</span><span class="p">)</span>
+
+        <span class="n">crosshair_widget_layout</span><span class="o">.</span><span class="n">setContentsMargins</span><span class="p">(</span>
+            <span class="mi">0</span><span class="p">,</span>
+            <span class="mi">0</span><span class="p">,</span>
+            <span class="mi">0</span><span class="p">,</span>
+            <span class="mi">0</span><span class="p">,</span>
+        <span class="p">)</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">crosshair_color_btn</span> <span class="o">=</span> <span class="n">QtWidgets</span><span class="o">.</span><span class="n">QPushButton</span><span class="p">(</span><span class="s2">&quot;Color&quot;</span><span class="p">)</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">crosshair_color_btn</span><span class="o">.</span><span class="n">clicked</span><span class="o">.</span><span class="n">connect</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">crosshair_choose_color</span><span class="p">)</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">crosshair_color_preview</span> <span class="o">=</span> <span class="n">QtWidgets</span><span class="o">.</span><span class="n">QLabel</span><span class="p">(</span><span class="s2">&quot;   &quot;</span><span class="p">)</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">crosshair_color_preview</span><span class="o">.</span><span class="n">setStyleSheet</span><span class="p">(</span>
+            <span class="s2">&quot;background-color: rgb(255,0,0); border: 1px solid black;&quot;</span>
+        <span class="p">)</span>
+
+        <span class="n">crosshair_widget_layout</span><span class="o">.</span><span class="n">addWidget</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">crosshair_color_btn</span><span class="p">)</span>
+
+        <span class="n">crosshair_widget_layout</span><span class="o">.</span><span class="n">addWidget</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">crosshair_color_preview</span><span class="p">)</span>
+
+        <span class="n">crosshair_layout</span><span class="o">.</span><span class="n">addRow</span><span class="p">(</span>
+            <span class="s2">&quot;Color&quot;</span><span class="p">,</span>
+            <span class="n">crosshair_widget</span><span class="p">,</span>
+        <span class="p">)</span>
+
+        <span class="n">crosshair_action</span> <span class="o">=</span> <span class="n">QtWidgets</span><span class="o">.</span><span class="n">QWidgetAction</span><span class="p">(</span><span class="n">crosshair_menu</span><span class="p">)</span>
+
+        <span class="n">crosshair_action</span><span class="o">.</span><span class="n">setDefaultWidget</span><span class="p">(</span><span class="n">crosshair_panel</span><span class="p">)</span>
+
+        <span class="n">crosshair_menu</span><span class="o">.</span><span class="n">addAction</span><span class="p">(</span><span class="n">crosshair_action</span><span class="p">)</span>
+
+        <span class="n">crosshair_btn</span><span class="o">.</span><span class="n">setMenu</span><span class="p">(</span><span class="n">crosshair_menu</span><span class="p">)</span>
+
+        <span class="n">toolbar</span><span class="o">.</span><span class="n">addWidget</span><span class="p">(</span><span class="n">crosshair_btn</span><span class="p">)</span>
+
+        <span class="c1"># ============================================================</span>
+        <span class="c1"># LOGS</span>
+        <span class="c1"># ============================================================</span>
+        <span class="n">toolbar</span><span class="o">.</span><span class="n">addSeparator</span><span class="p">()</span>
+
+        <span class="n">clear_log_btn</span> <span class="o">=</span> <span class="n">QtWidgets</span><span class="o">.</span><span class="n">QToolButton</span><span class="p">()</span>
+        <span class="n">clear_log_btn</span><span class="o">.</span><span class="n">setText</span><span class="p">(</span><span class="s2">&quot;Clear logs&quot;</span><span class="p">)</span>
+        <span class="n">clear_log_btn</span><span class="o">.</span><span class="n">clicked</span><span class="o">.</span><span class="n">connect</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">clear_logs</span><span class="p">)</span>
+
+        <span class="n">toolbar</span><span class="o">.</span><span class="n">addWidget</span><span class="p">(</span><span class="n">clear_log_btn</span><span class="p">)</span></div>
 
 
     <span class="c1"># ============================================================</span>
-    <span class="c1"># Precision mode</span>
+    <span class="c1"># Update pipeline</span>
     <span class="c1"># ============================================================</span>
 
-<div class="viewcode-block" id="ClickImageApp.on_precision_changed">
-<a class="viewcode-back" href="../../api_doc/click_image_app.html#pyclickimage.ClickImageApp.on_precision_changed">[docs]</a>
-    <span class="k">def</span><span class="w"> </span><span class="nf">on_precision_changed</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">state</span><span class="p">):</span>
+<div class="viewcode-block" id="ClickImageApp.update">
+<a class="viewcode-back" href="../../api_doc/click_image_app.html#pyclickimage.ClickImageApp.update">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">update</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
 <span class="w">        </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">        Toggle integer/float precision mode.</span>
+<span class="sd">        Refresh UI.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
-        <span class="n">INT</span> <span class="o">=</span> <span class="n">state</span> <span class="o">==</span> <span class="n">QtCore</span><span class="o">.</span><span class="n">Qt</span><span class="o">.</span><span class="n">Checked</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">click_manager</span><span class="o">.</span><span class="n">precision_mode</span> <span class="o">=</span> <span class="s2">&quot;int&quot;</span> <span class="k">if</span> <span class="n">INT</span> <span class="k">else</span> <span class="s2">&quot;float&quot;</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">_append_log</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Precision mode: </span><span class="si">{</span><span class="s1">&#39;INT&#39;</span><span class="w"> </span><span class="k">if</span><span class="w"> </span><span class="n">INT</span><span class="w"> </span><span class="k">else</span><span class="w"> </span><span class="s1">&#39;FLOAT&#39;</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">update</span><span class="p">()</span></div>
+        <span class="k">if</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">initialization_done</span><span class="p">:</span>
+            <span class="k">return</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">update_groups</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">update_table</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">update_viewer</span><span class="p">()</span></div>
 
 
-<div class="viewcode-block" id="ClickImageApp.on_half_shift_changed">
-<a class="viewcode-back" href="../../api_doc/click_image_app.html#pyclickimage.ClickImageApp.on_half_shift_changed">[docs]</a>
-    <span class="k">def</span><span class="w"> </span><span class="nf">on_half_shift_changed</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">state</span><span class="p">):</span>
+<div class="viewcode-block" id="ClickImageApp._format_value">
+<a class="viewcode-back" href="../../api_doc/click_image_app.html#pyclickimage.ClickImageApp._format_value">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">_format_value</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">v</span><span class="p">):</span>
+        <span class="k">if</span> <span class="n">v</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="k">return</span> <span class="s2">&quot;&quot;</span>
+
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">click_manager</span><span class="o">.</span><span class="n">use_int_precision</span><span class="p">:</span>
+            <span class="k">return</span> <span class="nb">str</span><span class="p">(</span><span class="nb">int</span><span class="p">(</span><span class="nb">round</span><span class="p">(</span><span class="n">v</span><span class="p">)))</span>
+
+        <span class="k">return</span> <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">v</span><span class="si">:</span><span class="s2">.3f</span><span class="si">}</span><span class="s2">&quot;</span></div>
+
+
+<div class="viewcode-block" id="ClickImageApp.update_viewer">
+<a class="viewcode-back" href="../../api_doc/click_image_app.html#pyclickimage.ClickImageApp.update_viewer">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">update_viewer</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
 <span class="w">        </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">        Toggle half-shift mode.</span>
+<span class="sd">        Render image + clicks.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">img</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">image</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">float32</span><span class="p">)</span>
+        <span class="n">imax</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">iinfo</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">image</span><span class="o">.</span><span class="n">dtype</span><span class="p">)</span><span class="o">.</span><span class="n">max</span>
+        <span class="n">dm</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">display_min_pc</span> <span class="o">*</span> <span class="n">imax</span> <span class="o">/</span> <span class="mi">100</span>
+        <span class="n">dM</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">display_max_pc</span> <span class="o">*</span> <span class="n">imax</span> <span class="o">/</span> <span class="mi">100</span>
+        <span class="n">b</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">beta_pc</span> <span class="o">*</span> <span class="n">imax</span> <span class="o">/</span> <span class="mi">100</span>
 
-        <span class="n">half_shift</span> <span class="o">=</span> <span class="n">state</span> <span class="o">==</span> <span class="n">QtCore</span><span class="o">.</span><span class="n">Qt</span><span class="o">.</span><span class="n">Checked</span>
+        <span class="n">img</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">clip</span><span class="p">(</span><span class="n">img</span><span class="p">,</span> <span class="n">dm</span><span class="p">,</span> <span class="n">dM</span><span class="p">)</span>
 
-        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">click_manager</span><span class="o">.</span><span class="n">n_clicks</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span>
+        <span class="n">img</span> <span class="o">=</span> <span class="p">(</span><span class="n">img</span> <span class="o">-</span> <span class="n">dm</span><span class="p">)</span> <span class="o">/</span> <span class="nb">max</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="n">dM</span> <span class="o">-</span> <span class="n">dm</span><span class="p">)</span> <span class="o">*</span> <span class="n">imax</span>
+        <span class="n">img</span> <span class="o">=</span> <span class="n">img</span> <span class="o">*</span> <span class="bp">self</span><span class="o">.</span><span class="n">alpha</span> <span class="o">+</span> <span class="n">b</span>
 
-            <span class="n">msg</span> <span class="o">=</span> <span class="n">QtWidgets</span><span class="o">.</span><span class="n">QMessageBox</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span>
-            <span class="n">msg</span><span class="o">.</span><span class="n">setWindowTitle</span><span class="p">(</span><span class="s2">&quot;Existing clicks detected&quot;</span><span class="p">)</span>
-            <span class="n">msg</span><span class="o">.</span><span class="n">setText</span><span class="p">(</span>
-                <span class="sa">f</span><span class="s2">&quot;Do you want to shift all previous clicked points by 0.5 to match the new coordinates system ?&quot;</span>
+        <span class="n">img</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">clip</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">round</span><span class="p">(</span><span class="n">img</span><span class="p">),</span> <span class="mi">0</span><span class="p">,</span> <span class="n">imax</span><span class="p">)</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">image</span><span class="o">.</span><span class="n">dtype</span><span class="p">)</span>
+
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_image_has_changed</span> <span class="ow">or</span> <span class="bp">self</span><span class="o">.</span><span class="n">_colormap_has_changed</span><span class="p">:</span>
+            <span class="n">colormap</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_selected_colormap</span><span class="p">()</span>
+
+            <span class="k">if</span> <span class="n">colormap</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+                <span class="n">gray</span> <span class="o">=</span> <span class="n">cv2</span><span class="o">.</span><span class="n">cvtColor</span><span class="p">(</span><span class="n">img</span><span class="p">,</span> <span class="n">cv2</span><span class="o">.</span><span class="n">COLOR_BGR2GRAY</span><span class="p">)</span>
+                <span class="n">img</span> <span class="o">=</span> <span class="n">cv2</span><span class="o">.</span><span class="n">applyColorMap</span><span class="p">(</span><span class="n">gray</span><span class="p">,</span> <span class="n">colormap</span><span class="p">)</span>
+
+            <span class="c1"># conversion unique pour Qt</span>
+            <span class="n">rgb</span> <span class="o">=</span> <span class="n">cv2</span><span class="o">.</span><span class="n">cvtColor</span><span class="p">(</span><span class="n">img</span><span class="p">,</span> <span class="n">cv2</span><span class="o">.</span><span class="n">COLOR_BGR2RGB</span><span class="p">)</span>
+
+            <span class="n">h</span><span class="p">,</span> <span class="n">w</span><span class="p">,</span> <span class="n">ch</span> <span class="o">=</span> <span class="n">rgb</span><span class="o">.</span><span class="n">shape</span>
+            <span class="n">bytes_per_line</span> <span class="o">=</span> <span class="n">ch</span> <span class="o">*</span> <span class="n">w</span>
+
+            <span class="n">qimg</span> <span class="o">=</span> <span class="n">QtGui</span><span class="o">.</span><span class="n">QImage</span><span class="p">(</span>
+                <span class="n">rgb</span><span class="o">.</span><span class="n">data</span><span class="p">,</span> <span class="n">w</span><span class="p">,</span> <span class="n">h</span><span class="p">,</span> <span class="n">bytes_per_line</span><span class="p">,</span> <span class="n">QtGui</span><span class="o">.</span><span class="n">QImage</span><span class="o">.</span><span class="n">Format_RGB888</span>
             <span class="p">)</span>
-            <span class="n">msg</span><span class="o">.</span><span class="n">setInformativeText</span><span class="p">(</span><span class="s2">&quot;No = keep clicks</span><span class="se">\n</span><span class="s2">Yes = shift clicks&quot;</span><span class="p">)</span>
-            <span class="n">msg</span><span class="o">.</span><span class="n">setStandardButtons</span><span class="p">(</span><span class="n">QtWidgets</span><span class="o">.</span><span class="n">QMessageBox</span><span class="o">.</span><span class="n">No</span> <span class="o">|</span> <span class="n">QtWidgets</span><span class="o">.</span><span class="n">QMessageBox</span><span class="o">.</span><span class="n">Yes</span><span class="p">)</span>
-            <span class="n">msg</span><span class="o">.</span><span class="n">setDefaultButton</span><span class="p">(</span><span class="n">QtWidgets</span><span class="o">.</span><span class="n">QMessageBox</span><span class="o">.</span><span class="n">Yes</span><span class="p">)</span>
+            <span class="n">pix</span> <span class="o">=</span> <span class="n">QtGui</span><span class="o">.</span><span class="n">QPixmap</span><span class="o">.</span><span class="n">fromImage</span><span class="p">(</span><span class="n">qimg</span><span class="p">)</span>
 
-            <span class="n">choice</span> <span class="o">=</span> <span class="n">msg</span><span class="o">.</span><span class="n">exec_</span><span class="p">()</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">viewer</span><span class="o">.</span><span class="n">set_image</span><span class="p">(</span><span class="n">pix</span><span class="p">)</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_image_has_changed</span> <span class="o">=</span> <span class="kc">False</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_colormap_has_changed</span> <span class="o">=</span> <span class="kc">False</span>
 
-            <span class="k">if</span> <span class="n">choice</span> <span class="o">==</span> <span class="n">QtWidgets</span><span class="o">.</span><span class="n">QMessageBox</span><span class="o">.</span><span class="n">Yes</span><span class="p">:</span>
-                <span class="k">if</span> <span class="n">half_shift</span><span class="p">:</span>
-                    <span class="bp">self</span><span class="o">.</span><span class="n">click_manager</span><span class="o">.</span><span class="n">to_half_shift_on</span><span class="p">()</span>
-                <span class="k">else</span><span class="p">:</span>
-                    <span class="bp">self</span><span class="o">.</span><span class="n">click_manager</span><span class="o">.</span><span class="n">to_half_shift_off</span><span class="p">()</span>
+        <span class="c1"># redraw clicks</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">viewer</span><span class="o">.</span><span class="n">clear_markers</span><span class="p">()</span>
 
-        <span class="bp">self</span><span class="o">.</span><span class="n">viewer</span><span class="o">.</span><span class="n">half_shift</span> <span class="o">=</span> <span class="n">half_shift</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">_append_log</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Half-Shift mode: </span><span class="si">{</span><span class="n">half_shift</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">update</span><span class="p">()</span></div>
+        <span class="n">pts</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">click_manager</span><span class="o">.</span><span class="n">extract_group</span><span class="p">()</span>
+
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">show_clicks</span><span class="p">:</span>
+            <span class="k">for</span> <span class="n">x</span><span class="p">,</span> <span class="n">y</span> <span class="ow">in</span> <span class="n">pts</span><span class="p">:</span>
+                <span class="k">if</span> <span class="n">x</span> <span class="ow">is</span> <span class="kc">None</span> <span class="ow">or</span> <span class="n">y</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+                    <span class="k">continue</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">viewer</span><span class="o">.</span><span class="n">add_marker</span><span class="p">((</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">),</span> <span class="bp">self</span><span class="o">.</span><span class="n">marker_color</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">marker_size</span><span class="p">)</span></div>
 
 
-<div class="viewcode-block" id="ClickImageApp.on_display_clicks_changed">
-<a class="viewcode-back" href="../../api_doc/click_image_app.html#pyclickimage.ClickImageApp.on_display_clicks_changed">[docs]</a>
-    <span class="k">def</span><span class="w"> </span><span class="nf">on_display_clicks_changed</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">state</span><span class="p">):</span>
+<div class="viewcode-block" id="ClickImageApp.update_table">
+<a class="viewcode-back" href="../../api_doc/click_image_app.html#pyclickimage.ClickImageApp.update_table">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">update_table</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
 <span class="w">        </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">        Toggle dispaly clicks.</span>
+<span class="sd">        Update table with current group points.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
-        <span class="n">DISPLAY</span> <span class="o">=</span> <span class="n">state</span> <span class="o">==</span> <span class="n">QtCore</span><span class="o">.</span><span class="n">Qt</span><span class="o">.</span><span class="n">Checked</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">_append_log</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Display clicks: </span><span class="si">{</span><span class="n">DISPLAY</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">update</span><span class="p">()</span></div>
+        <span class="n">pts</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">click_manager</span><span class="o">.</span><span class="n">extract_group</span><span class="p">()</span>
+
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">click_manager</span><span class="o">.</span><span class="n">use_float_precision</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">table</span><span class="o">.</span><span class="n">setHorizontalHeaderLabels</span><span class="p">([</span><span class="s2">&quot;Index&quot;</span><span class="p">,</span> <span class="s2">&quot;X (float)&quot;</span><span class="p">,</span> <span class="s2">&quot;Y (float)&quot;</span><span class="p">])</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">table</span><span class="o">.</span><span class="n">setHorizontalHeaderLabels</span><span class="p">([</span><span class="s2">&quot;Index&quot;</span><span class="p">,</span> <span class="s2">&quot;X (int)&quot;</span><span class="p">,</span> <span class="s2">&quot;Y (int)&quot;</span><span class="p">])</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">table</span><span class="o">.</span><span class="n">setRowCount</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">pts</span><span class="p">))</span>
+
+        <span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">)</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">pts</span><span class="p">):</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">table</span><span class="o">.</span><span class="n">setItem</span><span class="p">(</span><span class="n">i</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="n">QtWidgets</span><span class="o">.</span><span class="n">QTableWidgetItem</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="n">i</span><span class="p">)))</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">table</span><span class="o">.</span><span class="n">setItem</span><span class="p">(</span><span class="n">i</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="n">QtWidgets</span><span class="o">.</span><span class="n">QTableWidgetItem</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_format_value</span><span class="p">(</span><span class="n">x</span><span class="p">)))</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">table</span><span class="o">.</span><span class="n">setItem</span><span class="p">(</span><span class="n">i</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="n">QtWidgets</span><span class="o">.</span><span class="n">QTableWidgetItem</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_format_value</span><span class="p">(</span><span class="n">y</span><span class="p">)))</span></div>
+
+
+<div class="viewcode-block" id="ClickImageApp.update_groups">
+<a class="viewcode-back" href="../../api_doc/click_image_app.html#pyclickimage.ClickImageApp.update_groups">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">update_groups</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Sync group selector.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">group_selector</span><span class="o">.</span><span class="n">blockSignals</span><span class="p">(</span><span class="kc">True</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">group_selector</span><span class="o">.</span><span class="n">clear</span><span class="p">()</span>
+
+        <span class="k">for</span> <span class="n">g</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">click_manager</span><span class="o">.</span><span class="n">groups</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">group_selector</span><span class="o">.</span><span class="n">addItem</span><span class="p">(</span><span class="n">g</span><span class="p">)</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">group_selector</span><span class="o">.</span><span class="n">setCurrentText</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">click_manager</span><span class="o">.</span><span class="n">current_group</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">group_selector</span><span class="o">.</span><span class="n">blockSignals</span><span class="p">(</span><span class="kc">False</span><span class="p">)</span></div>
 
 
     <span class="c1"># ============================================================</span>
     <span class="c1"># Image</span>
     <span class="c1"># ============================================================</span>
-
 <div class="viewcode-block" id="ClickImageApp.set_image">
 <a class="viewcode-back" href="../../api_doc/click_image_app.html#pyclickimage.ClickImageApp.set_image">[docs]</a>
     <span class="k">def</span><span class="w"> </span><span class="nf">set_image</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">image</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">]):</span>
@@ -861,113 +1105,71 @@
         <span class="bp">self</span><span class="o">.</span><span class="n">update</span><span class="p">()</span></div>
 
 
-    <span class="c1"># ============================================================</span>
-    <span class="c1"># Update pipeline</span>
-    <span class="c1"># ============================================================</span>
-
-<div class="viewcode-block" id="ClickImageApp.update">
-<a class="viewcode-back" href="../../api_doc/click_image_app.html#pyclickimage.ClickImageApp.update">[docs]</a>
-    <span class="k">def</span><span class="w"> </span><span class="nf">update</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-<span class="w">        </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">        Refresh UI.</span>
+<div class="viewcode-block" id="ClickImageApp.on_colormap_changed">
+<a class="viewcode-back" href="../../api_doc/click_image_app.html#pyclickimage.ClickImageApp.on_colormap_changed">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">on_colormap_changed</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">index</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Called when the user selects a different colormap.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
-        <span class="k">if</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">initialization_done</span><span class="p">:</span>
-            <span class="k">return</span>
-
-        <span class="bp">self</span><span class="o">.</span><span class="n">update_groups</span><span class="p">()</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">update_table</span><span class="p">()</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">update_viewer</span><span class="p">()</span></div>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_colormap_has_changed</span> <span class="o">=</span> <span class="kc">True</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_append_log</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Colormap changed to: </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">colormap_selector</span><span class="o">.</span><span class="n">currentText</span><span class="p">()</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">update</span><span class="p">()</span></div>
 
 
-<div class="viewcode-block" id="ClickImageApp._format_value">
-<a class="viewcode-back" href="../../api_doc/click_image_app.html#pyclickimage.ClickImageApp._format_value">[docs]</a>
-    <span class="k">def</span><span class="w"> </span><span class="nf">_format_value</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">v</span><span class="p">):</span>
-        <span class="k">if</span> <span class="n">v</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
-            <span class="k">return</span> <span class="s2">&quot;&quot;</span>
+<div class="viewcode-block" id="ClickImageApp.get_selected_colormap">
+<a class="viewcode-back" href="../../api_doc/click_image_app.html#pyclickimage.ClickImageApp.get_selected_colormap">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">get_selected_colormap</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Get the selected colormap for displaying the image.</span>
 
-        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">click_manager</span><span class="o">.</span><span class="n">use_int_precision</span><span class="p">:</span>
-            <span class="k">return</span> <span class="nb">str</span><span class="p">(</span><span class="nb">int</span><span class="p">(</span><span class="nb">round</span><span class="p">(</span><span class="n">v</span><span class="p">)))</span>
-
-        <span class="k">return</span> <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">v</span><span class="si">:</span><span class="s2">.3f</span><span class="si">}</span><span class="s2">&quot;</span></div>
-
-
-<div class="viewcode-block" id="ClickImageApp.update_viewer">
-<a class="viewcode-back" href="../../api_doc/click_image_app.html#pyclickimage.ClickImageApp.update_viewer">[docs]</a>
-    <span class="k">def</span><span class="w"> </span><span class="nf">update_viewer</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-<span class="w">        </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">        Render image + clicks.</span>
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        str</span>
+<span class="sd">            The selected colormap.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
-        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_image_has_changed</span> <span class="ow">or</span> <span class="bp">self</span><span class="o">.</span><span class="n">_colormap_has_changed</span><span class="p">:</span>
-            <span class="n">colormap</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_selected_colormap</span><span class="p">()</span>
-            <span class="n">img</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">image</span>  <span class="c1"># BGR (OpenCV standard)</span>
-
-            <span class="k">if</span> <span class="n">colormap</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
-                <span class="n">gray</span> <span class="o">=</span> <span class="n">cv2</span><span class="o">.</span><span class="n">cvtColor</span><span class="p">(</span><span class="n">img</span><span class="p">,</span> <span class="n">cv2</span><span class="o">.</span><span class="n">COLOR_BGR2GRAY</span><span class="p">)</span>
-                <span class="n">img</span> <span class="o">=</span> <span class="n">cv2</span><span class="o">.</span><span class="n">applyColorMap</span><span class="p">(</span><span class="n">gray</span><span class="p">,</span> <span class="n">colormap</span><span class="p">)</span>
-
-            <span class="c1"># conversion unique pour Qt</span>
-            <span class="n">rgb</span> <span class="o">=</span> <span class="n">cv2</span><span class="o">.</span><span class="n">cvtColor</span><span class="p">(</span><span class="n">img</span><span class="p">,</span> <span class="n">cv2</span><span class="o">.</span><span class="n">COLOR_BGR2RGB</span><span class="p">)</span>
-
-            <span class="n">h</span><span class="p">,</span> <span class="n">w</span><span class="p">,</span> <span class="n">ch</span> <span class="o">=</span> <span class="n">rgb</span><span class="o">.</span><span class="n">shape</span>
-            <span class="n">bytes_per_line</span> <span class="o">=</span> <span class="n">ch</span> <span class="o">*</span> <span class="n">w</span>
-
-            <span class="n">qimg</span> <span class="o">=</span> <span class="n">QtGui</span><span class="o">.</span><span class="n">QImage</span><span class="p">(</span>
-                <span class="n">rgb</span><span class="o">.</span><span class="n">data</span><span class="p">,</span> <span class="n">w</span><span class="p">,</span> <span class="n">h</span><span class="p">,</span> <span class="n">bytes_per_line</span><span class="p">,</span> <span class="n">QtGui</span><span class="o">.</span><span class="n">QImage</span><span class="o">.</span><span class="n">Format_RGB888</span>
-            <span class="p">)</span>
-            <span class="n">pix</span> <span class="o">=</span> <span class="n">QtGui</span><span class="o">.</span><span class="n">QPixmap</span><span class="o">.</span><span class="n">fromImage</span><span class="p">(</span><span class="n">qimg</span><span class="p">)</span>
-
-            <span class="bp">self</span><span class="o">.</span><span class="n">viewer</span><span class="o">.</span><span class="n">set_image</span><span class="p">(</span><span class="n">pix</span><span class="p">)</span>
-            <span class="bp">self</span><span class="o">.</span><span class="n">_image_has_changed</span> <span class="o">=</span> <span class="kc">False</span>
-            <span class="bp">self</span><span class="o">.</span><span class="n">_colormap_has_changed</span> <span class="o">=</span> <span class="kc">False</span>
-
-        <span class="c1"># redraw clicks</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">viewer</span><span class="o">.</span><span class="n">clear_markers</span><span class="p">()</span>
-
-        <span class="n">pts</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">click_manager</span><span class="o">.</span><span class="n">extract_group</span><span class="p">()</span>
-
-        <span class="n">DISPLAY</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">display_clicks_checkbox</span><span class="o">.</span><span class="n">isChecked</span><span class="p">()</span>
-        <span class="k">if</span> <span class="n">DISPLAY</span><span class="p">:</span>
-            <span class="k">for</span> <span class="n">x</span><span class="p">,</span> <span class="n">y</span> <span class="ow">in</span> <span class="n">pts</span><span class="p">:</span>
-                <span class="k">if</span> <span class="n">x</span> <span class="ow">is</span> <span class="kc">None</span> <span class="ow">or</span> <span class="n">y</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
-                    <span class="k">continue</span>
-                <span class="bp">self</span><span class="o">.</span><span class="n">viewer</span><span class="o">.</span><span class="n">add_marker</span><span class="p">((</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">),</span> <span class="bp">self</span><span class="o">.</span><span class="n">marker_color</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">marker_size</span><span class="p">)</span></div>
+        <span class="n">colormap_map</span> <span class="o">=</span> <span class="p">{</span>
+            <span class="s2">&quot;Default&quot;</span><span class="p">:</span> <span class="kc">None</span><span class="p">,</span>
+            <span class="s2">&quot;Gray&quot;</span><span class="p">:</span> <span class="n">cv2</span><span class="o">.</span><span class="n">COLORMAP_BONE</span><span class="p">,</span>
+            <span class="s2">&quot;Hot&quot;</span><span class="p">:</span> <span class="n">cv2</span><span class="o">.</span><span class="n">COLORMAP_HOT</span><span class="p">,</span>
+            <span class="s2">&quot;Jet&quot;</span><span class="p">:</span> <span class="n">cv2</span><span class="o">.</span><span class="n">COLORMAP_JET</span><span class="p">,</span>
+            <span class="s2">&quot;Rainbow&quot;</span><span class="p">:</span> <span class="n">cv2</span><span class="o">.</span><span class="n">COLORMAP_RAINBOW</span><span class="p">,</span>
+            <span class="s2">&quot;Cool&quot;</span><span class="p">:</span> <span class="n">cv2</span><span class="o">.</span><span class="n">COLORMAP_COOL</span><span class="p">,</span>
+            <span class="s2">&quot;Spring&quot;</span><span class="p">:</span> <span class="n">cv2</span><span class="o">.</span><span class="n">COLORMAP_SPRING</span><span class="p">,</span>
+        <span class="p">}</span>
+        <span class="k">return</span> <span class="n">colormap_map</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">colormap_selector</span><span class="o">.</span><span class="n">currentText</span><span class="p">(),</span> <span class="kc">None</span><span class="p">)</span></div>
 
 
-<div class="viewcode-block" id="ClickImageApp.update_table">
-<a class="viewcode-back" href="../../api_doc/click_image_app.html#pyclickimage.ClickImageApp.update_table">[docs]</a>
-    <span class="k">def</span><span class="w"> </span><span class="nf">update_table</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-<span class="w">        </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">        Update table with current group points.</span>
+<div class="viewcode-block" id="ClickImageApp.on_contrast_changed">
+<a class="viewcode-back" href="../../api_doc/click_image_app.html#pyclickimage.ClickImageApp.on_contrast_changed">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">on_contrast_changed</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">alpha</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">alpha_slider</span><span class="o">.</span><span class="n">value</span><span class="p">()</span> <span class="o">/</span> <span class="mi">100</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">beta_pc</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">beta_slider</span><span class="o">.</span><span class="n">value</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">display_min_pc</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">min_slider</span><span class="o">.</span><span class="n">value</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">display_max_pc</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">max_slider</span><span class="o">.</span><span class="n">value</span><span class="p">()</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">alpha_value_label</span><span class="o">.</span><span class="n">setText</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">alpha</span><span class="si">:</span><span class="s2">.2f</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">beta_value_label</span><span class="o">.</span><span class="n">setText</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">beta_pc</span><span class="si">}</span><span class="s2">%&quot;</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">min_value_label</span><span class="o">.</span><span class="n">setText</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">display_min_pc</span><span class="si">}</span><span class="s2">%&quot;</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">max_value_label</span><span class="o">.</span><span class="n">setText</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">display_max_pc</span><span class="si">}</span><span class="s2">%&quot;</span><span class="p">)</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">_image_has_changed</span> <span class="o">=</span> <span class="kc">True</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">update</span><span class="p">()</span></div>
+
+
+<div class="viewcode-block" id="ClickImageApp.on_reset_contrast">
+<a class="viewcode-back" href="../../api_doc/click_image_app.html#pyclickimage.ClickImageApp.on_reset_contrast">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">on_reset_contrast</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Reset contrast settings.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
-        <span class="n">pts</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">click_manager</span><span class="o">.</span><span class="n">extract_group</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">alpha_slider</span><span class="o">.</span><span class="n">setValue</span><span class="p">(</span><span class="mi">100</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">beta_slider</span><span class="o">.</span><span class="n">setValue</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
 
-        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">click_manager</span><span class="o">.</span><span class="n">use_float_precision</span><span class="p">:</span>
-            <span class="bp">self</span><span class="o">.</span><span class="n">table</span><span class="o">.</span><span class="n">setHorizontalHeaderLabels</span><span class="p">([</span><span class="s2">&quot;Index&quot;</span><span class="p">,</span> <span class="s2">&quot;X (float)&quot;</span><span class="p">,</span> <span class="s2">&quot;Y (float)&quot;</span><span class="p">])</span>
-        <span class="k">else</span><span class="p">:</span>
-            <span class="bp">self</span><span class="o">.</span><span class="n">table</span><span class="o">.</span><span class="n">setHorizontalHeaderLabels</span><span class="p">([</span><span class="s2">&quot;Index&quot;</span><span class="p">,</span> <span class="s2">&quot;X (int)&quot;</span><span class="p">,</span> <span class="s2">&quot;Y (int)&quot;</span><span class="p">])</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">min_slider</span><span class="o">.</span><span class="n">setValue</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">max_slider</span><span class="o">.</span><span class="n">setValue</span><span class="p">(</span><span class="mi">100</span><span class="p">)</span>
 
-        <span class="bp">self</span><span class="o">.</span><span class="n">table</span><span class="o">.</span><span class="n">setRowCount</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">pts</span><span class="p">))</span>
-
-        <span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">)</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">pts</span><span class="p">):</span>
-            <span class="bp">self</span><span class="o">.</span><span class="n">table</span><span class="o">.</span><span class="n">setItem</span><span class="p">(</span><span class="n">i</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="n">QtWidgets</span><span class="o">.</span><span class="n">QTableWidgetItem</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="n">i</span><span class="p">)))</span>
-            <span class="bp">self</span><span class="o">.</span><span class="n">table</span><span class="o">.</span><span class="n">setItem</span><span class="p">(</span><span class="n">i</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="n">QtWidgets</span><span class="o">.</span><span class="n">QTableWidgetItem</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_format_value</span><span class="p">(</span><span class="n">x</span><span class="p">)))</span>
-            <span class="bp">self</span><span class="o">.</span><span class="n">table</span><span class="o">.</span><span class="n">setItem</span><span class="p">(</span><span class="n">i</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="n">QtWidgets</span><span class="o">.</span><span class="n">QTableWidgetItem</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_format_value</span><span class="p">(</span><span class="n">y</span><span class="p">)))</span></div>
-
-
-<div class="viewcode-block" id="ClickImageApp.update_groups">
-<a class="viewcode-back" href="../../api_doc/click_image_app.html#pyclickimage.ClickImageApp.update_groups">[docs]</a>
-    <span class="k">def</span><span class="w"> </span><span class="nf">update_groups</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-<span class="w">        </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">        Sync group selector.</span>
-<span class="sd">        &quot;&quot;&quot;</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">group_selector</span><span class="o">.</span><span class="n">blockSignals</span><span class="p">(</span><span class="kc">True</span><span class="p">)</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">group_selector</span><span class="o">.</span><span class="n">clear</span><span class="p">()</span>
-
-        <span class="k">for</span> <span class="n">g</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">click_manager</span><span class="o">.</span><span class="n">groups</span><span class="p">:</span>
-            <span class="bp">self</span><span class="o">.</span><span class="n">group_selector</span><span class="o">.</span><span class="n">addItem</span><span class="p">(</span><span class="n">g</span><span class="p">)</span>
-
-        <span class="bp">self</span><span class="o">.</span><span class="n">group_selector</span><span class="o">.</span><span class="n">setCurrentText</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">click_manager</span><span class="o">.</span><span class="n">current_group</span><span class="p">)</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">group_selector</span><span class="o">.</span><span class="n">blockSignals</span><span class="p">(</span><span class="kc">False</span><span class="p">)</span></div>
+        <span class="bp">self</span><span class="o">.</span><span class="n">on_contrast_changed</span><span class="p">()</span></div>
 
 
     <span class="c1"># ============================================================</span>
@@ -984,6 +1186,7 @@
             <span class="k">return</span>
 
         <span class="bp">self</span><span class="o">.</span><span class="n">click_manager</span><span class="o">.</span><span class="n">add_click</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_append_log</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Click processed: </span><span class="si">{</span><span class="p">(</span><span class="n">x</span><span class="p">,</span><span class="w"> </span><span class="n">y</span><span class="p">)</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">_is_saved</span> <span class="o">=</span> <span class="kc">False</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">update</span><span class="p">()</span></div>
 
@@ -998,6 +1201,7 @@
             <span class="k">return</span>
 
         <span class="bp">self</span><span class="o">.</span><span class="n">click_manager</span><span class="o">.</span><span class="n">add_click</span><span class="p">(</span><span class="kc">None</span><span class="p">,</span> <span class="kc">None</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_append_log</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Click processed: </span><span class="si">{</span><span class="p">(</span><span class="kc">None</span><span class="p">,</span><span class="w"> </span><span class="kc">None</span><span class="p">)</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">_is_saved</span> <span class="o">=</span> <span class="kc">False</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">update</span><span class="p">()</span></div>
 
@@ -1048,6 +1252,62 @@
         <span class="bp">self</span><span class="o">.</span><span class="n">update</span><span class="p">()</span></div>
 
 
+<div class="viewcode-block" id="ClickImageApp.on_precision_changed">
+<a class="viewcode-back" href="../../api_doc/click_image_app.html#pyclickimage.ClickImageApp.on_precision_changed">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">on_precision_changed</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">state</span><span class="p">):</span>
+<span class="w">        </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Toggle integer/float precision mode.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">INT</span> <span class="o">=</span> <span class="n">state</span> <span class="o">==</span> <span class="n">QtCore</span><span class="o">.</span><span class="n">Qt</span><span class="o">.</span><span class="n">Checked</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">click_manager</span><span class="o">.</span><span class="n">precision_mode</span> <span class="o">=</span> <span class="s2">&quot;int&quot;</span> <span class="k">if</span> <span class="n">INT</span> <span class="k">else</span> <span class="s2">&quot;float&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_append_log</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Precision mode: </span><span class="si">{</span><span class="s1">&#39;INT&#39;</span><span class="w"> </span><span class="k">if</span><span class="w"> </span><span class="n">INT</span><span class="w"> </span><span class="k">else</span><span class="w"> </span><span class="s1">&#39;FLOAT&#39;</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">update</span><span class="p">()</span></div>
+
+
+<div class="viewcode-block" id="ClickImageApp.on_half_shift_changed">
+<a class="viewcode-back" href="../../api_doc/click_image_app.html#pyclickimage.ClickImageApp.on_half_shift_changed">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">on_half_shift_changed</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">state</span><span class="p">):</span>
+<span class="w">        </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Toggle half-shift mode.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+
+        <span class="n">half_shift</span> <span class="o">=</span> <span class="n">state</span> <span class="o">==</span> <span class="n">QtCore</span><span class="o">.</span><span class="n">Qt</span><span class="o">.</span><span class="n">Checked</span>
+
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">click_manager</span><span class="o">.</span><span class="n">n_clicks</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span>
+
+            <span class="n">msg</span> <span class="o">=</span> <span class="n">QtWidgets</span><span class="o">.</span><span class="n">QMessageBox</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span>
+            <span class="n">msg</span><span class="o">.</span><span class="n">setWindowTitle</span><span class="p">(</span><span class="s2">&quot;Existing clicks detected&quot;</span><span class="p">)</span>
+            <span class="n">msg</span><span class="o">.</span><span class="n">setText</span><span class="p">(</span>
+                <span class="sa">f</span><span class="s2">&quot;Do you want to shift all previous clicked points by 0.5 to match the new coordinates system ?&quot;</span>
+            <span class="p">)</span>
+            <span class="n">msg</span><span class="o">.</span><span class="n">setInformativeText</span><span class="p">(</span><span class="s2">&quot;No = keep clicks</span><span class="se">\n</span><span class="s2">Yes = shift clicks&quot;</span><span class="p">)</span>
+            <span class="n">msg</span><span class="o">.</span><span class="n">setStandardButtons</span><span class="p">(</span><span class="n">QtWidgets</span><span class="o">.</span><span class="n">QMessageBox</span><span class="o">.</span><span class="n">No</span> <span class="o">|</span> <span class="n">QtWidgets</span><span class="o">.</span><span class="n">QMessageBox</span><span class="o">.</span><span class="n">Yes</span><span class="p">)</span>
+            <span class="n">msg</span><span class="o">.</span><span class="n">setDefaultButton</span><span class="p">(</span><span class="n">QtWidgets</span><span class="o">.</span><span class="n">QMessageBox</span><span class="o">.</span><span class="n">Yes</span><span class="p">)</span>
+
+            <span class="n">choice</span> <span class="o">=</span> <span class="n">msg</span><span class="o">.</span><span class="n">exec_</span><span class="p">()</span>
+
+            <span class="k">if</span> <span class="n">choice</span> <span class="o">==</span> <span class="n">QtWidgets</span><span class="o">.</span><span class="n">QMessageBox</span><span class="o">.</span><span class="n">Yes</span><span class="p">:</span>
+                <span class="k">if</span> <span class="n">half_shift</span><span class="p">:</span>
+                    <span class="bp">self</span><span class="o">.</span><span class="n">click_manager</span><span class="o">.</span><span class="n">to_half_shift_on</span><span class="p">()</span>
+                <span class="k">else</span><span class="p">:</span>
+                    <span class="bp">self</span><span class="o">.</span><span class="n">click_manager</span><span class="o">.</span><span class="n">to_half_shift_off</span><span class="p">()</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">viewer</span><span class="o">.</span><span class="n">half_shift</span> <span class="o">=</span> <span class="n">half_shift</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_append_log</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Half-Shift mode: </span><span class="si">{</span><span class="n">half_shift</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">update</span><span class="p">()</span></div>
+
+
+<div class="viewcode-block" id="ClickImageApp.on_display_clicks_changed">
+<a class="viewcode-back" href="../../api_doc/click_image_app.html#pyclickimage.ClickImageApp.on_display_clicks_changed">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">on_display_clicks_changed</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">state</span><span class="p">):</span>
+<span class="w">        </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Toggle dispaly clicks.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">show_clicks</span> <span class="o">=</span> <span class="n">state</span> <span class="o">==</span> <span class="n">QtCore</span><span class="o">.</span><span class="n">Qt</span><span class="o">.</span><span class="n">Checked</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_append_log</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Display clicks: </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">show_clicks</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">update</span><span class="p">()</span></div>
+
+
     <span class="c1"># ============================================================</span>
     <span class="c1"># Design</span>
     <span class="c1"># ============================================================</span>
@@ -1062,7 +1322,9 @@
 
             <span class="bp">self</span><span class="o">.</span><span class="n">crosshair_color_preview</span><span class="o">.</span><span class="n">setStyleSheet</span><span class="p">(</span>
                 <span class="sa">f</span><span class="s2">&quot;background-color: </span><span class="si">{</span><span class="n">color</span><span class="o">.</span><span class="n">name</span><span class="p">()</span><span class="si">}</span><span class="s2">; border: 1px solid black;&quot;</span>
-            <span class="p">)</span></div>
+            <span class="p">)</span>
+
+            <span class="bp">self</span><span class="o">.</span><span class="n">_append_log</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Crosshair color set to: </span><span class="si">{</span><span class="n">color</span><span class="o">.</span><span class="n">name</span><span class="p">()</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span></div>
 
 
 <div class="viewcode-block" id="ClickImageApp.choose_color">
@@ -1076,7 +1338,9 @@
 
             <span class="bp">self</span><span class="o">.</span><span class="n">color_preview</span><span class="o">.</span><span class="n">setStyleSheet</span><span class="p">(</span>
                 <span class="sa">f</span><span class="s2">&quot;background-color: </span><span class="si">{</span><span class="n">color</span><span class="o">.</span><span class="n">name</span><span class="p">()</span><span class="si">}</span><span class="s2">; border: 1px solid black;&quot;</span>
-            <span class="p">)</span></div>
+            <span class="p">)</span>
+
+            <span class="bp">self</span><span class="o">.</span><span class="n">_append_log</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Marker color set to: </span><span class="si">{</span><span class="n">color</span><span class="o">.</span><span class="n">name</span><span class="p">()</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span></div>
 
 
 <div class="viewcode-block" id="ClickImageApp.on_marker_size_changed">
@@ -1091,49 +1355,14 @@
         <span class="k">except</span> <span class="ne">ValueError</span><span class="p">:</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">marker_size</span> <span class="o">=</span> <span class="mi">8</span>
 
-        <span class="bp">self</span><span class="o">.</span><span class="n">_append_log</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Marker size set to </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">marker_size</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_append_log</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Marker size set to: </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">marker_size</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
 
         <span class="bp">self</span><span class="o">.</span><span class="n">update</span><span class="p">()</span></div>
-
-
-<div class="viewcode-block" id="ClickImageApp.on_colormap_changed">
-<a class="viewcode-back" href="../../api_doc/click_image_app.html#pyclickimage.ClickImageApp.on_colormap_changed">[docs]</a>
-    <span class="k">def</span><span class="w"> </span><span class="nf">on_colormap_changed</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">index</span><span class="p">):</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">        Called when the user selects a different colormap.</span>
-<span class="sd">        &quot;&quot;&quot;</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">_append_log</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Colormap changed to: </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">colormap_selector</span><span class="o">.</span><span class="n">currentText</span><span class="p">()</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">_colormap_has_changed</span> <span class="o">=</span> <span class="kc">True</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">update</span><span class="p">()</span></div>
-
-
-<div class="viewcode-block" id="ClickImageApp.get_selected_colormap">
-<a class="viewcode-back" href="../../api_doc/click_image_app.html#pyclickimage.ClickImageApp.get_selected_colormap">[docs]</a>
-    <span class="k">def</span><span class="w"> </span><span class="nf">get_selected_colormap</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">        Get the selected colormap for displaying the image.</span>
-
-<span class="sd">        Returns</span>
-<span class="sd">        -------</span>
-<span class="sd">        str</span>
-<span class="sd">            The selected colormap.</span>
-<span class="sd">        &quot;&quot;&quot;</span>
-        <span class="n">colormap_map</span> <span class="o">=</span> <span class="p">{</span>
-            <span class="s2">&quot;Default&quot;</span><span class="p">:</span> <span class="kc">None</span><span class="p">,</span>
-            <span class="s2">&quot;Gray&quot;</span><span class="p">:</span> <span class="n">cv2</span><span class="o">.</span><span class="n">COLORMAP_BONE</span><span class="p">,</span>
-            <span class="s2">&quot;Hot&quot;</span><span class="p">:</span> <span class="n">cv2</span><span class="o">.</span><span class="n">COLORMAP_HOT</span><span class="p">,</span>
-            <span class="s2">&quot;Jet&quot;</span><span class="p">:</span> <span class="n">cv2</span><span class="o">.</span><span class="n">COLORMAP_JET</span><span class="p">,</span>
-            <span class="s2">&quot;Rainbow&quot;</span><span class="p">:</span> <span class="n">cv2</span><span class="o">.</span><span class="n">COLORMAP_RAINBOW</span><span class="p">,</span>
-            <span class="s2">&quot;Cool&quot;</span><span class="p">:</span> <span class="n">cv2</span><span class="o">.</span><span class="n">COLORMAP_COOL</span><span class="p">,</span>
-            <span class="s2">&quot;Spring&quot;</span><span class="p">:</span> <span class="n">cv2</span><span class="o">.</span><span class="n">COLORMAP_SPRING</span><span class="p">,</span>
-        <span class="p">}</span>
-        <span class="k">return</span> <span class="n">colormap_map</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">colormap_selector</span><span class="o">.</span><span class="n">currentText</span><span class="p">(),</span> <span class="kc">None</span><span class="p">)</span></div>
 
 
     <span class="c1"># ============================================================</span>
     <span class="c1"># Groups</span>
     <span class="c1"># ============================================================</span>
-
 <div class="viewcode-block" id="ClickImageApp.on_group_changed">
 <a class="viewcode-back" href="../../api_doc/click_image_app.html#pyclickimage.ClickImageApp.on_group_changed">[docs]</a>
     <span class="k">def</span><span class="w"> </span><span class="nf">on_group_changed</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">name</span><span class="p">):</span>
@@ -1141,6 +1370,7 @@
 <span class="sd">        Switch active group.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">click_manager</span><span class="o">.</span><span class="n">set_group</span><span class="p">(</span><span class="n">name</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_append_log</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Group switch to : </span><span class="si">{</span><span class="n">name</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">update</span><span class="p">()</span></div>
 
 
@@ -1251,7 +1481,7 @@
                 <span class="bp">self</span><span class="o">.</span><span class="n">output_path</span> <span class="o">=</span> <span class="n">file_path</span>
 
                 <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">output_path</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
-                    <span class="bp">self</span><span class="o">.</span><span class="n">_append_log</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Output CSV path setted to : </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">output_path</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+                    <span class="bp">self</span><span class="o">.</span><span class="n">_append_log</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Output CSV path setted to: </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">output_path</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
 
             <span class="c1"># -------------------------------------------------</span>
             <span class="c1"># Save</span>
@@ -1323,7 +1553,6 @@
     <span class="c1"># ============================================================</span>
     <span class="c1"># Utils</span>
     <span class="c1"># ============================================================</span>
-
 <div class="viewcode-block" id="ClickImageApp._append_log">
 <a class="viewcode-back" href="../../api_doc/click_image_app.html#pyclickimage.ClickImageApp._append_log">[docs]</a>
     <span class="k">def</span><span class="w"> </span><span class="nf">_append_log</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">msg</span><span class="p">:</span> <span class="nb">str</span><span class="p">):</span>

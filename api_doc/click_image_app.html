@@ -8,7 +8,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
-    <title>pyclickimage.ClickImageApp &#8212; pyclickimage 2.2.1 documentation</title>
+    <title>pyclickimage.ClickImageApp &#8212; pyclickimage 2.4.0 documentation</title>
   
   
   
@@ -38,7 +38,7 @@
   <link rel="preload" as="script" href="../_static/scripts/bootstrap.js?digest=8878045cc6db502f8baf" />
 <link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=8878045cc6db502f8baf" />
 
-    <script src="../_static/documentation_options.js?v=16656018"></script>
+    <script src="../_static/documentation_options.js?v=4d935f96"></script>
     <script src="../_static/doctools.js?v=9a2dae69"></script>
     <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
     <script>DOCUMENTATION_OPTIONS.pagename = 'api_doc/click_image_app';</script>
@@ -110,7 +110,7 @@
   
   
   
-    <p class="title logo__title">pyclickimage 2.2.1 documentation</p>
+    <p class="title logo__title">pyclickimage 2.4.0 documentation</p>
   
 </a></div>
     
@@ -357,9 +357,15 @@
 <dd></dd></dl>
 
 <dl class="py method">
-<dt class="sig sig-object py" id="pyclickimage.ClickImageApp._init_ui">
-<span class="sig-name descname"><span class="pre">_init_ui</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/pyclickimage/click_image_app.html#ClickImageApp._init_ui"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pyclickimage.ClickImageApp._init_ui" title="Link to this definition">#</a></dt>
-<dd><p>Build full interface layout.</p>
+<dt class="sig sig-object py" id="pyclickimage.ClickImageApp._init_left_panel">
+<span class="sig-name descname"><span class="pre">_init_left_panel</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/pyclickimage/click_image_app.html#ClickImageApp._init_left_panel"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pyclickimage.ClickImageApp._init_left_panel" title="Link to this definition">#</a></dt>
+<dd><p>Build the left interface</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="pyclickimage.ClickImageApp._init_toolbar">
+<span class="sig-name descname"><span class="pre">_init_toolbar</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/pyclickimage/click_image_app.html#ClickImageApp._init_toolbar"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pyclickimage.ClickImageApp._init_toolbar" title="Link to this definition">#</a></dt>
+<dd><p>Build toolbar</p>
 </dd></dl>
 
 <dl class="py method">
@@ -423,6 +429,11 @@
 </dd></dl>
 
 <dl class="py method">
+<dt class="sig sig-object py" id="pyclickimage.ClickImageApp.on_contrast_changed">
+<span class="sig-name descname"><span class="pre">on_contrast_changed</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/pyclickimage/click_image_app.html#ClickImageApp.on_contrast_changed"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pyclickimage.ClickImageApp.on_contrast_changed" title="Link to this definition">#</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
 <dt class="sig sig-object py" id="pyclickimage.ClickImageApp.on_delete_group">
 <span class="sig-name descname"><span class="pre">on_delete_group</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/pyclickimage/click_image_app.html#ClickImageApp.on_delete_group"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pyclickimage.ClickImageApp.on_delete_group" title="Link to this definition">#</a></dt>
 <dd><p>Delete current group with safety checks.</p>
@@ -475,6 +486,12 @@
 <dt class="sig sig-object py" id="pyclickimage.ClickImageApp.on_rename_group">
 <span class="sig-name descname"><span class="pre">on_rename_group</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/pyclickimage/click_image_app.html#ClickImageApp.on_rename_group"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pyclickimage.ClickImageApp.on_rename_group" title="Link to this definition">#</a></dt>
 <dd><p>Rename current group.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="pyclickimage.ClickImageApp.on_reset_contrast">
+<span class="sig-name descname"><span class="pre">on_reset_contrast</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/pyclickimage/click_image_app.html#ClickImageApp.on_reset_contrast"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pyclickimage.ClickImageApp.on_reset_contrast" title="Link to this definition">#</a></dt>
+<dd><p>Reset contrast settings.</p>
 </dd></dl>
 
 <dl class="py method">
@@ -585,7 +602,8 @@
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#pyclickimage.ClickImageApp"><code class="docutils literal notranslate"><span class="pre">ClickImageApp</span></code></a><ul class="nav section-nav flex-column">
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#pyclickimage.ClickImageApp._append_log"><code class="docutils literal notranslate"><span class="pre">ClickImageApp._append_log()</span></code></a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#pyclickimage.ClickImageApp._format_value"><code class="docutils literal notranslate"><span class="pre">ClickImageApp._format_value()</span></code></a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#pyclickimage.ClickImageApp._init_ui"><code class="docutils literal notranslate"><span class="pre">ClickImageApp._init_ui()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#pyclickimage.ClickImageApp._init_left_panel"><code class="docutils literal notranslate"><span class="pre">ClickImageApp._init_left_panel()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#pyclickimage.ClickImageApp._init_toolbar"><code class="docutils literal notranslate"><span class="pre">ClickImageApp._init_toolbar()</span></code></a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#pyclickimage.ClickImageApp._process_left_click"><code class="docutils literal notranslate"><span class="pre">ClickImageApp._process_left_click()</span></code></a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#pyclickimage.ClickImageApp._process_right_click"><code class="docutils literal notranslate"><span class="pre">ClickImageApp._process_right_click()</span></code></a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#pyclickimage.ClickImageApp.choose_color"><code class="docutils literal notranslate"><span class="pre">ClickImageApp.choose_color()</span></code></a></li>
@@ -595,6 +613,7 @@
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#pyclickimage.ClickImageApp.get_selected_colormap"><code class="docutils literal notranslate"><span class="pre">ClickImageApp.get_selected_colormap()</span></code></a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#pyclickimage.ClickImageApp.on_add_group"><code class="docutils literal notranslate"><span class="pre">ClickImageApp.on_add_group()</span></code></a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#pyclickimage.ClickImageApp.on_colormap_changed"><code class="docutils literal notranslate"><span class="pre">ClickImageApp.on_colormap_changed()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#pyclickimage.ClickImageApp.on_contrast_changed"><code class="docutils literal notranslate"><span class="pre">ClickImageApp.on_contrast_changed()</span></code></a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#pyclickimage.ClickImageApp.on_delete_group"><code class="docutils literal notranslate"><span class="pre">ClickImageApp.on_delete_group()</span></code></a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#pyclickimage.ClickImageApp.on_display_clicks_changed"><code class="docutils literal notranslate"><span class="pre">ClickImageApp.on_display_clicks_changed()</span></code></a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#pyclickimage.ClickImageApp.on_group_changed"><code class="docutils literal notranslate"><span class="pre">ClickImageApp.on_group_changed()</span></code></a></li>
@@ -604,6 +623,7 @@
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#pyclickimage.ClickImageApp.on_marker_size_changed"><code class="docutils literal notranslate"><span class="pre">ClickImageApp.on_marker_size_changed()</span></code></a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#pyclickimage.ClickImageApp.on_precision_changed"><code class="docutils literal notranslate"><span class="pre">ClickImageApp.on_precision_changed()</span></code></a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#pyclickimage.ClickImageApp.on_rename_group"><code class="docutils literal notranslate"><span class="pre">ClickImageApp.on_rename_group()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#pyclickimage.ClickImageApp.on_reset_contrast"><code class="docutils literal notranslate"><span class="pre">ClickImageApp.on_reset_contrast()</span></code></a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#pyclickimage.ClickImageApp.on_undo_all_click"><code class="docutils literal notranslate"><span class="pre">ClickImageApp.on_undo_all_click()</span></code></a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#pyclickimage.ClickImageApp.on_undo_last_click"><code class="docutils literal notranslate"><span class="pre">ClickImageApp.on_undo_last_click()</span></code></a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#pyclickimage.ClickImageApp.save_as_csv"><code class="docutils literal notranslate"><span class="pre">ClickImageApp.save_as_csv()</span></code></a></li>
