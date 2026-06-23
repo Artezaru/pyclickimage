@@ -26,10 +26,10 @@ dependencies = [
 ]
 
 [project.urls]
-Homepage = "https://github.com/Artezaru/pygraphs"
-Documentation = "https://Artezaru.github.io/pygraphs"
-Source = "https://github.com/Artezaru/pygraphs"
-Tracker = "https://github.com/Artezaru/pygraphs/issues"
+Homepage = "https://github.com/Artezaru/pyclickimage"
+Documentation = "https://Artezaru.github.io/pyclickimage"
+Source = "https://github.com/Artezaru/pyclickimage"
+Tracker = "https://github.com/Artezaru/pyclickimage/issues"
 
 [tool.setuptools.packages.find]
 where = ["."]
