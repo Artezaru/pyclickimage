@@ -7,7 +7,7 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>pyclickimage.click_image_app &#8212; pyclickimage 2.1.0 documentation</title>
+    <title>pyclickimage.click_image_app &#8212; pyclickimage 2.2.0 documentation</title>
   
   
   
@@ -37,7 +37,7 @@
   <link rel="preload" as="script" href="../../_static/scripts/bootstrap.js?digest=8878045cc6db502f8baf" />
 <link rel="preload" as="script" href="../../_static/scripts/pydata-sphinx-theme.js?digest=8878045cc6db502f8baf" />
 
-    <script src="../../_static/documentation_options.js?v=20623aea"></script>
+    <script src="../../_static/documentation_options.js?v=b21de401"></script>
     <script src="../../_static/doctools.js?v=9a2dae69"></script>
     <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
     <script>DOCUMENTATION_OPTIONS.pagename = '_modules/pyclickimage/click_image_app';</script>
@@ -107,7 +107,7 @@
   
   
   
-    <p class="title logo__title">pyclickimage 2.1.0 documentation</p>
+    <p class="title logo__title">pyclickimage 2.2.0 documentation</p>
   
 </a></div>
     
@@ -507,6 +507,13 @@
         <span class="bp">self</span><span class="o">.</span><span class="n">half_shift_checkbox</span><span class="o">.</span><span class="n">stateChanged</span><span class="o">.</span><span class="n">connect</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">on_half_shift_changed</span><span class="p">)</span>
         <span class="n">side</span><span class="o">.</span><span class="n">addWidget</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">half_shift_checkbox</span><span class="p">)</span>
 
+        <span class="bp">self</span><span class="o">.</span><span class="n">display_clicks_checkbox</span> <span class="o">=</span> <span class="n">QtWidgets</span><span class="o">.</span><span class="n">QCheckBox</span><span class="p">(</span><span class="s2">&quot;Display clicks&quot;</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">display_clicks_checkbox</span><span class="o">.</span><span class="n">setChecked</span><span class="p">(</span><span class="kc">True</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">display_clicks_checkbox</span><span class="o">.</span><span class="n">stateChanged</span><span class="o">.</span><span class="n">connect</span><span class="p">(</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">on_display_clicks_changed</span>
+        <span class="p">)</span>
+        <span class="n">side</span><span class="o">.</span><span class="n">addWidget</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">display_clicks_checkbox</span><span class="p">)</span>
+
         <span class="c1"># ============================================================</span>
         <span class="c1"># Group selector</span>
         <span class="c1"># ============================================================</span>
@@ -749,6 +756,17 @@
         <span class="bp">self</span><span class="o">.</span><span class="n">update</span><span class="p">()</span></div>
 
 
+<div class="viewcode-block" id="ClickImageApp.on_display_clicks_changed">
+<a class="viewcode-back" href="../../api_doc/click_image_app.html#pyclickimage.ClickImageApp.on_display_clicks_changed">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">on_display_clicks_changed</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">state</span><span class="p">):</span>
+<span class="w">        </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Toggle dispaly clicks.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">DISPLAY</span> <span class="o">=</span> <span class="n">state</span> <span class="o">==</span> <span class="n">QtCore</span><span class="o">.</span><span class="n">Qt</span><span class="o">.</span><span class="n">Checked</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_append_log</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Display clicks: </span><span class="si">{</span><span class="n">DISPLAY</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">update</span><span class="p">()</span></div>
+
+
     <span class="c1"># ============================================================</span>
     <span class="c1"># Image</span>
     <span class="c1"># ============================================================</span>
@@ -759,7 +777,6 @@
 <span class="w">        </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Set image to display.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
-
         <span class="k">if</span> <span class="n">image</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
             <span class="n">image</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="mi">512</span><span class="p">,</span> <span class="mi">512</span><span class="p">,</span> <span class="mi">3</span><span class="p">),</span> <span class="n">dtype</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">uint8</span><span class="p">)</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">_is_empty_image</span> <span class="o">=</span> <span class="kc">True</span>
@@ -908,10 +925,12 @@
 
         <span class="n">pts</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">click_manager</span><span class="o">.</span><span class="n">extract_group</span><span class="p">()</span>
 
-        <span class="k">for</span> <span class="n">x</span><span class="p">,</span> <span class="n">y</span> <span class="ow">in</span> <span class="n">pts</span><span class="p">:</span>
-            <span class="k">if</span> <span class="n">x</span> <span class="ow">is</span> <span class="kc">None</span> <span class="ow">or</span> <span class="n">y</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
-                <span class="k">continue</span>
-            <span class="bp">self</span><span class="o">.</span><span class="n">viewer</span><span class="o">.</span><span class="n">add_marker</span><span class="p">((</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">),</span> <span class="bp">self</span><span class="o">.</span><span class="n">marker_color</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">marker_size</span><span class="p">)</span></div>
+        <span class="n">DISPLAY</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">display_clicks_checkbox</span><span class="o">.</span><span class="n">isChecked</span><span class="p">()</span>
+        <span class="k">if</span> <span class="n">DISPLAY</span><span class="p">:</span>
+            <span class="k">for</span> <span class="n">x</span><span class="p">,</span> <span class="n">y</span> <span class="ow">in</span> <span class="n">pts</span><span class="p">:</span>
+                <span class="k">if</span> <span class="n">x</span> <span class="ow">is</span> <span class="kc">None</span> <span class="ow">or</span> <span class="n">y</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+                    <span class="k">continue</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">viewer</span><span class="o">.</span><span class="n">add_marker</span><span class="p">((</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">),</span> <span class="bp">self</span><span class="o">.</span><span class="n">marker_color</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">marker_size</span><span class="p">)</span></div>
 
 
 <div class="viewcode-block" id="ClickImageApp.update_table">
