@@ -58,11 +58,26 @@ class ClickImageApp(QtWidgets.QMainWindow):
         self._colormap_has_changed = True
         self._is_empty_image = True
 
+        # --------------------------
+        # States
+        # --------------------------
+        self.alpha = 1.0
+        self.beta_pc = 0
+        self.display_min_pc = 0
+        self.display_max_pc = 100
+        self.show_clicks = True
+        self.marker_color = QtGui.QColor(255, 0, 0)
+        self.marker_size = 8
+
         # -------------------------
         # Core components
         # -------------------------
         self.click_manager = ClickManager(precision_mode="float")
         self.viewer = ImageViewer(half_shift=True)
+
+        self.viewer.auto_marker = False  # Don't draw directly
+        self.viewer.left_click_signal.connect(self._process_left_click)
+        self.viewer.right_click_signal.connect(self._process_right_click)
 
         # -------------------------
         # Logging
@@ -81,23 +96,31 @@ class ClickImageApp(QtWidgets.QMainWindow):
         self.set_image(image)
 
         # -------------------------
-        # Markers
-        # -------------------------
-        self.marker_color = QtGui.QColor(255, 0, 0)
-        self.marker_size = 8
-
-        # -------------------------
         # UI
         # -------------------------
-        self._init_ui()
+        self.central = QtWidgets.QWidget()
+        self.setCentralWidget(self.central)
+
+        self.layout = QtWidgets.QHBoxLayout()
+        self.central.setLayout(self.layout)
+
+        quit_action = QtWidgets.QAction("Quit", self)
+        quit_action.setShortcut("Ctrl+Q")
+        quit_action.triggered.connect(self.close)
+
+        self.addAction(quit_action)
+        self.layout.addWidget(self.viewer)
+        self.side = QtWidgets.QVBoxLayout()
+        self.side_widget = QtWidgets.QWidget()
+        self.side_widget.setFixedWidth(340)
+        self.side_widget.setLayout(self.side)
+
+        self._init_left_panel()
+        self._init_toolbar()
 
         # -------------------------
         # Signals
         # -------------------------
-        self.viewer.auto_marker = False  # Don't draw directly
-        self.viewer.left_click_signal.connect(self._process_left_click)
-        self.viewer.right_click_signal.connect(self._process_right_click)
-
         self.initialization_done = True
         self._append_log("Application ready.")
         if self.output_path is not None:
@@ -108,72 +131,29 @@ class ClickImageApp(QtWidgets.QMainWindow):
     # ============================================================
     # UI
     # ============================================================
-
-    def _init_ui(self):
-        r"""
-        Build full interface layout.
-        """
-
-        central = QtWidgets.QWidget()
-        self.setCentralWidget(central)
-
-        layout = QtWidgets.QHBoxLayout()
-        central.setLayout(layout)
-
-        quit_action = QtWidgets.QAction("Quit", self)
-        quit_action.setShortcut("Ctrl+Q")
-        quit_action.triggered.connect(self.close)
-
-        self.addAction(quit_action)
-
-        # -------------------------
-        # Viewer
-        # -------------------------
-        layout.addWidget(self.viewer)
-
-        # -------------------------
-        # Side panel
-        # -------------------------
-        side = QtWidgets.QVBoxLayout()
-        side_widget = QtWidgets.QWidget()
-        side_widget.setFixedWidth(340)
-        side_widget.setLayout(side)
-
+    def _init_left_panel(self):
+        r"""Build the left interface"""
+        # ============================================================
+        # Scroll Area
+        # ============================================================
         scroll = QtWidgets.QScrollArea()
         scroll.setWidgetResizable(True)
         scroll.setFixedWidth(360)
-        scroll.setWidget(side_widget)
+        scroll.setWidget(self.side_widget)
 
-        layout.addWidget(scroll)
+        self.layout.addWidget(scroll)
 
         # ============================================================
         # Load Image
         # ============================================================
-        self.load_btn = QtWidgets.QPushButton("Load Image (Ctrl+O)")
-        self.load_btn.clicked.connect(self.on_load_image)
-        self.load_btn.setShortcut("Ctrl+O")
-        side.addWidget(self.load_btn)
+        self.load_image_btn = QtWidgets.QPushButton("Load Image (Ctrl+O)")
+        self.load_image_btn.clicked.connect(self.on_load_image)
+        self.load_image_btn.setShortcut("Ctrl+O")
+        self.side.addWidget(self.load_image_btn)
 
-        row = QtWidgets.QHBoxLayout()
-
-        self.colormap_selector = QtWidgets.QComboBox()
-        self.colormap_selector.addItem("Default")
-        self.colormap_selector.addItem("Gray")
-        self.colormap_selector.addItem("Hot")
-        self.colormap_selector.addItem("Jet")
-        self.colormap_selector.addItem("Rainbow")
-        self.colormap_selector.addItem("Cool")
-        self.colormap_selector.addItem("Spring")
-        self.colormap_selector.setCurrentIndex(0)  # Default to "Default"
-        self.colormap_selector.currentIndexChanged.connect(self.on_colormap_changed)
-        row.addWidget(QtWidgets.QLabel("Image Colormap:"))
-        row.addWidget(self.colormap_selector)
-
-        side.addLayout(row)
-
-        self.loadc_btn = QtWidgets.QPushButton("Load Clicks")
-        self.loadc_btn.clicked.connect(self.on_load_clicks)
-        side.addWidget(self.loadc_btn)
+        self.load_click_btn = QtWidgets.QPushButton("Load Clicks")
+        self.load_click_btn.clicked.connect(self.on_load_clicks)
+        self.side.addWidget(self.load_click_btn)
 
         # ============================================================
         # Precision mode
@@ -182,21 +162,20 @@ class ClickImageApp(QtWidgets.QMainWindow):
         self.precision_checkbox.setChecked(False)
         self.precision_checkbox.stateChanged.connect(self.on_precision_changed)
         self.precision_checkbox.setShortcut("Ctrl+I")
-        side.addWidget(self.precision_checkbox)
-
+        self.side.addWidget(self.precision_checkbox)
         self.half_shift_checkbox = QtWidgets.QCheckBox(
             "Half-Shift: (0,0) on the pixel center."
         )
         self.half_shift_checkbox.setChecked(True)
         self.half_shift_checkbox.stateChanged.connect(self.on_half_shift_changed)
-        side.addWidget(self.half_shift_checkbox)
+        self.side.addWidget(self.half_shift_checkbox)
 
         self.display_clicks_checkbox = QtWidgets.QCheckBox("Display clicks")
         self.display_clicks_checkbox.setChecked(True)
         self.display_clicks_checkbox.stateChanged.connect(
             self.on_display_clicks_changed
         )
-        side.addWidget(self.display_clicks_checkbox)
+        self.side.addWidget(self.display_clicks_checkbox)
 
         # ============================================================
         # Group selector
@@ -211,7 +190,7 @@ class ClickImageApp(QtWidgets.QMainWindow):
 
         row.addWidget(self.group_selector)
 
-        side.addLayout(row)
+        self.side.addLayout(row)
 
         # -------------------------
         # Group management buttons
@@ -237,7 +216,7 @@ class ClickImageApp(QtWidgets.QMainWindow):
         row.addWidget(self.rename_group_btn)
         row.addWidget(self.delete_group_btn)
 
-        side.addLayout(row)
+        self.side.addLayout(row)
 
         # --------------------------
         # Click Management
@@ -255,7 +234,7 @@ class ClickImageApp(QtWidgets.QMainWindow):
         row.addWidget(self.undo_btn)
         row.addWidget(self.clear_btn)
 
-        side.addLayout(row)
+        self.side.addLayout(row)
 
         # ============================================================
         # Table
@@ -263,7 +242,7 @@ class ClickImageApp(QtWidgets.QMainWindow):
         self.table = QtWidgets.QTableWidget(0, 3)
         self.table.setHorizontalHeaderLabels(["Index", "X", "Y"])
         self.table.setMinimumHeight(180)
-        side.addWidget(self.table)
+        self.side.addWidget(self.table)
 
         # ============================================================
         # Save button
@@ -280,81 +259,216 @@ class ClickImageApp(QtWidgets.QMainWindow):
         self.save_as_btn.setShortcut("Ctrl+Shift+S")
         row.addWidget(self.save_as_btn)
 
-        side.addLayout(row)
+        self.side.addLayout(row)
 
         # ============================================================
         # Log
         # ============================================================
-        side.addWidget(self.log_text_edit)
+        self.side.addWidget(self.log_text_edit)
 
+    def _init_toolbar(self):
+        r"""Build toolbar"""
         # ============================================================
         # Toolbar
         # ============================================================
+
         toolbar = QtWidgets.QToolBar()
         self.addToolBar(toolbar)
+
+        # ============================================================
+        # RESET
+        # ============================================================
 
         toolbar.addAction("Reset View", self.viewer.reset_view)
 
         toolbar.addSeparator()
 
         # ============================================================
-        # Crosser color (button + preview)
+        # IMAGE
         # ============================================================
-        crosshair_color_widget = QtWidgets.QWidget()
-        crosshair_color_layout = QtWidgets.QHBoxLayout()
-        crosshair_color_layout.setContentsMargins(0, 0, 0, 0)
 
-        self.crosshair_color_btn = QtWidgets.QPushButton("Color")
-        self.crosshair_color_btn.clicked.connect(self.crosshair_choose_color)
+        image_btn = QtWidgets.QToolButton()
+        image_btn.setText("⚙ Image")
+        image_btn.setPopupMode(QtWidgets.QToolButton.InstantPopup)
 
-        self.crosshair_color_preview = QtWidgets.QLabel("   ")
-        self.crosshair_color_preview.setStyleSheet(
-            "background-color: rgb(255,0,0); border: 1px solid black;"
+        image_menu = QtWidgets.QMenu(self)
+
+        image_panel = QtWidgets.QWidget()
+        image_layout = QtWidgets.QFormLayout(image_panel)
+
+        # -------------------------
+        # Colormap
+        # -------------------------
+
+        self.colormap_selector = QtWidgets.QComboBox()
+        self.colormap_selector.addItems(
+            [
+                "Default",
+                "Gray",
+                "Hot",
+                "Jet",
+                "Rainbow",
+                "Cool",
+                "Spring",
+            ]
         )
 
-        crosshair_color_layout.addWidget(QtWidgets.QLabel("Crosshair"))
-        crosshair_color_layout.addWidget(self.crosshair_color_btn)
-        crosshair_color_layout.addWidget(self.crosshair_color_preview)
+        self.colormap_selector.currentIndexChanged.connect(self.on_colormap_changed)
 
-        crosshair_color_widget.setLayout(crosshair_color_layout)
+        image_layout.addRow("Colormap", self.colormap_selector)
 
-        toolbar.addWidget(crosshair_color_widget)
+        # -------------------------
+        # Alpha
+        # -------------------------
+
+        self.alpha_slider = QtWidgets.QSlider(QtCore.Qt.Horizontal)
+        self.alpha_slider.setRange(1, 500)
+        self.alpha_slider.setValue(100)
+
+        self.alpha_value_label = QtWidgets.QLabel("1.00")
+
+        self.alpha_slider.valueChanged.connect(self.on_contrast_changed)
+
+        alpha_widget = QtWidgets.QWidget()
+        alpha_layout = QtWidgets.QHBoxLayout(alpha_widget)
+        alpha_layout.setContentsMargins(0, 0, 0, 0)
+
+        alpha_layout.addWidget(self.alpha_slider)
+        alpha_layout.addWidget(self.alpha_value_label)
+
+        image_layout.addRow("Alpha", alpha_widget)
+
+        # -------------------------
+        # Beta
+        # -------------------------
+
+        self.beta_slider = QtWidgets.QSlider(QtCore.Qt.Horizontal)
+        self.beta_slider.setRange(-100, 100)
+        self.beta_slider.setValue(0)
+
+        self.beta_value_label = QtWidgets.QLabel("0%")
+
+        self.beta_slider.valueChanged.connect(self.on_contrast_changed)
+
+        beta_widget = QtWidgets.QWidget()
+        beta_layout = QtWidgets.QHBoxLayout(beta_widget)
+        beta_layout.setContentsMargins(0, 0, 0, 0)
+
+        beta_layout.addWidget(self.beta_slider)
+        beta_layout.addWidget(self.beta_value_label)
+
+        image_layout.addRow("Beta", beta_widget)
+
+        # -------------------------
+        # Min
+        # -------------------------
+
+        self.min_slider = QtWidgets.QSlider(QtCore.Qt.Horizontal)
+        self.min_slider.setRange(0, 100)
+        self.min_slider.setValue(0)
+
+        self.min_value_label = QtWidgets.QLabel("0%")
+
+        self.min_slider.valueChanged.connect(self.on_contrast_changed)
+
+        min_widget = QtWidgets.QWidget()
+        min_layout = QtWidgets.QHBoxLayout(min_widget)
+        min_layout.setContentsMargins(0, 0, 0, 0)
+
+        min_layout.addWidget(self.min_slider)
+        min_layout.addWidget(self.min_value_label)
+
+        image_layout.addRow("Min", min_widget)
+
+        # -------------------------
+        # Max
+        # -------------------------
+
+        self.max_slider = QtWidgets.QSlider(QtCore.Qt.Horizontal)
+        self.max_slider.setRange(0, 100)
+        self.max_slider.setValue(100)
+
+        self.max_value_label = QtWidgets.QLabel("100%")
+
+        self.max_slider.valueChanged.connect(self.on_contrast_changed)
+
+        max_widget = QtWidgets.QWidget()
+        max_layout = QtWidgets.QHBoxLayout(max_widget)
+        max_layout.setContentsMargins(0, 0, 0, 0)
+
+        max_layout.addWidget(self.max_slider)
+        max_layout.addWidget(self.max_value_label)
+
+        image_layout.addRow("Max", max_widget)
+
+        # -------------------------
+        # Reset contrast
+        # -------------------------
+
+        self.reset_contrast_btn = QtWidgets.QPushButton("Reset")
+
+        self.reset_contrast_btn.clicked.connect(self.on_reset_contrast)
+
+        image_layout.addRow(self.reset_contrast_btn)
+
+        image_action = QtWidgets.QWidgetAction(image_menu)
+        image_action.setDefaultWidget(image_panel)
+
+        image_menu.addAction(image_action)
+
+        image_btn.setMenu(image_menu)
+
+        toolbar.addWidget(image_btn)
+
+        # ============================================================
+        # CLICKS
+        # ============================================================
 
         toolbar.addSeparator()
 
-        # ============================================================
-        # Marker color (button + preview)
-        # ============================================================
-        color_widget = QtWidgets.QWidget()
-        color_layout = QtWidgets.QHBoxLayout()
-        color_layout.setContentsMargins(0, 0, 0, 0)
+        clicks_btn = QtWidgets.QToolButton()
+        clicks_btn.setText("⚙ Clicks")
+        clicks_btn.setPopupMode(QtWidgets.QToolButton.InstantPopup)
+
+        clicks_menu = QtWidgets.QMenu(self)
+
+        clicks_panel = QtWidgets.QWidget()
+        clicks_layout = QtWidgets.QFormLayout(clicks_panel)
+
+        self.display_clicks_checkbox = QtWidgets.QCheckBox("Display clicks")
+
+        self.display_clicks_checkbox.setChecked(True)
+
+        self.display_clicks_checkbox.stateChanged.connect(
+            self.on_display_clicks_changed
+        )
+
+        clicks_layout.addRow(self.display_clicks_checkbox)
+
+        # Marker color
+
+        marker_widget = QtWidgets.QWidget()
+        marker_layout = QtWidgets.QHBoxLayout(marker_widget)
+        marker_layout.setContentsMargins(0, 0, 0, 0)
 
         self.color_btn = QtWidgets.QPushButton("Color")
         self.color_btn.clicked.connect(self.choose_color)
 
         self.color_preview = QtWidgets.QLabel("   ")
+
         self.color_preview.setStyleSheet(
             "background-color: rgb(255,0,0); border: 1px solid black;"
         )
 
-        color_layout.addWidget(QtWidgets.QLabel("Marker"))
-        color_layout.addWidget(self.color_btn)
-        color_layout.addWidget(self.color_preview)
+        marker_layout.addWidget(self.color_btn)
+        marker_layout.addWidget(self.color_preview)
 
-        color_widget.setLayout(color_layout)
+        clicks_layout.addRow("Marker", marker_widget)
 
-        toolbar.addWidget(color_widget)
-
-        toolbar.addSeparator()
-
-        # ============================================================
-        # Marker size selector
-        # ============================================================
-        size_widget = QtWidgets.QWidget()
-        size_layout = QtWidgets.QHBoxLayout()
-        size_layout.setContentsMargins(0, 0, 0, 0)
+        # Marker size
 
         self.size_selector = QtWidgets.QComboBox()
+
         self.size_selector.addItems(
             [
                 "0.2",
@@ -374,77 +488,198 @@ class ClickImageApp(QtWidgets.QMainWindow):
                 "100",
             ]
         )
+
         self.size_selector.setCurrentText("8")
+
         self.size_selector.currentTextChanged.connect(self.on_marker_size_changed)
 
-        size_layout.addWidget(QtWidgets.QLabel("Size"))
-        size_layout.addWidget(self.size_selector)
+        clicks_layout.addRow(
+            "Size",
+            self.size_selector,
+        )
 
-        size_widget.setLayout(size_layout)
+        clicks_action = QtWidgets.QWidgetAction(clicks_menu)
+        clicks_action.setDefaultWidget(clicks_panel)
 
-        toolbar.addWidget(size_widget)
+        clicks_menu.addAction(clicks_action)
+
+        clicks_btn.setMenu(clicks_menu)
+
+        toolbar.addWidget(clicks_btn)
+
+        # ============================================================
+        # CROSSHAIR
+        # ============================================================
 
         toolbar.addSeparator()
 
-        toolbar.addAction("Clear Logs", self.clear_logs)
+        crosshair_btn = QtWidgets.QToolButton()
+        crosshair_btn.setText("⚙ Crosshair")
+        crosshair_btn.setPopupMode(QtWidgets.QToolButton.InstantPopup)
 
+        crosshair_menu = QtWidgets.QMenu(self)
+
+        crosshair_panel = QtWidgets.QWidget()
+        crosshair_layout = QtWidgets.QFormLayout(crosshair_panel)
+
+        crosshair_widget = QtWidgets.QWidget()
+        crosshair_widget_layout = QtWidgets.QHBoxLayout(crosshair_widget)
+
+        crosshair_widget_layout.setContentsMargins(
+            0,
+            0,
+            0,
+            0,
+        )
+
+        self.crosshair_color_btn = QtWidgets.QPushButton("Color")
+
+        self.crosshair_color_btn.clicked.connect(self.crosshair_choose_color)
+
+        self.crosshair_color_preview = QtWidgets.QLabel("   ")
+
+        self.crosshair_color_preview.setStyleSheet(
+            "background-color: rgb(255,0,0); border: 1px solid black;"
+        )
+
+        crosshair_widget_layout.addWidget(self.crosshair_color_btn)
+
+        crosshair_widget_layout.addWidget(self.crosshair_color_preview)
+
+        crosshair_layout.addRow(
+            "Color",
+            crosshair_widget,
+        )
+
+        crosshair_action = QtWidgets.QWidgetAction(crosshair_menu)
+
+        crosshair_action.setDefaultWidget(crosshair_panel)
+
+        crosshair_menu.addAction(crosshair_action)
+
+        crosshair_btn.setMenu(crosshair_menu)
+
+        toolbar.addWidget(crosshair_btn)
+
+        # ============================================================
+        # LOGS
+        # ============================================================
         toolbar.addSeparator()
 
+        clear_log_btn = QtWidgets.QToolButton()
+        clear_log_btn.setText("Clear logs")
+        clear_log_btn.clicked.connect(self.clear_logs)
+
+        toolbar.addWidget(clear_log_btn)
+
     # ============================================================
-    # Precision mode
+    # Update pipeline
     # ============================================================
 
-    def on_precision_changed(self, state):
+    def update(self):
         r"""
-        Toggle integer/float precision mode.
+        Refresh UI.
         """
-        INT = state == QtCore.Qt.Checked
-        self.click_manager.precision_mode = "int" if INT else "float"
-        self._append_log(f"Precision mode: {'INT' if INT else 'FLOAT'}")
-        self.update()
+        if not self.initialization_done:
+            return
 
-    def on_half_shift_changed(self, state):
+        self.update_groups()
+        self.update_table()
+        self.update_viewer()
+
+    def _format_value(self, v):
+        if v is None:
+            return ""
+
+        if self.click_manager.use_int_precision:
+            return str(int(round(v)))
+
+        return f"{v:.3f}"
+
+    def update_viewer(self):
         r"""
-        Toggle half-shift mode.
+        Render image + clicks.
         """
+        img = self.image.astype(np.float32)
+        imax = np.iinfo(self.image.dtype).max
+        dm = self.display_min_pc * imax / 100
+        dM = self.display_max_pc * imax / 100
+        b = self.beta_pc * imax / 100
 
-        half_shift = state == QtCore.Qt.Checked
+        img = np.clip(img, dm, dM)
 
-        if self.click_manager.n_clicks > 0:
+        img = (img - dm) / max(1, dM - dm) * imax
+        img = img * self.alpha + b
 
-            msg = QtWidgets.QMessageBox(self)
-            msg.setWindowTitle("Existing clicks detected")
-            msg.setText(
-                f"Do you want to shift all previous clicked points by 0.5 to match the new coordinates system ?"
+        img = np.clip(np.round(img), 0, imax).astype(self.image.dtype)
+
+        if self._image_has_changed or self._colormap_has_changed:
+            colormap = self.get_selected_colormap()
+
+            if colormap is not None:
+                gray = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)
+                img = cv2.applyColorMap(gray, colormap)
+
+            # conversion unique pour Qt
+            rgb = cv2.cvtColor(img, cv2.COLOR_BGR2RGB)
+
+            h, w, ch = rgb.shape
+            bytes_per_line = ch * w
+
+            qimg = QtGui.QImage(
+                rgb.data, w, h, bytes_per_line, QtGui.QImage.Format_RGB888
             )
-            msg.setInformativeText("No = keep clicks\nYes = shift clicks")
-            msg.setStandardButtons(QtWidgets.QMessageBox.No | QtWidgets.QMessageBox.Yes)
-            msg.setDefaultButton(QtWidgets.QMessageBox.Yes)
+            pix = QtGui.QPixmap.fromImage(qimg)
 
-            choice = msg.exec_()
+            self.viewer.set_image(pix)
+            self._image_has_changed = False
+            self._colormap_has_changed = False
 
-            if choice == QtWidgets.QMessageBox.Yes:
-                if half_shift:
-                    self.click_manager.to_half_shift_on()
-                else:
-                    self.click_manager.to_half_shift_off()
+        # redraw clicks
+        self.viewer.clear_markers()
 
-        self.viewer.half_shift = half_shift
-        self._append_log(f"Half-Shift mode: {half_shift}")
-        self.update()
+        pts = self.click_manager.extract_group()
 
-    def on_display_clicks_changed(self, state):
+        if self.show_clicks:
+            for x, y in pts:
+                if x is None or y is None:
+                    continue
+                self.viewer.add_marker((x, y), self.marker_color, self.marker_size)
+
+    def update_table(self):
         r"""
-        Toggle dispaly clicks.
+        Update table with current group points.
         """
-        DISPLAY = state == QtCore.Qt.Checked
-        self._append_log(f"Display clicks: {DISPLAY}")
-        self.update()
+        pts = self.click_manager.extract_group()
+
+        if self.click_manager.use_float_precision:
+            self.table.setHorizontalHeaderLabels(["Index", "X (float)", "Y (float)"])
+        else:
+            self.table.setHorizontalHeaderLabels(["Index", "X (int)", "Y (int)"])
+
+        self.table.setRowCount(len(pts))
+
+        for i, (x, y) in enumerate(pts):
+            self.table.setItem(i, 0, QtWidgets.QTableWidgetItem(str(i)))
+            self.table.setItem(i, 1, QtWidgets.QTableWidgetItem(self._format_value(x)))
+            self.table.setItem(i, 2, QtWidgets.QTableWidgetItem(self._format_value(y)))
+
+    def update_groups(self):
+        r"""
+        Sync group selector.
+        """
+        self.group_selector.blockSignals(True)
+        self.group_selector.clear()
+
+        for g in self.click_manager.groups:
+            self.group_selector.addItem(g)
+
+        self.group_selector.setCurrentText(self.click_manager.current_group)
+        self.group_selector.blockSignals(False)
 
     # ============================================================
     # Image
     # ============================================================
-
     def set_image(self, image: Optional[np.ndarray]):
         r"""
         Set image to display.
@@ -529,99 +764,60 @@ class ClickImageApp(QtWidgets.QMainWindow):
 
         self.update()
 
-    # ============================================================
-    # Update pipeline
-    # ============================================================
-
-    def update(self):
-        r"""
-        Refresh UI.
+    def on_colormap_changed(self, index):
         """
-        if not self.initialization_done:
-            return
-
-        self.update_groups()
-        self.update_table()
-        self.update_viewer()
-
-    def _format_value(self, v):
-        if v is None:
-            return ""
-
-        if self.click_manager.use_int_precision:
-            return str(int(round(v)))
-
-        return f"{v:.3f}"
-
-    def update_viewer(self):
-        r"""
-        Render image + clicks.
+        Called when the user selects a different colormap.
         """
-        if self._image_has_changed or self._colormap_has_changed:
-            colormap = self.get_selected_colormap()
-            img = self.image  # BGR (OpenCV standard)
+        self._colormap_has_changed = True
+        self._append_log(f"Colormap changed to: {self.colormap_selector.currentText()}")
+        self.update()
 
-            if colormap is not None:
-                gray = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)
-                img = cv2.applyColorMap(gray, colormap)
-
-            # conversion unique pour Qt
-            rgb = cv2.cvtColor(img, cv2.COLOR_BGR2RGB)
-
-            h, w, ch = rgb.shape
-            bytes_per_line = ch * w
-
-            qimg = QtGui.QImage(
-                rgb.data, w, h, bytes_per_line, QtGui.QImage.Format_RGB888
-            )
-            pix = QtGui.QPixmap.fromImage(qimg)
-
-            self.viewer.set_image(pix)
-            self._image_has_changed = False
-            self._colormap_has_changed = False
-
-        # redraw clicks
-        self.viewer.clear_markers()
-
-        pts = self.click_manager.extract_group()
-
-        DISPLAY = self.display_clicks_checkbox.isChecked()
-        if DISPLAY:
-            for x, y in pts:
-                if x is None or y is None:
-                    continue
-                self.viewer.add_marker((x, y), self.marker_color, self.marker_size)
-
-    def update_table(self):
-        r"""
-        Update table with current group points.
+    def get_selected_colormap(self):
         """
-        pts = self.click_manager.extract_group()
+        Get the selected colormap for displaying the image.
 
-        if self.click_manager.use_float_precision:
-            self.table.setHorizontalHeaderLabels(["Index", "X (float)", "Y (float)"])
-        else:
-            self.table.setHorizontalHeaderLabels(["Index", "X (int)", "Y (int)"])
-
-        self.table.setRowCount(len(pts))
-
-        for i, (x, y) in enumerate(pts):
-            self.table.setItem(i, 0, QtWidgets.QTableWidgetItem(str(i)))
-            self.table.setItem(i, 1, QtWidgets.QTableWidgetItem(self._format_value(x)))
-            self.table.setItem(i, 2, QtWidgets.QTableWidgetItem(self._format_value(y)))
-
-    def update_groups(self):
-        r"""
-        Sync group selector.
+        Returns
+        -------
+        str
+            The selected colormap.
         """
-        self.group_selector.blockSignals(True)
-        self.group_selector.clear()
+        colormap_map = {
+            "Default": None,
+            "Gray": cv2.COLORMAP_BONE,
+            "Hot": cv2.COLORMAP_HOT,
+            "Jet": cv2.COLORMAP_JET,
+            "Rainbow": cv2.COLORMAP_RAINBOW,
+            "Cool": cv2.COLORMAP_COOL,
+            "Spring": cv2.COLORMAP_SPRING,
+        }
+        return colormap_map.get(self.colormap_selector.currentText(), None)
 
-        for g in self.click_manager.groups:
-            self.group_selector.addItem(g)
+    def on_contrast_changed(self):
 
-        self.group_selector.setCurrentText(self.click_manager.current_group)
-        self.group_selector.blockSignals(False)
+        self.alpha = self.alpha_slider.value() / 100
+        self.beta_pc = self.beta_slider.value()
+        self.display_min_pc = self.min_slider.value()
+        self.display_max_pc = self.max_slider.value()
+
+        self.alpha_value_label.setText(f"{self.alpha:.2f}")
+        self.beta_value_label.setText(f"{self.beta_pc}%")
+        self.min_value_label.setText(f"{self.display_min_pc}%")
+        self.max_value_label.setText(f"{self.display_max_pc}%")
+
+        self._image_has_changed = True
+        self.update()
+
+    def on_reset_contrast(self):
+        """
+        Reset contrast settings.
+        """
+        self.alpha_slider.setValue(100)
+        self.beta_slider.setValue(0)
+
+        self.min_slider.setValue(0)
+        self.max_slider.setValue(100)
+
+        self.on_contrast_changed()
 
     # ============================================================
     # Click handling
@@ -635,6 +831,7 @@ class ClickImageApp(QtWidgets.QMainWindow):
             return
 
         self.click_manager.add_click(x, y)
+        self._append_log(f"Click processed: {(x, y)}")
         self._is_saved = False
         self.update()
 
@@ -646,6 +843,7 @@ class ClickImageApp(QtWidgets.QMainWindow):
             return
 
         self.click_manager.add_click(None, None)
+        self._append_log(f"Click processed: {(None, None)}")
         self._is_saved = False
         self.update()
 
@@ -689,6 +887,53 @@ class ClickImageApp(QtWidgets.QMainWindow):
         self._is_saved = False
         self.update()
 
+    def on_precision_changed(self, state):
+        r"""
+        Toggle integer/float precision mode.
+        """
+        INT = state == QtCore.Qt.Checked
+        self.click_manager.precision_mode = "int" if INT else "float"
+        self._append_log(f"Precision mode: {'INT' if INT else 'FLOAT'}")
+        self.update()
+
+    def on_half_shift_changed(self, state):
+        r"""
+        Toggle half-shift mode.
+        """
+
+        half_shift = state == QtCore.Qt.Checked
+
+        if self.click_manager.n_clicks > 0:
+
+            msg = QtWidgets.QMessageBox(self)
+            msg.setWindowTitle("Existing clicks detected")
+            msg.setText(
+                f"Do you want to shift all previous clicked points by 0.5 to match the new coordinates system ?"
+            )
+            msg.setInformativeText("No = keep clicks\nYes = shift clicks")
+            msg.setStandardButtons(QtWidgets.QMessageBox.No | QtWidgets.QMessageBox.Yes)
+            msg.setDefaultButton(QtWidgets.QMessageBox.Yes)
+
+            choice = msg.exec_()
+
+            if choice == QtWidgets.QMessageBox.Yes:
+                if half_shift:
+                    self.click_manager.to_half_shift_on()
+                else:
+                    self.click_manager.to_half_shift_off()
+
+        self.viewer.half_shift = half_shift
+        self._append_log(f"Half-Shift mode: {half_shift}")
+        self.update()
+
+    def on_display_clicks_changed(self, state):
+        r"""
+        Toggle dispaly clicks.
+        """
+        self.show_clicks = state == QtCore.Qt.Checked
+        self._append_log(f"Display clicks: {self.show_clicks}")
+        self.update()
+
     # ============================================================
     # Design
     # ============================================================
@@ -703,6 +948,8 @@ class ClickImageApp(QtWidgets.QMainWindow):
                 f"background-color: {color.name()}; border: 1px solid black;"
             )
 
+            self._append_log(f"Crosshair color set to: {color.name()}")
+
     def choose_color(self):
         color = QtWidgets.QColorDialog.getColor(self.marker_color, self)
 
@@ -714,6 +961,8 @@ class ClickImageApp(QtWidgets.QMainWindow):
                 f"background-color: {color.name()}; border: 1px solid black;"
             )
 
+            self._append_log(f"Marker color set to: {color.name()}")
+
     def on_marker_size_changed(self, value: str):
         r"""
         Update marker size.
@@ -724,47 +973,19 @@ class ClickImageApp(QtWidgets.QMainWindow):
         except ValueError:
             self.marker_size = 8
 
-        self._append_log(f"Marker size set to {self.marker_size}")
+        self._append_log(f"Marker size set to: {self.marker_size}")
 
         self.update()
-
-    def on_colormap_changed(self, index):
-        """
-        Called when the user selects a different colormap.
-        """
-        self._append_log(f"Colormap changed to: {self.colormap_selector.currentText()}")
-        self._colormap_has_changed = True
-        self.update()
-
-    def get_selected_colormap(self):
-        """
-        Get the selected colormap for displaying the image.
-
-        Returns
-        -------
-        str
-            The selected colormap.
-        """
-        colormap_map = {
-            "Default": None,
-            "Gray": cv2.COLORMAP_BONE,
-            "Hot": cv2.COLORMAP_HOT,
-            "Jet": cv2.COLORMAP_JET,
-            "Rainbow": cv2.COLORMAP_RAINBOW,
-            "Cool": cv2.COLORMAP_COOL,
-            "Spring": cv2.COLORMAP_SPRING,
-        }
-        return colormap_map.get(self.colormap_selector.currentText(), None)
 
     # ============================================================
     # Groups
     # ============================================================
-
     def on_group_changed(self, name):
         r"""
         Switch active group.
         """
         self.click_manager.set_group(name)
+        self._append_log(f"Group switch to : {name}")
         self.update()
 
     def on_add_group(self):
@@ -863,7 +1084,7 @@ class ClickImageApp(QtWidgets.QMainWindow):
                 self.output_path = file_path
 
                 if self.output_path is not None:
-                    self._append_log(f"Output CSV path setted to : {self.output_path}")
+                    self._append_log(f"Output CSV path setted to: {self.output_path}")
 
             # -------------------------------------------------
             # Save
@@ -928,7 +1149,6 @@ class ClickImageApp(QtWidgets.QMainWindow):
     # ============================================================
     # Utils
     # ============================================================
-
     def _append_log(self, msg: str):
         r"""
         Append log message.

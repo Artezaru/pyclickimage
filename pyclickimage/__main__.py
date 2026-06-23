@@ -64,7 +64,7 @@ def __main_gui__() -> None:
     args = parser.parse_args()
 
     if args.image is not None:
-        image = cv2.imread(args.image)
+        image = cv2.imread(args.image, cv2.IMREAD_UNCHANGED)
     else:
         image = None
 
