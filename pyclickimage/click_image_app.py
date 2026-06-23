@@ -191,6 +191,13 @@ class ClickImageApp(QtWidgets.QMainWindow):
         self.half_shift_checkbox.stateChanged.connect(self.on_half_shift_changed)
         side.addWidget(self.half_shift_checkbox)
 
+        self.display_clicks_checkbox = QtWidgets.QCheckBox("Display clicks")
+        self.display_clicks_checkbox.setChecked(True)
+        self.display_clicks_checkbox.stateChanged.connect(
+            self.on_display_clicks_changed
+        )
+        side.addWidget(self.display_clicks_checkbox)
+
         # ============================================================
         # Group selector
         # ============================================================
@@ -426,6 +433,14 @@ class ClickImageApp(QtWidgets.QMainWindow):
         self._append_log(f"Half-Shift mode: {half_shift}")
         self.update()
 
+    def on_display_clicks_changed(self, state):
+        r"""
+        Toggle dispaly clicks.
+        """
+        DISPLAY = state == QtCore.Qt.Checked
+        self._append_log(f"Display clicks: {DISPLAY}")
+        self.update()
+
     # ============================================================
     # Image
     # ============================================================
@@ -434,7 +449,6 @@ class ClickImageApp(QtWidgets.QMainWindow):
         r"""
         Set image to display.
         """
-
         if image is None:
             image = np.zeros((512, 512, 3), dtype=np.uint8)
             self._is_empty_image = True
@@ -571,10 +585,12 @@ class ClickImageApp(QtWidgets.QMainWindow):
 
         pts = self.click_manager.extract_group()
 
-        for x, y in pts:
-            if x is None or y is None:
-                continue
-            self.viewer.add_marker((x, y), self.marker_color, self.marker_size)
+        DISPLAY = self.display_clicks_checkbox.isChecked()
+        if DISPLAY:
+            for x, y in pts:
+                if x is None or y is None:
+                    continue
+                self.viewer.add_marker((x, y), self.marker_color, self.marker_size)
 
     def update_table(self):
         r"""
