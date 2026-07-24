@@ -2,80 +2,152 @@
 
 ## Description
 
-UI to collect 2D-coordinates of points on an image.
-The points can be separated into various groups.
+`pyclickimage` is a Python package providing a graphical interface to collect
+2D coordinates of points on images.
 
+The application supports:
 
-Run the command:
+- multiple images in the same annotation session,
+- multiple annotation groups,
+- floating-point coordinates for subpixel precision,
+- CSV session import/export,
+- visualization controls and annotation management.
 
-```
+Run the graphical application:
+
+```bash
 pyclickimage-gui
 ```
 
 ![GUI](https://raw.githubusercontent.com/Artezaru/pyclickimage/master/pyclickimage/resources/app.png)
 
-The output ``csv`` will have the following format (with ``integer`` or ``floating`` precision):
 
-```
-Group,Index,X,Y
-default,0,128,102
-default,1,115,153
-default,2,207,181
-default,3,261,134
-default,4,220,83
-default,5,151,37
-Coco,0,201,126
-Coco,1,105,119
-Coco,2,90,80
-Coco,3,126,51
-Coco,4,206,59
-Coco,5,261,93
-Coco,6,212,157
-Coco,7,166,175
+## Annotation sessions
+
+Annotations are stored as complete sessions.
+
+A session can contain several images and several groups. The exported CSV file
+has the following format:
+
+```text
+Image,Group,Index,X,Y
+image_1.png,default,0,128.5,102.0
+image_1.png,default,1,115.2,153.7
+image_1.png,Coco,0,201.0,126.5
+image_2.png,default,0,80.0,45.3
 ```
 
-**X** is the column-index of the click in the image and **Y** is the row-index of the click in the image such as for a NumPy Array the click is at **image[Y, X]**.
+The coordinates can be stored either as floating-point values or displayed
+with integer precision depending on the selected application mode.
+
+**X** is the horizontal coordinate (column index) and **Y** is the vertical
+coordinate (row index), following NumPy image indexing:
+
+```python
+image[Y, X]
+```
+
+Empty points can also be stored when a click is intentionally skipped:
+
+```text
+Image,Group,Index,X,Y
+image_1.png,default,2,,
+```
+
+
+## Reading sessions
+
+Session files can be loaded directly from Python without opening the GUI.
+
+```python
+import pyclickimage
+
+data = pyclickimage.read_session_csv(
+    "session.csv"
+)
+
+print(data)
+```
+
+The returned dictionary has the following structure:
+
+```python
+{
+    "image_1.png": {
+        "default": [
+            (128.5, 102.0),
+            (115.2, 153.7),
+        ],
+        "Coco": [
+            (201.0, 126.5),
+        ],
+    }
+}
+```
+
+Sessions can also be converted to JSON:
+
+```python
+import pyclickimage
+
+pyclickimage.csv2json(
+    "session.csv",
+    "session.json",
+)
+```
 
 
 ## Authors
 
 - Artezaru <artezaru.github@proton.me>
 
-- **Git Plateform**: https://github.com/Artezaru/pyclickimage.git
-- **Online Documentation**: https://Artezaru.github.io/pyclickimage
+Project repository:
+
+- **GitHub**: https://github.com/Artezaru/pyclickimage
+
+Documentation:
+
+- **Online documentation**: https://Artezaru.github.io/pyclickimage
+
 
 ## Installation
 
-Install with pip
+Install directly from GitHub:
 
-```
+```bash
 pip install git+https://github.com/Artezaru/pyclickimage.git
 ```
 
-Clone with git
+Or clone the repository:
 
-```
+```bash
 git clone https://github.com/Artezaru/pyclickimage.git
 ```
 
-## WARNING
 
-This package use ``PyQt5`` to display the GUI. 
-If you have ``opencv-python`` installed on your environment, it will should be replaced by ``opencv-python-headless`` to avoid conflicts.
-This package is not compatible with the full ``opencv-python``.
+## Requirements and compatibility
+
+This package uses `PyQt5` for the graphical interface.
+
+If `opencv-python` is installed in the same environment, it is recommended to
+replace it with `opencv-python-headless` to avoid conflicts between Qt and
+OpenCV GUI backends.
+
+The package is not compatible with the full `opencv-python` package.
+
 
 ## License
 
 Copyright 2025-2026 Artezaru
 
-Licensed under the Apache License, Version 2.0 (the "License");
-you may not use this file except in compliance with the License.
-You may obtain a copy of the License at
+Licensed under the GNU General Public License v3.0 or later (GPL-3.0-or-later).
 
-http://www.apache.org/licenses/LICENSE-2.0
+This program is free software: you can redistribute it and/or modify it under
+the terms of the GNU General Public License as published by the Free Software
+Foundation.
 
-Unless required by applicable law or agreed to in writing, software
-distributed under the License is distributed on an "AS IS" BASIS,
-WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-See the License for the specific language governing permissions and
-limitations under the License.
+This program is distributed in the hope that it will be useful, but WITHOUT ANY
+WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS FOR
+A PARTICULAR PURPOSE.
+
+See the `LICENSE` file for more information.

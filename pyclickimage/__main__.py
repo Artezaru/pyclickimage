@@ -18,7 +18,7 @@ along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
 import argparse
 import cv2
-from .run import run
+from .tools import run
 
 
 def __main__() -> None:
@@ -40,33 +40,59 @@ def __main_gui__() -> None:
     r"""
     Graphical user interface entry point of the package.
 
-    This method contains the script to run if the user enter the name of the package on the command line with the ``gui`` extension.
+    This method contains the script executed when running::
 
-    .. code-block:: console
         pyclickimage-gui
 
-    This will launch the GUI application for image clicking and saving coordinates.
+    The application can optionally preload images using
+    ``--images`` or load an existing annotation session using
+    ``--session``.
 
-    You can also specify an image file to be displayed ``--image`` or ``-i`` and a CSV file path to save the click coordinates ``--output`` or ``-o``.
+    Examples
+    --------
+
+    Launch empty application::
+
+        pyclickimage-gui
+
+    Open one image::
+
+        pyclickimage-gui -i image.tif
+
+    Open multiple images::
+
+        pyclickimage-gui -i image1.tif image2.tif
+
+    Load an existing session::
+
+        pyclickimage-gui -s annotations.csv
 
     """
-    # Parser for command line arguments
+
     parser = argparse.ArgumentParser(description="PyClickImage GUI application.")
+
     parser.add_argument(
-        "-i", "--image", type=str, help="Path to the image file to be displayed."
-    )
-    parser.add_argument(
-        "-o",
-        "--output",
+        "-i",
+        "--images",
+        nargs="+",
         type=str,
-        help="Path to save the CSV file with click coordinates.",
+        help=("Path(s) to image file(s) to preload."),
     )
+
+    parser.add_argument(
+        "-s",
+        "--session",
+        type=str,
+        help=("Path to an annotation session CSV file to load."),
+    )
+
     args = parser.parse_args()
 
-    if args.image is not None:
-        image = cv2.imread(args.image, cv2.IMREAD_UNCHANGED)
-    else:
-        image = None
+    if args.images is not None and args.session is not None:
 
-    # Launch the GUI application
-    run(image=image, output=args.output)
+        parser.error("--images and --session cannot be used together.")
+
+    run(
+        images=args.images,
+        session=args.session,
+    )

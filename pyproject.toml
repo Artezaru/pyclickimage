@@ -22,7 +22,8 @@ classifiers = [
 dependencies = [
   "pyqt5",
   "numpy",
-  "opencv-python-headless"
+  "opencv-python-headless",
+  "pandas",
 ]
 
 [project.urls]

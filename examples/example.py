@@ -1,11 +1,10 @@
 import cv2
-from pyclickimage import ClickManager, run
+from pyclickimage import run, read_session_csv
 import os
 
 img = cv2.imread(os.path.join(os.path.dirname(__file__), "example.png"))
-file = os.path.join(os.path.dirname(__file__), "clicks.csv")
-run(image=img, output=file)
+run(images=img)
+# Save at example.csv in order the next line work !
 
-clicks = ClickManager.load_from_csv(file)
-default_clicks = clicks.extract_group("default")
-print(default_clicks)
+clicks = read_session_csv("example.csv")
+print(clicks)
