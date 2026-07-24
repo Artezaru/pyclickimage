@@ -41,7 +41,7 @@ You can also preload an existing annotation session using the ``-s`` or
 .. note::
 
     A session file and image files are mutually exclusive inputs.
-    Use either ``--image`` or ``--session``.
+    Use either ``--images`` or ``--session``.
 
 The GUI will automatically load the selected images or session when starting.
 
