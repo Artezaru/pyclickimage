@@ -8,7 +8,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
-    <title>Extracting the Clicks from CSV &#8212; pyclickimage 2.4.0 documentation</title>
+    <title>Extracting the Clicks from CSV &#8212; pyclickimage 3.0.0 documentation</title>
   
   
   
@@ -38,7 +38,7 @@
   <link rel="preload" as="script" href="../_static/scripts/bootstrap.js?digest=8878045cc6db502f8baf" />
 <link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=8878045cc6db502f8baf" />
 
-    <script src="../_static/documentation_options.js?v=4d935f96"></script>
+    <script src="../_static/documentation_options.js?v=acc74ff5"></script>
     <script src="../_static/doctools.js?v=9a2dae69"></script>
     <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
     <script>DOCUMENTATION_OPTIONS.pagename = 'usage_doc/extracting_the_clicks';</script>
@@ -109,7 +109,7 @@
   
   
   
-    <p class="title logo__title">pyclickimage 2.4.0 documentation</p>
+    <p class="title logo__title">pyclickimage 3.0.0 documentation</p>
   
 </a></div>
     
@@ -330,34 +330,80 @@
                   
   <section id="extracting-the-clicks-from-csv">
 <h1>Extracting the Clicks from CSV<a class="headerlink" href="#extracting-the-clicks-from-csv" title="Link to this heading">#</a></h1>
-<p>The clicks stored in the <code class="docutils literal notranslate"><span class="pre">.csv</span></code> file can be extracted directly or using the <code class="docutils literal notranslate"><span class="pre">ClickManager</span></code> class.</p>
-<p>To extract the clicks, follow these steps:</p>
-<ol class="arabic simple">
-<li><p><strong>Load the CSV file</strong>: Use the <code class="docutils literal notranslate"><span class="pre">ClickManager.load_from_csv()</span></code> method to load the clicks from the CSV file.</p></li>
-<li><p><strong>Extract a specific group</strong>: Use the <code class="docutils literal notranslate"><span class="pre">extract_group()</span></code> method to get all the clicks from a specific group (e.g., “default”).</p></li>
-</ol>
-<p>Here’s how you can extract the clicks from a CSV file:</p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">pyclickimage</span><span class="w"> </span><span class="kn">import</span> <span class="n">ClickManager</span>
+<p>Annotation sessions saved by <code class="docutils literal notranslate"><span class="pre">pyclickimage</span></code> can be loaded directly from a
+CSV file without opening the graphical interface.</p>
+<p>For most use cases, the recommended approach is to use the
+<code class="xref py py-func docutils literal notranslate"><span class="pre">pyclickimage.read_session_csv()</span></code> function. It provides a simple way to
+access the annotations as a Python dictionary or as a pandas DataFrame.</p>
+<section id="reading-a-session">
+<h2>Reading a session<a class="headerlink" href="#reading-a-session" title="Link to this heading">#</a></h2>
+<p>To extract the clicks from a saved session:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">pyclickimage</span>
 
-<span class="c1"># Load the clicks from the CSV file</span>
-<span class="n">click_manager</span> <span class="o">=</span> <span class="n">ClickManager</span><span class="o">.</span><span class="n">load_from_csv</span><span class="p">(</span><span class="s2">&quot;clicks.csv&quot;</span><span class="p">)</span>
-
-<span class="c1"># Extract clicks for the &quot;default&quot; group</span>
-<span class="n">default_clicks</span> <span class="o">=</span> <span class="n">click_manager</span><span class="o">.</span><span class="n">extract_group</span><span class="p">(</span><span class="s2">&quot;default&quot;</span><span class="p">)</span>
-
-<span class="c1"># Print the extracted clicks</span>
-<span class="nb">print</span><span class="p">(</span><span class="n">default_clicks</span><span class="p">)</span>
-
-<span class="c1"># Output: [(276, 97), (242, 109), (317, 144), (253, 169)]</span>
+<span class="n">session</span> <span class="o">=</span> <span class="n">pyclickimage</span><span class="o">.</span><span class="n">read_session_csv</span><span class="p">(</span>
+    <span class="s2">&quot;session.csv&quot;</span>
+<span class="p">)</span>
 </pre></div>
 </div>
-<p>In this example:</p>
-<ul class="simple">
-<li><p>The CSV file contains the saved clicks, with each row including the group name, click index, and the X and Y coordinates.</p></li>
-<li><p>The <code class="docutils literal notranslate"><span class="pre">extract_group()</span></code> method filters and returns only the clicks from the specified group (in this case, the “default” group).</p></li>
-<li><p>The output is a list of tuples, where each tuple contains the X and Y coordinates of the clicks in the selected group.</p></li>
-</ul>
-<p>The clicks can then be used for further processing, such as analysis or visualization.</p>
+<p>The default output is a nested dictionary organized as:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="p">{</span>
+    <span class="s2">&quot;image_1.png&quot;</span><span class="p">:</span> <span class="p">{</span>
+        <span class="s2">&quot;default&quot;</span><span class="p">:</span> <span class="p">[</span>
+            <span class="p">(</span><span class="mf">276.5</span><span class="p">,</span> <span class="mf">97.0</span><span class="p">),</span>
+            <span class="p">(</span><span class="mf">242.2</span><span class="p">,</span> <span class="mf">109.8</span><span class="p">),</span>
+        <span class="p">],</span>
+        <span class="s2">&quot;target&quot;</span><span class="p">:</span> <span class="p">[</span>
+            <span class="p">(</span><span class="mf">317.0</span><span class="p">,</span> <span class="mf">144.5</span><span class="p">),</span>
+        <span class="p">],</span>
+    <span class="p">},</span>
+
+    <span class="s2">&quot;image_2.png&quot;</span><span class="p">:</span> <span class="p">{</span>
+        <span class="s2">&quot;default&quot;</span><span class="p">:</span> <span class="p">[</span>
+            <span class="p">(</span><span class="mf">50.0</span><span class="p">,</span> <span class="mf">25.5</span><span class="p">),</span>
+        <span class="p">],</span>
+    <span class="p">},</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</section>
+<section id="accessing-clicks">
+<h2>Accessing clicks<a class="headerlink" href="#accessing-clicks" title="Link to this heading">#</a></h2>
+<p>Clicks can then be accessed by image and group:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">clicks</span> <span class="o">=</span> <span class="n">session</span><span class="p">[</span><span class="s2">&quot;image_1.png&quot;</span><span class="p">][</span><span class="s2">&quot;default&quot;</span><span class="p">]</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="n">clicks</span><span class="p">)</span>
+
+<span class="c1"># Output:</span>
+<span class="c1"># [(276.5, 97.0), (242.2, 109.8)]</span>
+</pre></div>
+</div>
+</section>
+<section id="using-pandas">
+<h2>Using pandas<a class="headerlink" href="#using-pandas" title="Link to this heading">#</a></h2>
+<p>For data analysis workflows, the CSV file can also be loaded as a
+<code class="docutils literal notranslate"><span class="pre">pandas.DataFrame</span></code>:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">pyclickimage</span>
+
+<span class="n">df</span> <span class="o">=</span> <span class="n">pyclickimage</span><span class="o">.</span><span class="n">read_session_csv</span><span class="p">(</span>
+    <span class="s2">&quot;session.csv&quot;</span><span class="p">,</span>
+    <span class="n">output</span><span class="o">=</span><span class="s2">&quot;pandas&quot;</span><span class="p">,</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+<p>The resulting DataFrame contains the columns:</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>Image | Group | Index | X | Y
+</pre></div>
+</div>
+</section>
+<section id="using-the-core-classes">
+<h2>Using the core classes<a class="headerlink" href="#using-the-core-classes" title="Link to this heading">#</a></h2>
+<p>For advanced applications, the lower-level classes can be used directly.</p>
+<p><code class="docutils literal notranslate"><span class="pre">AnnotationSession</span></code> allows loading and manipulating a complete annotation
+session, while <code class="docutils literal notranslate"><span class="pre">ClickManager</span></code> manages the annotations associated with a
+single image.</p>
+<p>These classes are mainly intended for developers extending the package.
+<code class="docutils literal notranslate"><span class="pre">read_session_csv</span></code> is recommended for simple extraction and analysis tasks.</p>
+</section>
 </section>
 
 
@@ -389,6 +435,21 @@
                 <dialog id="pst-secondary-sidebar-modal"></dialog>
                 <div id="pst-secondary-sidebar" class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
 
+
+  <div class="sidebar-secondary-item">
+<div
+    id="pst-page-navigation-heading-2"
+    class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> On this page
+  </div>
+  <nav class="bd-toc-nav page-toc" aria-labelledby="pst-page-navigation-heading-2">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#reading-a-session">Reading a session</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#accessing-clicks">Accessing clicks</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#using-pandas">Using pandas</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#using-the-core-classes">Using the core classes</a></li>
+</ul>
+  </nav></div>
 
   <div class="sidebar-secondary-item">
   <div role="note" aria-label="source link">

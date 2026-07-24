@@ -8,7 +8,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
-    <title>Welcome to pyclickimage’s documentation! &#8212; pyclickimage 2.4.0 documentation</title>
+    <title>Welcome to pyclickimage’s documentation! &#8212; pyclickimage 3.0.0 documentation</title>
   
   
   
@@ -38,7 +38,7 @@
   <link rel="preload" as="script" href="_static/scripts/bootstrap.js?digest=8878045cc6db502f8baf" />
 <link rel="preload" as="script" href="_static/scripts/pydata-sphinx-theme.js?digest=8878045cc6db502f8baf" />
 
-    <script src="_static/documentation_options.js?v=4d935f96"></script>
+    <script src="_static/documentation_options.js?v=acc74ff5"></script>
     <script src="_static/doctools.js?v=9a2dae69"></script>
     <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
     <script>DOCUMENTATION_OPTIONS.pagename = 'index';</script>
@@ -109,7 +109,7 @@
   
   
   
-    <p class="title logo__title">pyclickimage 2.4.0 documentation</p>
+    <p class="title logo__title">pyclickimage 3.0.0 documentation</p>
   
 </a></div>
     
@@ -292,15 +292,25 @@
 <h1>Welcome to pyclickimage’s documentation!<a class="headerlink" href="#welcome-to-pyclickimage-s-documentation" title="Link to this heading">#</a></h1>
 <section id="description-of-the-package">
 <h2>Description of the package<a class="headerlink" href="#description-of-the-package" title="Link to this heading">#</a></h2>
-<p>UI to collect 2D-coordinates of points on an image.</p>
+<p><code class="docutils literal notranslate"><span class="pre">pyclickimage</span></code> is a Python package providing a graphical interface to
+collect 2D coordinates of points on images.</p>
+<p>The application supports:</p>
+<ul class="simple">
+<li><p>multiple images per annotation session,</p></li>
+<li><p>multiple annotation groups,</p></li>
+<li><p>subpixel floating-point coordinates,</p></li>
+<li><p>CSV session import/export,</p></li>
+<li><p>visualization and display controls,</p></li>
+<li><p>programmatic extraction of annotations.</p></li>
+</ul>
 </section>
 <section id="contents">
 <h2>Contents<a class="headerlink" href="#contents" title="Link to this heading">#</a></h2>
 <p>The documentation is divided into the following sections:</p>
 <ul class="simple">
-<li><p><strong>Installation</strong>: This section describes how to install the package.</p></li>
-<li><p><strong>API Reference</strong>: This section contains the documentation of the package’s API.</p></li>
-<li><p><strong>Usage</strong>: This section contains the documentation of how to use the package.</p></li>
+<li><p><strong>Installation</strong>: How to install the package.</p></li>
+<li><p><strong>API Reference</strong>: Reference documentation for user functions and developer classes.</p></li>
+<li><p><strong>Usage</strong>: Tutorials and examples explaining how to use the application.</p></li>
 </ul>
 <div class="toctree-wrapper compound">
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">Contents:</span></p>
@@ -310,47 +320,68 @@
 <li class="toctree-l1"><a class="reference internal" href="usage.html">Usage</a></li>
 </ul>
 </div>
-<p>A terminal commmand is created to run the GUI and collect the points on the image. The command is called <cite>pyclickimage-gui</cite> and can be used as follows:</p>
+</section>
+<section id="running-the-application">
+<h2>Running the application<a class="headerlink" href="#running-the-application" title="Link to this heading">#</a></h2>
+<p>A terminal command is installed with the package to launch the graphical
+interface:</p>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>pyclickimage-gui
 </pre></div>
 </div>
-<img alt="_images/app.png" class="align-center" src="_images/app.png" />
-<p>The clicks care in integer coordinates (<code class="docutils literal notranslate"><span class="pre">PyQt5</span></code> does not support float coordinates) and are saved in a CSV file.
-The clicks are saved by groups in their order of creation.</p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>Group,Index,Click<span class="w"> </span>X,Click<span class="w"> </span>Y
-default,0,128,102
-default,1,115,153
-default,2,207,181
-default,3,261,134
-default,4,220,83
-default,5,151,37
-Coco,0,201,126
-Coco,1,105,119
-Coco,2,90,80
-Coco,3,126,51
-Coco,4,206,59
-Coco,5,261,93
-Coco,6,212,157
-Coco,7,166,175
+<p>The application can also be launched from Python using:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">pyclickimage</span>
+
+<span class="n">pyclickimage</span><span class="o">.</span><span class="n">run</span><span class="p">()</span>
 </pre></div>
 </div>
-<p><code class="docutils literal notranslate"><span class="pre">X</span></code> is the column-index of the click in the image and <code class="docutils literal notranslate"><span class="pre">Y</span></code> is the row-index of the click in the image such as for a <code class="docutils literal notranslate"><span class="pre">numpy.ndarray</span></code> the click is at <code class="docutils literal notranslate"><span class="pre">image[Y,</span> <span class="pre">X]</span></code>.</p>
+<img alt="_images/app.png" class="align-center" src="_images/app.png" />
+</section>
+<section id="annotation-sessions">
+<h2>Annotation sessions<a class="headerlink" href="#annotation-sessions" title="Link to this heading">#</a></h2>
+<p>Annotations are stored as complete sessions.</p>
+<p>A session can contain multiple images and multiple annotation groups.
+The CSV format is:</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>Image,Group,Index,X,Y
+image_1.png,default,0,128.5,102.0
+image_1.png,default,1,115.2,153.7
+image_1.png,Coco,0,201.0,126.5
+image_2.png,default,0,80.0,45.3
+</pre></div>
+</div>
+<p>Coordinates are stored as floating-point values to preserve subpixel
+precision.</p>
+<p>The coordinates follow NumPy image indexing conventions:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">image</span><span class="p">[</span><span class="n">Y</span><span class="p">,</span> <span class="n">X</span><span class="p">]</span>
+</pre></div>
+</div>
+<p>where:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">X</span></code> is the horizontal coordinate (column index),</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">Y</span></code> is the vertical coordinate (row index).</p></li>
+</ul>
 </section>
 <section id="author">
 <h2>Author<a class="headerlink" href="#author" title="Link to this heading">#</a></h2>
-<p>The package <code class="docutils literal notranslate"><span class="pre">pyclickimage</span></code> was created by the following authors:</p>
+<p>The package <code class="docutils literal notranslate"><span class="pre">pyclickimage</span></code> was created by:</p>
 <ul class="simple">
 <li><p>Artezaru &lt;<a class="reference external" href="mailto:artezaru&#46;github&#37;&#52;&#48;proton&#46;me">artezaru<span>&#46;</span>github<span>&#64;</span>proton<span>&#46;</span>me</a>&gt;</p></li>
 </ul>
-<p>You can access the package and the documentation with the following URL:</p>
+</section>
+<section id="resources">
+<h2>Resources<a class="headerlink" href="#resources" title="Link to this heading">#</a></h2>
+<p>The source code and documentation are available at:</p>
 <ul class="simple">
-<li><p><strong>Git Plateform</strong>: <a class="github reference external" href="https://github.com/Artezaru/pyclickimage.git">Artezaru/pyclickimage.git</a></p></li>
-<li><p><strong>Online Documentation</strong>: <a class="reference external" href="https://Artezaru.github.io/pyclickimage">https://Artezaru.github.io/pyclickimage</a></p></li>
+<li><p><strong>GitHub repository</strong>:
+<a class="github reference external" href="https://github.com/Artezaru/pyclickimage">Artezaru/pyclickimage</a></p></li>
+<li><p><strong>Online documentation</strong>:
+<a class="reference external" href="https://Artezaru.github.io/pyclickimage">https://Artezaru.github.io/pyclickimage</a></p></li>
 </ul>
 </section>
 <section id="license">
 <h2>License<a class="headerlink" href="#license" title="Link to this heading">#</a></h2>
-<p>Please refer to the [LICENSE] file for the license of the package.</p>
+<p><code class="docutils literal notranslate"><span class="pre">pyclickimage</span></code> is distributed under the GNU General Public License
+version 3 or later (GPL-3.0-or-later).</p>
+<p>See the <code class="docutils literal notranslate"><span class="pre">LICENSE</span></code> file included with the package for more information.</p>
 </section>
 </section>
 
@@ -394,7 +425,10 @@ Coco,7,166,175
     <ul class="visible nav section-nav flex-column">
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#description-of-the-package">Description of the package</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#contents">Contents</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#running-the-application">Running the application</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#annotation-sessions">Annotation sessions</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#author">Author</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#resources">Resources</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#license">License</a></li>
 </ul>
   </nav></div>

@@ -8,7 +8,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
-    <title>Running the GUI &#8212; pyclickimage 2.4.0 documentation</title>
+    <title>Running the GUI &#8212; pyclickimage 3.0.0 documentation</title>
   
   
   
@@ -38,7 +38,7 @@
   <link rel="preload" as="script" href="../_static/scripts/bootstrap.js?digest=8878045cc6db502f8baf" />
 <link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=8878045cc6db502f8baf" />
 
-    <script src="../_static/documentation_options.js?v=4d935f96"></script>
+    <script src="../_static/documentation_options.js?v=acc74ff5"></script>
     <script src="../_static/doctools.js?v=9a2dae69"></script>
     <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
     <script>DOCUMENTATION_OPTIONS.pagename = 'usage_doc/running_the_GUI';</script>
@@ -110,7 +110,7 @@
   
   
   
-    <p class="title logo__title">pyclickimage 2.4.0 documentation</p>
+    <p class="title logo__title">pyclickimage 3.0.0 documentation</p>
   
 </a></div>
     
@@ -331,64 +331,81 @@
                   
   <section id="running-the-gui">
 <h1>Running the GUI<a class="headerlink" href="#running-the-gui" title="Link to this heading">#</a></h1>
-<p>Once the package is installed, you can run the GUI to select points on an image.
+<p>Once the package is installed, you can run the GUI to annotate images.
 For installation instructions, refer to the <a class="reference internal" href="../installation.html"><span class="doc">Installation</span></a> documentation.</p>
 <section id="running-the-gui-via-command-line">
 <h2>Running the GUI via Command Line<a class="headerlink" href="#running-the-gui-via-command-line" title="Link to this heading">#</a></h2>
-<p>You can use the command line to launch the GUI application.
-In your terminal, run the following command in the Python environment where the package is installed:</p>
+<p>You can launch the GUI application from the command line.
+In your terminal, run the following command in the Python environment where
+the package is installed:</p>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>pyclickimage-gui
+</pre></div>
+</div>
+<p>You can optionally preload one or multiple images using the <code class="docutils literal notranslate"><span class="pre">-i</span></code> or
+<code class="docutils literal notranslate"><span class="pre">--image</span></code> option.</p>
+<p>Single image:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>pyclickimage-gui<span class="w"> </span>-i<span class="w"> </span>example.png
+</pre></div>
+</div>
+<p>Multiple images:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>pyclickimage-gui<span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>-i<span class="w"> </span>image1.png<span class="w"> </span>image2.png<span class="w"> </span>image3.png
+</pre></div>
+</div>
+<p>You can also preload an existing annotation session using the <code class="docutils literal notranslate"><span class="pre">-s</span></code> or
+<code class="docutils literal notranslate"><span class="pre">--session</span></code> option.</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>pyclickimage-gui<span class="w"> </span>-s<span class="w"> </span>session.csv
+</pre></div>
+</div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>A session file and image files are mutually exclusive inputs.
+Use either <code class="docutils literal notranslate"><span class="pre">--image</span></code> or <code class="docutils literal notranslate"><span class="pre">--session</span></code>.</p>
+</div>
+<p>The GUI will automatically load the selected images or session when starting.</p>
+</section>
+<section id="running-the-gui-via-python-script">
+<h2>Running the GUI via Python Script<a class="headerlink" href="#running-the-gui-via-python-script" title="Link to this heading">#</a></h2>
+<p>You can also launch the application directly from Python using
+<code class="xref py py-func docutils literal notranslate"><span class="pre">pyclickimage.run()</span></code>.</p>
+<p>Run an empty application:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">pyclickimage</span>
+
+<span class="n">pyclickimage</span><span class="o">.</span><span class="n">run</span><span class="p">()</span>
+</pre></div>
+</div>
+<p>Preload one image:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">pyclickimage</span>
+
+<span class="n">pyclickimage</span><span class="o">.</span><span class="n">run</span><span class="p">(</span>
+    <span class="n">images</span><span class="o">=</span><span class="s2">&quot;example.png&quot;</span><span class="p">,</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+<p>Preload multiple images:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">pyclickimage</span>
+
+<span class="n">pyclickimage</span><span class="o">.</span><span class="n">run</span><span class="p">(</span>
+    <span class="n">images</span><span class="o">=</span><span class="p">[</span>
+        <span class="s2">&quot;image1.png&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;image2.png&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;image3.png&quot;</span><span class="p">,</span>
+    <span class="p">],</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+<p>You can also load an existing annotation session:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">pyclickimage</span>
+
+<span class="n">pyclickimage</span><span class="o">.</span><span class="n">run</span><span class="p">(</span>
+    <span class="n">session</span><span class="o">=</span><span class="s2">&quot;session.csv&quot;</span><span class="p">,</span>
+<span class="p">)</span>
 </pre></div>
 </div>
 <div class="admonition warning">
 <p class="admonition-title">Warning</p>
-<p>The old <code class="docutils literal notranslate"><span class="pre">pyclickimage</span></code> command is deprecated and will be removed in future versions.
-Please use <code class="docutils literal notranslate"><span class="pre">pyclickimage-gui</span></code> instead.</p>
-</div>
-<p>You can also specify the image path as an argument to the command using the <code class="docutils literal notranslate"><span class="pre">-i</span></code> or <code class="docutils literal notranslate"><span class="pre">--image</span></code> flag.</p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>pyclickimage-gui<span class="w"> </span>-i<span class="w"> </span>example.png
-<span class="c1"># Or</span>
-pyclickimage-gui<span class="w"> </span>--image<span class="w"> </span>example.png
-</pre></div>
-</div>
-<p>Additionally, you can specify the path to the output CSV file where the clicked points will be saved using the <code class="docutils literal notranslate"><span class="pre">-o</span></code> or <code class="docutils literal notranslate"><span class="pre">--output</span></code> flag.</p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>pyclickimage-gui<span class="w"> </span>-i<span class="w"> </span>example.png<span class="w"> </span>-o<span class="w"> </span>output.csv
-<span class="c1"># Or</span>
-pyclickimage-gui<span class="w"> </span>--image<span class="w"> </span>example.png<span class="w"> </span>--output<span class="w"> </span>output.csv
-</pre></div>
-</div>
-</section>
-<section id="running-the-gui-via-python-script">
-<h2>Running the GUI via Python Script<a class="headerlink" href="#running-the-gui-via-python-script" title="Link to this heading">#</a></h2>
-<p>You can also run the package directly within a Python script.
-To do so, use the <cite>pyclickimage.run()</cite> function.</p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">pyclickimage</span>
-
-<span class="c1"># Run the application (with default settings)</span>
-<span class="n">pyclickimage</span><span class="o">.</span><span class="n">run</span><span class="p">()</span>
-</pre></div>
-</div>
-<p>If you’d like to specify an image before running the application, you can do so as follows:</p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">cv2</span>
-<span class="kn">import</span><span class="w"> </span><span class="nn">pyclickimage</span>
-
-<span class="c1"># Read the image</span>
-<span class="n">image</span> <span class="o">=</span> <span class="n">cv2</span><span class="o">.</span><span class="n">imread</span><span class="p">(</span><span class="s2">&quot;example.png&quot;</span><span class="p">)</span>
-
-<span class="c1"># Run the application with the image</span>
-<span class="n">pyclickimage</span><span class="o">.</span><span class="n">run</span><span class="p">(</span><span class="n">image</span><span class="o">=</span><span class="n">image</span><span class="p">)</span>
-</pre></div>
-</div>
-<p>You can also specify the output CSV file path where the clicked points will be saved:</p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">cv2</span>
-<span class="kn">import</span><span class="w"> </span><span class="nn">pyclickimage</span>
-
-<span class="c1"># Read the image</span>
-<span class="n">image</span> <span class="o">=</span> <span class="n">cv2</span><span class="o">.</span><span class="n">imread</span><span class="p">(</span><span class="s2">&quot;example.png&quot;</span><span class="p">)</span>
-
-<span class="c1"># Run the application with the image and output file path</span>
-<span class="n">pyclickimage</span><span class="o">.</span><span class="n">run</span><span class="p">(</span><span class="n">image</span><span class="o">=</span><span class="n">image</span><span class="p">,</span> <span class="n">output</span><span class="o">=</span><span class="s2">&quot;output.csv&quot;</span><span class="p">)</span>
-</pre></div>
+<p><code class="docutils literal notranslate"><span class="pre">images</span></code> and <code class="docutils literal notranslate"><span class="pre">session</span></code> cannot be provided together.
+A session already contains the associated image paths and annotations.</p>
 </div>
 </section>
 </section>

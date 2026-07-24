@@ -8,7 +8,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
-    <title>pyclickimage.ImageViewer &#8212; pyclickimage 2.4.0 documentation</title>
+    <title>pyclickimage.ImageViewer &#8212; pyclickimage 3.0.0 documentation</title>
   
   
   
@@ -38,13 +38,13 @@
   <link rel="preload" as="script" href="../_static/scripts/bootstrap.js?digest=8878045cc6db502f8baf" />
 <link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=8878045cc6db502f8baf" />
 
-    <script src="../_static/documentation_options.js?v=4d935f96"></script>
+    <script src="../_static/documentation_options.js?v=acc74ff5"></script>
     <script src="../_static/doctools.js?v=9a2dae69"></script>
     <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
     <script>DOCUMENTATION_OPTIONS.pagename = 'api_doc/image_viewer';</script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="pyclickimage.run" href="run.html" />
+    <link rel="next" title="pyclickimage.ClickImageApp" href="click_image_app.html" />
     <link rel="prev" title="pyclickimage.ClickManager" href="click_manager.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
@@ -110,7 +110,7 @@
   
   
   
-    <p class="title logo__title">pyclickimage 2.4.0 documentation</p>
+    <p class="title logo__title">pyclickimage 3.0.0 documentation</p>
   
 </a></div>
     
@@ -264,11 +264,16 @@
 <nav class="bd-docs-nav bd-links"
      aria-label="Section Navigation">
   <p class="bd-links__title" role="heading" aria-level="1">Section Navigation</p>
-  <div class="bd-toc-item navbar-nav"><ul class="current nav bd-sidenav">
-<li class="toctree-l1"><a class="reference internal" href="click_image_app.html">pyclickimage.ClickImageApp</a></li>
+  <div class="bd-toc-item navbar-nav"><ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="run.html">pyclickimage.run</a></li>
+<li class="toctree-l1"><a class="reference internal" href="read_session_csv.html">pyclickimage.read_session_csv</a></li>
+<li class="toctree-l1"><a class="reference internal" href="csv2json.html">pyclickimage.csv2json</a></li>
+</ul>
+<ul class="current nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="annotation_session.html">pyclickimage.AnnotationSession</a></li>
 <li class="toctree-l1"><a class="reference internal" href="click_manager.html">pyclickimage.ClickManager</a></li>
 <li class="toctree-l1 current active"><a class="current reference internal" href="#">pyclickimage.ImageViewer</a></li>
-<li class="toctree-l1"><a class="reference internal" href="run.html">pyclickimage.run</a></li>
+<li class="toctree-l1"><a class="reference internal" href="click_image_app.html">pyclickimage.ClickImageApp</a></li>
 </ul>
 </div>
 </nav></div>
@@ -331,145 +336,6 @@
                   
   <section id="pyclickimage-imageviewer">
 <h1>pyclickimage.ImageViewer<a class="headerlink" href="#pyclickimage-imageviewer" title="Link to this heading">#</a></h1>
-<dl class="py class">
-<dt class="sig sig-object py" id="pyclickimage.ImageViewer">
-<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">pyclickimage.</span></span><span class="sig-name descname"><span class="pre">ImageViewer</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">parent</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">half_shift</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/pyclickimage/image_viewer.html#ImageViewer"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pyclickimage.ImageViewer" title="Link to this definition">#</a></dt>
-<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">QGraphicsView</span></code></p>
-<p>Interactive image viewer with:
-- subpixel cursor tracking
-- crosshair overlay
-- zoom with mouse wheel
-- precise click detection (drag-safe)
-- marker system for annotation</p>
-<p>half-shift :</p>
-<ul class="simple">
-<li><p>True = (0,0) on the center of the first pixel.</p></li>
-<li><p>False = (0,0) on the corner of the first pixel.</p></li>
-</ul>
-<dl class="py method">
-<dt class="sig sig-object py" id="pyclickimage.ImageViewer.add_marker">
-<span class="sig-name descname"><span class="pre">add_marker</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="pre">center:</span> <span class="pre">~typing.Tuple[float,</span> <span class="pre">float],</span> <span class="pre">color:</span> <span class="pre">~PyQt5.QtGui.QColor</span> <span class="pre">=</span> <span class="pre">&lt;PyQt5.QtGui.QColor</span> <span class="pre">object&gt;,</span> <span class="pre">size:</span> <span class="pre">int</span> <span class="pre">=</span> <span class="pre">8</span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="reference internal" href="../_modules/pyclickimage/image_viewer.html#ImageViewer.add_marker"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pyclickimage.ImageViewer.add_marker" title="Link to this definition">#</a></dt>
-<dd><p>Add a cross-style marker at a given position.</p>
-<dl class="field-list simple">
-<dt class="field-odd">Parameters<span class="colon">:</span></dt>
-<dd class="field-odd"><ul class="simple">
-<li><p><strong>center</strong> (<em>Tuple</em><em>[</em><em>float</em><em>, </em><em>float</em><em>]</em>) – (x, y) coordinates.</p></li>
-<li><p><strong>color</strong> (<em>QtGui.QColor</em>) – Marker color.</p></li>
-<li><p><strong>size</strong> (<em>int</em>) – Half-size of cross arms.</p></li>
-</ul>
-</dd>
-</dl>
-</dd></dl>
-
-<dl class="py method">
-<dt class="sig sig-object py" id="pyclickimage.ImageViewer.clear_markers">
-<span class="sig-name descname"><span class="pre">clear_markers</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="reference internal" href="../_modules/pyclickimage/image_viewer.html#ImageViewer.clear_markers"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pyclickimage.ImageViewer.clear_markers" title="Link to this definition">#</a></dt>
-<dd><p>Remove all markers from the scene.</p>
-</dd></dl>
-
-<dl class="py method">
-<dt class="sig sig-object py" id="pyclickimage.ImageViewer.get_crosshair_color">
-<span class="sig-name descname"><span class="pre">get_crosshair_color</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">QColor</span></span></span><a class="reference internal" href="../_modules/pyclickimage/image_viewer.html#ImageViewer.get_crosshair_color"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pyclickimage.ImageViewer.get_crosshair_color" title="Link to this definition">#</a></dt>
-<dd><p>Return current crosshair color.</p>
-</dd></dl>
-
-<dl class="py attribute">
-<dt class="sig sig-object py" id="pyclickimage.ImageViewer.left_click_signal">
-<span class="sig-name descname"><span class="pre">left_click_signal</span></span><a class="headerlink" href="#pyclickimage.ImageViewer.left_click_signal" title="Link to this definition">#</a></dt>
-<dd></dd></dl>
-
-<dl class="py method">
-<dt class="sig sig-object py" id="pyclickimage.ImageViewer.load_image">
-<span class="sig-name descname"><span class="pre">load_image</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">path</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="reference internal" href="../_modules/pyclickimage/image_viewer.html#ImageViewer.load_image"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pyclickimage.ImageViewer.load_image" title="Link to this definition">#</a></dt>
-<dd><p>Load an image into the viewer.</p>
-<dl class="field-list simple">
-<dt class="field-odd">Parameters<span class="colon">:</span></dt>
-<dd class="field-odd"><p><strong>path</strong> (<em>str</em>) – Path to image file.</p>
-</dd>
-<dt class="field-even">Raises<span class="colon">:</span></dt>
-<dd class="field-even"><p><strong>ValueError</strong> – If image cannot be loaded.</p>
-</dd>
-</dl>
-</dd></dl>
-
-<dl class="py method">
-<dt class="sig sig-object py" id="pyclickimage.ImageViewer.mouseMoveEvent">
-<span class="sig-name descname"><span class="pre">mouseMoveEvent</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">event</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">QMouseEvent</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="reference internal" href="../_modules/pyclickimage/image_viewer.html#ImageViewer.mouseMoveEvent"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pyclickimage.ImageViewer.mouseMoveEvent" title="Link to this definition">#</a></dt>
-<dd><p>Update crosshair and coordinate display.</p>
-<dl class="field-list simple">
-<dt class="field-odd">Parameters<span class="colon">:</span></dt>
-<dd class="field-odd"><p><strong>event</strong> (<em>QtGui.QMouseEvent</em>) – Mouse move event.</p>
-</dd>
-</dl>
-</dd></dl>
-
-<dl class="py method">
-<dt class="sig sig-object py" id="pyclickimage.ImageViewer.mousePressEvent">
-<span class="sig-name descname"><span class="pre">mousePressEvent</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">event</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">QMouseEvent</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="reference internal" href="../_modules/pyclickimage/image_viewer.html#ImageViewer.mousePressEvent"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pyclickimage.ImageViewer.mousePressEvent" title="Link to this definition">#</a></dt>
-<dd><p>Store press position for click validation.</p>
-<dl class="field-list simple">
-<dt class="field-odd">Parameters<span class="colon">:</span></dt>
-<dd class="field-odd"><p><strong>event</strong> (<em>QtGui.QMouseEvent</em>) – Mouse press event.</p>
-</dd>
-</dl>
-</dd></dl>
-
-<dl class="py method">
-<dt class="sig sig-object py" id="pyclickimage.ImageViewer.mouseReleaseEvent">
-<span class="sig-name descname"><span class="pre">mouseReleaseEvent</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">event</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">QMouseEvent</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="reference internal" href="../_modules/pyclickimage/image_viewer.html#ImageViewer.mouseReleaseEvent"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pyclickimage.ImageViewer.mouseReleaseEvent" title="Link to this definition">#</a></dt>
-<dd><p>Detect valid click and emit coordinates.</p>
-<dl class="field-list simple">
-<dt class="field-odd">Parameters<span class="colon">:</span></dt>
-<dd class="field-odd"><p><strong>event</strong> (<em>QtGui.QMouseEvent</em>) – Mouse release event.</p>
-</dd>
-</dl>
-</dd></dl>
-
-<dl class="py method">
-<dt class="sig sig-object py" id="pyclickimage.ImageViewer.reset_view">
-<span class="sig-name descname"><span class="pre">reset_view</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="reference internal" href="../_modules/pyclickimage/image_viewer.html#ImageViewer.reset_view"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pyclickimage.ImageViewer.reset_view" title="Link to this definition">#</a></dt>
-<dd><p>Reset the view to the initial state (no zoom, centered image).</p>
-<p>This method:
-- resets the internal zoom counter
-- resets Qt transformation matrix
-- re-applies fitInView on the current image</p>
-</dd></dl>
-
-<dl class="py attribute">
-<dt class="sig sig-object py" id="pyclickimage.ImageViewer.right_click_signal">
-<span class="sig-name descname"><span class="pre">right_click_signal</span></span><a class="headerlink" href="#pyclickimage.ImageViewer.right_click_signal" title="Link to this definition">#</a></dt>
-<dd></dd></dl>
-
-<dl class="py method">
-<dt class="sig sig-object py" id="pyclickimage.ImageViewer.set_crosshair_color">
-<span class="sig-name descname"><span class="pre">set_crosshair_color</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">color</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/pyclickimage/image_viewer.html#ImageViewer.set_crosshair_color"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pyclickimage.ImageViewer.set_crosshair_color" title="Link to this definition">#</a></dt>
-<dd><p>Set the crosshair color</p>
-</dd></dl>
-
-<dl class="py method">
-<dt class="sig sig-object py" id="pyclickimage.ImageViewer.set_image">
-<span class="sig-name descname"><span class="pre">set_image</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">pixmap</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">QPixmap</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/pyclickimage/image_viewer.html#ImageViewer.set_image"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pyclickimage.ImageViewer.set_image" title="Link to this definition">#</a></dt>
-<dd><p>Set the displayed image in the viewer.</p>
-<dl class="field-list simple">
-<dt class="field-odd">Parameters<span class="colon">:</span></dt>
-<dd class="field-odd"><p><strong>pixmap</strong> (<em>QtGui.QPixmap</em>) – Image already converted for Qt display.</p>
-</dd>
-</dl>
-</dd></dl>
-
-<dl class="py method">
-<dt class="sig sig-object py" id="pyclickimage.ImageViewer.wheelEvent">
-<span class="sig-name descname"><span class="pre">wheelEvent</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">event</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">QWheelEvent</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="reference internal" href="../_modules/pyclickimage/image_viewer.html#ImageViewer.wheelEvent"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pyclickimage.ImageViewer.wheelEvent" title="Link to this definition">#</a></dt>
-<dd><p>Handle zoom with mouse wheel.</p>
-<dl class="field-list simple">
-<dt class="field-odd">Parameters<span class="colon">:</span></dt>
-<dd class="field-odd"><p><strong>event</strong> (<em>QtGui.QWheelEvent</em>) – Wheel event.</p>
-</dd>
-</dl>
-</dd></dl>
-
-</dd></dl>
-
 </section>
 
 
@@ -492,11 +358,11 @@
       </div>
     </a>
     <a class="right-next"
-       href="run.html"
+       href="click_image_app.html"
        title="next page">
       <div class="prev-next-info">
         <p class="prev-next-subtitle">next</p>
-        <p class="prev-next-title">pyclickimage.run</p>
+        <p class="prev-next-title">pyclickimage.ClickImageApp</p>
       </div>
       <i class="fa-solid fa-angle-right"></i>
     </a>
@@ -510,33 +376,6 @@
                 <dialog id="pst-secondary-sidebar-modal"></dialog>
                 <div id="pst-secondary-sidebar" class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
 
-
-  <div class="sidebar-secondary-item">
-<div
-    id="pst-page-navigation-heading-2"
-    class="page-toc tocsection onthispage">
-    <i class="fa-solid fa-list"></i> On this page
-  </div>
-  <nav class="bd-toc-nav page-toc" aria-labelledby="pst-page-navigation-heading-2">
-    <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#pyclickimage.ImageViewer"><code class="docutils literal notranslate"><span class="pre">ImageViewer</span></code></a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#pyclickimage.ImageViewer.add_marker"><code class="docutils literal notranslate"><span class="pre">ImageViewer.add_marker()</span></code></a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#pyclickimage.ImageViewer.clear_markers"><code class="docutils literal notranslate"><span class="pre">ImageViewer.clear_markers()</span></code></a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#pyclickimage.ImageViewer.get_crosshair_color"><code class="docutils literal notranslate"><span class="pre">ImageViewer.get_crosshair_color()</span></code></a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#pyclickimage.ImageViewer.left_click_signal"><code class="docutils literal notranslate"><span class="pre">ImageViewer.left_click_signal</span></code></a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#pyclickimage.ImageViewer.load_image"><code class="docutils literal notranslate"><span class="pre">ImageViewer.load_image()</span></code></a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#pyclickimage.ImageViewer.mouseMoveEvent"><code class="docutils literal notranslate"><span class="pre">ImageViewer.mouseMoveEvent()</span></code></a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#pyclickimage.ImageViewer.mousePressEvent"><code class="docutils literal notranslate"><span class="pre">ImageViewer.mousePressEvent()</span></code></a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#pyclickimage.ImageViewer.mouseReleaseEvent"><code class="docutils literal notranslate"><span class="pre">ImageViewer.mouseReleaseEvent()</span></code></a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#pyclickimage.ImageViewer.reset_view"><code class="docutils literal notranslate"><span class="pre">ImageViewer.reset_view()</span></code></a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#pyclickimage.ImageViewer.right_click_signal"><code class="docutils literal notranslate"><span class="pre">ImageViewer.right_click_signal</span></code></a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#pyclickimage.ImageViewer.set_crosshair_color"><code class="docutils literal notranslate"><span class="pre">ImageViewer.set_crosshair_color()</span></code></a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#pyclickimage.ImageViewer.set_image"><code class="docutils literal notranslate"><span class="pre">ImageViewer.set_image()</span></code></a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#pyclickimage.ImageViewer.wheelEvent"><code class="docutils literal notranslate"><span class="pre">ImageViewer.wheelEvent()</span></code></a></li>
-</ul>
-</li>
-</ul>
-  </nav></div>
 
   <div class="sidebar-secondary-item">
   <div role="note" aria-label="source link">

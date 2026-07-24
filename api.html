@@ -8,7 +8,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
-    <title>API Reference &#8212; pyclickimage 2.4.0 documentation</title>
+    <title>API Reference &#8212; pyclickimage 3.0.0 documentation</title>
   
   
   
@@ -38,13 +38,13 @@
   <link rel="preload" as="script" href="_static/scripts/bootstrap.js?digest=8878045cc6db502f8baf" />
 <link rel="preload" as="script" href="_static/scripts/pydata-sphinx-theme.js?digest=8878045cc6db502f8baf" />
 
-    <script src="_static/documentation_options.js?v=4d935f96"></script>
+    <script src="_static/documentation_options.js?v=acc74ff5"></script>
     <script src="_static/doctools.js?v=9a2dae69"></script>
     <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
     <script>DOCUMENTATION_OPTIONS.pagename = 'api';</script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
-    <link rel="next" title="pyclickimage.ClickImageApp" href="api_doc/click_image_app.html" />
+    <link rel="next" title="pyclickimage.run" href="api_doc/run.html" />
     <link rel="prev" title="Installation" href="installation.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
@@ -110,7 +110,7 @@
   
   
   
-    <p class="title logo__title">pyclickimage 2.4.0 documentation</p>
+    <p class="title logo__title">pyclickimage 3.0.0 documentation</p>
   
 </a></div>
     
@@ -265,10 +265,15 @@
      aria-label="Section Navigation">
   <p class="bd-links__title" role="heading" aria-level="1">Section Navigation</p>
   <div class="bd-toc-item navbar-nav"><ul class="nav bd-sidenav">
-<li class="toctree-l1"><a class="reference internal" href="api_doc/click_image_app.html">pyclickimage.ClickImageApp</a></li>
+<li class="toctree-l1"><a class="reference internal" href="api_doc/run.html">pyclickimage.run</a></li>
+<li class="toctree-l1"><a class="reference internal" href="api_doc/read_session_csv.html">pyclickimage.read_session_csv</a></li>
+<li class="toctree-l1"><a class="reference internal" href="api_doc/csv2json.html">pyclickimage.csv2json</a></li>
+</ul>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="api_doc/annotation_session.html">pyclickimage.AnnotationSession</a></li>
 <li class="toctree-l1"><a class="reference internal" href="api_doc/click_manager.html">pyclickimage.ClickManager</a></li>
 <li class="toctree-l1"><a class="reference internal" href="api_doc/image_viewer.html">pyclickimage.ImageViewer</a></li>
-<li class="toctree-l1"><a class="reference internal" href="api_doc/run.html">pyclickimage.run</a></li>
+<li class="toctree-l1"><a class="reference internal" href="api_doc/click_image_app.html">pyclickimage.ClickImageApp</a></li>
 </ul>
 </div>
 </nav></div>
@@ -328,16 +333,33 @@
                   
   <section id="api-reference">
 <h1>API Reference<a class="headerlink" href="#api-reference" title="Link to this heading">#</a></h1>
-<p>The package <code class="docutils literal notranslate"><span class="pre">pyclickimage</span></code> is composed of the following functions, classes, and modules:</p>
+<p>The <code class="docutils literal notranslate"><span class="pre">pyclickimage</span></code> package provides a high-level user API for common
+operations and lower-level classes for developers.</p>
+<section id="user-api">
+<h2>User API<a class="headerlink" href="#user-api" title="Link to this heading">#</a></h2>
+<p>Functions intended for regular users.</p>
 <div class="toctree-wrapper compound">
 <ul>
-<li class="toctree-l1"><a class="reference internal" href="api_doc/click_image_app.html">pyclickimage.ClickImageApp</a></li>
-<li class="toctree-l1"><a class="reference internal" href="api_doc/click_manager.html">pyclickimage.ClickManager</a></li>
-<li class="toctree-l1"><a class="reference internal" href="api_doc/image_viewer.html">pyclickimage.ImageViewer</a></li>
 <li class="toctree-l1"><a class="reference internal" href="api_doc/run.html">pyclickimage.run</a></li>
+<li class="toctree-l1"><a class="reference internal" href="api_doc/read_session_csv.html">pyclickimage.read_session_csv</a></li>
+<li class="toctree-l1"><a class="reference internal" href="api_doc/csv2json.html">pyclickimage.csv2json</a></li>
 </ul>
 </div>
-<p>To learn how to use the package effectively, refer to the documentation <a class="reference internal" href="usage.html"><span class="doc">Usage</span></a>.</p>
+<p>To learn how to use the package effectively, refer to the documentation
+<a class="reference internal" href="usage.html"><span class="doc">Usage</span></a>.</p>
+</section>
+<section id="developer-api">
+<h2>Developer API<a class="headerlink" href="#developer-api" title="Link to this heading">#</a></h2>
+<p>Core classes and modules for advanced usage, extension, and development.</p>
+<div class="toctree-wrapper compound">
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="api_doc/annotation_session.html">pyclickimage.AnnotationSession</a></li>
+<li class="toctree-l1"><a class="reference internal" href="api_doc/click_manager.html">pyclickimage.ClickManager</a></li>
+<li class="toctree-l1"><a class="reference internal" href="api_doc/image_viewer.html">pyclickimage.ImageViewer</a></li>
+<li class="toctree-l1"><a class="reference internal" href="api_doc/click_image_app.html">pyclickimage.ClickImageApp</a></li>
+</ul>
+</div>
+</section>
 </section>
 
 
@@ -360,11 +382,11 @@
       </div>
     </a>
     <a class="right-next"
-       href="api_doc/click_image_app.html"
+       href="api_doc/run.html"
        title="next page">
       <div class="prev-next-info">
         <p class="prev-next-subtitle">next</p>
-        <p class="prev-next-title">pyclickimage.ClickImageApp</p>
+        <p class="prev-next-title">pyclickimage.run</p>
       </div>
       <i class="fa-solid fa-angle-right"></i>
     </a>
@@ -378,6 +400,19 @@
                 <dialog id="pst-secondary-sidebar-modal"></dialog>
                 <div id="pst-secondary-sidebar" class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
 
+
+  <div class="sidebar-secondary-item">
+<div
+    id="pst-page-navigation-heading-2"
+    class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> On this page
+  </div>
+  <nav class="bd-toc-nav page-toc" aria-labelledby="pst-page-navigation-heading-2">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#user-api">User API</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#developer-api">Developer API</a></li>
+</ul>
+  </nav></div>
 
   <div class="sidebar-secondary-item">
   <div role="note" aria-label="source link">
