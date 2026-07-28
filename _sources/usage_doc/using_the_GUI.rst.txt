@@ -217,10 +217,10 @@ The following shortcuts are available:
     * - ``Space``
       - Toggle click display
 
-    * - ``Tab``
+    * - ``Ctrl+Right // N``
       - Switch to next image
 
-    * - ``Shift+Tab``
+    * - ``Ctrl+Left // P``
       - Switch to previous image
 
     * - ``Ctrl+Down``

@@ -17,7 +17,7 @@ To extract the clicks from a saved session:
 
     import pyclickimage
 
-    session = pyclickimage.read_session_csv(
+    session = pyclickimage.read_session(
         "session.csv"
     )
 
@@ -58,27 +58,6 @@ Clicks can then be accessed by image and group:
     # Output:
     # [(276.5, 97.0), (242.2, 109.8)]
 
-
-Using pandas
-------------
-
-For data analysis workflows, the CSV file can also be loaded as a
-``pandas.DataFrame``:
-
-.. code-block:: python
-
-    import pyclickimage
-
-    df = pyclickimage.read_session_csv(
-        "session.csv",
-        output="pandas",
-    )
-
-The resulting DataFrame contains the columns:
-
-.. code-block:: text
-
-    Image | Group | Index | X | Y
 
 
 Using the core classes

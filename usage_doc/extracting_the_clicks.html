@@ -8,7 +8,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
-    <title>Extracting the Clicks from CSV &#8212; pyclickimage 3.0.1 documentation</title>
+    <title>Extracting the Clicks from CSV &#8212; pyclickimage 3.1.0 documentation</title>
   
   
   
@@ -38,7 +38,7 @@
   <link rel="preload" as="script" href="../_static/scripts/bootstrap.js?digest=8878045cc6db502f8baf" />
 <link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=8878045cc6db502f8baf" />
 
-    <script src="../_static/documentation_options.js?v=08bfcbec"></script>
+    <script src="../_static/documentation_options.js?v=dd1205ac"></script>
     <script src="../_static/doctools.js?v=9a2dae69"></script>
     <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
     <script>DOCUMENTATION_OPTIONS.pagename = 'usage_doc/extracting_the_clicks';</script>
@@ -109,7 +109,7 @@
   
   
   
-    <p class="title logo__title">pyclickimage 3.0.1 documentation</p>
+    <p class="title logo__title">pyclickimage 3.1.0 documentation</p>
   
 </a></div>
     
@@ -340,7 +340,7 @@ access the annotations as a Python dictionary or as a pandas DataFrame.</p>
 <p>To extract the clicks from a saved session:</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">pyclickimage</span>
 
-<span class="n">session</span> <span class="o">=</span> <span class="n">pyclickimage</span><span class="o">.</span><span class="n">read_session_csv</span><span class="p">(</span>
+<span class="n">session</span> <span class="o">=</span> <span class="n">pyclickimage</span><span class="o">.</span><span class="n">read_session</span><span class="p">(</span>
     <span class="s2">&quot;session.csv&quot;</span>
 <span class="p">)</span>
 </pre></div>
@@ -375,23 +375,6 @@ access the annotations as a Python dictionary or as a pandas DataFrame.</p>
 
 <span class="c1"># Output:</span>
 <span class="c1"># [(276.5, 97.0), (242.2, 109.8)]</span>
-</pre></div>
-</div>
-</section>
-<section id="using-pandas">
-<h2>Using pandas<a class="headerlink" href="#using-pandas" title="Link to this heading">#</a></h2>
-<p>For data analysis workflows, the CSV file can also be loaded as a
-<code class="docutils literal notranslate"><span class="pre">pandas.DataFrame</span></code>:</p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">pyclickimage</span>
-
-<span class="n">df</span> <span class="o">=</span> <span class="n">pyclickimage</span><span class="o">.</span><span class="n">read_session_csv</span><span class="p">(</span>
-    <span class="s2">&quot;session.csv&quot;</span><span class="p">,</span>
-    <span class="n">output</span><span class="o">=</span><span class="s2">&quot;pandas&quot;</span><span class="p">,</span>
-<span class="p">)</span>
-</pre></div>
-</div>
-<p>The resulting DataFrame contains the columns:</p>
-<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>Image | Group | Index | X | Y
 </pre></div>
 </div>
 </section>
@@ -446,7 +429,6 @@ single image.</p>
     <ul class="visible nav section-nav flex-column">
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#reading-a-session">Reading a session</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#accessing-clicks">Accessing clicks</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#using-pandas">Using pandas</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#using-the-core-classes">Using the core classes</a></li>
 </ul>
   </nav></div>
