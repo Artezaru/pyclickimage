@@ -48,24 +48,44 @@ class ClickImageApp(QtWidgets.QMainWindow):
 
     def __init__(
         self,
-        images=None,
-        session=None,
-    ):
+        images: str | Path | list[str | Path] | None = None,
+        session: str | Path | None = None,
+    ) -> None:
         r"""
         Create the Click Image application.
 
         Parameters
         ----------
-        images : None, str, pathlib.Path or list of str/pathlib.Path, optional
+        images : str, pathlib.Path, list or None, optional
             Images to preload at startup.
 
-        session : None, str or pathlib.Path, optional
-            CSV annotation session to preload.
+        session : str, pathlib.Path or None, optional
+            Annotation session file to load at startup.
+            The file format is detected automatically from its extension.
+
+            Supported formats:
+
+            - CSV
+            - JSON
+
+        Raises
+        ------
+        ValueError
+            If images and a session file are provided together.
 
         Notes
         -----
-        ``images`` and ``session`` are mutually exclusive.
-        A session CSV already contains the image list and annotations.
+        Images and sessions are mutually exclusive.
+
+        A session file already contains:
+
+        - image paths,
+        - annotation groups,
+        - click coordinates,
+        - current selections,
+        - session options.
+
+        Therefore, providing additional images is not allowed.
         """
 
         super().__init__()
@@ -187,9 +207,9 @@ class ClickImageApp(QtWidgets.QMainWindow):
 
         if session is not None:
 
-            self.session = AnnotationSession.from_csv(str(session))
-
-            self.image_cache = {}
+            self.session = AnnotationSession.from_file(
+                session,
+            )
 
         elif images is not None:
 
@@ -207,8 +227,8 @@ class ClickImageApp(QtWidgets.QMainWindow):
                 if img is not None:
                     self.image_cache[image] = img
 
-            if len(self.session.images) > 0:
-                self.session.change_current_image(self.session.images[0])
+            if self.session.images:
+                self.session.select_current_image_index(0)
 
         # -------------------------
         # Initialization finished
@@ -239,7 +259,25 @@ class ClickImageApp(QtWidgets.QMainWindow):
         self.layout.addWidget(scroll)
 
         # ============================================================
-        # SESSION / IMAGES
+        # SESSION
+        # ============================================================
+
+        session_group = QtWidgets.QGroupBox("Session")
+        session_layout = QtWidgets.QHBoxLayout(session_group)
+
+        self.load_session_btn = QtWidgets.QPushButton("Load Session")
+        self.load_session_btn.clicked.connect(self.on_load_session)
+
+        self.save_session_btn = QtWidgets.QPushButton("Save Session")
+        self.save_session_btn.clicked.connect(self.on_save_session)
+
+        session_layout.addWidget(self.load_session_btn)
+        session_layout.addWidget(self.save_session_btn)
+
+        self.side.addWidget(session_group)
+
+        # ============================================================
+        # IMAGES
         # ============================================================
 
         image_group = QtWidgets.QGroupBox("Images")
@@ -263,14 +301,39 @@ class ClickImageApp(QtWidgets.QMainWindow):
 
         self.add_image_btn = QtWidgets.QPushButton("+")
         self.add_image_btn.setToolTip("Add image")
+        self.add_image_btn.setFixedHeight(32)
         self.add_image_btn.clicked.connect(self.on_add_images)
 
         self.remove_image_btn = QtWidgets.QPushButton("🗑")
         self.remove_image_btn.setToolTip("Remove current image")
+        self.remove_image_btn.setFixedHeight(32)
         self.remove_image_btn.clicked.connect(self.on_remove_image)
 
         row.addWidget(self.add_image_btn)
         row.addWidget(self.remove_image_btn)
+
+        self.sort_image_alpha_btn = QtWidgets.QPushButton("⇅a")
+        self.sort_image_alpha_btn.setToolTip("Sort images alphabetically")
+        self.sort_image_alpha_btn.setFixedSize(32, 32)
+        self.sort_image_alpha_btn.setSizePolicy(
+            QtWidgets.QSizePolicy.Fixed,
+            QtWidgets.QSizePolicy.Fixed,
+        )
+        self.sort_image_alpha_btn.clicked.connect(self.on_sort_images_alpha)
+
+        self.sort_image_natural_btn = QtWidgets.QPushButton("⇅0")
+        self.sort_image_natural_btn.setToolTip(
+            "Sort images naturally (numeric ordering)"
+        )
+        self.sort_image_natural_btn.setFixedSize(32, 32)
+        self.sort_image_natural_btn.setSizePolicy(
+            QtWidgets.QSizePolicy.Fixed,
+            QtWidgets.QSizePolicy.Fixed,
+        )
+        self.sort_image_natural_btn.clicked.connect(self.on_sort_images_natural)
+
+        row.addWidget(self.sort_image_alpha_btn)
+        row.addWidget(self.sort_image_natural_btn)
 
         image_layout.addLayout(row)
 
@@ -285,24 +348,6 @@ class ClickImageApp(QtWidgets.QMainWindow):
         self.side.addWidget(image_group)
 
         # ============================================================
-        # SESSION CSV
-        # ============================================================
-
-        session_group = QtWidgets.QGroupBox("Session")
-        session_layout = QtWidgets.QHBoxLayout(session_group)
-
-        self.load_session_btn = QtWidgets.QPushButton("Load Session CSV")
-        self.load_session_btn.clicked.connect(self.on_load_session)
-
-        self.save_session_btn = QtWidgets.QPushButton("Save Session CSV")
-        self.save_session_btn.clicked.connect(self.on_save_session)
-
-        session_layout.addWidget(self.load_session_btn)
-        session_layout.addWidget(self.save_session_btn)
-
-        self.side.addWidget(session_group)
-
-        # ============================================================
         # GROUP MANAGEMENT
         # ============================================================
 
@@ -315,7 +360,7 @@ class ClickImageApp(QtWidgets.QMainWindow):
 
         self.group_selector = QtWidgets.QComboBox()
 
-        self.group_selector.currentTextChanged.connect(self.on_change_current_group)
+        self.group_selector.currentIndexChanged.connect(self.on_change_current_group)
 
         row.addWidget(self.group_selector)
 
@@ -327,19 +372,44 @@ class ClickImageApp(QtWidgets.QMainWindow):
 
         self.add_group_btn = QtWidgets.QPushButton("+")
         self.add_group_btn.setToolTip("Add group")
+        self.add_group_btn.setFixedHeight(32)
         self.add_group_btn.clicked.connect(self.on_add_group)
 
         self.rename_group_btn = QtWidgets.QPushButton("✎")
         self.rename_group_btn.setToolTip("Rename group")
+        self.rename_group_btn.setFixedHeight(32)
         self.rename_group_btn.clicked.connect(self.on_rename_group)
 
         self.delete_group_btn = QtWidgets.QPushButton("🗑")
         self.delete_group_btn.setToolTip("Delete group")
+        self.delete_group_btn.setFixedHeight(32)
         self.delete_group_btn.clicked.connect(self.on_delete_group)
+
+        self.sort_group_alpha_btn = QtWidgets.QPushButton("⇅a")
+        self.sort_group_alpha_btn.setToolTip("Sort groups alphabetically")
+        self.sort_group_alpha_btn.setFixedSize(32, 32)
+        self.sort_group_alpha_btn.setSizePolicy(
+            QtWidgets.QSizePolicy.Fixed,
+            QtWidgets.QSizePolicy.Fixed,
+        )
+        self.sort_group_alpha_btn.clicked.connect(self.on_sort_groups_alpha)
+
+        self.sort_group_natural_btn = QtWidgets.QPushButton("⇅0")
+        self.sort_group_natural_btn.setToolTip(
+            "Sort groups naturally (numeric ordering)"
+        )
+        self.sort_group_natural_btn.setFixedSize(32, 32)
+        self.sort_group_natural_btn.setSizePolicy(
+            QtWidgets.QSizePolicy.Fixed,
+            QtWidgets.QSizePolicy.Fixed,
+        )
+        self.sort_group_natural_btn.clicked.connect(self.on_sort_groups_natural)
 
         row.addWidget(self.add_group_btn)
         row.addWidget(self.rename_group_btn)
         row.addWidget(self.delete_group_btn)
+        row.addWidget(self.sort_group_alpha_btn)
+        row.addWidget(self.sort_group_natural_btn)
 
         group_layout.addLayout(row)
 
@@ -430,11 +500,16 @@ class ClickImageApp(QtWidgets.QMainWindow):
 
         def add_action(
             name,
-            shortcut,
+            shortcuts,
             callback,
         ):
             action = QtWidgets.QAction(name, self)
-            action.setShortcut(shortcut)
+
+            if isinstance(shortcuts, (str, QtGui.QKeySequence)):
+                shortcuts = [shortcuts]
+
+            action.setShortcuts(shortcuts)
+            action.setShortcutContext(QtCore.Qt.ShortcutContext.WindowShortcut)
             action.triggered.connect(callback)
             self.addAction(action)
             return action
@@ -507,13 +582,13 @@ class ClickImageApp(QtWidgets.QMainWindow):
 
         add_action(
             "Previous image",
-            "Ctrl+Tab",
+            ["Ctrl+Left", "P"],
             self.previous_image,
         )
 
         add_action(
             "Next image",
-            "Ctrl+Shift+Tab",
+            ["Ctrl+Right", "N"],
             self.next_image,
         )
 
@@ -872,15 +947,13 @@ class ClickImageApp(QtWidgets.QMainWindow):
 
         self.image_selector.blockSignals(True)
 
-        current_image = self.session.current_image
-
         self.image_selector.clear()
 
         fullpath = self.fullpath_checkbox.isChecked()
 
-        for image in self.session.images:
+        for entry in self.session.images:
 
-            image = Path(image)
+            image = entry.path
 
             text = str(image) if fullpath else image.name
 
@@ -890,28 +963,21 @@ class ClickImageApp(QtWidgets.QMainWindow):
             )
 
         # Restore current selection
-        if current_image is not None:
+        if self.session.current_image_index >= 0:
 
-            current_image = str(current_image)
+            self.image_selector.setCurrentIndex(self.session.current_image_index)
 
-            for index in range(self.image_selector.count()):
+        elif self.session.current_image_index < 0 and self.image_selector.count() > 0:
 
-                if self.image_selector.itemData(index) == current_image:
-                    self.image_selector.setCurrentIndex(index)
-                    break
+            self.image_selector.setCurrentIndex(0)
+            self.session.select_current_image_index(0)
+            self._image_has_changed = True
 
-        # If session has no current image, use combobox current index
-        if self.session.current_image is None:
+        # Empty combobox -> no current image
+        else:
 
-            index = self.image_selector.currentIndex()
-
-            if index >= 0:
-
-                image_path = self.image_selector.itemData(index)
-
-                if image_path is not None:
-                    self.session.change_current_image(image_path)
-                    self._image_has_changed = True
+            self.session.select_current_image_index(-1)
+            self._image_has_changed = True
 
         self.image_selector.blockSignals(False)
 
@@ -922,8 +988,6 @@ class ClickImageApp(QtWidgets.QMainWindow):
 
         self.group_selector.blockSignals(True)
 
-        current_group = self.session.current_group
-
         self.group_selector.clear()
 
         for group in self.session.groups:
@@ -933,26 +997,22 @@ class ClickImageApp(QtWidgets.QMainWindow):
                 group,
             )
 
-        # Restore current group
-        if current_group is not None:
+        # Restore current selection
+        if self.session.current_group_index >= 0:
 
-            for index in range(self.group_selector.count()):
+            self.group_selector.setCurrentIndex(self.session.current_group_index)
 
-                if self.group_selector.itemData(index) == current_group:
-                    self.group_selector.setCurrentIndex(index)
-                    break
-
-        # No current group -> select first available
-        if self.session.current_group is None and self.group_selector.count() > 0:
+        # No current group -> select first group
+        elif self.session.current_group_index < 0 and self.group_selector.count() > 0:
 
             self.group_selector.setCurrentIndex(0)
 
-            self.session.current_group = self.group_selector.currentData()
+            self.session.select_current_group(self.group_selector.itemData(0))
 
         # Empty combobox -> no current group
-        elif self.group_selector.count() == 0:
+        else:
 
-            self.session.current_group = None
+            self.session.select_current_group(None)
 
         self.group_selector.blockSignals(False)
 
@@ -1021,7 +1081,7 @@ class ClickImageApp(QtWidgets.QMainWindow):
         # Select last added image
         current_image = added_images[-1]
 
-        self.session.change_current_image(current_image)
+        self.session.select_current_image_path(current_image)
 
         self._append_log(f"{len(added_images)} image(s) added.")
 
@@ -1043,10 +1103,10 @@ class ClickImageApp(QtWidgets.QMainWindow):
             Current BGR image.
         """
 
-        if self.session.current_image is None:
+        if self.session.current_image_path is None:
             return None
 
-        image_path = self.session.current_image
+        image_path = self.session.current_image_path
 
         if image_path in self.image_cache:
             return self.image_cache[image_path]
@@ -1065,7 +1125,7 @@ class ClickImageApp(QtWidgets.QMainWindow):
         Remove the current image from the annotation session.
         """
 
-        if self.session.current_image is None:
+        if self.session.current_image_path is None:
             QtWidgets.QMessageBox.warning(
                 self,
                 "No image",
@@ -1073,7 +1133,7 @@ class ClickImageApp(QtWidgets.QMainWindow):
             )
             return
 
-        image_path = self.session.current_image
+        image_path = self.session.current_image_path
 
         reply = QtWidgets.QMessageBox.question(
             self,
@@ -1114,19 +1174,19 @@ class ClickImageApp(QtWidgets.QMainWindow):
         """
 
         if index < 0:
-            self.session.current_image = None
+            self.session.current_image_path = None
             return
 
         image_path = self.image_selector.itemData(index)
 
         if image_path is None:
-            self.session.current_image = None
+            self.session.current_image_path = None
             return
 
         image_path = Path(image_path)
 
         try:
-            self.session.change_current_image(image_path)
+            self.session.select_current_image_path(image_path)
 
         except KeyError as e:
             QtWidgets.QMessageBox.warning(
@@ -1142,6 +1202,24 @@ class ClickImageApp(QtWidgets.QMainWindow):
         self.update()
 
         self._append_log(f"Current image changed: {image_path.name}")
+
+    def on_sort_images_alpha(self):
+        r"""
+        Sort images alphabetically.
+        """
+
+        self.session.sort_images_alpha(fullpath=self.fullpath_checkbox.isChecked())
+
+        self.synchronize_images()
+
+    def on_sort_images_natural(self):
+        r"""
+        Sort images using natural numeric ordering.
+        """
+
+        self.session.sort_images_natural(fullpath=self.fullpath_checkbox.isChecked())
+
+        self.synchronize_images()
 
     # =====================
     # Group management
@@ -1173,7 +1251,7 @@ class ClickImageApp(QtWidgets.QMainWindow):
 
         try:
             self.session.add_group(group_name)
-            self.session.change_current_group(group_name)
+            self.session.select_current_group(group_name)
 
         except Exception as e:
             QtWidgets.QMessageBox.warning(
@@ -1277,7 +1355,7 @@ class ClickImageApp(QtWidgets.QMainWindow):
                 new_name,
             )
 
-            self.session.change_current_group(
+            self.session.select_current_group(
                 new_name,
             )
 
@@ -1312,7 +1390,7 @@ class ClickImageApp(QtWidgets.QMainWindow):
             return
 
         try:
-            self.session.change_current_group(group_name)
+            self.session.select_current_group(group_name)
 
         except Exception as e:
             QtWidgets.QMessageBox.warning(
@@ -1328,6 +1406,24 @@ class ClickImageApp(QtWidgets.QMainWindow):
 
         self._append_log(f"Current group changed: {group_name}")
 
+    def on_sort_groups_alpha(self):
+        r"""
+        Sort groups alphabetically.
+        """
+
+        self.session.sort_groups_alpha()
+
+        self.synchronize_groups()
+
+    def on_sort_groups_natural(self):
+        r"""
+        Sort groups using natural numeric ordering.
+        """
+
+        self.session.sort_groups_natural()
+
+        self.synchronize_groups()
+
     # ============================
     # Clicks Management
     # ============================
@@ -1341,7 +1437,7 @@ class ClickImageApp(QtWidgets.QMainWindow):
             True if annotations can be added.
         """
 
-        if self.session.current_image is None:
+        if self.session.current_image_path is None:
 
             QtWidgets.QMessageBox.warning(
                 self,
@@ -1382,7 +1478,7 @@ class ClickImageApp(QtWidgets.QMainWindow):
 
         self._append_log(
             f"Click added to '{self.session.current_group}' "
-            f"on '{self.session.current_image.name}': "
+            f"on '{self.session.current_image_path.name}': "
             f"({x:.3f}, {y:.3f})"
         )
 
@@ -1405,7 +1501,7 @@ class ClickImageApp(QtWidgets.QMainWindow):
 
         self._append_log(
             f"Empty click added to '{self.session.current_group}' "
-            f"on '{self.session.current_image.name}'."
+            f"on '{self.session.current_image_path.name}'."
         )
 
         self.update()
@@ -1431,7 +1527,7 @@ class ClickImageApp(QtWidgets.QMainWindow):
         half_shift = state == QtCore.Qt.Checked
 
         has_clicks = any(
-            manager.n_clicks > 0 for manager in self.session.click_managers.values()
+            entry.click_manager.n_clicks > 0 for entry in self.session.images
         )
 
         if has_clicks:
@@ -1449,12 +1545,10 @@ class ClickImageApp(QtWidgets.QMainWindow):
 
             if msg.exec_() == QtWidgets.QMessageBox.Yes:
 
-                for manager in self.session.click_managers.values():
-
-                    if half_shift:
-                        manager.to_half_shift_on()
-                    else:
-                        manager.to_half_shift_off()
+                if half_shift:
+                    self.session.apply_half_shift(mode="on")
+                else:
+                    self.session.apply_half_shift(mode="off")
 
         self.viewer.half_shift = half_shift
 
@@ -1490,7 +1584,7 @@ class ClickImageApp(QtWidgets.QMainWindow):
 
         self._append_log(
             f"Last click removed from '{self.session.current_group}' "
-            f"on '{self.session.current_image.name}'."
+            f"on '{self.session.current_image_path.name}'."
         )
 
     def on_remove_all_clicks(self) -> None:
@@ -1498,7 +1592,7 @@ class ClickImageApp(QtWidgets.QMainWindow):
         Remove all clicks from the current image and group.
         """
 
-        if self.session.current_image is None:
+        if self.session.current_image_path is None:
             QtWidgets.QMessageBox.warning(
                 self,
                 "No image selected",
@@ -1516,7 +1610,7 @@ class ClickImageApp(QtWidgets.QMainWindow):
             )
             return
 
-        image_name = self.session.current_image.name
+        image_name = self.session.current_image_path.name
         group_name = self.session.current_group
 
         answer = QtWidgets.QMessageBox.question(
@@ -1552,16 +1646,17 @@ class ClickImageApp(QtWidgets.QMainWindow):
     # ================================
     # Session Management
     # ================================
+
     def on_load_session(self) -> None:
         r"""
-        Load an annotation session from CSV.
+        Load an annotation session from CSV or JSON.
         """
 
         file_path, _ = QtWidgets.QFileDialog.getOpenFileName(
             self,
             "Load Annotation Session",
             "",
-            "CSV files (*.csv)",
+            "Session files (*.json *.csv)",
         )
 
         if not file_path:
@@ -1578,7 +1673,9 @@ class ClickImageApp(QtWidgets.QMainWindow):
             return
 
         try:
-            self.session = AnnotationSession.from_csv(file_path)
+            self.session = AnnotationSession.from_file(
+                file_path,
+            )
 
         except Exception as e:
             QtWidgets.QMessageBox.critical(
@@ -1601,7 +1698,12 @@ class ClickImageApp(QtWidgets.QMainWindow):
 
     def on_save_session(self) -> None:
         r"""
-        Save the current annotation session to CSV.
+        Save the current annotation session.
+
+        Supported formats:
+
+        - JSON: complete project backup.
+        - CSV: annotation export.
         """
 
         if len(self.session.images) == 0:
@@ -1612,11 +1714,11 @@ class ClickImageApp(QtWidgets.QMainWindow):
             )
             return
 
-        file_path, _ = QtWidgets.QFileDialog.getSaveFileName(
+        file_path, selected_filter = QtWidgets.QFileDialog.getSaveFileName(
             self,
             "Save Annotation Session",
             "",
-            "CSV files (*.csv)",
+            ("JSON Session (*.json);;" "CSV Export (*.csv)"),
         )
 
         if not file_path:
@@ -1624,12 +1726,25 @@ class ClickImageApp(QtWidgets.QMainWindow):
 
         path = Path(file_path)
 
-        # Add .csv extension if missing
-        if path.suffix.lower() != ".csv":
-            path = path.with_suffix(".csv")
+        # Determine extension if the user omitted it
+        if path.suffix.lower() not in (".json", ".csv"):
+
+            if "JSON" in selected_filter:
+                path = path.with_suffix(".json")
+
+            else:
+                path = path.with_suffix(".csv")
 
         try:
-            self.session.to_csv(str(path))
+
+            if path.suffix.lower() == ".json":
+                self.session.to_json(path)
+
+            elif path.suffix.lower() == ".csv":
+                self.session.to_csv(path)
+
+            else:
+                raise ValueError(f"Unsupported session format: {path.suffix}")
 
         except Exception as e:
             QtWidgets.QMessageBox.critical(
@@ -1962,7 +2077,7 @@ class ClickImageApp(QtWidgets.QMainWindow):
 
             self.group_selector.setCurrentIndex(index)
 
-            self.on_change_current_group(self.group_selector.currentText())
+            self.on_change_current_group(index)
 
             self.group_selector.blockSignals(False)
 
@@ -2370,11 +2485,11 @@ class ClickImageApp(QtWidgets.QMainWindow):
 
             <ul>
                 <li>
-                <b>Tab</b> : Select next image.
+                <b>Ctrl + Right // N</b> : Select next image.
                 </li>
 
                 <li>
-                <b>Shift + Tab</b> : Select previous image.
+                <b>Ctrl + Left // P</b> : Select previous image.
                 </li>
             </ul>
 

@@ -13,9 +13,7 @@ Functions intended for regular users.
     :maxdepth: 1
 
     ./api_doc/run
-    ./api_doc/read_session_csv
-    ./api_doc/csv2json
-
+    ./api_doc/reading_session
 
 To learn how to use the package effectively, refer to the documentation
 :doc:`../usage`.

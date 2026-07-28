@@ -19,17 +19,20 @@ along with this program.  If not, see <https://www.gnu.org/licenses/>.
 from .__version__ import __version__
 from .click_manager import ClickManager
 from .image_viewer import ImageViewer
-from .annotation_session import AnnotationSession
-from .tools import run, read_session_csv, csv2json
+from .annotation_session import AnnotationSession, ImageEntry
+from .tools import run, read_session_csv, read_session_json, read_session
 from .app import ClickImageApp
 
 __all__ = [
     "__version__",
     "ClickManager",
     "ImageViewer",
+    "ImageEntry",
     "ClickImageApp",
     "AnnotationSession",
     "run",
     "read_session_csv",
+    "read_session_json",
+    "read_session",
     "csv2json",
 ]

@@ -82,49 +82,91 @@ def run(
     app.exec_()
 
 
-def read_session_csv(
+def read_session_json(
     path: str | Path,
     output: Literal[
         "dict",
-        "pandas",
+        "raw",
     ] = "dict",
 ):
     r"""
-    Read a pyclickimage session CSV file.
+    Read a pyclickimage JSON session file.
 
     Parameters
     ----------
     path : str or pathlib.Path
-        CSV session file.
+        JSON session file.
 
-    output : {"dict", "pandas"}, default="dict"
+    output : {"dict", "raw"}, default="dict"
         Output format.
 
         - ``"dict"``:
-            Return a nested dictionary:
+            Return only the annotation data:
             ``image -> group -> list of (x, y)``.
 
-        - ``"pandas"``:
-            Return a pandas DataFrame.
+        - ``"raw"``:
+            Return the complete JSON session dictionary.
 
     Returns
     -------
-    dict or pandas.DataFrame
+    dict
         Session data.
     """
 
     path = Path(path)
 
-    if output == "pandas":
+    with open(
+        path,
+        "r",
+        encoding="utf-8",
+    ) as file:
 
-        return pd.read_csv(
-            path,
-            sep=",",
-            quotechar='"',
-        )
+        data = json.load(file)
+
+    if output == "raw":
+        return data
 
     if output != "dict":
         raise ValueError(f"Unknown output format: {output}")
+
+    annotations = {}
+
+    for image in data.get("images", []):
+
+        image_path = image["path"]
+
+        annotations[image_path] = {}
+
+        for group, points in image.get(
+            "groups",
+            {},
+        ).items():
+
+            annotations[image_path][group] = [tuple(point) for point in points]
+
+    return annotations
+
+
+def read_session_csv(
+    path: str | Path,
+):
+    r"""
+    Read a pyclickimage CSV export.
+
+    Parameters
+    ----------
+    path : str or pathlib.Path
+        CSV export file.
+
+    Returns
+    -------
+    dict
+        Nested dictionary:
+
+        ``image -> group -> list of (x, y)``
+    """
+
+    path = Path(path)
 
     session = {}
 
@@ -137,88 +179,6 @@ def read_session_csv(
 
         reader = csv.DictReader(
             file,
-            delimiter=",",
-            quotechar='"',
-        )
-
-        for row in reader:
-
-            image = row["Image"]
-            group = row["Group"]
-
-            if row["X"] == "" or row["Y"] == "":
-                point = (None, None)
-
-            else:
-                point = (
-                    float(row["X"]),
-                    float(row["Y"]),
-                )
-
-            if image not in session:
-                session[image] = {}
-
-            if group not in session[image]:
-                session[image][group] = []
-
-            session[image][group].append(point)
-
-    return session
-
-
-def csv2json(
-    csv_path: Union[str, Path],
-    json_path: Union[str, Path],
-    indent: int = 4,
-) -> None:
-    r"""
-    Convert a pyclickimage CSV session file into JSON.
-
-    Parameters
-    ----------
-    csv_path : str or pathlib.Path
-        Input CSV session file.
-
-    json_path : str or pathlib.Path
-        Output JSON file.
-
-    indent : int, default=4
-        JSON indentation level.
-
-    Notes
-    -----
-    The generated JSON format is:
-
-    .. code-block:: json
-
-        {
-            "image.png": {
-                "group1": [
-                    [x, y],
-                    [x, y]
-                ]
-            }
-        }
-
-    Empty clicks are stored as ``[null, null]``.
-    """
-
-    csv_path = Path(csv_path)
-    json_path = Path(json_path)
-
-    data = {}
-
-    with open(
-        csv_path,
-        "r",
-        encoding="utf-8",
-        newline="",
-    ) as file:
-
-        reader = csv.DictReader(
-            file,
-            delimiter=",",
-            quotechar='"',
         )
 
         required_columns = {
@@ -229,42 +189,64 @@ def csv2json(
             "Y",
         }
 
+        if reader.fieldnames is None:
+            raise ValueError("CSV file is empty.")
+
         if not required_columns.issubset(reader.fieldnames):
-            raise ValueError(
-                "Invalid CSV format. " "Expected columns: Image, Group, Index, X, Y"
-            )
+            raise ValueError("Invalid CSV format.")
 
         for row in reader:
 
             image = row["Image"]
             group = row["Group"]
 
-            if image not in data:
-                data[image] = {}
+            if image not in session:
+                session[image] = {}
 
-            if group not in data[image]:
-                data[image][group] = []
+            if group not in session[image]:
+                session[image][group] = []
 
             if row["X"] == "" or row["Y"] == "":
-                point = [None, None]
+                point = (None, None)
 
             else:
-                point = [
+                point = (
                     float(row["X"]),
                     float(row["Y"]),
-                ]
+                )
 
-            data[image][group].append(point)
+            session[image][group].append(point)
 
-    with open(
-        json_path,
-        "w",
-        encoding="utf-8",
-    ) as file:
+    return session
 
-        json.dump(
-            data,
-            file,
-            indent=indent,
-            ensure_ascii=False,
-        )
+
+def read_session(
+    path: str | Path,
+):
+    r"""
+    Read a pyclickimage session file.
+
+    The format is automatically detected
+    from the file extension.
+
+    Parameters
+    ----------
+    path : str or pathlib.Path
+        Session file.
+
+    Returns
+    -------
+    dict
+        Annotation dictionary:
+        ``image -> group -> list of points``.
+    """
+
+    path = Path(path)
+
+    if path.suffix.lower() == ".json":
+        return read_session_json(path)
+
+    if path.suffix.lower() == ".csv":
+        return read_session_csv(path)
+
+    raise ValueError(f"Unsupported session format: {path.suffix}")

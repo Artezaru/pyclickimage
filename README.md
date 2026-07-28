@@ -10,7 +10,7 @@ The application supports:
 - multiple images in the same annotation session,
 - multiple annotation groups,
 - floating-point coordinates for subpixel precision,
-- CSV session import/export,
+- CSV or JSON session import/export,
 - visualization controls and annotation management.
 
 Run the graphical application:
@@ -26,10 +26,64 @@ pyclickimage-gui
 
 Annotations are stored as complete sessions.
 
-A session can contain several images and several groups. The exported CSV file
-has the following format:
+Two file formats are supported:
 
-```text
+- JSON: complete session backup and restoration.
+- CSV: annotation export.
+
+---
+
+### JSON session format
+
+The JSON format is the recommended format for saving and restoring annotation projects.
+
+It stores the complete state of the annotation session, including:
+
+- image paths,
+- annotation groups,
+- click coordinates,
+- current selections,
+- session options.
+
+A JSON session can be loaded later to restore the project exactly as it was saved.
+
+Example:
+
+```python
+{
+    "precision_mode": "float",
+    "current_image_index": 0,
+    "current_group_index": 1,
+    "groups": [
+        "default",
+        "Coco"
+    ],
+    "images": [
+        {
+            "path": "image_1.png",
+            "groups": {
+                "default": [
+                    [128.5, 102.0],
+                    [115.2, 153.7]
+                ],
+                "Coco": [
+                    [201.0, 126.5]
+                ]
+            }
+        }
+    ]
+}
+```
+
+---
+
+### CSV export format
+
+The CSV format is intended for exporting annotations to external tools such as spreadsheets or data processing pipelines.
+
+The exported CSV file has the following format:
+
+```
 Image,Group,Index,X,Y
 image_1.png,default,0,128.5,102.0
 image_1.png,default,1,115.2,153.7
@@ -37,22 +91,30 @@ image_1.png,Coco,0,201.0,126.5
 image_2.png,default,0,80.0,45.3
 ```
 
-The coordinates can be stored either as floating-point values or displayed
-with integer precision depending on the selected application mode.
+The CSV columns are:
 
-**X** is the horizontal coordinate (column index) and **Y** is the vertical
-coordinate (row index), following NumPy image indexing:
+- Image: image file path.
+- Group: annotation group name.
+- Index: point index inside the group.
+- X: horizontal coordinate.
+- Y: vertical coordinate.
 
-```python
+## Coordinates
+
+The coordinates can be stored either as floating-point values or displayed with integer precision depending on the selected application mode.
+
+X is the horizontal coordinate (column index) and Y is the vertical coordinate (row index), following NumPy image indexing:
+
 image[Y, X]
-```
 
 Empty points can also be stored when a click is intentionally skipped:
 
-```text
 Image,Group,Index,X,Y
 image_1.png,default,2,,
-```
+
+CSV files do not store the complete application state. They are intended for annotation exchange and analysis.
+
+For saving and restoring complete projects, use the JSON format.
 
 
 ## Reading sessions
@@ -62,7 +124,7 @@ Session files can be loaded directly from Python without opening the GUI.
 ```python
 import pyclickimage
 
-data = pyclickimage.read_session_csv(
+data = pyclickimage.read_session(
     "session.csv"
 )
 
@@ -85,16 +147,6 @@ The returned dictionary has the following structure:
 }
 ```
 
-Sessions can also be converted to JSON:
-
-```python
-import pyclickimage
-
-pyclickimage.csv2json(
-    "session.csv",
-    "session.json",
-)
-```
 
 
 ## Authors
