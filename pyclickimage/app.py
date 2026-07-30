@@ -120,10 +120,13 @@ class ClickImageApp(QtWidgets.QMainWindow):
         self.display_max_pc = 100
 
         self.show_clicks = True
+        self.show_other_clicks = False
 
         self.marker_color = QtGui.QColor(255, 0, 0)
+        self.other_marker_color = QtGui.QColor(0, 0, 255)
 
         self.marker_size = 8
+        self.other_marker_size = 8
 
         # -------------------------
         # Core components
@@ -207,9 +210,7 @@ class ClickImageApp(QtWidgets.QMainWindow):
 
         if session is not None:
 
-            self.session = AnnotationSession.from_file(
-                session,
-            )
+            self.session = AnnotationSession.from_file(session)
 
         elif images is not None:
 
@@ -240,6 +241,7 @@ class ClickImageApp(QtWidgets.QMainWindow):
 
         self.synchronize_images()
         self.synchronize_groups()
+        self.synchronize_params()
         self.update()
 
     def _init_left_panel(self):
@@ -480,6 +482,13 @@ class ClickImageApp(QtWidgets.QMainWindow):
             self.on_display_clicks_changed
         )
         display_layout.addWidget(self.display_clicks_checkbox)
+
+        self.display_other_clicks_checkbox = QtWidgets.QCheckBox("Display all groups")
+        self.display_other_clicks_checkbox.setChecked(False)
+        self.display_other_clicks_checkbox.stateChanged.connect(
+            self.on_display_other_clicks_changed
+        )
+        display_layout.addWidget(self.display_other_clicks_checkbox)
 
         self.side.addWidget(display_box)
 
@@ -798,17 +807,14 @@ class ClickImageApp(QtWidgets.QMainWindow):
         clicks_menu = QtWidgets.QMenu(self)
 
         clicks_panel = QtWidgets.QWidget()
-        clicks_layout = QtWidgets.QFormLayout(clicks_panel)
+        clicks_layout = QtWidgets.QVBoxLayout(clicks_panel)
 
-        self.display_clicks_checkbox = QtWidgets.QCheckBox("Display clicks")
+        # --------------
+        # CURRENT GROUP CLICKS
+        # --------------
 
-        self.display_clicks_checkbox.setChecked(True)
-
-        self.display_clicks_checkbox.stateChanged.connect(
-            self.on_display_clicks_changed
-        )
-
-        clicks_layout.addRow(self.display_clicks_checkbox)
+        current_group = QtWidgets.QGroupBox("Current group clicks")
+        current_layout = QtWidgets.QFormLayout(current_group)
 
         # Marker color
 
@@ -820,7 +826,6 @@ class ClickImageApp(QtWidgets.QMainWindow):
         self.color_btn.clicked.connect(self.choose_color)
 
         self.color_preview = QtWidgets.QLabel("   ")
-
         self.color_preview.setStyleSheet(
             "background-color: rgb(255,0,0); border: 1px solid black;"
         )
@@ -828,7 +833,10 @@ class ClickImageApp(QtWidgets.QMainWindow):
         marker_layout.addWidget(self.color_btn)
         marker_layout.addWidget(self.color_preview)
 
-        clicks_layout.addRow("Marker", marker_widget)
+        current_layout.addRow(
+            "Marker",
+            marker_widget,
+        )
 
         # Marker size
 
@@ -855,13 +863,84 @@ class ClickImageApp(QtWidgets.QMainWindow):
         )
 
         self.size_selector.setCurrentText("8")
-
         self.size_selector.currentTextChanged.connect(self.on_marker_size_changed)
 
-        clicks_layout.addRow(
+        current_layout.addRow(
             "Size",
             self.size_selector,
         )
+
+        clicks_layout.addWidget(current_group)
+
+        # --------------
+        # OTHER GROUP CLICKS
+        # --------------
+
+        other_group = QtWidgets.QGroupBox("Other group clicks")
+        other_layout = QtWidgets.QFormLayout(other_group)
+
+        # Other marker color
+
+        other_marker_widget = QtWidgets.QWidget()
+        other_marker_layout = QtWidgets.QHBoxLayout(other_marker_widget)
+        other_marker_layout.setContentsMargins(0, 0, 0, 0)
+
+        self.other_color_btn = QtWidgets.QPushButton("Color")
+        self.other_color_btn.clicked.connect(self.choose_other_color)
+
+        self.other_color_preview = QtWidgets.QLabel("   ")
+        self.other_color_preview.setStyleSheet(
+            "background-color: rgb(0,0,255); border: 1px solid black;"
+        )
+
+        other_marker_layout.addWidget(self.other_color_btn)
+        other_marker_layout.addWidget(self.other_color_preview)
+
+        other_layout.addRow(
+            "Marker",
+            other_marker_widget,
+        )
+
+        # Other marker size
+
+        self.other_size_selector = QtWidgets.QComboBox()
+
+        self.other_size_selector.addItems(
+            [
+                "0.2",
+                "0.5",
+                "1",
+                "2",
+                "4",
+                "6",
+                "8",
+                "10",
+                "12",
+                "16",
+                "20",
+                "30",
+                "50",
+                "75",
+                "100",
+            ]
+        )
+
+        self.other_size_selector.setCurrentText("8")
+
+        self.other_size_selector.currentTextChanged.connect(
+            self.on_other_marker_size_changed
+        )
+
+        other_layout.addRow(
+            "Size",
+            self.other_size_selector,
+        )
+
+        clicks_layout.addWidget(other_group)
+
+        # --------------
+        # MENU
+        # --------------
 
         clicks_action = QtWidgets.QWidgetAction(clicks_menu)
         clicks_action.setDefaultWidget(clicks_panel)
@@ -1015,6 +1094,15 @@ class ClickImageApp(QtWidgets.QMainWindow):
             self.session.select_current_group(None)
 
         self.group_selector.blockSignals(False)
+
+    def synchronize_params(self):
+        r"""
+        Synchronize checkbox with current session.
+        """
+
+        self.int_precision_checkbox.blockSignals(True)
+        self.int_precision_checkbox.setChecked(self.session.precision_mode == "int")
+        self.int_precision_checkbox.blockSignals(False)
 
     # ===============================
     # Images management
@@ -1862,6 +1950,23 @@ class ClickImageApp(QtWidgets.QMainWindow):
                     self.marker_size,
                 )
 
+        if self.show_clicks and self.show_other_clicks:
+
+            for group in self.session.groups:
+                if group != self.session.current_group:
+                    pts = self.session.get_clicks(group)
+
+                    for x, y in pts:
+
+                        if x is None or y is None:
+                            continue
+
+                        self.viewer.add_marker(
+                            (x, y),
+                            self.other_marker_color,
+                            self.other_marker_size,
+                        )
+
     def _format_value(self, v):
         r"""
         Format a coordinate for display in the table.
@@ -1985,6 +2090,17 @@ class ClickImageApp(QtWidgets.QMainWindow):
 
         self.update()
 
+    def on_display_other_clicks_changed(self, state: int) -> None:
+        r"""
+        Toggle annotation marker visibility.
+        """
+
+        self.show_other_clicks = state == QtCore.Qt.Checked
+
+        self._append_log(f"Display all clicks: {self.show_other_clicks}")
+
+        self.update()
+
     def crosshair_choose_color(self) -> None:
         r"""
         Change viewer crosshair color.
@@ -2031,6 +2147,29 @@ class ClickImageApp(QtWidgets.QMainWindow):
 
         self.update()
 
+    def choose_other_color(self) -> None:
+        r"""
+        Change annotation marker color.
+        """
+
+        color = QtWidgets.QColorDialog.getColor(
+            self.other_marker_color,
+            self,
+        )
+
+        if not color.isValid():
+            return
+
+        self.other_marker_color = color
+
+        self.other_color_preview.setStyleSheet(
+            f"background-color: {color.name()};" "border: 1px solid black;"
+        )
+
+        self._append_log(f"Marker color for not-current group changed: {color.name()}")
+
+        self.update()
+
     def on_marker_size_changed(self, value: str) -> None:
         r"""
         Update annotation marker size.
@@ -2043,6 +2182,23 @@ class ClickImageApp(QtWidgets.QMainWindow):
             self.marker_size = 8.0
 
         self._append_log(f"Marker size changed: {self.marker_size:.1f}")
+
+        self.update()
+
+    def on_other_marker_size_changed(self, value: str) -> None:
+        r"""
+        Update annotation marker size.
+        """
+
+        try:
+            self.other_marker_size = float(value)
+
+        except ValueError:
+            self.other_marker_size = 8.0
+
+        self._append_log(
+            f"Marker size for not-current group changed: {self.other_marker_size:.1f}"
+        )
 
         self.update()
 

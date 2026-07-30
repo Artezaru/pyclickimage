@@ -934,6 +934,40 @@ class AnnotationSession:
             precision_mode=self.precision_mode,
         )
 
+    def get_clicks(self, group_name: str) -> Group:
+        r"""
+        Return the clicks of the group.
+
+        Parameters
+        ----------
+        group_name : str
+            Group name.
+
+        Returns
+        -------
+        Group
+            Clicks of the current image and selected group.
+
+        Notes
+        -----
+        Returns an empty group if no image is selected.
+        """
+        if not isinstance(group_name, str):
+            raise TypeError("Group name must be a string.")
+
+        if group_name not in self.groups:
+            raise ValueError(f"Group '{group_name}' not exists.")
+
+        manager = self.current_click_manager
+
+        if manager is None:
+            return []
+
+        return manager.extract_group(
+            group_name,
+            precision_mode=self.precision_mode,
+        )
+
     def add_click(
         self,
         x: Number,
