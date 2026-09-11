@@ -223,7 +223,7 @@ class ClickImageApp(QtWidgets.QMainWindow):
 
                 self.session.add_image(image)
 
-                img = cv2.imread(str(image))
+                img = cv2.imread(str(image), cv2.IMREAD_UNCHANGED)
 
                 if img is not None:
                     self.image_cache[image] = img
@@ -1138,7 +1138,7 @@ class ClickImageApp(QtWidgets.QMainWindow):
                 continue
 
             # Load image to verify it is valid
-            image = cv2.imread(str(image_path))
+            image = cv2.imread(str(image_path), cv2.IMREAD_UNCHANGED)
 
             if image is None:
                 QtWidgets.QMessageBox.warning(
@@ -1199,7 +1199,7 @@ class ClickImageApp(QtWidgets.QMainWindow):
         if image_path in self.image_cache:
             return self.image_cache[image_path]
 
-        image = cv2.imread(str(image_path))
+        image = cv2.imread(str(image_path), cv2.IMREAD_UNCHANGED)
 
         if image is None:
             return None
@@ -1872,28 +1872,33 @@ class ClickImageApp(QtWidgets.QMainWindow):
                 dtype=np.uint8,
             )
 
-        img = image.astype(np.float32)
-
         if np.issubdtype(image.dtype, np.integer):
             imax = np.iinfo(image.dtype).max
-        else:
-            imax = 1.0
+            img = image.astype(np.float64) / imax
 
-        dm = self.display_min_pc * imax / 100
-        dM = self.display_max_pc * imax / 100
-        b = self.beta_pc * imax / 100
+        elif np.issubdtype(image.dtype, np.floating):
+            img = image.astype(np.float64)
+            img = np.clip(img, 0.0, 1.0)
+
+        else:
+            raise ValueError(f"Unsupported image type: {image.dtype}")
+
+        # Normalize image [0, 1]
+        dm = self.display_min_pc / 100
+        dM = self.display_max_pc / 100
+        b = self.beta_pc / 100
+
+        if dM <= dm:
+            dM = dm + 1e-6
 
         img = np.clip(img, dm, dM)
-
-        img = (img - dm) / max(1, dM - dm) * imax
+        img = (img - dm) / (dM - dm)
 
         img = img * self.alpha + b
+        img = np.clip(img, 0.0, 1.0)
 
-        img = np.clip(
-            np.round(img),
-            0,
-            imax,
-        ).astype(image.dtype)
+        # Convert ro RGB888
+        img = np.round(img * 255.0).astype(np.uint8)
 
         if self._image_has_changed or self._colormap_has_changed:
 
