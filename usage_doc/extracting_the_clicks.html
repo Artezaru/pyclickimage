@@ -8,7 +8,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
-    <title>Extracting the Clicks from CSV &#8212; pyclickimage 3.2.0 documentation</title>
+    <title>Extracting the Clicks from CSV &#8212; pyclickimage 3.2.1 documentation</title>
   
   
   
@@ -38,7 +38,7 @@
   <link rel="preload" as="script" href="../_static/scripts/bootstrap.js?digest=8878045cc6db502f8baf" />
 <link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=8878045cc6db502f8baf" />
 
-    <script src="../_static/documentation_options.js?v=4f6ddb47"></script>
+    <script src="../_static/documentation_options.js?v=eb155f5e"></script>
     <script src="../_static/doctools.js?v=9a2dae69"></script>
     <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
     <script>DOCUMENTATION_OPTIONS.pagename = 'usage_doc/extracting_the_clicks';</script>
@@ -109,7 +109,7 @@
   
   
   
-    <p class="title logo__title">pyclickimage 3.2.0 documentation</p>
+    <p class="title logo__title">pyclickimage 3.2.1 documentation</p>
   
 </a></div>
     
@@ -341,24 +341,24 @@ access the annotations as a Python dictionary or as a pandas DataFrame.</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">pyclickimage</span>
 
 <span class="n">session</span> <span class="o">=</span> <span class="n">pyclickimage</span><span class="o">.</span><span class="n">read_session</span><span class="p">(</span>
-    <span class="s2">&quot;session.csv&quot;</span>
+    <span class="s2">"session.csv"</span>
 <span class="p">)</span>
 </pre></div>
 </div>
 <p>The default output is a nested dictionary organized as:</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="p">{</span>
-    <span class="s2">&quot;image_1.png&quot;</span><span class="p">:</span> <span class="p">{</span>
-        <span class="s2">&quot;default&quot;</span><span class="p">:</span> <span class="p">[</span>
+    <span class="s2">"image_1.png"</span><span class="p">:</span> <span class="p">{</span>
+        <span class="s2">"default"</span><span class="p">:</span> <span class="p">[</span>
             <span class="p">(</span><span class="mf">276.5</span><span class="p">,</span> <span class="mf">97.0</span><span class="p">),</span>
             <span class="p">(</span><span class="mf">242.2</span><span class="p">,</span> <span class="mf">109.8</span><span class="p">),</span>
         <span class="p">],</span>
-        <span class="s2">&quot;target&quot;</span><span class="p">:</span> <span class="p">[</span>
+        <span class="s2">"target"</span><span class="p">:</span> <span class="p">[</span>
             <span class="p">(</span><span class="mf">317.0</span><span class="p">,</span> <span class="mf">144.5</span><span class="p">),</span>
         <span class="p">],</span>
     <span class="p">},</span>
 
-    <span class="s2">&quot;image_2.png&quot;</span><span class="p">:</span> <span class="p">{</span>
-        <span class="s2">&quot;default&quot;</span><span class="p">:</span> <span class="p">[</span>
+    <span class="s2">"image_2.png"</span><span class="p">:</span> <span class="p">{</span>
+        <span class="s2">"default"</span><span class="p">:</span> <span class="p">[</span>
             <span class="p">(</span><span class="mf">50.0</span><span class="p">,</span> <span class="mf">25.5</span><span class="p">),</span>
         <span class="p">],</span>
     <span class="p">},</span>
@@ -369,7 +369,7 @@ access the annotations as a Python dictionary or as a pandas DataFrame.</p>
 <section id="accessing-clicks">
 <h2>Accessing clicks<a class="headerlink" href="#accessing-clicks" title="Link to this heading">#</a></h2>
 <p>Clicks can then be accessed by image and group:</p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">clicks</span> <span class="o">=</span> <span class="n">session</span><span class="p">[</span><span class="s2">&quot;image_1.png&quot;</span><span class="p">][</span><span class="s2">&quot;default&quot;</span><span class="p">]</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">clicks</span> <span class="o">=</span> <span class="n">session</span><span class="p">[</span><span class="s2">"image_1.png"</span><span class="p">][</span><span class="s2">"default"</span><span class="p">]</span>
 
 <span class="nb">print</span><span class="p">(</span><span class="n">clicks</span><span class="p">)</span>
 
