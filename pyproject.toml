@@ -1,0 +1,51 @@
+[build-system]
+requires = [
+  "setuptools>=42",
+  "setuptools-scm>=8.0"
+]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "pyclickimage"
+requires-python = ">= 3.11"
+dynamic = ["version"]
+description = "Python library to select points on a image [pyqt5 GUI]"
+license = {file = "LICENSE"}
+authors = [
+{name = "Artezaru", email = "artezaru.github@proton.me"}
+]
+classifiers = [
+    "Programming Language :: Python :: 3",
+    "License :: OSI Approved :: GNU General Public License v3 or later (GPLv3+)",
+    "Operating System :: OS Independent",
+]
+dependencies = [
+  "pyqt5",
+  "numpy",
+  "opencv-python-headless",
+  "pandas",
+]
+
+[project.urls]
+Homepage = "https://github.com/Artezaru/pyclickimage"
+Documentation = "https://Artezaru.github.io/pyclickimage"
+Source = "https://github.com/Artezaru/pyclickimage"
+Tracker = "https://github.com/Artezaru/pyclickimage/issues"
+
+[tool.setuptools.packages.find]
+where = ["."]
+include = ["pyclickimage", "pyclickimage*"]
+exclude = ["laboratory", "laboratory.*", "tests", "tests*", "examples", "examples*"]
+
+[tool.setuptools.package-data]
+"pyclickimage.resources" = ["*"]
+
+[project.gui-scripts]
+pyclickimage = "pyclickimage.__main__:__main_gui__"
+
+[tool.setuptools.dynamic]
+version = {attr = "pyclickimage.__version__.__version__"}
+
+[project.readme]
+file = "README.md"
+content-type = "text/markdown"

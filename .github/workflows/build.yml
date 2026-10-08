@@ -1,0 +1,206 @@
+# =============================================================================
+#  Build executables (Linux + Windows) + .deb, and publish a GitHub Release
+#  on "v*" tags.
+#
+#  Generic workflow: ONLY edit the `env:` block below for a new repository.
+#  Copy this file to .github/workflows/build.yml
+# =============================================================================
+
+name: Build executables
+
+on:
+  push:
+    tags:
+      - "v*"
+  workflow_dispatch: {}
+
+env:
+  # --- Application -----------------------------------------------------------
+  # Executable name and Debian package name (lowercase, no "_", no spaces).
+  PACKAGE_NAME: "pyclickimage"
+  # Python script PyInstaller starts from.
+  ENTRY_POINT: "pyclickimage/__main__.py"
+  # Application icon (.png or .ico). Leave empty "" for no icon.
+  APP_ICON_PATH: ""
+  # Data folder to embed in the executable. Leave empty "" if none.
+  RESOURCES_PATH: ""
+  # "true" for a GUI app (no console), "false" for a CLI tool.
+  WINDOWED: "true"
+  PYTHON_VERSION: "3.11"
+
+  # --- Linux launcher (.desktop) ---------------------------------------------
+  APP_DISPLAY_NAME: "pyclickimage"
+  APP_DESCRIPTION: "Select and annotate points on images with sub-pixel precision."
+  APP_LONG_DESCRIPTION: "Desktop application (PyQt5) to click points on images, organized in groups, with profiles, histogram and intensity interpolation; sessions saved as JSON or CSV."
+  DESKTOP_CATEGORIES: "Graphics;Science;"
+  # Mime types the app opens (e.g. "application/pdf;"). Leave empty "" if none.
+  DESKTOP_MIMETYPE: ""
+
+  # --- Debian package (.deb) -------------------------------------------------
+  MAINTAINER: "Artezaru <artezaru.github@proton.me>"
+  DEB_SECTION: "science"
+  # System dependencies. The list below is what PyQt5 needs; "" for none.
+  DEB_DEPENDS: "libgl1, libxkbcommon-x11-0, libxcb-icccm4, libxcb-image0, libxcb-keysyms1, libxcb-randr0, libxcb-render-util0, libxcb-shape0, libxcb-xinerama0, libxcb-xkb1"
+
+# =============================================================================
+#  Nothing to change below this line.
+# =============================================================================
+
+jobs:
+  build:
+    strategy:
+      fail-fast: false
+      matrix:
+        os: [ubuntu-latest, windows-latest]
+
+    runs-on: ${{ matrix.os }}
+
+    defaults:
+      run:
+        shell: bash   # same script on Linux and Windows (Git Bash)
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: ${{ env.PYTHON_VERSION }}
+
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install .
+          # Pillow lets PyInstaller convert a .png icon to .ico on Windows.
+          pip install pyinstaller pillow
+
+      - name: Set platform variables
+        run: |
+          if [ "$RUNNER_OS" = "Windows" ]; then
+            echo "ASSET_NAME=${PACKAGE_NAME}-windows.exe" >> "$GITHUB_ENV"
+            echo "BUILT_FILE=dist/${PACKAGE_NAME}.exe"   >> "$GITHUB_ENV"
+            echo "DATA_SEP=;"                            >> "$GITHUB_ENV"
+          else
+            echo "ASSET_NAME=${PACKAGE_NAME}-linux"      >> "$GITHUB_ENV"
+            echo "BUILT_FILE=dist/${PACKAGE_NAME}"       >> "$GITHUB_ENV"
+            echo "DATA_SEP=:"                            >> "$GITHUB_ENV"
+          fi
+
+      - name: Build executable
+        run: |
+          ARGS=(--name "$PACKAGE_NAME" --onefile --noconfirm)
+
+          if [ "$WINDOWED" = "true" ]; then
+            ARGS+=(--windowed)
+          fi
+
+          if [ -n "$RESOURCES_PATH" ]; then
+            ARGS+=(--add-data "${RESOURCES_PATH}${DATA_SEP}${RESOURCES_PATH}")
+          fi
+
+          if [ -n "$APP_ICON_PATH" ] && [ -f "$APP_ICON_PATH" ]; then
+            ARGS+=(--icon "$APP_ICON_PATH")
+          fi
+
+          pyinstaller "${ARGS[@]}" "$ENTRY_POINT"
+
+      - name: Rename artifact
+        run: mv "$BUILT_FILE" "dist/$ASSET_NAME"
+
+      - name: Upload build artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: ${{ env.ASSET_NAME }}
+          path: dist/${{ env.ASSET_NAME }}
+          if-no-files-found: error
+
+      - name: Build .deb package (Linux)
+        if: runner.os == 'Linux'
+        run: |
+          # "v1.0.0" -> "1.0.0"; "0.0.0" for a manual run (dpkg needs a version).
+          if [ "${{ github.ref_type }}" = "tag" ]; then
+            VERSION="${GITHUB_REF_NAME#v}"
+          else
+            VERSION="0.0.0"
+          fi
+
+          PKGROOT="pkgroot"
+          mkdir -p "$PKGROOT/DEBIAN" \
+                   "$PKGROOT/usr/bin" \
+                   "$PKGROOT/usr/share/applications" \
+                   "$PKGROOT/usr/share/pixmaps"
+
+          cp "dist/$ASSET_NAME" "$PKGROOT/usr/bin/$PACKAGE_NAME"
+          chmod 755 "$PKGROOT/usr/bin/$PACKAGE_NAME"
+
+          # --- DEBIAN/control ---
+          {
+            echo "Package: $PACKAGE_NAME"
+            echo "Version: $VERSION"
+            echo "Section: $DEB_SECTION"
+            echo "Priority: optional"
+            echo "Architecture: amd64"
+            if [ -n "$DEB_DEPENDS" ]; then
+              echo "Depends: $DEB_DEPENDS"
+            fi
+            echo "Maintainer: $MAINTAINER"
+            echo "Description: $APP_DESCRIPTION"
+            if [ -n "$APP_LONG_DESCRIPTION" ]; then
+              echo " $APP_LONG_DESCRIPTION"
+            fi
+          } > "$PKGROOT/DEBIAN/control"
+
+          # --- .desktop launcher ---
+          DESKTOP="$PKGROOT/usr/share/applications/$PACKAGE_NAME.desktop"
+          {
+            echo "[Desktop Entry]"
+            echo "Type=Application"
+            echo "Name=$APP_DISPLAY_NAME"
+            echo "Comment=$APP_DESCRIPTION"
+            if [ -n "$DESKTOP_MIMETYPE" ]; then
+              echo "Exec=/usr/bin/$PACKAGE_NAME %F"
+              echo "MimeType=$DESKTOP_MIMETYPE"
+            else
+              echo "Exec=/usr/bin/$PACKAGE_NAME"
+            fi
+            if [ -n "$APP_ICON_PATH" ] && [ -f "$APP_ICON_PATH" ]; then
+              EXT="${APP_ICON_PATH##*.}"
+              cp "$APP_ICON_PATH" "$PKGROOT/usr/share/pixmaps/$PACKAGE_NAME.$EXT"
+              echo "Icon=$PACKAGE_NAME"
+            fi
+            if [ "$WINDOWED" = "true" ]; then
+              echo "Terminal=false"
+            else
+              echo "Terminal=true"
+            fi
+            echo "Categories=$DESKTOP_CATEGORIES"
+          } > "$DESKTOP"
+
+          dpkg-deb --build --root-owner-group "$PKGROOT" \
+            "dist/${PACKAGE_NAME}_${VERSION}_amd64.deb"
+
+      - name: Upload .deb artifact (Linux)
+        if: runner.os == 'Linux'
+        uses: actions/upload-artifact@v4
+        with:
+          name: ${{ env.PACKAGE_NAME }}-deb
+          path: dist/*.deb
+          if-no-files-found: error
+
+  release:
+    needs: build
+    if: startsWith(github.ref, 'refs/tags/')
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    steps:
+      - name: Download all artifacts
+        uses: actions/download-artifact@v4
+        with:
+          path: artifacts
+
+      - name: Create GitHub Release
+        uses: softprops/action-gh-release@v2
+        with:
+          files: artifacts/**/*
