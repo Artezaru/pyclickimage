@@ -46,9 +46,11 @@ SHELL := /bin/bash
 .DEFAULT_GOAL := help
 
 PYTHON  := $(venv)/bin/python
-version  = $(shell grep -m1 '__version__' $(VERSION_FILE) 2>/dev/null | sed -E "s/.*['\"]([^'\"]+)['\"].*/\1/")
 
-.PHONY: help install main test bump clean html open commit push pushtag
+BUMPVER_FILE = .bumpver.toml
+version = $(shell sed -n 's/^current_version *= *"\(.*\)"/\1/p' $(BUMPVER_FILE))
+
+.PHONY: help install version main test bump clean html open commit push pushtag
 
 # -----------------------------------------------------------------------------
 #  Help
@@ -60,6 +62,7 @@ help:
 	echo "  install   [venv=venv]  Create the venv if needed, pip install -e . + docs/dev tools"
 	echo ""
 	echo "Development"
+	echo "  version                Show the current version of the package"
 	echo "  main      [venv=venv]  Run the application (python -m $(PACKAGE_DIR))"
 	echo "  test      [venv=venv]  Run the tests with pytest ($(TESTS_DIR)/)"
 	echo "  bump      level=major|minor|patch  Update the package version with bumpver"
@@ -95,6 +98,9 @@ install:
 # -----------------------------------------------------------------------------
 #  Development
 # -----------------------------------------------------------------------------
+version:
+	@echo "$(version)"
+
 main:
 	@"$(PYTHON)" -m $(PACKAGE_DIR)
 
@@ -102,13 +108,14 @@ test:
 	@"$(PYTHON)" -m pytest $(TESTS_DIR)
 
 bump:
-	@case "$(level)" in
-		major|minor|patch) ;;
-		*) echo "Error: use 'make bump level=major|minor|patch'"; exit 1 ;;
-	esac
-	echo "Current version: $(version)"
-	bumpver update --$(level) --no-fetch
-	echo "Version updated."
+	@\
+	case "$(level)" in \
+		major|minor|patch) ;; \
+		*) echo "Error: use 'make bump level=major|minor|patch'"; exit 1 ;; \
+	esac && \
+	echo "Current version: $(version)" && \
+	bumpver update --$(level) --no-fetch && \
+	echo "New version: $$(sed -n 's/^current_version *= *"\(.*\)"/\1/p' $(BUMPVER_FILE))"
 
 # -----------------------------------------------------------------------------
 #  Documentation
