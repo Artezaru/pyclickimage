@@ -107,7 +107,7 @@ bump:
 		*) echo "Error: use 'make bump level=major|minor|patch'"; exit 1 ;;
 	esac
 	echo "Current version: $(version)"
-	"$(venv)/bin/bumpver" update --$(level) --no-fetch
+	bumpver update --$(level) --no-fetch
 	echo "Version updated."
 
 # -----------------------------------------------------------------------------
