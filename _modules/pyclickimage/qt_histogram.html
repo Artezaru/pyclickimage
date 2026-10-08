@@ -1,0 +1,2059 @@
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="../../" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>pyclickimage.qt_histogram &#8212; pyclickimage 4.0.0 documentation</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  <!--
+    this give us a css class that will be invisible only if js is disabled
+  -->
+  <noscript>
+    <style>
+      .pst-js-only { display: none !important; }
+
+    </style>
+  </noscript>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../../_static/styles/theme.css?digest=18bd87630a240e9c25be" rel="stylesheet" />
+<link href="../../_static/styles/pydata-sphinx-theme.css?digest=18bd87630a240e9c25be" rel="stylesheet" />
+
+    <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=8f2a1f02" />
+  
+  <!-- So that users can add custom icons -->
+  <script defer src="../../_static/scripts/fontawesome.js?digest=18bd87630a240e9c25be"></script>
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../../_static/scripts/bootstrap.js?digest=18bd87630a240e9c25be" />
+<link rel="preload" as="script" href="../../_static/scripts/pydata-sphinx-theme.js?digest=18bd87630a240e9c25be" />
+
+    <script src="../../_static/documentation_options.js?v=3304f9e4"></script>
+    <script src="../../_static/doctools.js?v=fd6eb6e6"></script>
+    <script src="../../_static/sphinx_highlight.js?v=6ffebe34"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = '_modules/pyclickimage/qt_histogram';</script>
+    <script>DOCUMENTATION_OPTIONS.search_as_you_type = false;</script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="color-scheme" content="light dark"/>
+  <meta name="docsearch:language" content="en"/>
+  <meta name="docsearch:version" content="" />
+  
+    
+    <script src="../../_static/searchtools.js"></script>
+    <script src="../../_static/language_data.js"></script>
+    <script src="../../searchindex.js"></script>
+  
+  </head>
+  <body data-default-mode="">
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
+  
+  
+  
+  
+  <dialog id="pst-search-dialog">
+    
+<form class="bd-search d-flex align-items-center"
+      action="../../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         placeholder="Search the docs ..."
+         aria-label="Search the docs ..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form>
+  </dialog>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+
+  
+    <header id="pst-header" class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+<div class="bd-header__inner bd-page-width">
+  <button type="button" class="pst-navbar-icon sidebar-toggle primary-toggle" aria-label="Site navigation">
+    <span class="fa-solid fa-bars"></span>
+  </button>
+  
+  
+  <div class="col-lg-3 navbar-header-items__start">
+    
+      <div class="navbar-item">
+
+  
+    
+  
+
+<a class="navbar-brand logo" href="../../index.html">
+  
+  
+  
+  
+  
+  
+    <p class="title logo__title">pyclickimage 4.0.0 documentation</p>
+  
+</a></div>
+    
+  </div>
+  
+  <div class="col-lg-9 navbar-header-items">
+    
+    <div class="me-auto navbar-header-items__center">
+      
+        <div class="navbar-item">
+<nav>
+  <ul class="bd-navbar-elements navbar-nav">
+    
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../installation.html">
+    Installation
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../api.html">
+    API Reference
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../usage.html">
+    Usage
+  </a>
+</li>
+
+  </ul>
+</nav></div>
+      
+    </div>
+    
+    
+    <div class="navbar-header-items__end">
+      
+        <div class="navbar-item navbar-persistent--container">
+          
+
+<button type="button" class="btn search-button-field search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+ <i class="fa-solid fa-magnifying-glass"></i>
+ <span class="search-button__default-text">Search</span>
+ <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+</button>
+        </div>
+      
+      
+        <div class="navbar-item">
+
+<div class="theme-switch-container dropdown pst-js-only" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Color mode">
+  <button type="button" class="btn btn-sm nav-link pst-navbar-icon theme-switch-button dropdown-toggle" aria-label="Color mode" data-bs-toggle="dropdown">
+    <i class="theme-switch fa-solid fa-sun fa-lg fa-fw" data-mode="light" title="Light"></i>
+    <i class="theme-switch fa-solid fa-moon fa-lg fa-fw" data-mode="dark" title="Dark"></i>
+    <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg fa-fw" data-mode="auto" title="System Settings"></i>
+  </button>
+  <ul class="dropdown-menu dropdown-menu-end">
+    <li><button type="button" class="dropdown-item d-flex align-items-center theme-change-button" data-mode="auto"><i class="fa-solid fa-circle-half-stroke fa-lg fa-fw me-1"></i>System Settings</button></li>
+    <li><button type="button" class="dropdown-item d-flex align-items-center theme-change-button" data-mode="light"><i class="fa-solid fa-sun fa-lg fa-fw me-1"></i>Light</button></li>
+    <li><button type="button" class="dropdown-item d-flex align-items-center theme-change-button" data-mode="dark"><i class="fa-solid fa-moon fa-lg fa-fw me-1"></i>Dark</button></li>
+  </ul>
+</div></div>
+      
+    </div>
+    
+  </div>
+  
+  
+    <div class="navbar-persistent--mobile">
+
+<button type="button" class="btn search-button-field search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+ <i class="fa-solid fa-magnifying-glass"></i>
+ <span class="search-button__default-text">Search</span>
+ <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+</button>
+    </div>
+  
+
+  
+</div>
+
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+        
+      
+      <dialog id="pst-primary-sidebar-modal"></dialog>
+      <div id="pst-primary-sidebar" class="bd-sidebar-primary bd-sidebar hide-on-wide">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+      <div class="sidebar-header-items__center">
+        
+          
+          
+            <div class="navbar-item">
+<nav>
+  <ul class="bd-navbar-elements navbar-nav">
+    
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../installation.html">
+    Installation
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../api.html">
+    API Reference
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../usage.html">
+    Usage
+  </a>
+</li>
+
+  </ul>
+</nav></div>
+          
+        
+      </div>
+    
+    
+    
+      <div class="sidebar-header-items__end">
+        
+          <div class="navbar-item">
+
+<div class="theme-switch-container dropdown pst-js-only" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Color mode">
+  <button type="button" class="btn btn-sm nav-link pst-navbar-icon theme-switch-button dropdown-toggle" aria-label="Color mode" data-bs-toggle="dropdown">
+    <i class="theme-switch fa-solid fa-sun fa-lg fa-fw" data-mode="light" title="Light"></i>
+    <i class="theme-switch fa-solid fa-moon fa-lg fa-fw" data-mode="dark" title="Dark"></i>
+    <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg fa-fw" data-mode="auto" title="System Settings"></i>
+  </button>
+  <ul class="dropdown-menu dropdown-menu-end">
+    <li><button type="button" class="dropdown-item d-flex align-items-center theme-change-button" data-mode="auto"><i class="fa-solid fa-circle-half-stroke fa-lg fa-fw me-1"></i>System Settings</button></li>
+    <li><button type="button" class="dropdown-item d-flex align-items-center theme-change-button" data-mode="light"><i class="fa-solid fa-sun fa-lg fa-fw me-1"></i>Light</button></li>
+    <li><button type="button" class="dropdown-item d-flex align-items-center theme-change-button" data-mode="dark"><i class="fa-solid fa-moon fa-lg fa-fw me-1"></i>Dark</button></li>
+  </ul>
+</div></div>
+        
+      </div>
+    
+  </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+      <div class="sidebar-primary-item">
+<div id="ethical-ad-placement"
+      class="flat"
+      data-ea-publisher="readthedocs"
+      data-ea-type="readthedocs-sidebar"
+      data-ea-manual="true">
+</div></div>
+  </div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item">
+
+<nav aria-label="Breadcrumb" class="d-print-none">
+  <ul class="bd-breadcrumbs">
+    
+    <li class="breadcrumb-item breadcrumb-home">
+      <a href="../../index.html" class="nav-link" aria-label="Home">
+        <i class="fa-solid fa-home"></i>
+      </a>
+    </li>
+    
+    <li class="breadcrumb-item"><a href="../index.html" class="nav-link">Module code</a></li>
+    
+    <li class="breadcrumb-item active" aria-current="page"><span class="ellipsis">pyclickimage.qt_histogram</span></li>
+  </ul>
+</nav>
+</div>
+      
+    </div>
+  
+  
+</div>
+</div>
+              
+              
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <h1>Source code for pyclickimage.qt_histogram</h1><div class="highlight"><pre>
+<span></span><span class="sd">"""</span>
+<span class="sd">pyclickimage - Python library to select points on a image [pyqt5 GUI]</span>
+<span class="sd">Copyright (C) 2025-2026 Artezaru, artezaru.github@proton.me</span>
+
+<span class="sd">This program is free software: you can redistribute it and/or modify</span>
+<span class="sd">it under the terms of the GNU General Public License as published by</span>
+<span class="sd">the Free Software Foundation, either version 3 of the License, or</span>
+<span class="sd">(at your option) any later version.</span>
+
+<span class="sd">This program is distributed in the hope that it will be useful,</span>
+<span class="sd">but WITHOUT ANY WARRANTY; without even the implied warranty of</span>
+<span class="sd">MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the</span>
+<span class="sd">GNU General Public License for more details.</span>
+
+<span class="sd">You should have received a copy of the GNU General Public License</span>
+<span class="sd">along with this program.  If not, see &lt;https://www.gnu.org/licenses/&gt;.</span>
+<span class="sd">"""</span>
+
+<span class="kn">from</span><span class="w"> </span><span class="nn">__future__</span><span class="w"> </span><span class="kn">import</span> <span class="n">annotations</span>
+
+<span class="kn">from</span><span class="w"> </span><span class="nn">typing</span><span class="w"> </span><span class="kn">import</span> <span class="n">Callable</span><span class="p">,</span> <span class="n">Sequence</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">bisect</span><span class="w"> </span><span class="kn">import</span> <span class="n">bisect_right</span>
+
+<span class="kn">from</span><span class="w"> </span><span class="nn">PyQt5.QtCore</span><span class="w"> </span><span class="kn">import</span> <span class="n">QPointF</span><span class="p">,</span> <span class="n">QRect</span><span class="p">,</span> <span class="n">QSize</span><span class="p">,</span> <span class="n">Qt</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">PyQt5.QtGui</span><span class="w"> </span><span class="kn">import</span> <span class="n">QColor</span><span class="p">,</span> <span class="n">QFont</span><span class="p">,</span> <span class="n">QIcon</span><span class="p">,</span> <span class="n">QPainter</span><span class="p">,</span> <span class="n">QPen</span><span class="p">,</span> <span class="n">QPixmap</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">PyQt5.QtWidgets</span><span class="w"> </span><span class="kn">import</span> <span class="p">(</span>
+    <span class="n">QCheckBox</span><span class="p">,</span>
+    <span class="n">QHBoxLayout</span><span class="p">,</span>
+    <span class="n">QSizePolicy</span><span class="p">,</span>
+    <span class="n">QVBoxLayout</span><span class="p">,</span>
+    <span class="n">QWidget</span><span class="p">,</span>
+<span class="p">)</span>
+
+
+<div class="viewcode-block" id="QtHistogram">
+<a class="viewcode-back" href="../../api_doc/qt_histogram.html#pyclickimage.qt_histogram.QtHistogram">[docs]</a>
+<span class="k">class</span><span class="w"> </span><span class="nc">QtHistogram</span><span class="p">(</span><span class="n">QWidget</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">"""Interactive histogram and cumulative-distribution widget.</span>
+
+<span class="sd">    The widget displays binned numeric data using four display modes:</span>
+
+<span class="sd">    * histogram with absolute counts;</span>
+<span class="sd">    * histogram with percentages;</span>
+<span class="sd">    * cumulative histogram with absolute counts;</span>
+<span class="sd">    * cumulative histogram with percentages.</span>
+
+<span class="sd">    The underlying histogram always stores absolute bin values. Display</span>
+<span class="sd">    transformations are applied only while painting, so changing the</span>
+<span class="sd">    display mode never modifies the source data.</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    data : Sequence[float], optional</span>
+<span class="sd">        Raw numeric samples used to build the histogram. Values are</span>
+<span class="sd">        converted to ``float``.</span>
+<span class="sd">    bins : Sequence[float], optional</span>
+<span class="sd">        Explicit histogram heights. Values must be non-negative. When</span>
+<span class="sd">        provided, ``edges`` must contain ``len(bins) + 1`` values.</span>
+<span class="sd">    edges : Sequence[float], optional</span>
+<span class="sd">        Monotonically increasing bin boundaries. When omitted with</span>
+<span class="sd">        ``bins``, integer boundaries ``[0, 1, ..., len(bins)]`` are used.</span>
+<span class="sd">    parent : QWidget, optional</span>
+<span class="sd">        Parent Qt widget.</span>
+
+<span class="sd">    Notes</span>
+<span class="sd">    -----</span>
+<span class="sd">    ``set_data`` computes equally spaced bins when no explicit edges are</span>
+<span class="sd">    supplied. ``set_bins`` accepts already-computed histogram values.</span>
+
+<span class="sd">    Percentage mode divides each displayed value by the sum of the original</span>
+<span class="sd">    bin values and multiplies it by 100. In cumulative percentage mode, the</span>
+<span class="sd">    final value is therefore 100 when the histogram contains data.</span>
+
+<span class="sd">    The two display options are controlled by checkboxes placed below the</span>
+<span class="sd">    histogram.</span>
+
+<span class="sd">    Examples</span>
+<span class="sd">    --------</span>
+<span class="sd">    &gt;&gt;&gt; histogram = QtHistogram(data=[1, 2, 2, 3, 3, 3])</span>
+<span class="sd">    &gt;&gt;&gt; histogram.cumulative = True</span>
+<span class="sd">    &gt;&gt;&gt; histogram.percentage = True</span>
+<span class="sd">    &gt;&gt;&gt; histogram.bin_count = 20</span>
+<span class="sd">    &gt;&gt;&gt; histogram.set_data([0, 1, 2, 3])</span>
+<span class="sd">    """</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span>
+        <span class="bp">self</span><span class="p">,</span>
+        <span class="n">data</span><span class="p">:</span> <span class="n">Sequence</span><span class="p">[</span><span class="nb">float</span><span class="p">]</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+        <span class="n">bins</span><span class="p">:</span> <span class="n">Sequence</span><span class="p">[</span><span class="nb">float</span><span class="p">]</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+        <span class="n">edges</span><span class="p">:</span> <span class="n">Sequence</span><span class="p">[</span><span class="nb">float</span><span class="p">]</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+        <span class="n">parent</span><span class="p">:</span> <span class="n">QWidget</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+    <span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">"""Initialize the histogram widget.</span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        data : Sequence[float], optional</span>
+<span class="sd">            Raw samples used to compute the histogram.</span>
+<span class="sd">        bins : Sequence[float], optional</span>
+<span class="sd">            Precomputed non-negative bin values.</span>
+<span class="sd">        edges : Sequence[float], optional</span>
+<span class="sd">            Bin boundaries associated with ``bins``.</span>
+<span class="sd">        parent : QWidget, optional</span>
+<span class="sd">            Parent Qt widget.</span>
+<span class="sd">        """</span>
+        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="n">parent</span><span class="p">)</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">_bins</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="nb">float</span><span class="p">]</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_edges</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="nb">float</span><span class="p">]</span> <span class="o">=</span> <span class="p">[]</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">_bin_count</span> <span class="o">=</span> <span class="mi">10</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_cumulative</span> <span class="o">=</span> <span class="kc">False</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_percentage</span> <span class="o">=</span> <span class="kc">False</span>
+
+        <span class="c1"># Space between the widget border and the plotting area. The</span>
+        <span class="c1"># bottom margin is measured from the top of the mode checkboxes</span>
+        <span class="c1"># and holds the X tick labels and the X title.</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_margin_left</span> <span class="o">=</span> <span class="mi">76</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_margin_top</span> <span class="o">=</span> <span class="mi">36</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_margin_right</span> <span class="o">=</span> <span class="mi">32</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_margin_bottom</span> <span class="o">=</span> <span class="mi">52</span>
+
+        <span class="c1"># Margins around the whole widget content (checkbox row included).</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_content_margins</span> <span class="o">=</span> <span class="p">(</span><span class="mi">12</span><span class="p">,</span> <span class="mi">8</span><span class="p">,</span> <span class="mi">12</span><span class="p">,</span> <span class="mi">10</span><span class="p">)</span>
+
+        <span class="n">palette</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">palette</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_background_color</span> <span class="o">=</span> <span class="n">palette</span><span class="o">.</span><span class="n">base</span><span class="p">()</span><span class="o">.</span><span class="n">color</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_border_color</span> <span class="o">=</span> <span class="n">palette</span><span class="o">.</span><span class="n">mid</span><span class="p">()</span><span class="o">.</span><span class="n">color</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_bar_color</span> <span class="o">=</span> <span class="n">palette</span><span class="o">.</span><span class="n">highlight</span><span class="p">()</span><span class="o">.</span><span class="n">color</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_bar_border_color</span> <span class="o">=</span> <span class="n">palette</span><span class="o">.</span><span class="n">highlight</span><span class="p">()</span><span class="o">.</span><span class="n">color</span><span class="p">()</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">_grid_color</span> <span class="o">=</span> <span class="n">QColor</span><span class="p">(</span><span class="mi">210</span><span class="p">,</span> <span class="mi">210</span><span class="p">,</span> <span class="mi">210</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_minor_grid_color</span> <span class="o">=</span> <span class="n">QColor</span><span class="p">(</span><span class="mi">235</span><span class="p">,</span> <span class="mi">235</span><span class="p">,</span> <span class="mi">235</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_axis_color</span> <span class="o">=</span> <span class="n">QColor</span><span class="p">(</span><span class="mi">80</span><span class="p">,</span> <span class="mi">80</span><span class="p">,</span> <span class="mi">80</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_text_color</span> <span class="o">=</span> <span class="n">QColor</span><span class="p">(</span><span class="mi">80</span><span class="p">,</span> <span class="mi">80</span><span class="p">,</span> <span class="mi">80</span><span class="p">)</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">_border_width</span> <span class="o">=</span> <span class="mi">1</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_bar_width</span> <span class="o">=</span> <span class="mi">1</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_grid_width</span> <span class="o">=</span> <span class="mi">1</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_minor_grid_width</span> <span class="o">=</span> <span class="mi">1</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_axis_width</span> <span class="o">=</span> <span class="mi">1</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_tick_width</span> <span class="o">=</span> <span class="mi">1</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">_tick_length</span> <span class="o">=</span> <span class="mi">4</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_grid_x</span> <span class="o">=</span> <span class="mi">5</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_grid_y</span> <span class="o">=</span> <span class="mi">5</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_minor_grid</span> <span class="o">=</span> <span class="mi">0</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">_font</span> <span class="o">=</span> <span class="n">QFont</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_font</span><span class="o">.</span><span class="n">setPointSize</span><span class="p">(</span><span class="mi">8</span><span class="p">)</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">_show_grid</span> <span class="o">=</span> <span class="kc">True</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_show_minor_grid</span> <span class="o">=</span> <span class="kc">False</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_show_axes</span> <span class="o">=</span> <span class="kc">True</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_show_ticks</span> <span class="o">=</span> <span class="kc">True</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_show_labels</span> <span class="o">=</span> <span class="kc">True</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">_x_title</span> <span class="o">=</span> <span class="s2">""</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">_x_ticks</span><span class="p">:</span> <span class="n">Sequence</span><span class="p">[</span><span class="nb">float</span><span class="p">]</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="kc">None</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_x_formatter</span><span class="p">:</span> <span class="n">Callable</span><span class="p">[[</span><span class="nb">float</span><span class="p">],</span> <span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="k">lambda</span> <span class="n">value</span><span class="p">:</span> <span class="sa">f</span><span class="s2">"</span><span class="si">{</span><span class="n">value</span><span class="si">:</span><span class="s2">g</span><span class="si">}</span><span class="s2">"</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">_build_mode_controls</span><span class="p">()</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">setMinimumSize</span><span class="p">(</span><span class="mi">120</span><span class="p">,</span> <span class="mi">80</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">setSizePolicy</span><span class="p">(</span>
+            <span class="n">QSizePolicy</span><span class="o">.</span><span class="n">Expanding</span><span class="p">,</span>
+            <span class="n">QSizePolicy</span><span class="o">.</span><span class="n">Expanding</span><span class="p">,</span>
+        <span class="p">)</span>
+
+        <span class="k">if</span> <span class="n">bins</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">set_bins</span><span class="p">(</span><span class="n">bins</span><span class="p">,</span> <span class="n">edges</span><span class="p">)</span>
+        <span class="k">elif</span> <span class="n">data</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">set_data</span><span class="p">(</span><span class="n">data</span><span class="p">)</span>
+
+    <span class="c1"># ==================================================================</span>
+    <span class="c1"># Modes</span>
+    <span class="c1"># ==================================================================</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">cumulative</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bool</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">"""bool: Whether cumulative values are displayed."""</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_cumulative</span>
+
+    <span class="nd">@cumulative</span><span class="o">.</span><span class="n">setter</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">cumulative</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">value</span><span class="p">:</span> <span class="nb">bool</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">set_cumulative</span><span class="p">(</span><span class="n">value</span><span class="p">)</span>
+
+<div class="viewcode-block" id="QtHistogram.set_cumulative">
+<a class="viewcode-back" href="../../api_doc/qt_histogram.html#pyclickimage.qt_histogram.QtHistogram.set_cumulative">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">set_cumulative</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">value</span><span class="p">:</span> <span class="nb">bool</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">"""Enable or disable cumulative mode.</span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        value : bool</span>
+<span class="sd">            Whether cumulative values should be displayed.</span>
+<span class="sd">        """</span>
+        <span class="n">value</span> <span class="o">=</span> <span class="nb">bool</span><span class="p">(</span><span class="n">value</span><span class="p">)</span>
+
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_cumulative</span> <span class="o">==</span> <span class="n">value</span><span class="p">:</span>
+            <span class="k">return</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">_cumulative</span> <span class="o">=</span> <span class="n">value</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_cumulative_checkbox</span><span class="o">.</span><span class="n">setChecked</span><span class="p">(</span><span class="n">value</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">update</span><span class="p">()</span></div>
+
+
+    <span class="nd">@property</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">percentage</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bool</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">"""bool: Whether values are displayed as percentages."""</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_percentage</span>
+
+    <span class="nd">@percentage</span><span class="o">.</span><span class="n">setter</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">percentage</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">value</span><span class="p">:</span> <span class="nb">bool</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">set_percentage</span><span class="p">(</span><span class="n">value</span><span class="p">)</span>
+
+<div class="viewcode-block" id="QtHistogram.set_percentage">
+<a class="viewcode-back" href="../../api_doc/qt_histogram.html#pyclickimage.qt_histogram.QtHistogram.set_percentage">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">set_percentage</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">value</span><span class="p">:</span> <span class="nb">bool</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">"""Enable or disable percentage mode.</span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        value : bool</span>
+<span class="sd">            Whether percentages should be displayed instead of absolute</span>
+<span class="sd">            values.</span>
+<span class="sd">        """</span>
+        <span class="n">value</span> <span class="o">=</span> <span class="nb">bool</span><span class="p">(</span><span class="n">value</span><span class="p">)</span>
+
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_percentage</span> <span class="o">==</span> <span class="n">value</span><span class="p">:</span>
+            <span class="k">return</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">_percentage</span> <span class="o">=</span> <span class="n">value</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_percentage_checkbox</span><span class="o">.</span><span class="n">setChecked</span><span class="p">(</span><span class="n">value</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">update</span><span class="p">()</span></div>
+
+
+    <span class="c1"># ==================================================================</span>
+    <span class="c1"># Properties</span>
+    <span class="c1"># ==================================================================</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">bins</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">list</span><span class="p">[</span><span class="nb">float</span><span class="p">]:</span>
+<span class="w">        </span><span class="sd">"""list[float]: Copy of the original bin values."""</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_bins</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">edges</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">list</span><span class="p">[</span><span class="nb">float</span><span class="p">]:</span>
+<span class="w">        </span><span class="sd">"""list[float]: Copy of the current bin boundaries."""</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_edges</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">bin_count</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">int</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">"""int: Default number of bins used by :meth:`set_data`."""</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_bin_count</span>
+
+    <span class="nd">@bin_count</span><span class="o">.</span><span class="n">setter</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">bin_count</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">value</span><span class="p">:</span> <span class="nb">int</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="n">value</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">value</span><span class="p">)</span>
+
+        <span class="k">if</span> <span class="n">value</span> <span class="o">&lt;=</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span>
+                <span class="s2">"bin_count must be greater than zero."</span>
+            <span class="p">)</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">_bin_count</span> <span class="o">=</span> <span class="n">value</span>
+
+<div class="viewcode-block" id="QtHistogram._color_property">
+<a class="viewcode-back" href="../../api_doc/qt_histogram.html#pyclickimage.qt_histogram.QtHistogram._color_property">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">_color_property</span><span class="p">(</span><span class="n">name</span><span class="p">:</span> <span class="nb">str</span><span class="p">):</span>
+        <span class="k">def</span><span class="w"> </span><span class="nf">getter</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+            <span class="k">return</span> <span class="nb">getattr</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="sa">f</span><span class="s2">"_</span><span class="si">{</span><span class="n">name</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
+
+        <span class="k">def</span><span class="w"> </span><span class="nf">setter</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">value</span><span class="p">):</span>
+            <span class="nb">setattr</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="sa">f</span><span class="s2">"_</span><span class="si">{</span><span class="n">name</span><span class="si">}</span><span class="s2">"</span><span class="p">,</span> <span class="n">QColor</span><span class="p">(</span><span class="n">value</span><span class="p">))</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">update</span><span class="p">()</span>
+
+        <span class="k">return</span> <span class="nb">property</span><span class="p">(</span><span class="n">getter</span><span class="p">,</span> <span class="n">setter</span><span class="p">)</span></div>
+
+
+    <span class="n">background_color</span> <span class="o">=</span> <span class="n">_color_property</span><span class="p">(</span><span class="s2">"background_color"</span><span class="p">)</span>
+    <span class="n">bar_color</span> <span class="o">=</span> <span class="n">_color_property</span><span class="p">(</span><span class="s2">"bar_color"</span><span class="p">)</span>
+    <span class="n">bar_border_color</span> <span class="o">=</span> <span class="n">_color_property</span><span class="p">(</span><span class="s2">"bar_border_color"</span><span class="p">)</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">show_grid</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bool</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">"""bool: Whether major grid lines are displayed."""</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_show_grid</span>
+
+    <span class="nd">@show_grid</span><span class="o">.</span><span class="n">setter</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">show_grid</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">value</span><span class="p">:</span> <span class="nb">bool</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_show_grid</span> <span class="o">=</span> <span class="nb">bool</span><span class="p">(</span><span class="n">value</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">update</span><span class="p">()</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">show_minor_grid</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bool</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">"""bool: Whether minor grid lines are displayed."""</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_show_minor_grid</span>
+
+    <span class="nd">@show_minor_grid</span><span class="o">.</span><span class="n">setter</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">show_minor_grid</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">value</span><span class="p">:</span> <span class="nb">bool</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_show_minor_grid</span> <span class="o">=</span> <span class="nb">bool</span><span class="p">(</span><span class="n">value</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">update</span><span class="p">()</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">show_axes</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bool</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">"""bool: Whether axes are displayed."""</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_show_axes</span>
+
+    <span class="nd">@show_axes</span><span class="o">.</span><span class="n">setter</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">show_axes</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">value</span><span class="p">:</span> <span class="nb">bool</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_show_axes</span> <span class="o">=</span> <span class="nb">bool</span><span class="p">(</span><span class="n">value</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">update</span><span class="p">()</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">show_ticks</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bool</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">"""bool: Whether ticks are displayed."""</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_show_ticks</span>
+
+    <span class="nd">@show_ticks</span><span class="o">.</span><span class="n">setter</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">show_ticks</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">value</span><span class="p">:</span> <span class="nb">bool</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_show_ticks</span> <span class="o">=</span> <span class="nb">bool</span><span class="p">(</span><span class="n">value</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">update</span><span class="p">()</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">show_labels</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bool</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">"""bool: Whether axis labels are displayed."""</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_show_labels</span>
+
+    <span class="nd">@show_labels</span><span class="o">.</span><span class="n">setter</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">show_labels</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">value</span><span class="p">:</span> <span class="nb">bool</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_show_labels</span> <span class="o">=</span> <span class="nb">bool</span><span class="p">(</span><span class="n">value</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">update</span><span class="p">()</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">x_title</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">"""str: X-axis title."""</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_x_title</span>
+
+    <span class="nd">@x_title</span><span class="o">.</span><span class="n">setter</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">x_title</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">value</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_x_title</span> <span class="o">=</span> <span class="nb">str</span><span class="p">(</span><span class="n">value</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">update</span><span class="p">()</span>
+        
+    <span class="nd">@property</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">x_ticks</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Sequence</span><span class="p">[</span><span class="nb">float</span><span class="p">]</span> <span class="o">|</span> <span class="kc">None</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">"""Sequence[float] | None: Explicit X-axis tick positions."""</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_x_ticks</span>
+
+    <span class="nd">@x_ticks</span><span class="o">.</span><span class="n">setter</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">x_ticks</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">value</span><span class="p">:</span> <span class="n">Sequence</span><span class="p">[</span><span class="nb">float</span><span class="p">]</span> <span class="o">|</span> <span class="kc">None</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_x_ticks</span> <span class="o">=</span> <span class="n">value</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">update</span><span class="p">()</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">x_formatter</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Callable</span><span class="p">[[</span><span class="nb">float</span><span class="p">],</span> <span class="nb">str</span><span class="p">]:</span>
+<span class="w">        </span><span class="sd">"""Callable[[float], str]: X-axis label formatter."""</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_x_formatter</span>
+
+    <span class="nd">@x_formatter</span><span class="o">.</span><span class="n">setter</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">x_formatter</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">value</span><span class="p">:</span> <span class="n">Callable</span><span class="p">[[</span><span class="nb">float</span><span class="p">],</span> <span class="nb">str</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_x_formatter</span> <span class="o">=</span> <span class="n">value</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">update</span><span class="p">()</span>
+
+    <span class="c1"># ==================================================================</span>
+    <span class="c1"># Mode controls</span>
+    <span class="c1"># ==================================================================</span>
+
+<div class="viewcode-block" id="QtHistogram._build_mode_controls">
+<a class="viewcode-back" href="../../api_doc/qt_histogram.html#pyclickimage.qt_histogram.QtHistogram._build_mode_controls">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">_build_mode_controls</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">"""Create the display checkboxes below the histogram."""</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_cumulative_checkbox</span> <span class="o">=</span> <span class="n">QCheckBox</span><span class="p">(</span>
+            <span class="s2">"Cumulative"</span><span class="p">,</span>
+            <span class="bp">self</span><span class="p">,</span>
+        <span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_percentage_checkbox</span> <span class="o">=</span> <span class="n">QCheckBox</span><span class="p">(</span>
+            <span class="s2">"Percentage"</span><span class="p">,</span>
+            <span class="bp">self</span><span class="p">,</span>
+        <span class="p">)</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">_cumulative_checkbox</span><span class="o">.</span><span class="n">toggled</span><span class="o">.</span><span class="n">connect</span><span class="p">(</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">set_cumulative</span>
+        <span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_percentage_checkbox</span><span class="o">.</span><span class="n">toggled</span><span class="o">.</span><span class="n">connect</span><span class="p">(</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">set_percentage</span>
+        <span class="p">)</span>
+
+        <span class="n">controls_layout</span> <span class="o">=</span> <span class="n">QHBoxLayout</span><span class="p">()</span>
+        <span class="n">controls_layout</span><span class="o">.</span><span class="n">setContentsMargins</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>
+        <span class="n">controls_layout</span><span class="o">.</span><span class="n">setSpacing</span><span class="p">(</span><span class="mi">12</span><span class="p">)</span>
+        <span class="n">controls_layout</span><span class="o">.</span><span class="n">addWidget</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_cumulative_checkbox</span><span class="p">)</span>
+        <span class="n">controls_layout</span><span class="o">.</span><span class="n">addWidget</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_percentage_checkbox</span><span class="p">)</span>
+        <span class="n">controls_layout</span><span class="o">.</span><span class="n">addStretch</span><span class="p">()</span>
+
+        <span class="n">main_layout</span> <span class="o">=</span> <span class="n">QVBoxLayout</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span>
+        <span class="n">main_layout</span><span class="o">.</span><span class="n">setContentsMargins</span><span class="p">(</span><span class="o">*</span><span class="bp">self</span><span class="o">.</span><span class="n">_content_margins</span><span class="p">)</span>
+        <span class="n">main_layout</span><span class="o">.</span><span class="n">setSpacing</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span>
+        <span class="n">main_layout</span><span class="o">.</span><span class="n">addStretch</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+        <span class="n">main_layout</span><span class="o">.</span><span class="n">addLayout</span><span class="p">(</span><span class="n">controls_layout</span><span class="p">)</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">setLayout</span><span class="p">(</span><span class="n">main_layout</span><span class="p">)</span></div>
+
+
+    <span class="c1"># ==================================================================</span>
+    <span class="c1"># Data</span>
+    <span class="c1"># ==================================================================</span>
+
+<div class="viewcode-block" id="QtHistogram.set_data">
+<a class="viewcode-back" href="../../api_doc/qt_histogram.html#pyclickimage.qt_histogram.QtHistogram.set_data">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">set_data</span><span class="p">(</span>
+        <span class="bp">self</span><span class="p">,</span>
+        <span class="n">data</span><span class="p">:</span> <span class="n">Sequence</span><span class="p">[</span><span class="nb">float</span><span class="p">],</span>
+        <span class="n">bins</span><span class="p">:</span> <span class="nb">int</span> <span class="o">|</span> <span class="n">Sequence</span><span class="p">[</span><span class="nb">float</span><span class="p">]</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+    <span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">"""Build and store a histogram from raw numeric samples.</span>
+
+<span class="sd">        The input samples are converted to ``float`` before binning.</span>
+
+<span class="sd">        If ``bins`` is an integer, that value specifies the number of</span>
+<span class="sd">        equally spaced bins between the minimum and maximum sample.</span>
+
+<span class="sd">        If ``bins`` is a sequence, it is interpreted as explicit bin</span>
+<span class="sd">        boundaries. In this case the boundaries do not need to be equally</span>
+<span class="sd">        spaced.</span>
+
+<span class="sd">        The rightmost edge is inclusive, so a value exactly equal to</span>
+<span class="sd">        ``edges[-1]`` is assigned to the last bin.</span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        data : Sequence[float]</span>
+<span class="sd">            Raw numeric samples.</span>
+<span class="sd">        bins : int or Sequence[float], optional</span>
+<span class="sd">            Number of equally spaced bins, or explicit bin boundaries.</span>
+
+<span class="sd">        Raises</span>
+<span class="sd">        ------</span>
+<span class="sd">        ValueError</span>
+<span class="sd">            If the number of bins is not positive or if explicit bin</span>
+<span class="sd">            boundaries are invalid.</span>
+<span class="sd">        """</span>
+        <span class="n">values</span> <span class="o">=</span> <span class="p">[</span><span class="nb">float</span><span class="p">(</span><span class="n">value</span><span class="p">)</span> <span class="k">for</span> <span class="n">value</span> <span class="ow">in</span> <span class="n">data</span><span class="p">]</span>
+
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">values</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">clear</span><span class="p">()</span>
+            <span class="k">return</span>
+
+        <span class="k">if</span> <span class="n">bins</span> <span class="ow">is</span> <span class="kc">None</span> <span class="ow">or</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">bins</span><span class="p">,</span> <span class="nb">int</span><span class="p">):</span>
+            <span class="n">bin_count</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_bin_count</span> <span class="k">if</span> <span class="n">bins</span> <span class="ow">is</span> <span class="kc">None</span> <span class="k">else</span> <span class="n">bins</span>
+
+            <span class="k">if</span> <span class="n">bin_count</span> <span class="o">&lt;=</span> <span class="mi">0</span><span class="p">:</span>
+                <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span>
+                    <span class="s2">"bins must be greater than zero."</span>
+                <span class="p">)</span>
+
+            <span class="n">data_min</span> <span class="o">=</span> <span class="nb">min</span><span class="p">(</span><span class="n">values</span><span class="p">)</span>
+            <span class="n">data_max</span> <span class="o">=</span> <span class="nb">max</span><span class="p">(</span><span class="n">values</span><span class="p">)</span>
+
+            <span class="c1"># Give a constant-valued dataset a finite histogram range.</span>
+            <span class="k">if</span> <span class="n">data_min</span> <span class="o">==</span> <span class="n">data_max</span><span class="p">:</span>
+                <span class="n">data_min</span> <span class="o">-=</span> <span class="mf">0.5</span>
+                <span class="n">data_max</span> <span class="o">+=</span> <span class="mf">0.5</span>
+
+            <span class="n">bin_width</span> <span class="o">=</span> <span class="p">(</span><span class="n">data_max</span> <span class="o">-</span> <span class="n">data_min</span><span class="p">)</span> <span class="o">/</span> <span class="n">bin_count</span>
+
+            <span class="n">edges</span> <span class="o">=</span> <span class="p">[</span>
+                <span class="n">data_min</span> <span class="o">+</span> <span class="n">index</span> <span class="o">*</span> <span class="n">bin_width</span>
+                <span class="k">for</span> <span class="n">index</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">bin_count</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span>
+            <span class="p">]</span>
+
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">edges</span> <span class="o">=</span> <span class="p">[</span><span class="nb">float</span><span class="p">(</span><span class="n">value</span><span class="p">)</span> <span class="k">for</span> <span class="n">value</span> <span class="ow">in</span> <span class="n">bins</span><span class="p">]</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_validate_edges</span><span class="p">(</span><span class="n">edges</span><span class="p">)</span>
+
+        <span class="n">bin_values</span> <span class="o">=</span> <span class="p">[</span><span class="mf">0.0</span><span class="p">]</span> <span class="o">*</span> <span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">edges</span><span class="p">)</span> <span class="o">-</span> <span class="mi">1</span><span class="p">)</span>
+
+        <span class="k">for</span> <span class="n">value</span> <span class="ow">in</span> <span class="n">values</span><span class="p">:</span>
+            <span class="c1"># The last edge is inclusive.</span>
+            <span class="k">if</span> <span class="n">value</span> <span class="o">==</span> <span class="n">edges</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]:</span>
+                <span class="n">bin_index</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">bin_values</span><span class="p">)</span> <span class="o">-</span> <span class="mi">1</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="c1"># ``bisect_right`` correctly handles non-uniform edges.</span>
+                <span class="n">bin_index</span> <span class="o">=</span> <span class="n">bisect_right</span><span class="p">(</span><span class="n">edges</span><span class="p">,</span> <span class="n">value</span><span class="p">)</span> <span class="o">-</span> <span class="mi">1</span>
+
+            <span class="k">if</span> <span class="mi">0</span> <span class="o">&lt;=</span> <span class="n">bin_index</span> <span class="o">&lt;</span> <span class="nb">len</span><span class="p">(</span><span class="n">bin_values</span><span class="p">):</span>
+                <span class="n">bin_values</span><span class="p">[</span><span class="n">bin_index</span><span class="p">]</span> <span class="o">+=</span> <span class="mf">1.0</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">_bins</span> <span class="o">=</span> <span class="n">bin_values</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_edges</span> <span class="o">=</span> <span class="n">edges</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_bin_count</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">bin_values</span><span class="p">)</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">update</span><span class="p">()</span></div>
+
+
+
+<div class="viewcode-block" id="QtHistogram.set_bins">
+<a class="viewcode-back" href="../../api_doc/qt_histogram.html#pyclickimage.qt_histogram.QtHistogram.set_bins">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">set_bins</span><span class="p">(</span>
+        <span class="bp">self</span><span class="p">,</span>
+        <span class="n">bins</span><span class="p">:</span> <span class="n">Sequence</span><span class="p">[</span><span class="nb">float</span><span class="p">],</span>
+        <span class="n">edges</span><span class="p">:</span> <span class="n">Sequence</span><span class="p">[</span><span class="nb">float</span><span class="p">]</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+    <span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">"""Set precomputed histogram bin values.</span>
+
+<span class="sd">        The values are stored as absolute values. Display transformations</span>
+<span class="sd">        such as cumulative values and percentages are applied only during</span>
+<span class="sd">        painting.</span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        bins : Sequence[float]</span>
+<span class="sd">            Non-negative values associated with each histogram bin.</span>
+<span class="sd">        edges : Sequence[float], optional</span>
+<span class="sd">            Bin boundaries. There must be exactly ``len(bins) + 1``</span>
+<span class="sd">            boundaries. If omitted, integer boundaries starting at zero</span>
+<span class="sd">            are generated.</span>
+
+<span class="sd">        Raises</span>
+<span class="sd">        ------</span>
+<span class="sd">        ValueError</span>
+<span class="sd">            If a bin value is negative, if the edges are invalid, or if</span>
+<span class="sd">            the number of edges does not match the number of bins.</span>
+<span class="sd">        """</span>
+        <span class="n">bin_values</span> <span class="o">=</span> <span class="p">[</span><span class="nb">float</span><span class="p">(</span><span class="n">value</span><span class="p">)</span> <span class="k">for</span> <span class="n">value</span> <span class="ow">in</span> <span class="n">bins</span><span class="p">]</span>
+
+        <span class="k">if</span> <span class="nb">any</span><span class="p">(</span><span class="n">value</span> <span class="o">&lt;</span> <span class="mi">0</span> <span class="k">for</span> <span class="n">value</span> <span class="ow">in</span> <span class="n">bin_values</span><span class="p">):</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span>
+                <span class="s2">"Histogram values must be non-negative."</span>
+            <span class="p">)</span>
+
+        <span class="n">bin_edges</span> <span class="o">=</span> <span class="p">(</span>
+            <span class="p">[</span><span class="nb">float</span><span class="p">(</span><span class="n">value</span><span class="p">)</span> <span class="k">for</span> <span class="n">value</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">bin_values</span><span class="p">)</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)]</span>
+            <span class="k">if</span> <span class="n">edges</span> <span class="ow">is</span> <span class="kc">None</span>
+            <span class="k">else</span> <span class="p">[</span><span class="nb">float</span><span class="p">(</span><span class="n">value</span><span class="p">)</span> <span class="k">for</span> <span class="n">value</span> <span class="ow">in</span> <span class="n">edges</span><span class="p">]</span>
+        <span class="p">)</span>
+
+        <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">bin_edges</span><span class="p">)</span> <span class="o">!=</span> <span class="nb">len</span><span class="p">(</span><span class="n">bin_values</span><span class="p">)</span> <span class="o">+</span> <span class="mi">1</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span>
+                <span class="s2">"edges must contain len(bins) + 1 values."</span>
+            <span class="p">)</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">_validate_edges</span><span class="p">(</span><span class="n">bin_edges</span><span class="p">)</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">_bins</span> <span class="o">=</span> <span class="n">bin_values</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_edges</span> <span class="o">=</span> <span class="n">bin_edges</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_bin_count</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">bin_values</span><span class="p">)</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">update</span><span class="p">()</span></div>
+
+
+
+<div class="viewcode-block" id="QtHistogram.clear">
+<a class="viewcode-back" href="../../api_doc/qt_histogram.html#pyclickimage.qt_histogram.QtHistogram.clear">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">clear</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">"""Remove all histogram data.</span>
+
+<span class="sd">        The current display mode, axis configuration, colors and other</span>
+<span class="sd">        visual properties are preserved.</span>
+<span class="sd">        """</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_bins</span><span class="o">.</span><span class="n">clear</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_edges</span><span class="o">.</span><span class="n">clear</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">update</span><span class="p">()</span></div>
+
+
+
+<div class="viewcode-block" id="QtHistogram._validate_edges">
+<a class="viewcode-back" href="../../api_doc/qt_histogram.html#pyclickimage.qt_histogram.QtHistogram._validate_edges">[docs]</a>
+    <span class="nd">@staticmethod</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">_validate_edges</span><span class="p">(</span><span class="n">edges</span><span class="p">:</span> <span class="n">Sequence</span><span class="p">[</span><span class="nb">float</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">"""Validate histogram bin boundaries.</span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        edges : Sequence[float]</span>
+<span class="sd">            Bin boundaries.</span>
+
+<span class="sd">        Raises</span>
+<span class="sd">        ------</span>
+<span class="sd">        ValueError</span>
+<span class="sd">            If fewer than two boundaries are provided or if boundaries</span>
+<span class="sd">            are not strictly increasing.</span>
+<span class="sd">        """</span>
+        <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">edges</span><span class="p">)</span> <span class="o">&lt;</span> <span class="mi">2</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span>
+                <span class="s2">"Bin edges must contain at least two values."</span>
+            <span class="p">)</span>
+
+        <span class="k">if</span> <span class="nb">any</span><span class="p">(</span>
+            <span class="n">first</span> <span class="o">&gt;=</span> <span class="n">second</span>
+            <span class="k">for</span> <span class="n">first</span><span class="p">,</span> <span class="n">second</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="n">edges</span><span class="p">,</span> <span class="n">edges</span><span class="p">[</span><span class="mi">1</span><span class="p">:])</span>
+        <span class="p">):</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span>
+                <span class="s2">"Bin edges must be strictly increasing."</span>
+            <span class="p">)</span></div>
+
+
+
+    <span class="c1"># ==================================================================</span>
+    <span class="c1"># Painting</span>
+    <span class="c1"># ==================================================================</span>
+
+<div class="viewcode-block" id="QtHistogram.paintEvent">
+<a class="viewcode-back" href="../../api_doc/qt_histogram.html#pyclickimage.qt_histogram.QtHistogram.paintEvent">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">paintEvent</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">event</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">"""Paint the complete histogram widget.</span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        event : QPaintEvent</span>
+<span class="sd">            Qt paint event requesting the widget to be repainted.</span>
+<span class="sd">        """</span>
+        <span class="n">painter</span> <span class="o">=</span> <span class="n">QPainter</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span>
+        <span class="n">painter</span><span class="o">.</span><span class="n">setRenderHint</span><span class="p">(</span><span class="n">QPainter</span><span class="o">.</span><span class="n">Antialiasing</span><span class="p">)</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">_paint_histogram</span><span class="p">(</span><span class="n">painter</span><span class="p">)</span></div>
+
+
+
+<div class="viewcode-block" id="QtHistogram._paint_histogram">
+<a class="viewcode-back" href="../../api_doc/qt_histogram.html#pyclickimage.qt_histogram.QtHistogram._paint_histogram">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">_paint_histogram</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">painter</span><span class="p">:</span> <span class="n">QPainter</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">"""Paint the histogram plotting area and its frame.</span>
+
+<span class="sd">        The method computes the displayed values from the original bins</span>
+<span class="sd">        according to the current cumulative and percentage modes.</span>
+
+<span class="sd">        Empty histograms still display the plotting frame but do not draw</span>
+<span class="sd">        grid lines, bars or axes based on data.</span>
+<span class="sd">        """</span>
+        <span class="n">painter</span><span class="o">.</span><span class="n">fillRect</span><span class="p">(</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">rect</span><span class="p">(),</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_background_color</span><span class="p">,</span>
+        <span class="p">)</span>
+
+        <span class="n">left</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_margin_left</span>
+        <span class="n">top</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_margin_top</span>
+        <span class="n">right</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">width</span><span class="p">()</span> <span class="o">-</span> <span class="bp">self</span><span class="o">.</span><span class="n">_margin_right</span>
+
+        <span class="c1"># The plot ends ``margin_bottom`` pixels above the checkbox row.</span>
+        <span class="n">controls_top</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_cumulative_checkbox</span><span class="o">.</span><span class="n">geometry</span><span class="p">()</span><span class="o">.</span><span class="n">top</span><span class="p">()</span>
+
+        <span class="k">if</span> <span class="n">controls_top</span> <span class="o">&lt;=</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="n">controls_top</span> <span class="o">=</span> <span class="p">(</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">height</span><span class="p">()</span>
+                <span class="o">-</span> <span class="bp">self</span><span class="o">.</span><span class="n">_content_margins</span><span class="p">[</span><span class="mi">3</span><span class="p">]</span>
+                <span class="o">-</span> <span class="bp">self</span><span class="o">.</span><span class="n">_cumulative_checkbox</span><span class="o">.</span><span class="n">sizeHint</span><span class="p">()</span><span class="o">.</span><span class="n">height</span><span class="p">()</span>
+            <span class="p">)</span>
+
+        <span class="n">bottom</span> <span class="o">=</span> <span class="n">controls_top</span> <span class="o">-</span> <span class="bp">self</span><span class="o">.</span><span class="n">_margin_bottom</span>
+
+        <span class="k">if</span> <span class="n">right</span> <span class="o">&lt;=</span> <span class="n">left</span> <span class="ow">or</span> <span class="n">bottom</span> <span class="o">&lt;=</span> <span class="n">top</span><span class="p">:</span>
+            <span class="k">return</span>
+
+        <span class="k">if</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">_bins</span> <span class="ow">or</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">_edges</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_frame</span><span class="p">(</span>
+                <span class="n">painter</span><span class="p">,</span>
+                <span class="n">left</span><span class="p">,</span>
+                <span class="n">top</span><span class="p">,</span>
+                <span class="n">right</span><span class="p">,</span>
+                <span class="n">bottom</span><span class="p">,</span>
+            <span class="p">)</span>
+            <span class="k">return</span>
+
+        <span class="n">x_min</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_edges</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+        <span class="n">x_max</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_edges</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
+
+        <span class="k">if</span> <span class="n">x_max</span> <span class="o">&lt;=</span> <span class="n">x_min</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_frame</span><span class="p">(</span>
+                <span class="n">painter</span><span class="p">,</span>
+                <span class="n">left</span><span class="p">,</span>
+                <span class="n">top</span><span class="p">,</span>
+                <span class="n">right</span><span class="p">,</span>
+                <span class="n">bottom</span><span class="p">,</span>
+            <span class="p">)</span>
+            <span class="k">return</span>
+
+        <span class="n">display_values</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_display_values</span><span class="p">()</span>
+
+        <span class="c1"># Keep a finite positive plotting range even when all values are zero.</span>
+        <span class="n">y_max</span> <span class="o">=</span> <span class="nb">max</span><span class="p">(</span><span class="n">display_values</span><span class="p">,</span> <span class="n">default</span><span class="o">=</span><span class="mf">0.0</span><span class="p">)</span>
+
+        <span class="k">if</span> <span class="n">y_max</span> <span class="o">&lt;=</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="n">y_max</span> <span class="o">=</span> <span class="mf">1.0</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">_grid</span><span class="p">(</span>
+            <span class="n">painter</span><span class="p">,</span>
+            <span class="n">left</span><span class="p">,</span>
+            <span class="n">top</span><span class="p">,</span>
+            <span class="n">right</span><span class="p">,</span>
+            <span class="n">bottom</span><span class="p">,</span>
+            <span class="n">y_max</span><span class="p">,</span>
+        <span class="p">)</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">_bars</span><span class="p">(</span>
+            <span class="n">painter</span><span class="p">,</span>
+            <span class="n">left</span><span class="p">,</span>
+            <span class="n">top</span><span class="p">,</span>
+            <span class="n">right</span><span class="p">,</span>
+            <span class="n">bottom</span><span class="p">,</span>
+            <span class="n">x_min</span><span class="p">,</span>
+            <span class="n">x_max</span><span class="p">,</span>
+            <span class="n">y_max</span><span class="p">,</span>
+            <span class="n">display_values</span><span class="p">,</span>
+        <span class="p">)</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">_axes</span><span class="p">(</span>
+            <span class="n">painter</span><span class="p">,</span>
+            <span class="n">left</span><span class="p">,</span>
+            <span class="n">top</span><span class="p">,</span>
+            <span class="n">right</span><span class="p">,</span>
+            <span class="n">bottom</span><span class="p">,</span>
+            <span class="n">x_min</span><span class="p">,</span>
+            <span class="n">x_max</span><span class="p">,</span>
+            <span class="n">y_max</span><span class="p">,</span>
+        <span class="p">)</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">_frame</span><span class="p">(</span>
+            <span class="n">painter</span><span class="p">,</span>
+            <span class="n">left</span><span class="p">,</span>
+            <span class="n">top</span><span class="p">,</span>
+            <span class="n">right</span><span class="p">,</span>
+            <span class="n">bottom</span><span class="p">,</span>
+        <span class="p">)</span></div>
+
+
+
+<div class="viewcode-block" id="QtHistogram._display_values">
+<a class="viewcode-back" href="../../api_doc/qt_histogram.html#pyclickimage.qt_histogram.QtHistogram._display_values">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">_display_values</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">list</span><span class="p">[</span><span class="nb">float</span><span class="p">]:</span>
+<span class="w">        </span><span class="sd">"""Return bin values transformed for the current display mode.</span>
+
+<span class="sd">        The original ``self._bins`` values are never modified.</span>
+
+<span class="sd">        Transformation order is:</span>
+
+<span class="sd">        1. Start with absolute bin values.</span>
+<span class="sd">        2. If cumulative mode is enabled, compute the cumulative sum.</span>
+<span class="sd">        3. If percentage mode is enabled, divide by the total of the</span>
+<span class="sd">        original histogram and multiply by 100.</span>
+
+<span class="sd">        This ordering ensures that cumulative percentage mode reaches</span>
+<span class="sd">        100 percent at the final non-empty bin.</span>
+
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        list[float]</span>
+<span class="sd">            Values that should be rendered by the histogram.</span>
+<span class="sd">        """</span>
+        <span class="n">values</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_bins</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
+
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_cumulative</span><span class="p">:</span>
+            <span class="n">cumulative</span> <span class="o">=</span> <span class="mf">0.0</span>
+            <span class="n">values</span> <span class="o">=</span> <span class="p">[</span>
+                <span class="n">cumulative</span> <span class="o">:=</span> <span class="n">cumulative</span> <span class="o">+</span> <span class="n">value</span>
+                <span class="k">for</span> <span class="n">value</span> <span class="ow">in</span> <span class="n">values</span>
+            <span class="p">]</span>
+
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_percentage</span><span class="p">:</span>
+            <span class="n">total</span> <span class="o">=</span> <span class="nb">sum</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_bins</span><span class="p">)</span>
+
+            <span class="k">if</span> <span class="n">total</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span>
+                <span class="n">values</span> <span class="o">=</span> <span class="p">[</span>
+                    <span class="n">value</span> <span class="o">/</span> <span class="n">total</span> <span class="o">*</span> <span class="mf">100.0</span>
+                    <span class="k">for</span> <span class="n">value</span> <span class="ow">in</span> <span class="n">values</span>
+                <span class="p">]</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="n">values</span> <span class="o">=</span> <span class="p">[</span><span class="mf">0.0</span><span class="p">]</span> <span class="o">*</span> <span class="nb">len</span><span class="p">(</span><span class="n">values</span><span class="p">)</span>
+
+        <span class="k">return</span> <span class="n">values</span></div>
+
+
+
+    <span class="c1"># ==================================================================</span>
+    <span class="c1"># Grid</span>
+    <span class="c1"># ==================================================================</span>
+
+<div class="viewcode-block" id="QtHistogram._grid">
+<a class="viewcode-back" href="../../api_doc/qt_histogram.html#pyclickimage.qt_histogram.QtHistogram._grid">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">_grid</span><span class="p">(</span>
+        <span class="bp">self</span><span class="p">,</span>
+        <span class="n">painter</span><span class="p">:</span> <span class="n">QPainter</span><span class="p">,</span>
+        <span class="n">left</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span>
+        <span class="n">top</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span>
+        <span class="n">right</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span>
+        <span class="n">bottom</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span>
+        <span class="n">y_max</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span>
+    <span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">"""Draw major and minor grid lines.</span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        painter : QPainter</span>
+<span class="sd">            Painter used for rendering.</span>
+<span class="sd">        left, top, right, bottom : int</span>
+<span class="sd">            Plotting area boundaries in widget coordinates.</span>
+<span class="sd">        y_max : float</span>
+<span class="sd">            Maximum displayed Y value.</span>
+
+<span class="sd">        Notes</span>
+<span class="sd">        -----</span>
+<span class="sd">        ``y_max`` is currently not required because horizontal grid lines</span>
+<span class="sd">        are evenly distributed geometrically. It is kept in the signature</span>
+<span class="sd">        so the grid method can later be adapted to non-linear axes without</span>
+<span class="sd">        changing its callers.</span>
+<span class="sd">        """</span>
+        <span class="k">del</span> <span class="n">y_max</span>
+
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_show_minor_grid</span> <span class="ow">and</span> <span class="bp">self</span><span class="o">.</span><span class="n">_minor_grid</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_draw_vertical_grid</span><span class="p">(</span>
+                <span class="n">painter</span><span class="p">,</span>
+                <span class="n">left</span><span class="p">,</span>
+                <span class="n">right</span><span class="p">,</span>
+                <span class="n">top</span><span class="p">,</span>
+                <span class="n">bottom</span><span class="p">,</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">_minor_grid</span><span class="p">,</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">_minor_grid_color</span><span class="p">,</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">_minor_grid_width</span><span class="p">,</span>
+            <span class="p">)</span>
+
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_show_grid</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_draw_vertical_grid</span><span class="p">(</span>
+                <span class="n">painter</span><span class="p">,</span>
+                <span class="n">left</span><span class="p">,</span>
+                <span class="n">right</span><span class="p">,</span>
+                <span class="n">top</span><span class="p">,</span>
+                <span class="n">bottom</span><span class="p">,</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">_grid_x</span><span class="p">,</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">_grid_color</span><span class="p">,</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">_grid_width</span><span class="p">,</span>
+            <span class="p">)</span>
+
+            <span class="bp">self</span><span class="o">.</span><span class="n">_draw_horizontal_grid</span><span class="p">(</span>
+                <span class="n">painter</span><span class="p">,</span>
+                <span class="n">left</span><span class="p">,</span>
+                <span class="n">right</span><span class="p">,</span>
+                <span class="n">top</span><span class="p">,</span>
+                <span class="n">bottom</span><span class="p">,</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">_grid_y</span><span class="p">,</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">_grid_color</span><span class="p">,</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">_grid_width</span><span class="p">,</span>
+            <span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="QtHistogram._draw_vertical_grid">
+<a class="viewcode-back" href="../../api_doc/qt_histogram.html#pyclickimage.qt_histogram.QtHistogram._draw_vertical_grid">[docs]</a>
+    <span class="nd">@staticmethod</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">_draw_vertical_grid</span><span class="p">(</span>
+        <span class="n">painter</span><span class="p">:</span> <span class="n">QPainter</span><span class="p">,</span>
+        <span class="n">left</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span>
+        <span class="n">right</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span>
+        <span class="n">top</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span>
+        <span class="n">bottom</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span>
+        <span class="n">line_count</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span>
+        <span class="n">color</span><span class="p">:</span> <span class="n">QColor</span><span class="p">,</span>
+        <span class="n">width</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span>
+    <span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">"""Draw evenly spaced vertical grid lines.</span>
+
+<span class="sd">        The grid includes both boundaries of the plotting area. Therefore,</span>
+<span class="sd">        ``line_count`` represents the number of intervals between the first</span>
+<span class="sd">        and last grid line, and the method draws ``line_count + 1`` lines.</span>
+
+<span class="sd">        For example, with ``line_count=5`` the method draws six vertical</span>
+<span class="sd">        lines at positions corresponding to::</span>
+
+<span class="sd">            0 %, 20 %, 40 %, 60 %, 80 %, 100 %</span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        painter : QPainter</span>
+<span class="sd">            Painter used to draw the grid lines.</span>
+<span class="sd">        left : int</span>
+<span class="sd">            X coordinate of the left side of the plotting area.</span>
+<span class="sd">        right : int</span>
+<span class="sd">            X coordinate of the right side of the plotting area.</span>
+<span class="sd">        top : int</span>
+<span class="sd">            Y coordinate of the top of the plotting area.</span>
+<span class="sd">        bottom : int</span>
+<span class="sd">            Y coordinate of the bottom of the plotting area.</span>
+<span class="sd">        line_count : int</span>
+<span class="sd">            Number of intervals between vertical grid lines. Must be</span>
+<span class="sd">            greater than zero.</span>
+<span class="sd">        color : QColor</span>
+<span class="sd">            Color used for the grid lines.</span>
+<span class="sd">        width : int</span>
+<span class="sd">            Width of the grid lines.</span>
+
+<span class="sd">        Raises</span>
+<span class="sd">        ------</span>
+<span class="sd">        ValueError</span>
+<span class="sd">            If ``line_count`` is not positive or if ``right`` is smaller</span>
+<span class="sd">            than ``left``.</span>
+<span class="sd">        """</span>
+        <span class="k">if</span> <span class="n">line_count</span> <span class="o">&lt;=</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span>
+                <span class="s2">"line_count must be greater than zero."</span>
+            <span class="p">)</span>
+
+        <span class="k">if</span> <span class="n">right</span> <span class="o">&lt;</span> <span class="n">left</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span>
+                <span class="s2">"right must be greater than or equal to left."</span>
+            <span class="p">)</span>
+
+        <span class="n">painter</span><span class="o">.</span><span class="n">setPen</span><span class="p">(</span><span class="n">QPen</span><span class="p">(</span><span class="n">color</span><span class="p">,</span> <span class="n">width</span><span class="p">))</span>
+
+        <span class="n">plot_width</span> <span class="o">=</span> <span class="n">right</span> <span class="o">-</span> <span class="n">left</span>
+
+        <span class="k">for</span> <span class="n">line_index</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">line_count</span> <span class="o">+</span> <span class="mi">1</span><span class="p">):</span>
+            <span class="n">x_position</span> <span class="o">=</span> <span class="nb">round</span><span class="p">(</span>
+                <span class="n">left</span>
+                <span class="o">+</span> <span class="n">line_index</span> <span class="o">*</span> <span class="n">plot_width</span> <span class="o">/</span> <span class="n">line_count</span>
+            <span class="p">)</span>
+
+            <span class="n">painter</span><span class="o">.</span><span class="n">drawLine</span><span class="p">(</span>
+                <span class="n">x_position</span><span class="p">,</span>
+                <span class="n">top</span><span class="p">,</span>
+                <span class="n">x_position</span><span class="p">,</span>
+                <span class="n">bottom</span><span class="p">,</span>
+            <span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="QtHistogram._draw_horizontal_grid">
+<a class="viewcode-back" href="../../api_doc/qt_histogram.html#pyclickimage.qt_histogram.QtHistogram._draw_horizontal_grid">[docs]</a>
+    <span class="nd">@staticmethod</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">_draw_horizontal_grid</span><span class="p">(</span>
+        <span class="n">painter</span><span class="p">:</span> <span class="n">QPainter</span><span class="p">,</span>
+        <span class="n">left</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span>
+        <span class="n">right</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span>
+        <span class="n">top</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span>
+        <span class="n">bottom</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span>
+        <span class="n">line_count</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span>
+        <span class="n">color</span><span class="p">:</span> <span class="n">QColor</span><span class="p">,</span>
+        <span class="n">width</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span>
+    <span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">"""Draw evenly spaced horizontal grid lines.</span>
+
+<span class="sd">        The grid includes both the top and bottom boundaries of the</span>
+<span class="sd">        plotting area. Therefore, ``line_count`` represents the number</span>
+<span class="sd">        of intervals, and the method draws ``line_count + 1`` horizontal</span>
+<span class="sd">        lines.</span>
+
+<span class="sd">        The first line is drawn at the bottom of the plotting area and</span>
+<span class="sd">        subsequent lines are drawn upward until the top boundary is</span>
+<span class="sd">        reached.</span>
+
+<span class="sd">        For example, with ``line_count=5`` the method draws six horizontal</span>
+<span class="sd">        lines at positions corresponding to::</span>
+
+<span class="sd">            0 %, 20 %, 40 %, 60 %, 80 %, 100 %</span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        painter : QPainter</span>
+<span class="sd">            Painter used to draw the grid lines.</span>
+<span class="sd">        left : int</span>
+<span class="sd">            X coordinate of the left side of the plotting area.</span>
+<span class="sd">        right : int</span>
+<span class="sd">            X coordinate of the right side of the plotting area.</span>
+<span class="sd">        top : int</span>
+<span class="sd">            Y coordinate of the top of the plotting area.</span>
+<span class="sd">        bottom : int</span>
+<span class="sd">            Y coordinate of the bottom of the plotting area.</span>
+<span class="sd">        line_count : int</span>
+<span class="sd">            Number of intervals between horizontal grid lines. Must be</span>
+<span class="sd">            greater than zero.</span>
+<span class="sd">        color : QColor</span>
+<span class="sd">            Color used for the grid lines.</span>
+<span class="sd">        width : int</span>
+<span class="sd">            Width of the grid lines.</span>
+
+<span class="sd">        Raises</span>
+<span class="sd">        ------</span>
+<span class="sd">        ValueError</span>
+<span class="sd">            If ``line_count`` is not positive or if ``bottom`` is smaller</span>
+<span class="sd">            than ``top``.</span>
+<span class="sd">        """</span>
+        <span class="k">if</span> <span class="n">line_count</span> <span class="o">&lt;=</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span>
+                <span class="s2">"line_count must be greater than zero."</span>
+            <span class="p">)</span>
+
+        <span class="k">if</span> <span class="n">bottom</span> <span class="o">&lt;</span> <span class="n">top</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span>
+                <span class="s2">"bottom must be greater than or equal to top."</span>
+            <span class="p">)</span>
+
+        <span class="n">painter</span><span class="o">.</span><span class="n">setPen</span><span class="p">(</span><span class="n">QPen</span><span class="p">(</span><span class="n">color</span><span class="p">,</span> <span class="n">width</span><span class="p">))</span>
+
+        <span class="n">plot_height</span> <span class="o">=</span> <span class="n">bottom</span> <span class="o">-</span> <span class="n">top</span>
+
+        <span class="k">for</span> <span class="n">line_index</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">line_count</span> <span class="o">+</span> <span class="mi">1</span><span class="p">):</span>
+            <span class="n">y_position</span> <span class="o">=</span> <span class="nb">round</span><span class="p">(</span>
+                <span class="n">bottom</span>
+                <span class="o">-</span> <span class="n">line_index</span> <span class="o">*</span> <span class="n">plot_height</span> <span class="o">/</span> <span class="n">line_count</span>
+            <span class="p">)</span>
+
+            <span class="n">painter</span><span class="o">.</span><span class="n">drawLine</span><span class="p">(</span>
+                <span class="n">left</span><span class="p">,</span>
+                <span class="n">y_position</span><span class="p">,</span>
+                <span class="n">right</span><span class="p">,</span>
+                <span class="n">y_position</span><span class="p">,</span>
+            <span class="p">)</span></div>
+
+
+    <span class="c1"># ==================================================================</span>
+    <span class="c1"># Bars</span>
+    <span class="c1"># ==================================================================</span>
+
+<div class="viewcode-block" id="QtHistogram._bars">
+<a class="viewcode-back" href="../../api_doc/qt_histogram.html#pyclickimage.qt_histogram.QtHistogram._bars">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">_bars</span><span class="p">(</span>
+        <span class="bp">self</span><span class="p">,</span>
+        <span class="n">painter</span><span class="p">:</span> <span class="n">QPainter</span><span class="p">,</span>
+        <span class="n">left</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span>
+        <span class="n">top</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span>
+        <span class="n">right</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span>
+        <span class="n">bottom</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span>
+        <span class="n">x_min</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span>
+        <span class="n">x_max</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span>
+        <span class="n">y_max</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span>
+        <span class="n">values</span><span class="p">:</span> <span class="n">Sequence</span><span class="p">[</span><span class="nb">float</span><span class="p">],</span>
+    <span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">"""Draw histogram bars.</span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        painter : QPainter</span>
+<span class="sd">            Painter used for rendering.</span>
+<span class="sd">        left, top, right, bottom : int</span>
+<span class="sd">            Plotting area boundaries.</span>
+<span class="sd">        x_min, x_max : float</span>
+<span class="sd">            Numerical X-axis range.</span>
+<span class="sd">        y_max : float</span>
+<span class="sd">            Maximum displayed Y value.</span>
+<span class="sd">        values : Sequence[float]</span>
+<span class="sd">            Values to render for each histogram bin.</span>
+
+<span class="sd">        Notes</span>
+<span class="sd">        -----</span>
+<span class="sd">        The bin boundaries in ``self._edges`` determine the horizontal</span>
+<span class="sd">        position and width of each bar. This means non-uniform bins are</span>
+<span class="sd">        rendered with their actual widths.</span>
+
+<span class="sd">        The bar height is based on the transformed ``values`` argument,</span>
+<span class="sd">        so cumulative and percentage modes do not modify the underlying</span>
+<span class="sd">        histogram data.</span>
+<span class="sd">        """</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">values</span> <span class="ow">or</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">_edges</span><span class="p">:</span>
+            <span class="k">return</span>
+
+        <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_edges</span><span class="p">)</span> <span class="o">!=</span> <span class="nb">len</span><span class="p">(</span><span class="n">values</span><span class="p">)</span> <span class="o">+</span> <span class="mi">1</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span>
+                <span class="s2">"The number of edges must be one greater than "</span>
+                <span class="s2">"the number of bar values."</span>
+            <span class="p">)</span>
+
+        <span class="k">if</span> <span class="n">x_max</span> <span class="o">&lt;=</span> <span class="n">x_min</span> <span class="ow">or</span> <span class="n">y_max</span> <span class="o">&lt;=</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="k">return</span>
+
+        <span class="n">plot_width</span> <span class="o">=</span> <span class="n">right</span> <span class="o">-</span> <span class="n">left</span>
+        <span class="n">plot_height</span> <span class="o">=</span> <span class="n">bottom</span> <span class="o">-</span> <span class="n">top</span>
+
+        <span class="n">painter</span><span class="o">.</span><span class="n">setBrush</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_bar_color</span><span class="p">)</span>
+        <span class="n">painter</span><span class="o">.</span><span class="n">setPen</span><span class="p">(</span>
+            <span class="n">QPen</span><span class="p">(</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">_bar_border_color</span><span class="p">,</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">_bar_width</span><span class="p">,</span>
+            <span class="p">)</span>
+        <span class="p">)</span>
+
+        <span class="k">for</span> <span class="n">index</span><span class="p">,</span> <span class="n">value</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">values</span><span class="p">):</span>
+            <span class="c1"># Do not allow invalid negative display values to extend below</span>
+            <span class="c1"># the X axis. This is mainly defensive; normal histogram data</span>
+            <span class="c1"># is non-negative.</span>
+            <span class="n">value</span> <span class="o">=</span> <span class="nb">max</span><span class="p">(</span><span class="mf">0.0</span><span class="p">,</span> <span class="nb">float</span><span class="p">(</span><span class="n">value</span><span class="p">))</span>
+
+            <span class="n">edge_left</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_edges</span><span class="p">[</span><span class="n">index</span><span class="p">]</span>
+            <span class="n">edge_right</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_edges</span><span class="p">[</span><span class="n">index</span> <span class="o">+</span> <span class="mi">1</span><span class="p">]</span>
+
+            <span class="c1"># Convert numerical X coordinates into pixel coordinates.</span>
+            <span class="n">x1</span> <span class="o">=</span> <span class="n">left</span> <span class="o">+</span> <span class="p">(</span>
+                <span class="p">(</span><span class="n">edge_left</span> <span class="o">-</span> <span class="n">x_min</span><span class="p">)</span>
+                <span class="o">/</span> <span class="p">(</span><span class="n">x_max</span> <span class="o">-</span> <span class="n">x_min</span><span class="p">)</span>
+                <span class="o">*</span> <span class="n">plot_width</span>
+            <span class="p">)</span>
+
+            <span class="n">x2</span> <span class="o">=</span> <span class="n">left</span> <span class="o">+</span> <span class="p">(</span>
+                <span class="p">(</span><span class="n">edge_right</span> <span class="o">-</span> <span class="n">x_min</span><span class="p">)</span>
+                <span class="o">/</span> <span class="p">(</span><span class="n">x_max</span> <span class="o">-</span> <span class="n">x_min</span><span class="p">)</span>
+                <span class="o">*</span> <span class="n">plot_width</span>
+            <span class="p">)</span>
+
+            <span class="c1"># Convert the value into a pixel height.</span>
+            <span class="n">y</span> <span class="o">=</span> <span class="n">bottom</span> <span class="o">-</span> <span class="p">(</span>
+                <span class="n">value</span> <span class="o">/</span> <span class="n">y_max</span> <span class="o">*</span> <span class="n">plot_height</span>
+            <span class="p">)</span>
+
+            <span class="c1"># Use floor/ceil-style rounding so adjacent bins meet cleanly</span>
+            <span class="c1"># even when their boundaries map to fractional pixels.</span>
+            <span class="n">rect_left</span> <span class="o">=</span> <span class="nb">round</span><span class="p">(</span><span class="n">x1</span><span class="p">)</span>
+            <span class="n">rect_right</span> <span class="o">=</span> <span class="nb">round</span><span class="p">(</span><span class="n">x2</span><span class="p">)</span>
+            <span class="n">rect_top</span> <span class="o">=</span> <span class="nb">round</span><span class="p">(</span><span class="n">y</span><span class="p">)</span>
+            <span class="n">rect_bottom</span> <span class="o">=</span> <span class="n">bottom</span>
+
+            <span class="k">if</span> <span class="n">rect_right</span> <span class="o">&lt;=</span> <span class="n">rect_left</span><span class="p">:</span>
+                <span class="n">rect_right</span> <span class="o">=</span> <span class="n">rect_left</span> <span class="o">+</span> <span class="mi">1</span>
+
+            <span class="k">if</span> <span class="n">rect_top</span> <span class="o">&gt;</span> <span class="n">rect_bottom</span><span class="p">:</span>
+                <span class="n">rect_top</span> <span class="o">=</span> <span class="n">rect_bottom</span>
+
+            <span class="n">painter</span><span class="o">.</span><span class="n">drawRect</span><span class="p">(</span>
+                <span class="n">rect_left</span><span class="p">,</span>
+                <span class="n">rect_top</span><span class="p">,</span>
+                <span class="n">rect_right</span> <span class="o">-</span> <span class="n">rect_left</span><span class="p">,</span>
+                <span class="n">rect_bottom</span> <span class="o">-</span> <span class="n">rect_top</span><span class="p">,</span>
+            <span class="p">)</span></div>
+
+
+    <span class="c1"># ==================================================================</span>
+    <span class="c1"># Axes</span>
+    <span class="c1"># ==================================================================</span>
+
+<div class="viewcode-block" id="QtHistogram._get_y_ticks">
+<a class="viewcode-back" href="../../api_doc/qt_histogram.html#pyclickimage.qt_histogram.QtHistogram._get_y_ticks">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">_get_y_ticks</span><span class="p">(</span>
+        <span class="bp">self</span><span class="p">,</span>
+        <span class="n">y_max</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span>
+    <span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">tuple</span><span class="p">[</span><span class="nb">list</span><span class="p">[</span><span class="nb">float</span><span class="p">],</span> <span class="nb">list</span><span class="p">[</span><span class="nb">str</span><span class="p">],</span> <span class="nb">str</span><span class="p">]:</span>
+<span class="w">        </span><span class="sd">"""Generate Y-axis tick positions, labels and title.</span>
+
+<span class="sd">        Tick positions are kept at their exact numerical positions.</span>
+<span class="sd">        Only their textual representation is rounded. This prevents the</span>
+<span class="sd">        visual position of a tick from becoming inconsistent with the</span>
+<span class="sd">        actual Y-axis scale.</span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        y_max : float</span>
+<span class="sd">            Maximum value represented by the Y-axis.</span>
+
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        tuple[list[float], list[str], str]</span>
+<span class="sd">            A tuple containing the numerical tick positions, their</span>
+<span class="sd">            formatted labels and the Y-axis title.</span>
+
+<span class="sd">        Raises</span>
+<span class="sd">        ------</span>
+<span class="sd">        ValueError</span>
+<span class="sd">            If ``y_max`` is negative or if ``_grid_y`` is not positive.</span>
+<span class="sd">        """</span>
+        <span class="k">if</span> <span class="n">y_max</span> <span class="o">&lt;</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span>
+                <span class="s2">"y_max must be greater than or equal to zero."</span>
+            <span class="p">)</span>
+
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_grid_y</span> <span class="o">&lt;=</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span>
+                <span class="s2">"_grid_y must be greater than zero."</span>
+            <span class="p">)</span>
+
+        <span class="k">if</span> <span class="n">y_max</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="n">ticks</span> <span class="o">=</span> <span class="p">[</span>
+                <span class="mf">0.0</span>
+                <span class="k">for</span> <span class="n">_</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_grid_y</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span>
+            <span class="p">]</span>
+        <span class="k">elif</span> <span class="bp">self</span><span class="o">.</span><span class="n">_percentage</span><span class="p">:</span>
+            <span class="n">ticks</span> <span class="o">=</span> <span class="p">[</span>
+                <span class="n">index</span> <span class="o">*</span> <span class="n">y_max</span> <span class="o">/</span> <span class="bp">self</span><span class="o">.</span><span class="n">_grid_y</span>
+                <span class="k">for</span> <span class="n">index</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_grid_y</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span>
+            <span class="p">]</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">ticks</span> <span class="o">=</span> <span class="p">[</span>
+                <span class="nb">round</span><span class="p">(</span><span class="n">index</span> <span class="o">*</span> <span class="n">y_max</span> <span class="o">/</span> <span class="bp">self</span><span class="o">.</span><span class="n">_grid_y</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>
+                <span class="k">for</span> <span class="n">index</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_grid_y</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span>
+            <span class="p">]</span>
+            <span class="n">ticks</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="nb">set</span><span class="p">(</span><span class="n">ticks</span><span class="p">))</span> <span class="c1"># Ensure uniques</span>
+
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_percentage</span><span class="p">:</span>
+            <span class="n">labels</span> <span class="o">=</span> <span class="p">[</span>
+                <span class="sa">f</span><span class="s2">"</span><span class="si">{</span><span class="n">value</span><span class="si">:</span><span class="s2">.1f</span><span class="si">}</span><span class="s2">"</span>
+                <span class="k">for</span> <span class="n">value</span> <span class="ow">in</span> <span class="n">ticks</span>
+            <span class="p">]</span>
+
+            <span class="n">title</span> <span class="o">=</span> <span class="p">(</span>
+                <span class="s2">"Cumulative count [%]"</span>
+                <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_cumulative</span>
+                <span class="k">else</span> <span class="s2">"Count [%]"</span>
+            <span class="p">)</span>
+
+        <span class="k">else</span><span class="p">:</span>
+            <span class="c1"># Histogram counts are normally integers. Keep the formatting</span>
+            <span class="c1"># compatible with weighted/precomputed floating-point bins too.</span>
+            <span class="n">labels</span> <span class="o">=</span> <span class="p">[</span>
+                <span class="sa">f</span><span class="s2">"</span><span class="si">{</span><span class="n">value</span><span class="si">:</span><span class="s2">.3g</span><span class="si">}</span><span class="s2">"</span>
+                <span class="k">for</span> <span class="n">value</span> <span class="ow">in</span> <span class="n">ticks</span>
+            <span class="p">]</span>
+
+            <span class="n">title</span> <span class="o">=</span> <span class="p">(</span>
+                <span class="s2">"Cumulative count"</span>
+                <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_cumulative</span>
+                <span class="k">else</span> <span class="s2">"Count"</span>
+            <span class="p">)</span>
+
+        <span class="k">return</span> <span class="n">ticks</span><span class="p">,</span> <span class="n">labels</span><span class="p">,</span> <span class="n">title</span></div>
+
+
+
+<div class="viewcode-block" id="QtHistogram._axes">
+<a class="viewcode-back" href="../../api_doc/qt_histogram.html#pyclickimage.qt_histogram.QtHistogram._axes">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">_axes</span><span class="p">(</span>
+        <span class="bp">self</span><span class="p">,</span>
+        <span class="n">painter</span><span class="p">:</span> <span class="n">QPainter</span><span class="p">,</span>
+        <span class="n">left</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span>
+        <span class="n">top</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span>
+        <span class="n">right</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span>
+        <span class="n">bottom</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span>
+        <span class="n">x_min</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span>
+        <span class="n">x_max</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span>
+        <span class="n">y_max</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span>
+    <span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">"""Draw axes, tick marks, labels and axis titles.</span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        painter : QPainter</span>
+<span class="sd">            Painter used for rendering.</span>
+<span class="sd">        left, top, right, bottom : int</span>
+<span class="sd">            Plotting area boundaries.</span>
+<span class="sd">        x_min, x_max : float</span>
+<span class="sd">            Numerical X-axis range.</span>
+<span class="sd">        y_max : float</span>
+<span class="sd">            Numerical Y-axis maximum.</span>
+<span class="sd">        """</span>
+        <span class="n">painter</span><span class="o">.</span><span class="n">setFont</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_font</span><span class="p">)</span>
+        <span class="n">painter</span><span class="o">.</span><span class="n">setPen</span><span class="p">(</span>
+            <span class="n">QPen</span><span class="p">(</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">_axis_color</span><span class="p">,</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">_axis_width</span><span class="p">,</span>
+            <span class="p">)</span>
+        <span class="p">)</span>
+
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_show_axes</span><span class="p">:</span>
+            <span class="n">painter</span><span class="o">.</span><span class="n">drawLine</span><span class="p">(</span>
+                <span class="n">left</span><span class="p">,</span>
+                <span class="n">bottom</span><span class="p">,</span>
+                <span class="n">right</span><span class="p">,</span>
+                <span class="n">bottom</span><span class="p">,</span>
+            <span class="p">)</span>
+            <span class="n">painter</span><span class="o">.</span><span class="n">drawLine</span><span class="p">(</span>
+                <span class="n">left</span><span class="p">,</span>
+                <span class="n">top</span><span class="p">,</span>
+                <span class="n">left</span><span class="p">,</span>
+                <span class="n">bottom</span><span class="p">,</span>
+            <span class="p">)</span>
+
+        <span class="k">if</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">_show_ticks</span> <span class="ow">and</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">_show_labels</span><span class="p">:</span>
+            <span class="k">return</span>
+
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_grid_x</span> <span class="o">&lt;=</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span>
+                <span class="s2">"_grid_x must be greater than zero."</span>
+            <span class="p">)</span>
+
+        <span class="k">if</span> <span class="n">x_max</span> <span class="o">&lt;=</span> <span class="n">x_min</span><span class="p">:</span>
+            <span class="k">return</span>
+
+        <span class="n">x_ticks</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_x_ticks</span> <span class="ow">or</span> <span class="p">[</span>
+            <span class="n">x_min</span>
+            <span class="o">+</span> <span class="n">index</span> <span class="o">*</span> <span class="p">(</span><span class="n">x_max</span> <span class="o">-</span> <span class="n">x_min</span><span class="p">)</span> <span class="o">/</span> <span class="bp">self</span><span class="o">.</span><span class="n">_grid_x</span>
+            <span class="k">for</span> <span class="n">index</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_grid_x</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span>
+        <span class="p">]</span>
+
+        <span class="n">y_ticks</span><span class="p">,</span> <span class="n">y_labels</span><span class="p">,</span> <span class="n">y_title</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_get_y_ticks</span><span class="p">(</span><span class="n">y_max</span><span class="p">)</span>
+
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_show_ticks</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_ticks_x</span><span class="p">(</span>
+                <span class="n">painter</span><span class="p">,</span>
+                <span class="n">left</span><span class="p">,</span>
+                <span class="n">right</span><span class="p">,</span>
+                <span class="n">bottom</span><span class="p">,</span>
+                <span class="n">x_min</span><span class="p">,</span>
+                <span class="n">x_max</span><span class="p">,</span>
+                <span class="n">x_ticks</span><span class="p">,</span>
+            <span class="p">)</span>
+
+            <span class="bp">self</span><span class="o">.</span><span class="n">_ticks_y</span><span class="p">(</span>
+                <span class="n">painter</span><span class="p">,</span>
+                <span class="n">left</span><span class="p">,</span>
+                <span class="n">top</span><span class="p">,</span>
+                <span class="n">bottom</span><span class="p">,</span>
+                <span class="n">y_max</span><span class="p">,</span>
+                <span class="n">y_ticks</span><span class="p">,</span>
+            <span class="p">)</span>
+
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_show_labels</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_labels_x</span><span class="p">(</span>
+                <span class="n">painter</span><span class="p">,</span>
+                <span class="n">left</span><span class="p">,</span>
+                <span class="n">right</span><span class="p">,</span>
+                <span class="n">bottom</span><span class="p">,</span>
+                <span class="n">x_min</span><span class="p">,</span>
+                <span class="n">x_max</span><span class="p">,</span>
+                <span class="n">x_ticks</span><span class="p">,</span>
+            <span class="p">)</span>
+
+            <span class="bp">self</span><span class="o">.</span><span class="n">_labels_y</span><span class="p">(</span>
+                <span class="n">painter</span><span class="p">,</span>
+                <span class="n">left</span><span class="p">,</span>
+                <span class="n">top</span><span class="p">,</span>
+                <span class="n">bottom</span><span class="p">,</span>
+                <span class="n">y_max</span><span class="p">,</span>
+                <span class="n">y_ticks</span><span class="p">,</span>
+                <span class="n">y_labels</span><span class="p">,</span>
+            <span class="p">)</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">_titles</span><span class="p">(</span>
+            <span class="n">painter</span><span class="p">,</span>
+            <span class="n">left</span><span class="p">,</span>
+            <span class="n">top</span><span class="p">,</span>
+            <span class="n">right</span><span class="p">,</span>
+            <span class="n">bottom</span><span class="p">,</span>
+            <span class="n">y_title</span><span class="p">,</span>
+        <span class="p">)</span></div>
+
+
+
+<div class="viewcode-block" id="QtHistogram._ticks_x">
+<a class="viewcode-back" href="../../api_doc/qt_histogram.html#pyclickimage.qt_histogram.QtHistogram._ticks_x">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">_ticks_x</span><span class="p">(</span>
+        <span class="bp">self</span><span class="p">,</span>
+        <span class="n">painter</span><span class="p">:</span> <span class="n">QPainter</span><span class="p">,</span>
+        <span class="n">left</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span>
+        <span class="n">right</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span>
+        <span class="n">bottom</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span>
+        <span class="n">x_min</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span>
+        <span class="n">x_max</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span>
+        <span class="n">ticks</span><span class="p">:</span> <span class="n">Sequence</span><span class="p">[</span><span class="nb">float</span><span class="p">],</span>
+    <span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">"""Draw X-axis tick marks.</span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        painter : QPainter</span>
+<span class="sd">            Painter used for rendering.</span>
+<span class="sd">        left, right, bottom : int</span>
+<span class="sd">            Plotting area boundaries.</span>
+<span class="sd">        x_min, x_max : float</span>
+<span class="sd">            Numerical X-axis range.</span>
+<span class="sd">        ticks : Sequence[float]</span>
+<span class="sd">            X values at which ticks should be drawn.</span>
+<span class="sd">        """</span>
+        <span class="n">painter</span><span class="o">.</span><span class="n">setPen</span><span class="p">(</span>
+            <span class="n">QPen</span><span class="p">(</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">_axis_color</span><span class="p">,</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">_tick_width</span><span class="p">,</span>
+            <span class="p">)</span>
+        <span class="p">)</span>
+
+        <span class="k">if</span> <span class="n">x_max</span> <span class="o">&lt;=</span> <span class="n">x_min</span><span class="p">:</span>
+            <span class="k">return</span>
+
+        <span class="k">for</span> <span class="n">tick_value</span> <span class="ow">in</span> <span class="n">ticks</span><span class="p">:</span>
+            <span class="k">if</span> <span class="n">x_min</span> <span class="o">&lt;=</span> <span class="n">tick_value</span> <span class="o">&lt;=</span> <span class="n">x_max</span><span class="p">:</span>
+                <span class="n">x_position</span> <span class="o">=</span> <span class="nb">round</span><span class="p">(</span>
+                    <span class="n">left</span>
+                    <span class="o">+</span> <span class="p">(</span><span class="n">tick_value</span> <span class="o">-</span> <span class="n">x_min</span><span class="p">)</span>
+                    <span class="o">/</span> <span class="p">(</span><span class="n">x_max</span> <span class="o">-</span> <span class="n">x_min</span><span class="p">)</span>
+                    <span class="o">*</span> <span class="p">(</span><span class="n">right</span> <span class="o">-</span> <span class="n">left</span><span class="p">)</span>
+                <span class="p">)</span>
+
+                <span class="n">painter</span><span class="o">.</span><span class="n">drawLine</span><span class="p">(</span>
+                    <span class="n">x_position</span><span class="p">,</span>
+                    <span class="n">bottom</span><span class="p">,</span>
+                    <span class="n">x_position</span><span class="p">,</span>
+                    <span class="n">bottom</span> <span class="o">+</span> <span class="bp">self</span><span class="o">.</span><span class="n">_tick_length</span><span class="p">,</span>
+                <span class="p">)</span></div>
+
+
+
+<div class="viewcode-block" id="QtHistogram._ticks_y">
+<a class="viewcode-back" href="../../api_doc/qt_histogram.html#pyclickimage.qt_histogram.QtHistogram._ticks_y">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">_ticks_y</span><span class="p">(</span>
+        <span class="bp">self</span><span class="p">,</span>
+        <span class="n">painter</span><span class="p">:</span> <span class="n">QPainter</span><span class="p">,</span>
+        <span class="n">left</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span>
+        <span class="n">top</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span>
+        <span class="n">bottom</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span>
+        <span class="n">y_max</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span>
+        <span class="n">ticks</span><span class="p">:</span> <span class="n">Sequence</span><span class="p">[</span><span class="nb">float</span><span class="p">],</span>
+    <span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">"""Draw Y-axis tick marks.</span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        painter : QPainter</span>
+<span class="sd">            Painter used for rendering.</span>
+<span class="sd">        left, top, bottom : int</span>
+<span class="sd">            Plotting area boundaries.</span>
+<span class="sd">        y_max : float</span>
+<span class="sd">            Numerical Y-axis maximum.</span>
+<span class="sd">        ticks : Sequence[float]</span>
+<span class="sd">            Y values at which ticks should be drawn.</span>
+<span class="sd">        """</span>
+        <span class="n">painter</span><span class="o">.</span><span class="n">setPen</span><span class="p">(</span>
+            <span class="n">QPen</span><span class="p">(</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">_axis_color</span><span class="p">,</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">_tick_width</span><span class="p">,</span>
+            <span class="p">)</span>
+        <span class="p">)</span>
+
+        <span class="k">if</span> <span class="n">y_max</span> <span class="o">&lt;=</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="k">return</span>
+
+        <span class="k">for</span> <span class="n">tick_value</span> <span class="ow">in</span> <span class="n">ticks</span><span class="p">:</span>
+            <span class="k">if</span> <span class="mi">0</span> <span class="o">&lt;=</span> <span class="n">tick_value</span> <span class="o">&lt;=</span> <span class="n">y_max</span><span class="p">:</span>
+                <span class="n">y_position</span> <span class="o">=</span> <span class="nb">round</span><span class="p">(</span>
+                    <span class="n">bottom</span>
+                    <span class="o">-</span> <span class="n">tick_value</span> <span class="o">/</span> <span class="n">y_max</span> <span class="o">*</span> <span class="p">(</span><span class="n">bottom</span> <span class="o">-</span> <span class="n">top</span><span class="p">)</span>
+                <span class="p">)</span>
+
+                <span class="n">painter</span><span class="o">.</span><span class="n">drawLine</span><span class="p">(</span>
+                    <span class="n">left</span> <span class="o">-</span> <span class="bp">self</span><span class="o">.</span><span class="n">_tick_length</span><span class="p">,</span>
+                    <span class="n">y_position</span><span class="p">,</span>
+                    <span class="n">left</span><span class="p">,</span>
+                    <span class="n">y_position</span><span class="p">,</span>
+                <span class="p">)</span></div>
+
+
+
+<div class="viewcode-block" id="QtHistogram._labels_x">
+<a class="viewcode-back" href="../../api_doc/qt_histogram.html#pyclickimage.qt_histogram.QtHistogram._labels_x">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">_labels_x</span><span class="p">(</span>
+        <span class="bp">self</span><span class="p">,</span>
+        <span class="n">painter</span><span class="p">:</span> <span class="n">QPainter</span><span class="p">,</span>
+        <span class="n">left</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span>
+        <span class="n">right</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span>
+        <span class="n">bottom</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span>
+        <span class="n">x_min</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span>
+        <span class="n">x_max</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span>
+        <span class="n">ticks</span><span class="p">:</span> <span class="n">Sequence</span><span class="p">[</span><span class="nb">float</span><span class="p">],</span>
+    <span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">"""Draw formatted X-axis labels.</span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        painter : QPainter</span>
+<span class="sd">            Painter used for rendering.</span>
+<span class="sd">        left, right, bottom : int</span>
+<span class="sd">            Plotting area boundaries.</span>
+<span class="sd">        x_min, x_max : float</span>
+<span class="sd">            Numerical X-axis range.</span>
+<span class="sd">        ticks : Sequence[float]</span>
+<span class="sd">            X values whose labels should be drawn.</span>
+<span class="sd">        """</span>
+        <span class="n">painter</span><span class="o">.</span><span class="n">setPen</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_text_color</span><span class="p">)</span>
+
+        <span class="k">if</span> <span class="n">x_max</span> <span class="o">&lt;=</span> <span class="n">x_min</span><span class="p">:</span>
+            <span class="k">return</span>
+
+        <span class="n">metrics</span> <span class="o">=</span> <span class="n">painter</span><span class="o">.</span><span class="n">fontMetrics</span><span class="p">()</span>
+
+        <span class="k">for</span> <span class="n">tick_value</span> <span class="ow">in</span> <span class="n">ticks</span><span class="p">:</span>
+            <span class="k">if</span> <span class="n">x_min</span> <span class="o">&lt;=</span> <span class="n">tick_value</span> <span class="o">&lt;=</span> <span class="n">x_max</span><span class="p">:</span>
+                <span class="n">x_position</span> <span class="o">=</span> <span class="p">(</span>
+                    <span class="n">left</span>
+                    <span class="o">+</span> <span class="p">(</span><span class="n">tick_value</span> <span class="o">-</span> <span class="n">x_min</span><span class="p">)</span>
+                    <span class="o">/</span> <span class="p">(</span><span class="n">x_max</span> <span class="o">-</span> <span class="n">x_min</span><span class="p">)</span>
+                    <span class="o">*</span> <span class="p">(</span><span class="n">right</span> <span class="o">-</span> <span class="n">left</span><span class="p">)</span>
+                <span class="p">)</span>
+
+                <span class="n">label</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_x_formatter</span><span class="p">(</span><span class="n">tick_value</span><span class="p">)</span>
+                <span class="n">label_width</span> <span class="o">=</span> <span class="n">metrics</span><span class="o">.</span><span class="n">horizontalAdvance</span><span class="p">(</span><span class="n">label</span><span class="p">)</span>
+
+                <span class="n">painter</span><span class="o">.</span><span class="n">drawText</span><span class="p">(</span>
+                    <span class="nb">round</span><span class="p">(</span><span class="n">x_position</span> <span class="o">-</span> <span class="n">label_width</span> <span class="o">/</span> <span class="mi">2</span><span class="p">),</span>
+                    <span class="n">bottom</span>
+                    <span class="o">+</span> <span class="bp">self</span><span class="o">.</span><span class="n">_tick_length</span>
+                    <span class="o">+</span> <span class="n">metrics</span><span class="o">.</span><span class="n">ascent</span><span class="p">()</span>
+                    <span class="o">+</span> <span class="mi">4</span><span class="p">,</span>
+                    <span class="n">label</span><span class="p">,</span>
+                <span class="p">)</span></div>
+
+
+
+<div class="viewcode-block" id="QtHistogram._labels_y">
+<a class="viewcode-back" href="../../api_doc/qt_histogram.html#pyclickimage.qt_histogram.QtHistogram._labels_y">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">_labels_y</span><span class="p">(</span>
+        <span class="bp">self</span><span class="p">,</span>
+        <span class="n">painter</span><span class="p">:</span> <span class="n">QPainter</span><span class="p">,</span>
+        <span class="n">left</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span>
+        <span class="n">top</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span>
+        <span class="n">bottom</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span>
+        <span class="n">y_max</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span>
+        <span class="n">ticks</span><span class="p">:</span> <span class="n">Sequence</span><span class="p">[</span><span class="nb">float</span><span class="p">],</span>
+        <span class="n">labels</span><span class="p">:</span> <span class="n">Sequence</span><span class="p">[</span><span class="nb">str</span><span class="p">],</span>
+    <span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">"""Draw formatted Y-axis labels.</span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        painter : QPainter</span>
+<span class="sd">            Painter used for rendering.</span>
+<span class="sd">        left, top, bottom : int</span>
+<span class="sd">            Plotting area boundaries.</span>
+<span class="sd">        y_max : float</span>
+<span class="sd">            Numerical Y-axis maximum.</span>
+<span class="sd">        ticks : Sequence[float]</span>
+<span class="sd">            Numerical Y positions corresponding to ``labels``.</span>
+<span class="sd">        labels : Sequence[str]</span>
+<span class="sd">            Text displayed for each Y-axis tick.</span>
+
+<span class="sd">        Raises</span>
+<span class="sd">        ------</span>
+<span class="sd">        ValueError</span>
+<span class="sd">            If the number of labels differs from the number of ticks.</span>
+<span class="sd">        """</span>
+        <span class="n">painter</span><span class="o">.</span><span class="n">setPen</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_text_color</span><span class="p">)</span>
+
+        <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">ticks</span><span class="p">)</span> <span class="o">!=</span> <span class="nb">len</span><span class="p">(</span><span class="n">labels</span><span class="p">):</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span>
+                <span class="s2">"The number of Y-axis ticks must match "</span>
+                <span class="s2">"the number of Y-axis labels."</span>
+            <span class="p">)</span>
+
+        <span class="k">if</span> <span class="n">y_max</span> <span class="o">&lt;=</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="k">return</span>
+
+        <span class="n">metrics</span> <span class="o">=</span> <span class="n">painter</span><span class="o">.</span><span class="n">fontMetrics</span><span class="p">()</span>
+
+        <span class="k">for</span> <span class="n">tick_value</span><span class="p">,</span> <span class="n">label</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="n">ticks</span><span class="p">,</span> <span class="n">labels</span><span class="p">):</span>
+            <span class="k">if</span> <span class="mi">0</span> <span class="o">&lt;=</span> <span class="n">tick_value</span> <span class="o">&lt;=</span> <span class="n">y_max</span><span class="p">:</span>
+                <span class="n">y_position</span> <span class="o">=</span> <span class="p">(</span>
+                    <span class="n">bottom</span>
+                    <span class="o">-</span> <span class="n">tick_value</span> <span class="o">/</span> <span class="n">y_max</span> <span class="o">*</span> <span class="p">(</span><span class="n">bottom</span> <span class="o">-</span> <span class="n">top</span><span class="p">)</span>
+                <span class="p">)</span>
+
+                <span class="n">label_width</span> <span class="o">=</span> <span class="n">metrics</span><span class="o">.</span><span class="n">horizontalAdvance</span><span class="p">(</span><span class="n">label</span><span class="p">)</span>
+
+                <span class="n">baseline</span> <span class="o">=</span> <span class="p">(</span>
+                    <span class="n">y_position</span>
+                    <span class="o">+</span> <span class="p">(</span><span class="n">metrics</span><span class="o">.</span><span class="n">ascent</span><span class="p">()</span> <span class="o">-</span> <span class="n">metrics</span><span class="o">.</span><span class="n">descent</span><span class="p">())</span> <span class="o">/</span> <span class="mi">2</span>
+                <span class="p">)</span>
+
+                <span class="n">painter</span><span class="o">.</span><span class="n">drawText</span><span class="p">(</span>
+                    <span class="nb">round</span><span class="p">(</span>
+                        <span class="n">left</span>
+                        <span class="o">-</span> <span class="bp">self</span><span class="o">.</span><span class="n">_tick_length</span>
+                        <span class="o">-</span> <span class="n">label_width</span>
+                        <span class="o">-</span> <span class="mi">6</span>
+                    <span class="p">),</span>
+                    <span class="nb">round</span><span class="p">(</span><span class="n">baseline</span><span class="p">),</span>
+                    <span class="n">label</span><span class="p">,</span>
+                <span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="QtHistogram._titles">
+<a class="viewcode-back" href="../../api_doc/qt_histogram.html#pyclickimage.qt_histogram.QtHistogram._titles">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">_titles</span><span class="p">(</span>
+        <span class="bp">self</span><span class="p">,</span>
+        <span class="n">painter</span><span class="p">:</span> <span class="n">QPainter</span><span class="p">,</span>
+        <span class="n">left</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span>
+        <span class="n">top</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span>
+        <span class="n">right</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span>
+        <span class="n">bottom</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span>
+        <span class="n">y_title</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
+    <span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">"""Draw the X-axis and Y-axis titles.</span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        painter : QPainter</span>
+<span class="sd">            Painter used for rendering.</span>
+<span class="sd">        left, top, right, bottom : int</span>
+<span class="sd">            Plotting area boundaries.</span>
+<span class="sd">        y_title : str</span>
+<span class="sd">            Title of the Y-axis generated by :meth:`_get_y_ticks`.</span>
+<span class="sd">        """</span>
+        <span class="n">painter</span><span class="o">.</span><span class="n">setPen</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_text_color</span><span class="p">)</span>
+
+        <span class="n">metrics</span> <span class="o">=</span> <span class="n">painter</span><span class="o">.</span><span class="n">fontMetrics</span><span class="p">()</span>
+
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_x_title</span><span class="p">:</span>
+            <span class="n">title_width</span> <span class="o">=</span> <span class="n">metrics</span><span class="o">.</span><span class="n">horizontalAdvance</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_x_title</span><span class="p">)</span>
+
+            <span class="n">painter</span><span class="o">.</span><span class="n">drawText</span><span class="p">(</span>
+                <span class="nb">round</span><span class="p">(</span>
+                    <span class="p">(</span><span class="n">left</span> <span class="o">+</span> <span class="n">right</span> <span class="o">-</span> <span class="n">title_width</span><span class="p">)</span> <span class="o">/</span> <span class="mi">2</span>
+                <span class="p">),</span>
+                <span class="nb">round</span><span class="p">(</span>
+                    <span class="n">bottom</span>
+                    <span class="o">+</span> <span class="bp">self</span><span class="o">.</span><span class="n">_tick_length</span>
+                    <span class="o">+</span> <span class="n">metrics</span><span class="o">.</span><span class="n">height</span><span class="p">()</span>
+                    <span class="o">+</span> <span class="mi">14</span>
+                <span class="p">),</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">_x_title</span><span class="p">,</span>
+            <span class="p">)</span>
+
+        <span class="c1"># Y title above the Y axis, left-aligned with the tick labels.</span>
+        <span class="n">title_x</span> <span class="o">=</span> <span class="nb">max</span><span class="p">(</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_content_margins</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span>
+            <span class="n">left</span> <span class="o">-</span> <span class="n">metrics</span><span class="o">.</span><span class="n">horizontalAdvance</span><span class="p">(</span><span class="n">y_title</span><span class="p">)</span> <span class="o">//</span> <span class="mi">2</span><span class="p">,</span>
+        <span class="p">)</span>
+
+        <span class="n">painter</span><span class="o">.</span><span class="n">drawText</span><span class="p">(</span>
+            <span class="n">title_x</span><span class="p">,</span>
+            <span class="n">top</span> <span class="o">-</span> <span class="n">metrics</span><span class="o">.</span><span class="n">descent</span><span class="p">()</span> <span class="o">-</span> <span class="mi">10</span><span class="p">,</span>
+            <span class="n">y_title</span><span class="p">,</span>
+        <span class="p">)</span></div>
+
+
+    <span class="c1"># ==================================================================</span>
+    <span class="c1"># Frame</span>
+    <span class="c1"># ==================================================================</span>
+
+<div class="viewcode-block" id="QtHistogram._frame">
+<a class="viewcode-back" href="../../api_doc/qt_histogram.html#pyclickimage.qt_histogram.QtHistogram._frame">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">_frame</span><span class="p">(</span>
+        <span class="bp">self</span><span class="p">,</span>
+        <span class="n">painter</span><span class="p">:</span> <span class="n">QPainter</span><span class="p">,</span>
+        <span class="n">left</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span>
+        <span class="n">top</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span>
+        <span class="n">right</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span>
+        <span class="n">bottom</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span>
+    <span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">"""Draw the border surrounding the plotting area.</span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        painter : QPainter</span>
+<span class="sd">            Painter used for rendering.</span>
+<span class="sd">        left, top, right, bottom : int</span>
+<span class="sd">            Plotting area boundaries.</span>
+<span class="sd">        """</span>
+        <span class="n">painter</span><span class="o">.</span><span class="n">setBrush</span><span class="p">(</span><span class="n">Qt</span><span class="o">.</span><span class="n">NoBrush</span><span class="p">)</span>
+
+        <span class="n">painter</span><span class="o">.</span><span class="n">setPen</span><span class="p">(</span>
+            <span class="n">QPen</span><span class="p">(</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">_border_color</span><span class="p">,</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">_border_width</span><span class="p">,</span>
+            <span class="p">)</span>
+        <span class="p">)</span>
+
+        <span class="n">painter</span><span class="o">.</span><span class="n">drawRect</span><span class="p">(</span>
+            <span class="n">left</span><span class="p">,</span>
+            <span class="n">top</span><span class="p">,</span>
+            <span class="n">right</span> <span class="o">-</span> <span class="n">left</span><span class="p">,</span>
+            <span class="n">bottom</span> <span class="o">-</span> <span class="n">top</span><span class="p">,</span>
+        <span class="p">)</span></div>
+</div>
+
+</pre></div>
+
+                </article>
+              
+              
+              
+              
+              
+                <footer class="prev-next-footer d-print-none">
+                  
+<div class="prev-next-area">
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+          </footer>
+        
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script defer src="../../_static/scripts/bootstrap.js?digest=18bd87630a240e9c25be"></script>
+<script defer src="../../_static/scripts/pydata-sphinx-theme.js?digest=18bd87630a240e9c25be"></script>
+
+  <footer class="bd-footer">
+<div class="bd-footer__inner bd-page-width">
+  
+    <div class="footer-items__start">
+      
+        <div class="footer-item">
+
+  <p class="copyright">
+    
+      © Copyright 2025-2026, Artezaru.
+      <br/>
+    
+  </p>
+</div>
+      
+        <div class="footer-item">
+
+  <p class="sphinx-version">
+    Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 9.0.4.
+  </p>
+</div>
+      
+    </div>
+  
+  
+  
+    <div class="footer-items__end">
+      
+        <div class="footer-item">
+<p class="theme-version">
+  <!-- # L10n: Setting the PST URL as an argument as this does not need to be localized -->
+  Built with the <a href="https://pydata-sphinx-theme.readthedocs.io/en/stable/index.html">PyData Sphinx Theme</a> 0.23.0.
+</p></div>
+      
+    </div>
+  
+</div>
+
+  </footer>
+  </body>
+</html>

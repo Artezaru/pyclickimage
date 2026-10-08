@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 
 
@@ -8,7 +7,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
-    <title>pyclickimage.AnnotationSession &#8212; pyclickimage 3.2.1 documentation</title>
+    <title>pyclickimage.annotation_session &#8212; pyclickimage 4.0.0 documentation</title>
   
   
   
@@ -27,42 +26,50 @@
   </noscript>
   
   <!-- Loaded before other Sphinx assets -->
-  <link href="../_static/styles/theme.css?digest=8878045cc6db502f8baf" rel="stylesheet" />
-<link href="../_static/styles/pydata-sphinx-theme.css?digest=8878045cc6db502f8baf" rel="stylesheet" />
+  <link href="../_static/styles/theme.css?digest=18bd87630a240e9c25be" rel="stylesheet" />
+<link href="../_static/styles/pydata-sphinx-theme.css?digest=18bd87630a240e9c25be" rel="stylesheet" />
 
     <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=8f2a1f02" />
   
   <!-- So that users can add custom icons -->
-  <script src="../_static/scripts/fontawesome.js?digest=8878045cc6db502f8baf"></script>
+  <script defer src="../_static/scripts/fontawesome.js?digest=18bd87630a240e9c25be"></script>
   <!-- Pre-loaded scripts that we'll load fully later -->
-  <link rel="preload" as="script" href="../_static/scripts/bootstrap.js?digest=8878045cc6db502f8baf" />
-<link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=8878045cc6db502f8baf" />
+  <link rel="preload" as="script" href="../_static/scripts/bootstrap.js?digest=18bd87630a240e9c25be" />
+<link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=18bd87630a240e9c25be" />
 
-    <script src="../_static/documentation_options.js?v=eb155f5e"></script>
-    <script src="../_static/doctools.js?v=9a2dae69"></script>
-    <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../_static/documentation_options.js?v=3304f9e4"></script>
+    <script src="../_static/doctools.js?v=fd6eb6e6"></script>
+    <script src="../_static/sphinx_highlight.js?v=6ffebe34"></script>
     <script>DOCUMENTATION_OPTIONS.pagename = 'api_doc/annotation_session';</script>
+    <script>DOCUMENTATION_OPTIONS.search_as_you_type = false;</script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="pyclickimage.ClickManager" href="click_manager.html" />
-    <link rel="prev" title="Reading session" href="reading_session.html" />
+    <link rel="next" title="pyclickimage.click_manager" href="click_manager.html" />
+    <link rel="prev" title="pyclickimage.click_image_app" href="click_image_app.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="color-scheme" content="light dark"/>
   <meta name="docsearch:language" content="en"/>
   <meta name="docsearch:version" content="" />
+  
+    
+    <script src="../_static/searchtools.js"></script>
+    <script src="../_static/language_data.js"></script>
+    <script src="../searchindex.js"></script>
+  
   </head>
-  
-  
-  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
-
+  <body data-default-mode="">
   
   
   <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+
   
   <div id="pst-scroll-pixel-helper"></div>
   
   <button type="button" class="btn rounded-pill" id="pst-back-to-top">
     <i class="fa-solid fa-arrow-up"></i>Back to top</button>
-
+  
+  
+  
   
   <dialog id="pst-search-dialog">
     
@@ -88,9 +95,9 @@
 </div>
 
   
-    <header class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+    <header id="pst-header" class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
 <div class="bd-header__inner bd-page-width">
-  <button class="pst-navbar-icon sidebar-toggle primary-toggle" aria-label="Site navigation">
+  <button type="button" class="pst-navbar-icon sidebar-toggle primary-toggle" aria-label="Site navigation">
     <span class="fa-solid fa-bars"></span>
   </button>
   
@@ -110,7 +117,7 @@
   
   
   
-    <p class="title logo__title">pyclickimage 3.2.1 documentation</p>
+    <p class="title logo__title">pyclickimage 4.0.0 documentation</p>
   
 </a></div>
     
@@ -155,7 +162,7 @@
         <div class="navbar-item navbar-persistent--container">
           
 
-<button class="btn search-button-field search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+<button type="button" class="btn search-button-field search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
  <i class="fa-solid fa-magnifying-glass"></i>
  <span class="search-button__default-text">Search</span>
  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
@@ -165,11 +172,18 @@
       
         <div class="navbar-item">
 
-<button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button pst-js-only" aria-label="Color mode" data-bs-title="Color mode"  data-bs-placement="bottom" data-bs-toggle="tooltip">
-  <i class="theme-switch fa-solid fa-sun                fa-lg" data-mode="light" title="Light"></i>
-  <i class="theme-switch fa-solid fa-moon               fa-lg" data-mode="dark"  title="Dark"></i>
-  <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"  title="System Settings"></i>
-</button></div>
+<div class="theme-switch-container dropdown pst-js-only" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Color mode">
+  <button type="button" class="btn btn-sm nav-link pst-navbar-icon theme-switch-button dropdown-toggle" aria-label="Color mode" data-bs-toggle="dropdown">
+    <i class="theme-switch fa-solid fa-sun fa-lg fa-fw" data-mode="light" title="Light"></i>
+    <i class="theme-switch fa-solid fa-moon fa-lg fa-fw" data-mode="dark" title="Dark"></i>
+    <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg fa-fw" data-mode="auto" title="System Settings"></i>
+  </button>
+  <ul class="dropdown-menu dropdown-menu-end">
+    <li><button type="button" class="dropdown-item d-flex align-items-center theme-change-button" data-mode="auto"><i class="fa-solid fa-circle-half-stroke fa-lg fa-fw me-1"></i>System Settings</button></li>
+    <li><button type="button" class="dropdown-item d-flex align-items-center theme-change-button" data-mode="light"><i class="fa-solid fa-sun fa-lg fa-fw me-1"></i>Light</button></li>
+    <li><button type="button" class="dropdown-item d-flex align-items-center theme-change-button" data-mode="dark"><i class="fa-solid fa-moon fa-lg fa-fw me-1"></i>Dark</button></li>
+  </ul>
+</div></div>
       
     </div>
     
@@ -178,7 +192,7 @@
   
     <div class="navbar-persistent--mobile">
 
-<button class="btn search-button-field search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+<button type="button" class="btn search-button-field search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
  <i class="fa-solid fa-magnifying-glass"></i>
  <span class="search-button__default-text">Search</span>
  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
@@ -187,7 +201,7 @@
   
 
   
-    <button class="pst-navbar-icon sidebar-toggle secondary-toggle" aria-label="On this page">
+    <button type="button" class="pst-navbar-icon sidebar-toggle secondary-toggle" aria-label="On this page">
       <span class="fa-solid fa-outdent"></span>
     </button>
   
@@ -249,18 +263,33 @@
         
           <div class="navbar-item">
 
-<button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button pst-js-only" aria-label="Color mode" data-bs-title="Color mode"  data-bs-placement="bottom" data-bs-toggle="tooltip">
-  <i class="theme-switch fa-solid fa-sun                fa-lg" data-mode="light" title="Light"></i>
-  <i class="theme-switch fa-solid fa-moon               fa-lg" data-mode="dark"  title="Dark"></i>
-  <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"  title="System Settings"></i>
-</button></div>
+<div class="theme-switch-container dropdown pst-js-only" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Color mode">
+  <button type="button" class="btn btn-sm nav-link pst-navbar-icon theme-switch-button dropdown-toggle" aria-label="Color mode" data-bs-toggle="dropdown">
+    <i class="theme-switch fa-solid fa-sun fa-lg fa-fw" data-mode="light" title="Light"></i>
+    <i class="theme-switch fa-solid fa-moon fa-lg fa-fw" data-mode="dark" title="Dark"></i>
+    <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg fa-fw" data-mode="auto" title="System Settings"></i>
+  </button>
+  <ul class="dropdown-menu dropdown-menu-end">
+    <li><button type="button" class="dropdown-item d-flex align-items-center theme-change-button" data-mode="auto"><i class="fa-solid fa-circle-half-stroke fa-lg fa-fw me-1"></i>System Settings</button></li>
+    <li><button type="button" class="dropdown-item d-flex align-items-center theme-change-button" data-mode="light"><i class="fa-solid fa-sun fa-lg fa-fw me-1"></i>Light</button></li>
+    <li><button type="button" class="dropdown-item d-flex align-items-center theme-change-button" data-mode="dark"><i class="fa-solid fa-moon fa-lg fa-fw me-1"></i>Dark</button></li>
+  </ul>
+</div></div>
         
       </div>
     
   </div>
   
     <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item pst-sidebar-collapse"><button type="button" id="pst-collapse-sidebar-button" aria-expanded="true" aria-controls="pst-primary-sidebar">
+  <svg class="pst-icon" role="img" aria-hidden="true" focusable="false" viewBox="0 0 16 16" xmlns="http://www.w3.org/2000/svg">
+    <path fill="currentColor" d="M3 15.5C2.36232 15.5 1.74874 15.2564 1.28478 14.8189C0.820828 14.3815 0.541576 13.7832 0.504167 13.1467L0.5 13L0.5 3C0.499965 2.36232 0.743605 1.74874 1.18107 1.28478C1.61854 0.820828 2.21676 0.541576 2.85333 0.504167L3 0.5L13 0.5C13.6377 0.499965 14.2513 0.743605 14.7152 1.18107C15.1792 1.61854 15.4584 2.21676 15.4958 2.85333L15.5 3L15.5 13C15.5 13.6377 15.2564 14.2513 14.8189 14.7152C14.3815 15.1792 13.7832 15.4584 13.1467 15.4958L13 15.5L3 15.5ZM3 13.8333L10.5 13.8333L10.5 2.16667L3 2.16667C2.79589 2.16669 2.59889 2.24163 2.44636 2.37726C2.29383 2.5129 2.19638 2.69979 2.1725 2.9025L2.16667 3L2.16667 13C2.16669 13.2041 2.24163 13.4011 2.37726 13.5536C2.5129 13.7062 2.69979 13.8036 2.9025 13.8275L3 13.8333ZM6.65583 10.325L6.5775 10.2558L4.91083 8.58917C4.76735 8.44567 4.68116 8.25476 4.66843 8.05223C4.65569 7.84971 4.71729 7.6495 4.84167 7.48917L4.91083 7.41083L6.5775 5.74417C6.72747 5.59471 6.9287 5.50794 7.14032 5.50148C7.35194 5.49502 7.55809 5.56935 7.7169 5.70937C7.8757 5.8494 7.97525 6.04463 7.99533 6.25539C8.01541 6.46616 7.95451 6.67667 7.825 6.84417L7.75583 6.9225L6.67917 8L7.75583 9.0775C7.89931 9.22099 7.98551 9.41191 7.99824 9.61443C8.01097 9.81695 7.94938 10.0172 7.825 10.1775L7.75583 10.2558C7.61234 10.3993 7.42142 10.4855 7.2189 10.4982C7.01638 10.511 6.81617 10.4494 6.65583 10.325Z"/>
+  </svg>
+  <span class="pst-collapse-sidebar-label">Collapse Sidebar</span>
+  <span class="pst-expand-sidebar-label">Expand Sidebar</span>
+</button></div>
         <div class="sidebar-primary-item">
+
 <nav class="bd-docs-nav bd-links"
      aria-label="Section Navigation">
   <p class="bd-links__title" role="heading" aria-level="1">Section Navigation</p>
@@ -268,11 +297,23 @@
 <li class="toctree-l1"><a class="reference internal" href="run.html">pyclickimage.run</a></li>
 <li class="toctree-l1"><a class="reference internal" href="reading_session.html">Reading session</a></li>
 </ul>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="click_image_app.html">pyclickimage.click_image_app</a></li>
+</ul>
 <ul class="current nav bd-sidenav">
-<li class="toctree-l1 current active"><a class="current reference internal" href="#">pyclickimage.AnnotationSession</a></li>
-<li class="toctree-l1"><a class="reference internal" href="click_manager.html">pyclickimage.ClickManager</a></li>
-<li class="toctree-l1"><a class="reference internal" href="image_viewer.html">pyclickimage.ImageViewer</a></li>
-<li class="toctree-l1"><a class="reference internal" href="click_image_app.html">pyclickimage.ClickImageApp</a></li>
+<li class="toctree-l1 current active"><a aria-current="page" class="current reference internal" href="#">pyclickimage.annotation_session</a></li>
+<li class="toctree-l1"><a class="reference internal" href="click_manager.html">pyclickimage.click_manager</a></li>
+<li class="toctree-l1"><a class="reference internal" href="common.html">pyclickimage.common</a></li>
+</ul>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="qt_image_tool_window.html">pyclickimage.qt_image_tool_window</a></li>
+<li class="toctree-l1"><a class="reference internal" href="qt_image_viewer.html">pyclickimage.qt_image_viewer</a></li>
+<li class="toctree-l1"><a class="reference internal" href="qt_histogram.html">pyclickimage.qt_histogram</a></li>
+<li class="toctree-l1"><a class="reference internal" href="qt_profile_plot.html">pyclickimage.qt_profile_plot</a></li>
+<li class="toctree-l1"><a class="reference internal" href="qt_linear_interpolator.html">pyclickimage.qt_linear_interpolator</a></li>
+</ul>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="theme.html">pyclickimage.theme</a></li>
 </ul>
 </div>
 </nav></div>
@@ -316,7 +357,7 @@
     
     <li class="breadcrumb-item"><a href="../api.html" class="nav-link">API Reference</a></li>
     
-    <li class="breadcrumb-item active" aria-current="page"><span class="ellipsis">pyclickimage.AnnotationSession</span></li>
+    <li class="breadcrumb-item active" aria-current="page"><span class="ellipsis">pyclickimage.annotation_session</span></li>
   </ul>
 </nav>
 </div>
@@ -333,8 +374,795 @@
 <div id="searchbox"></div>
                 <article class="bd-article">
                   
-  <section id="pyclickimage-annotationsession">
-<h1>pyclickimage.AnnotationSession<a class="headerlink" href="#pyclickimage-annotationsession" title="Link to this heading">#</a></h1>
+  <section id="pyclickimage-annotation-session">
+<h1>pyclickimage.annotation_session<a class="headerlink" href="#pyclickimage-annotation-session" title="Link to this heading">#</a></h1>
+<dl class="py class">
+<dt class="sig sig-object py" id="pyclickimage.annotation_session.AnnotationSession">
+<span class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></span><span class="sig-prename descclassname"><span class="pre">pyclickimage.annotation_session.</span></span><span class="sig-name descname"><span class="pre">AnnotationSession</span></span><a class="reference internal" href="../_modules/pyclickimage/annotation_session.html#AnnotationSession"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pyclickimage.annotation_session.AnnotationSession" title="Link to this definition">#</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<p>Manage a multi-image annotation session.</p>
+<p>An <a class="reference internal" href="#pyclickimage.annotation_session.AnnotationSession" title="pyclickimage.annotation_session.AnnotationSession"><code class="xref py py-class docutils literal notranslate"><span class="pre">AnnotationSession</span></code></a> stores the complete state of an
+annotation project, including loaded images, annotation groups,
+current selections, and output formatting options.</p>
+<p>Each image is represented by an <a class="reference internal" href="#pyclickimage.annotation_session.ImageEntry" title="pyclickimage.annotation_session.ImageEntry"><code class="xref py py-class docutils literal notranslate"><span class="pre">ImageEntry</span></code></a> containing:</p>
+<ul class="simple">
+<li><p>the image file path,</p></li>
+<li><p>the associated <code class="xref py py-class docutils literal notranslate"><span class="pre">ClickManager</span></code>.</p></li>
+</ul>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>None</strong></p>
+</dd>
+</dl>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="pyclickimage.annotation_session.AnnotationSession.images">
+<span class="sig-name descname"><span class="pre">images</span></span><a class="headerlink" href="#pyclickimage.annotation_session.AnnotationSession.images" title="Link to this definition">#</a></dt>
+<dd><p>Images included in the current session.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>list[<a class="reference internal" href="#pyclickimage.annotation_session.ImageEntry" title="pyclickimage.annotation_session.ImageEntry">ImageEntry</a>]</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="pyclickimage.annotation_session.AnnotationSession.groups">
+<span class="sig-name descname"><span class="pre">groups</span></span><a class="headerlink" href="#pyclickimage.annotation_session.AnnotationSession.groups" title="Link to this definition">#</a></dt>
+<dd><p>Names of annotation groups available in the session.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>list[str]</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="pyclickimage.annotation_session.AnnotationSession.current_image_index">
+<span class="sig-name descname"><span class="pre">current_image_index</span></span><a class="headerlink" href="#pyclickimage.annotation_session.AnnotationSession.current_image_index" title="Link to this definition">#</a></dt>
+<dd><p>Index of the currently selected image.
+<code class="docutils literal notranslate"><span class="pre">-1</span></code> means that no image is selected.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>int</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="pyclickimage.annotation_session.AnnotationSession.current_group_index">
+<span class="sig-name descname"><span class="pre">current_group_index</span></span><a class="headerlink" href="#pyclickimage.annotation_session.AnnotationSession.current_group_index" title="Link to this definition">#</a></dt>
+<dd><p>Index of the currently selected annotation group.
+<code class="docutils literal notranslate"><span class="pre">-1</span></code> means that no group is selected.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>int or None</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="pyclickimage.annotation_session.AnnotationSession.precision_mode">
+<span class="sig-name descname"><span class="pre">precision_mode</span></span><a class="headerlink" href="#pyclickimage.annotation_session.AnnotationSession.precision_mode" title="Link to this definition">#</a></dt>
+<dd><p>Output coordinate precision mode.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><a class="reference internal" href="common.html#pyclickimage.common.PrecisionMode" title="pyclickimage.common.PrecisionMode">PrecisionMode</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<p class="rubric">Notes</p>
+<p>The session object manages the relationship between images and groups.
+<code class="xref py py-class docutils literal notranslate"><span class="pre">ClickManager</span></code> objects only store annotation data and do not
+manage global session state.</p>
+<dl class="py method">
+<dt class="sig sig-object py" id="pyclickimage.annotation_session.AnnotationSession._create_click_manager">
+<span class="sig-name descname"><span class="pre">_create_click_manager</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference internal" href="click_manager.html#pyclickimage.click_manager.ClickManager" title="pyclickimage.click_manager.ClickManager"><span class="pre">ClickManager</span></a></span></span><a class="reference internal" href="../_modules/pyclickimage/annotation_session.html#AnnotationSession._create_click_manager"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pyclickimage.annotation_session.AnnotationSession._create_click_manager" title="Link to this definition">#</a></dt>
+<dd><p>Create a click manager initialized with all session groups.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>Newly created click manager.</p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p><a class="reference internal" href="click_manager.html#pyclickimage.click_manager.ClickManager" title="pyclickimage.click_manager.ClickManager">ClickManager</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="pyclickimage.annotation_session.AnnotationSession._current_annotation">
+<span class="property"><span class="k"><span class="pre">property</span></span><span class="w"> </span></span><span class="sig-name descname"><span class="pre">_current_annotation</span></span><span class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">tuple</span><span class="p"><span class="pre">[</span></span><a class="reference internal" href="click_manager.html#pyclickimage.click_manager.ClickManager" title="pyclickimage.click_manager.ClickManager"><span class="pre">ClickManager</span></a><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">str</span><span class="p"><span class="pre">]</span></span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><a class="headerlink" href="#pyclickimage.annotation_session.AnnotationSession._current_annotation" title="Link to this definition">#</a></dt>
+<dd><p>Return the current annotation context.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>The current click manager and selected group, or <code class="docutils literal notranslate"><span class="pre">None</span></code> if
+no image or no group is currently selected.</p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p>tuple[<a class="reference internal" href="click_manager.html#pyclickimage.click_manager.ClickManager" title="pyclickimage.click_manager.ClickManager">ClickManager</a>, str] or None</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="pyclickimage.annotation_session.AnnotationSession._current_group_index">
+<span class="sig-name descname"><span class="pre">_current_group_index</span></span><span class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">int</span></span><a class="headerlink" href="#pyclickimage.annotation_session.AnnotationSession._current_group_index" title="Link to this definition">#</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="pyclickimage.annotation_session.AnnotationSession._current_image_index">
+<span class="sig-name descname"><span class="pre">_current_image_index</span></span><span class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">int</span></span><a class="headerlink" href="#pyclickimage.annotation_session.AnnotationSession._current_image_index" title="Link to this definition">#</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="pyclickimage.annotation_session.AnnotationSession._find_group">
+<span class="sig-name descname"><span class="pre">_find_group</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">group_name</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">str</span></span></span><a class="reference internal" href="../_modules/pyclickimage/annotation_session.html#AnnotationSession._find_group"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pyclickimage.annotation_session.AnnotationSession._find_group" title="Link to this definition">#</a></dt>
+<dd><p>Return a group.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>group_name</strong> (<em>str</em>) – Name of the group.</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>Matching group.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>str</p>
+</dd>
+<dt class="field-even">Raises<span class="colon">:</span></dt>
+<dd class="field-even"><p><strong>KeyError</strong> – If the group does not exist.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="pyclickimage.annotation_session.AnnotationSession._find_group_index">
+<span class="sig-name descname"><span class="pre">_find_group_index</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">group_name</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">int</span></span></span><a class="reference internal" href="../_modules/pyclickimage/annotation_session.html#AnnotationSession._find_group_index"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pyclickimage.annotation_session.AnnotationSession._find_group_index" title="Link to this definition">#</a></dt>
+<dd><p>Return the index of a group.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>group_name</strong> (<em>str</em>) – Name of the group.</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>Index of the group.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>int</p>
+</dd>
+<dt class="field-even">Raises<span class="colon">:</span></dt>
+<dd class="field-even"><p><strong>KeyError</strong> – If the group does not exist.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="pyclickimage.annotation_session.AnnotationSession._find_image">
+<span class="sig-name descname"><span class="pre">_find_image</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">image_path</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">Path</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference internal" href="#pyclickimage.annotation_session.ImageEntry" title="pyclickimage.annotation_session.ImageEntry"><span class="pre">ImageEntry</span></a></span></span><a class="reference internal" href="../_modules/pyclickimage/annotation_session.html#AnnotationSession._find_image"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pyclickimage.annotation_session.AnnotationSession._find_image" title="Link to this definition">#</a></dt>
+<dd><p>Return an image entry.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>image_path</strong> (<em>str</em><em> or </em><em>pathlib.Path</em>) – Image path to search.</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>Matching image entry.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><a class="reference internal" href="#pyclickimage.annotation_session.ImageEntry" title="pyclickimage.annotation_session.ImageEntry">ImageEntry</a></p>
+</dd>
+<dt class="field-even">Raises<span class="colon">:</span></dt>
+<dd class="field-even"><p><strong>KeyError</strong> – If the image does not exist.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="pyclickimage.annotation_session.AnnotationSession._find_image_index">
+<span class="sig-name descname"><span class="pre">_find_image_index</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">image_path</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">Path</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">int</span></span></span><a class="reference internal" href="../_modules/pyclickimage/annotation_session.html#AnnotationSession._find_image_index"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pyclickimage.annotation_session.AnnotationSession._find_image_index" title="Link to this definition">#</a></dt>
+<dd><p>Return the index of an image.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>image_path</strong> (<em>str</em><em> or </em><em>pathlib.Path</em>) – Image path to search.</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>Index of the image in the session.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>int</p>
+</dd>
+<dt class="field-even">Raises<span class="colon">:</span></dt>
+<dd class="field-even"><p><strong>KeyError</strong> – If the image does not exist.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="pyclickimage.annotation_session.AnnotationSession._natural_group_sorting_key">
+<span class="property"><span class="k"><span class="pre">static</span></span><span class="w"> </span></span><span class="sig-name descname"><span class="pre">_natural_group_sorting_key</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">group</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">list</span></span></span><a class="reference internal" href="../_modules/pyclickimage/annotation_session.html#AnnotationSession._natural_group_sorting_key"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pyclickimage.annotation_session.AnnotationSession._natural_group_sorting_key" title="Link to this definition">#</a></dt>
+<dd><p>Return a natural sorting key for a group.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>group</strong> (<em>str</em>) – Group name.</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>Natural sorting key.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>list</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="pyclickimage.annotation_session.AnnotationSession._natural_path_sorting_key">
+<span class="property"><span class="k"><span class="pre">static</span></span><span class="w"> </span></span><span class="sig-name descname"><span class="pre">_natural_path_sorting_key</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">path</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Path</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">fullpath</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">True</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">list</span></span></span><a class="reference internal" href="../_modules/pyclickimage/annotation_session.html#AnnotationSession._natural_path_sorting_key"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pyclickimage.annotation_session.AnnotationSession._natural_path_sorting_key" title="Link to this definition">#</a></dt>
+<dd><p>Return a natural sorting key for an image path.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>path</strong> (<em>pathlib.Path</em>) – Image path.</p></li>
+<li><p><strong>fullpath</strong> (<em>bool</em><em>, </em><em>default=True</em>) – If <code class="docutils literal notranslate"><span class="pre">True</span></code>, use the full path.
+Otherwise, use only the filename.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>Natural sorting key.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>list</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="pyclickimage.annotation_session.AnnotationSession._restore_current_group">
+<span class="sig-name descname"><span class="pre">_restore_current_group</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">current_group</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="reference internal" href="../_modules/pyclickimage/annotation_session.html#AnnotationSession._restore_current_group"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pyclickimage.annotation_session.AnnotationSession._restore_current_group" title="Link to this definition">#</a></dt>
+<dd><p>Restore the current group selection after reordering.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>current_group</strong> (<em>str</em><em> or </em><em>None</em>) – Previously selected group.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="pyclickimage.annotation_session.AnnotationSession._restore_current_image">
+<span class="sig-name descname"><span class="pre">_restore_current_image</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">current_image</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="#pyclickimage.annotation_session.ImageEntry" title="pyclickimage.annotation_session.ImageEntry"><span class="pre">ImageEntry</span></a><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="reference internal" href="../_modules/pyclickimage/annotation_session.html#AnnotationSession._restore_current_image"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pyclickimage.annotation_session.AnnotationSession._restore_current_image" title="Link to this definition">#</a></dt>
+<dd><p>Restore the current image selection after reordering.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>current_image</strong> (<a class="reference internal" href="#pyclickimage.annotation_session.ImageEntry" title="pyclickimage.annotation_session.ImageEntry"><em>ImageEntry</em></a><em> or </em><em>None</em>) – Previously selected image.</p>
+</dd>
+</dl>
+<p class="rubric">Notes</p>
+<p>The selection is restored by object identity, allowing the image
+list to be reordered without losing the current selection.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="pyclickimage.annotation_session.AnnotationSession._sort_groups">
+<span class="sig-name descname"><span class="pre">_sort_groups</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="keyword-only-separator o"><abbr title="Keyword-only parameters separator (PEP 3102)"><span class="pre">*</span></abbr></span></em>, <em class="sig-param"><span class="n"><span class="pre">key</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="reference internal" href="../_modules/pyclickimage/annotation_session.html#AnnotationSession._sort_groups"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pyclickimage.annotation_session.AnnotationSession._sort_groups" title="Link to this definition">#</a></dt>
+<dd><p>Sort groups while preserving the current selection.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>key</strong> (<em>callable</em>) – Sorting key passed to <code class="xref py py-meth docutils literal notranslate"><span class="pre">list.sort()</span></code>.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="pyclickimage.annotation_session.AnnotationSession._sort_images">
+<span class="sig-name descname"><span class="pre">_sort_images</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="keyword-only-separator o"><abbr title="Keyword-only parameters separator (PEP 3102)"><span class="pre">*</span></abbr></span></em>, <em class="sig-param"><span class="n"><span class="pre">key</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="reference internal" href="../_modules/pyclickimage/annotation_session.html#AnnotationSession._sort_images"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pyclickimage.annotation_session.AnnotationSession._sort_images" title="Link to this definition">#</a></dt>
+<dd><p>Sort images while preserving the current selection.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>key</strong> (<em>callable</em>) – Sorting key passed to <code class="xref py py-meth docutils literal notranslate"><span class="pre">list.sort()</span></code>.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="pyclickimage.annotation_session.AnnotationSession.add_click">
+<span class="sig-name descname"><span class="pre">add_click</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">x</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">float</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">y</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">float</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="reference internal" href="../_modules/pyclickimage/annotation_session.html#AnnotationSession.add_click"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pyclickimage.annotation_session.AnnotationSession.add_click" title="Link to this definition">#</a></dt>
+<dd><p>Add a click to the current annotation group.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>x</strong> (<em>numbers.Number</em>) – Horizontal coordinate.</p></li>
+<li><p><strong>y</strong> (<em>numbers.Number</em>) – Vertical coordinate.</p></li>
+</ul>
+</dd>
+</dl>
+<p class="rubric">Notes</p>
+<p>Does nothing if no image or group is selected.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="pyclickimage.annotation_session.AnnotationSession.add_group">
+<span class="sig-name descname"><span class="pre">add_group</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">group_name</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="reference internal" href="../_modules/pyclickimage/annotation_session.html#AnnotationSession.add_group"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pyclickimage.annotation_session.AnnotationSession.add_group" title="Link to this definition">#</a></dt>
+<dd><p>Add a new annotation group.</p>
+<p>The group is created in every existing
+<code class="xref py py-class docutils literal notranslate"><span class="pre">ClickManager</span></code>.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>group_name</strong> (<em>str</em>) – Group name.</p>
+</dd>
+<dt class="field-even">Raises<span class="colon">:</span></dt>
+<dd class="field-even"><ul class="simple">
+<li><p><strong>TypeError</strong> – If <code class="docutils literal notranslate"><span class="pre">group_name</span></code> is not a string.</p></li>
+<li><p><strong>ValueError</strong> – If the group already exists.</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="pyclickimage.annotation_session.AnnotationSession.add_image">
+<span class="sig-name descname"><span class="pre">add_image</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">image_path</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">Path</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="reference internal" href="../_modules/pyclickimage/annotation_session.html#AnnotationSession.add_image"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pyclickimage.annotation_session.AnnotationSession.add_image" title="Link to this definition">#</a></dt>
+<dd><p>Add an image to the session.</p>
+<p>A dedicated <code class="xref py py-class docutils literal notranslate"><span class="pre">ClickManager</span></code> is automatically created for the
+image and initialized with every existing annotation group.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>image_path</strong> (<em>str</em><em> or </em><em>pathlib.Path</em>) – Image path.</p>
+</dd>
+<dt class="field-even">Raises<span class="colon">:</span></dt>
+<dd class="field-even"><p><strong>ValueError</strong> – If the path contains a comma.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="pyclickimage.annotation_session.AnnotationSession.apply_half_shift">
+<span class="sig-name descname"><span class="pre">apply_half_shift</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">mode</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Literal</span><span class="p"><span class="pre">[</span></span><span class="s"><span class="pre">'on'</span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="s"><span class="pre">'off'</span></span><span class="p"><span class="pre">]</span></span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="reference internal" href="../_modules/pyclickimage/annotation_session.html#AnnotationSession.apply_half_shift"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pyclickimage.annotation_session.AnnotationSession.apply_half_shift" title="Link to this definition">#</a></dt>
+<dd><p>Enable or disable half-shift mode for every image.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>mode</strong> (<em>{&quot;on&quot;</em><em>, </em><em>&quot;off&quot;}</em>) – Half-shift mode to apply to every <code class="xref py py-class docutils literal notranslate"><span class="pre">ClickManager</span></code>.</p>
+</dd>
+<dt class="field-even">Raises<span class="colon">:</span></dt>
+<dd class="field-even"><p><strong>ValueError</strong> – If <code class="docutils literal notranslate"><span class="pre">mode</span></code> is invalid.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="pyclickimage.annotation_session.AnnotationSession.current_click_manager">
+<span class="property"><span class="k"><span class="pre">property</span></span><span class="w"> </span></span><span class="sig-name descname"><span class="pre">current_click_manager</span></span><span class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference internal" href="click_manager.html#pyclickimage.click_manager.ClickManager" title="pyclickimage.click_manager.ClickManager"><span class="pre">ClickManager</span></a><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><a class="headerlink" href="#pyclickimage.annotation_session.AnnotationSession.current_click_manager" title="Link to this definition">#</a></dt>
+<dd><p>Return the click manager associated with the current image.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>Click manager of the selected image, or <code class="docutils literal notranslate"><span class="pre">None</span></code> if no image is
+selected.</p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p><a class="reference internal" href="click_manager.html#pyclickimage.click_manager.ClickManager" title="pyclickimage.click_manager.ClickManager">ClickManager</a> or None</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="pyclickimage.annotation_session.AnnotationSession.current_clicks">
+<span class="property"><span class="k"><span class="pre">property</span></span><span class="w"> </span></span><span class="sig-name descname"><span class="pre">current_clicks</span></span><span class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="pre">Tuple</span><span class="p"><span class="pre">[</span></span><span class="pre">int</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">float</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">int</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">float</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span></span><a class="headerlink" href="#pyclickimage.annotation_session.AnnotationSession.current_clicks" title="Link to this definition">#</a></dt>
+<dd><p>Return the clicks of the current annotation group.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>Clicks of the current image and group.</p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p><a class="reference internal" href="common.html#pyclickimage.common.Group" title="pyclickimage.common.Group">Group</a></p>
+</dd>
+</dl>
+<p class="rubric">Notes</p>
+<p>Returns an empty group if no image or group is selected.</p>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="pyclickimage.annotation_session.AnnotationSession.current_group">
+<span class="property"><span class="k"><span class="pre">property</span></span><span class="w"> </span></span><span class="sig-name descname"><span class="pre">current_group</span></span><span class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">str</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><a class="headerlink" href="#pyclickimage.annotation_session.AnnotationSession.current_group" title="Link to this definition">#</a></dt>
+<dd><p>Return the currently selected annotation group.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>Current group, or <code class="docutils literal notranslate"><span class="pre">None</span></code> if no group is selected.</p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p>str or None</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="id0">
+<span class="property"><span class="k"><span class="pre">property</span></span><span class="w"> </span></span><span class="sig-name descname"><span class="pre">current_group_index</span></span><span class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">int</span></span><a class="headerlink" href="#id0" title="Link to this definition">#</a></dt>
+<dd><p>Return the index of the currently selected group.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>Current group index, or <code class="docutils literal notranslate"><span class="pre">-1</span></code> if no group is selected.</p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p>int</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="pyclickimage.annotation_session.AnnotationSession.current_image">
+<span class="property"><span class="k"><span class="pre">property</span></span><span class="w"> </span></span><span class="sig-name descname"><span class="pre">current_image</span></span><span class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference internal" href="#pyclickimage.annotation_session.ImageEntry" title="pyclickimage.annotation_session.ImageEntry"><span class="pre">ImageEntry</span></a><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><a class="headerlink" href="#pyclickimage.annotation_session.AnnotationSession.current_image" title="Link to this definition">#</a></dt>
+<dd><p>Return the currently selected image.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>Selected image, or <code class="docutils literal notranslate"><span class="pre">None</span></code> if no image is selected.</p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p><a class="reference internal" href="#pyclickimage.annotation_session.ImageEntry" title="pyclickimage.annotation_session.ImageEntry">ImageEntry</a> or None</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="id1">
+<span class="property"><span class="k"><span class="pre">property</span></span><span class="w"> </span></span><span class="sig-name descname"><span class="pre">current_image_index</span></span><span class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">int</span></span><a class="headerlink" href="#id1" title="Link to this definition">#</a></dt>
+<dd><p>Return the currently selected image.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>Current image entry index, or <code class="docutils literal notranslate"><span class="pre">-1</span></code> if no image is selected.</p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p><a class="reference internal" href="#pyclickimage.annotation_session.ImageEntry" title="pyclickimage.annotation_session.ImageEntry">ImageEntry</a> or None</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="pyclickimage.annotation_session.AnnotationSession.current_image_path">
+<span class="property"><span class="k"><span class="pre">property</span></span><span class="w"> </span></span><span class="sig-name descname"><span class="pre">current_image_path</span></span><span class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">Path</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><a class="headerlink" href="#pyclickimage.annotation_session.AnnotationSession.current_image_path" title="Link to this definition">#</a></dt>
+<dd><p>Return the path of the currently selected image.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>Path of the selected image, or <code class="docutils literal notranslate"><span class="pre">None</span></code> if no image is selected.</p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p>pathlib.Path or None</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="pyclickimage.annotation_session.AnnotationSession.delete_group">
+<span class="sig-name descname"><span class="pre">delete_group</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">group_name</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="reference internal" href="../_modules/pyclickimage/annotation_session.html#AnnotationSession.delete_group"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pyclickimage.annotation_session.AnnotationSession.delete_group" title="Link to this definition">#</a></dt>
+<dd><p>Delete an annotation group.</p>
+<p>The group and all associated clicks are removed
+from every image.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>group_name</strong> (<em>str</em>) – Group name.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="pyclickimage.annotation_session.AnnotationSession.from_csv">
+<span class="property"><span class="k"><span class="pre">classmethod</span></span><span class="w"> </span></span><span class="sig-name descname"><span class="pre">from_csv</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">path</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference internal" href="#pyclickimage.annotation_session.AnnotationSession" title="pyclickimage.annotation_session.AnnotationSession"><span class="pre">AnnotationSession</span></a></span></span><a class="reference internal" href="../_modules/pyclickimage/annotation_session.html#AnnotationSession.from_csv"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pyclickimage.annotation_session.AnnotationSession.from_csv" title="Link to this definition">#</a></dt>
+<dd><p>Load a session from CSV.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>path</strong> (<em>str</em>) – CSV file path.</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>Loaded annotation session.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><a class="reference internal" href="#pyclickimage.annotation_session.AnnotationSession" title="pyclickimage.annotation_session.AnnotationSession">AnnotationSession</a></p>
+</dd>
+<dt class="field-even">Raises<span class="colon">:</span></dt>
+<dd class="field-even"><p><strong>ValueError</strong> – If the CSV format is invalid.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="pyclickimage.annotation_session.AnnotationSession.from_file">
+<span class="property"><span class="k"><span class="pre">classmethod</span></span><span class="w"> </span></span><span class="sig-name descname"><span class="pre">from_file</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">path</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">Path</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference internal" href="#pyclickimage.annotation_session.AnnotationSession" title="pyclickimage.annotation_session.AnnotationSession"><span class="pre">AnnotationSession</span></a></span></span><a class="reference internal" href="../_modules/pyclickimage/annotation_session.html#AnnotationSession.from_file"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pyclickimage.annotation_session.AnnotationSession.from_file" title="Link to this definition">#</a></dt>
+<dd><p>Load an annotation session from a supported file format.</p>
+<p>Supported formats:</p>
+<ul class="simple">
+<li><p>JSON</p></li>
+<li><p>CSV</p></li>
+</ul>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="pyclickimage.annotation_session.AnnotationSession.from_json">
+<span class="property"><span class="k"><span class="pre">classmethod</span></span><span class="w"> </span></span><span class="sig-name descname"><span class="pre">from_json</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">path</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">Path</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference internal" href="#pyclickimage.annotation_session.AnnotationSession" title="pyclickimage.annotation_session.AnnotationSession"><span class="pre">AnnotationSession</span></a></span></span><a class="reference internal" href="../_modules/pyclickimage/annotation_session.html#AnnotationSession.from_json"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pyclickimage.annotation_session.AnnotationSession.from_json" title="Link to this definition">#</a></dt>
+<dd><p>Load an annotation session from JSON.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>path</strong> (<em>str</em><em> or </em><em>pathlib.Path</em>) – JSON file path.</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>Loaded session.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><a class="reference internal" href="#pyclickimage.annotation_session.AnnotationSession" title="pyclickimage.annotation_session.AnnotationSession">AnnotationSession</a></p>
+</dd>
+<dt class="field-even">Raises<span class="colon">:</span></dt>
+<dd class="field-even"><p><strong>ValueError</strong> – If the JSON structure is invalid.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="pyclickimage.annotation_session.AnnotationSession.get_clicks">
+<span class="sig-name descname"><span class="pre">get_clicks</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">group_name</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="pre">Tuple</span><span class="p"><span class="pre">[</span></span><span class="pre">int</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">float</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">int</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">float</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span></span></span><a class="reference internal" href="../_modules/pyclickimage/annotation_session.html#AnnotationSession.get_clicks"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pyclickimage.annotation_session.AnnotationSession.get_clicks" title="Link to this definition">#</a></dt>
+<dd><p>Return the clicks of the group.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>group_name</strong> (<em>str</em>) – Group name.</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>Clicks of the current image and selected group.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><a class="reference internal" href="common.html#pyclickimage.common.Group" title="pyclickimage.common.Group">Group</a></p>
+</dd>
+</dl>
+<p class="rubric">Notes</p>
+<p>Returns an empty group if no image is selected.</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="id2">
+<span class="sig-name descname"><span class="pre">groups</span></span><span class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">]</span></span></span><a class="headerlink" href="#id2" title="Link to this definition">#</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="id3">
+<span class="sig-name descname"><span class="pre">images</span></span><span class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">List</span><span class="p"><span class="pre">[</span></span><a class="reference internal" href="#pyclickimage.annotation_session.ImageEntry" title="pyclickimage.annotation_session.ImageEntry"><span class="pre">ImageEntry</span></a><span class="p"><span class="pre">]</span></span></span><a class="headerlink" href="#id3" title="Link to this definition">#</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="id4">
+<span class="sig-name descname"><span class="pre">precision_mode</span></span><span class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">Literal</span><span class="p"><span class="pre">[</span></span><span class="s"><span class="pre">'float'</span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="s"><span class="pre">'int'</span></span><span class="p"><span class="pre">]</span></span></span><a class="headerlink" href="#id4" title="Link to this definition">#</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="pyclickimage.annotation_session.AnnotationSession.remove_all_clicks">
+<span class="sig-name descname"><span class="pre">remove_all_clicks</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="reference internal" href="../_modules/pyclickimage/annotation_session.html#AnnotationSession.remove_all_clicks"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pyclickimage.annotation_session.AnnotationSession.remove_all_clicks" title="Link to this definition">#</a></dt>
+<dd><p>Remove all clicks from the current annotation group.</p>
+<p class="rubric">Notes</p>
+<p>Does nothing if no image or group is selected.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="pyclickimage.annotation_session.AnnotationSession.remove_image">
+<span class="sig-name descname"><span class="pre">remove_image</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">image_path</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">Path</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="reference internal" href="../_modules/pyclickimage/annotation_session.html#AnnotationSession.remove_image"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pyclickimage.annotation_session.AnnotationSession.remove_image" title="Link to this definition">#</a></dt>
+<dd><p>Remove an image from the session.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>image_path</strong> (<em>str</em><em> or </em><em>pathlib.Path</em>) – Image to remove.</p>
+</dd>
+<dt class="field-even">Raises<span class="colon">:</span></dt>
+<dd class="field-even"><p><strong>KeyError</strong> – If the image does not exist.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="pyclickimage.annotation_session.AnnotationSession.remove_last_click">
+<span class="sig-name descname"><span class="pre">remove_last_click</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="reference internal" href="../_modules/pyclickimage/annotation_session.html#AnnotationSession.remove_last_click"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pyclickimage.annotation_session.AnnotationSession.remove_last_click" title="Link to this definition">#</a></dt>
+<dd><p>Remove the last click from the current annotation group.</p>
+<p class="rubric">Notes</p>
+<p>Does nothing if no image or group is selected.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="pyclickimage.annotation_session.AnnotationSession.rename_group">
+<span class="sig-name descname"><span class="pre">rename_group</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">old_name</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">new_name</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="reference internal" href="../_modules/pyclickimage/annotation_session.html#AnnotationSession.rename_group"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pyclickimage.annotation_session.AnnotationSession.rename_group" title="Link to this definition">#</a></dt>
+<dd><p>Rename an annotation group.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>old_name</strong> (<em>str</em>) – Current group name.</p></li>
+<li><p><strong>new_name</strong> (<em>str</em>) – New group name.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Raises<span class="colon">:</span></dt>
+<dd class="field-even"><ul class="simple">
+<li><p><strong>KeyError</strong> – If <code class="docutils literal notranslate"><span class="pre">old_name</span></code> does not exist.</p></li>
+<li><p><strong>ValueError</strong> – If <code class="docutils literal notranslate"><span class="pre">new_name</span></code> already exists.</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="pyclickimage.annotation_session.AnnotationSession.select_current_group">
+<span class="sig-name descname"><span class="pre">select_current_group</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">group_name</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="reference internal" href="../_modules/pyclickimage/annotation_session.html#AnnotationSession.select_current_group"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pyclickimage.annotation_session.AnnotationSession.select_current_group" title="Link to this definition">#</a></dt>
+<dd><p>Select the current annotation group.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>group_name</strong> (<em>str</em><em> or </em><em>None</em>) – Group to select.
+If <code class="docutils literal notranslate"><span class="pre">None</span></code>, clears the current selection.</p>
+</dd>
+<dt class="field-even">Raises<span class="colon">:</span></dt>
+<dd class="field-even"><p><strong>KeyError</strong> – If the group does not exist.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="pyclickimage.annotation_session.AnnotationSession.select_current_group_index">
+<span class="sig-name descname"><span class="pre">select_current_group_index</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">index</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="reference internal" href="../_modules/pyclickimage/annotation_session.html#AnnotationSession.select_current_group_index"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pyclickimage.annotation_session.AnnotationSession.select_current_group_index" title="Link to this definition">#</a></dt>
+<dd><p>Select the current annotation group by index.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>index</strong> (<em>int</em>) – Group index.
+Use <code class="docutils literal notranslate"><span class="pre">-1</span></code> to clear the selection.</p>
+</dd>
+<dt class="field-even">Raises<span class="colon">:</span></dt>
+<dd class="field-even"><ul class="simple">
+<li><p><strong>TypeError</strong> – If <code class="docutils literal notranslate"><span class="pre">index</span></code> is not an integer.</p></li>
+<li><p><strong>IndexError</strong> – If the index is invalid.</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="pyclickimage.annotation_session.AnnotationSession.select_current_image_index">
+<span class="sig-name descname"><span class="pre">select_current_image_index</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">index</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="reference internal" href="../_modules/pyclickimage/annotation_session.html#AnnotationSession.select_current_image_index"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pyclickimage.annotation_session.AnnotationSession.select_current_image_index" title="Link to this definition">#</a></dt>
+<dd><p>Select the current image by index.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>index</strong> (<em>int</em>) – Image index.
+Use <code class="docutils literal notranslate"><span class="pre">-1</span></code> to clear the selection.</p>
+</dd>
+<dt class="field-even">Raises<span class="colon">:</span></dt>
+<dd class="field-even"><ul class="simple">
+<li><p><strong>TypeError</strong> – If <code class="docutils literal notranslate"><span class="pre">index</span></code> is not an integer.</p></li>
+<li><p><strong>IndexError</strong> – If the index is out of range.</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="pyclickimage.annotation_session.AnnotationSession.select_current_image_path">
+<span class="sig-name descname"><span class="pre">select_current_image_path</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">image_path</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">Path</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="reference internal" href="../_modules/pyclickimage/annotation_session.html#AnnotationSession.select_current_image_path"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pyclickimage.annotation_session.AnnotationSession.select_current_image_path" title="Link to this definition">#</a></dt>
+<dd><p>Select the current image.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>image_path</strong> (<em>str</em><em>, </em><em>pathlib.Path</em><em> or </em><em>None</em>) – Image to select.
+If <code class="docutils literal notranslate"><span class="pre">None</span></code>, the current selection is cleared.</p>
+</dd>
+<dt class="field-even">Raises<span class="colon">:</span></dt>
+<dd class="field-even"><p><strong>KeyError</strong> – If the image does not exist.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="pyclickimage.annotation_session.AnnotationSession.set_precision_mode">
+<span class="sig-name descname"><span class="pre">set_precision_mode</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">precision_mode</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Literal</span><span class="p"><span class="pre">[</span></span><span class="s"><span class="pre">'float'</span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="s"><span class="pre">'int'</span></span><span class="p"><span class="pre">]</span></span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="reference internal" href="../_modules/pyclickimage/annotation_session.html#AnnotationSession.set_precision_mode"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pyclickimage.annotation_session.AnnotationSession.set_precision_mode" title="Link to this definition">#</a></dt>
+<dd><p>Change output precision mode.</p>
+<p>The internal coordinates remain stored as float.
+This only affects returned values and CSV export.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>precision_mode</strong> (<em>{&quot;float&quot;</em><em>, </em><em>&quot;int&quot;}</em>) – Output precision mode.</p>
+</dd>
+<dt class="field-even">Raises<span class="colon">:</span></dt>
+<dd class="field-even"><p><strong>ValueError</strong> – If the precision mode is invalid.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="pyclickimage.annotation_session.AnnotationSession.sort_groups_alpha">
+<span class="sig-name descname"><span class="pre">sort_groups_alpha</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="reference internal" href="../_modules/pyclickimage/annotation_session.html#AnnotationSession.sort_groups_alpha"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pyclickimage.annotation_session.AnnotationSession.sort_groups_alpha" title="Link to this definition">#</a></dt>
+<dd><p>Sort groups alphabetically.</p>
+<p class="rubric">Notes</p>
+<p>The current group selection is preserved.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="pyclickimage.annotation_session.AnnotationSession.sort_groups_natural">
+<span class="sig-name descname"><span class="pre">sort_groups_natural</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="reference internal" href="../_modules/pyclickimage/annotation_session.html#AnnotationSession.sort_groups_natural"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pyclickimage.annotation_session.AnnotationSession.sort_groups_natural" title="Link to this definition">#</a></dt>
+<dd><p>Sort groups using natural ordering.</p>
+<p class="rubric">Notes</p>
+<p>The current group selection is preserved.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="pyclickimage.annotation_session.AnnotationSession.sort_images_alpha">
+<span class="sig-name descname"><span class="pre">sort_images_alpha</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">fullpath</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">True</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="reference internal" href="../_modules/pyclickimage/annotation_session.html#AnnotationSession.sort_images_alpha"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pyclickimage.annotation_session.AnnotationSession.sort_images_alpha" title="Link to this definition">#</a></dt>
+<dd><p>Sort images alphabetically.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>fullpath</strong> (<em>bool</em><em>, </em><em>default=True</em>) – If <code class="docutils literal notranslate"><span class="pre">True</span></code>, sort using the complete path.
+Otherwise, sort using only the filename.</p>
+</dd>
+</dl>
+<p class="rubric">Notes</p>
+<p>The current image selection is preserved.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="pyclickimage.annotation_session.AnnotationSession.sort_images_natural">
+<span class="sig-name descname"><span class="pre">sort_images_natural</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">fullpath</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">True</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="reference internal" href="../_modules/pyclickimage/annotation_session.html#AnnotationSession.sort_images_natural"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pyclickimage.annotation_session.AnnotationSession.sort_images_natural" title="Link to this definition">#</a></dt>
+<dd><p>Sort images using natural ordering.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>fullpath</strong> (<em>bool</em><em>, </em><em>default=True</em>) – If <code class="docutils literal notranslate"><span class="pre">True</span></code>, sort using the complete path.
+Otherwise, sort using only the filename.</p>
+</dd>
+</dl>
+<p class="rubric">Notes</p>
+<p>The current image selection is preserved.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="pyclickimage.annotation_session.AnnotationSession.to_csv">
+<span class="sig-name descname"><span class="pre">to_csv</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">path</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="reference internal" href="../_modules/pyclickimage/annotation_session.html#AnnotationSession.to_csv"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pyclickimage.annotation_session.AnnotationSession.to_csv" title="Link to this definition">#</a></dt>
+<dd><p>Save the complete session to CSV.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>path</strong> (<em>str</em>) – Output CSV file path.</p></li>
+<li><p><strong>Format</strong></p></li>
+<li><p><strong>------</strong></p></li>
+<li><p><strong>Image</strong></p></li>
+<li><p><strong>Group</strong></p></li>
+<li><p><strong>Index</strong></p></li>
+<li><p><strong>X</strong></p></li>
+<li><p><strong>Y</strong></p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="pyclickimage.annotation_session.AnnotationSession.to_json">
+<span class="sig-name descname"><span class="pre">to_json</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">path</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">Path</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="reference internal" href="../_modules/pyclickimage/annotation_session.html#AnnotationSession.to_json"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pyclickimage.annotation_session.AnnotationSession.to_json" title="Link to this definition">#</a></dt>
+<dd><p>Save the complete annotation session to JSON.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>path</strong> (<em>str</em><em> or </em><em>pathlib.Path</em>) – Output JSON file path.</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="pyclickimage.annotation_session.ImageEntry">
+<span class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></span><span class="sig-prename descclassname"><span class="pre">pyclickimage.annotation_session.</span></span><span class="sig-name descname"><span class="pre">ImageEntry</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">path</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Path</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">click_manager</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="click_manager.html#pyclickimage.click_manager.ClickManager" title="pyclickimage.click_manager.ClickManager"><span class="pre">ClickManager</span></a></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/pyclickimage/annotation_session.html#ImageEntry"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pyclickimage.annotation_session.ImageEntry" title="Link to this definition">#</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<p>Store an image and its associated annotations.</p>
+<p>An <a class="reference internal" href="#pyclickimage.annotation_session.ImageEntry" title="pyclickimage.annotation_session.ImageEntry"><code class="xref py py-class docutils literal notranslate"><span class="pre">ImageEntry</span></code></a> links an image file path with the
+<code class="xref py py-class docutils literal notranslate"><span class="pre">ClickManager</span></code> responsible for storing its annotation points.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>path</strong> (<em>pathlib.Path</em>) – Path to the image file.</p></li>
+<li><p><strong>click_manager</strong> (<a class="reference internal" href="click_manager.html#pyclickimage.click_manager.ClickManager" title="pyclickimage.click_manager.ClickManager"><em>ClickManager</em></a>) – Manager storing annotation clicks associated with this image.</p></li>
+</ul>
+</dd>
+</dl>
+<p class="rubric">Notes</p>
+<p>Each image in an <a class="reference internal" href="#pyclickimage.annotation_session.AnnotationSession" title="pyclickimage.annotation_session.AnnotationSession"><code class="xref py py-class docutils literal notranslate"><span class="pre">AnnotationSession</span></code></a> owns a dedicated
+<code class="xref py py-class docutils literal notranslate"><span class="pre">ClickManager</span></code>. This avoids maintaining separate synchronized
+containers for images and click managers.</p>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="pyclickimage.annotation_session.ImageEntry.click_manager">
+<span class="sig-name descname"><span class="pre">click_manager</span></span><span class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference internal" href="click_manager.html#pyclickimage.click_manager.ClickManager" title="pyclickimage.click_manager.ClickManager"><span class="pre">ClickManager</span></a></span><a class="headerlink" href="#pyclickimage.annotation_session.ImageEntry.click_manager" title="Link to this definition">#</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="pyclickimage.annotation_session.ImageEntry.path">
+<span class="sig-name descname"><span class="pre">path</span></span><span class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">Path</span></span><a class="headerlink" href="#pyclickimage.annotation_session.ImageEntry.path" title="Link to this definition">#</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
 </section>
 
 
@@ -348,12 +1176,12 @@
                   
 <div class="prev-next-area">
     <a class="left-prev"
-       href="reading_session.html"
+       href="click_image_app.html"
        title="previous page">
       <i class="fa-solid fa-angle-left"></i>
       <div class="prev-next-info">
         <p class="prev-next-subtitle">previous</p>
-        <p class="prev-next-title">Reading session</p>
+        <p class="prev-next-title">pyclickimage.click_image_app</p>
       </div>
     </a>
     <a class="right-next"
@@ -361,7 +1189,7 @@
        title="next page">
       <div class="prev-next-info">
         <p class="prev-next-subtitle">next</p>
-        <p class="prev-next-title">pyclickimage.ClickManager</p>
+        <p class="prev-next-title">pyclickimage.click_manager</p>
       </div>
       <i class="fa-solid fa-angle-right"></i>
     </a>
@@ -377,13 +1205,85 @@
 
 
   <div class="sidebar-secondary-item">
-  <div role="note" aria-label="source link">
-    <h3>This Page</h3>
-    <ul class="this-page-menu">
-      <li><a href="../_sources/api_doc/annotation_session.rst.txt"
-            rel="nofollow">Show Source</a></li>
-    </ul>
-   </div></div>
+<div
+    id="pst-page-navigation-heading-2"
+    class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> On this page
+  </div>
+  <nav id="pst-page-toc-nav" class="page-toc" aria-labelledby="pst-page-navigation-heading-2">
+    <ul class="pst-show_toc_level nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#pyclickimage.annotation_session.AnnotationSession"><code class="docutils literal notranslate"><span class="pre">AnnotationSession</span></code></a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#pyclickimage.annotation_session.AnnotationSession.images"><code class="docutils literal notranslate"><span class="pre">AnnotationSession.images</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#pyclickimage.annotation_session.AnnotationSession.groups"><code class="docutils literal notranslate"><span class="pre">AnnotationSession.groups</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#pyclickimage.annotation_session.AnnotationSession.current_image_index"><code class="docutils literal notranslate"><span class="pre">AnnotationSession.current_image_index</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#pyclickimage.annotation_session.AnnotationSession.current_group_index"><code class="docutils literal notranslate"><span class="pre">AnnotationSession.current_group_index</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#pyclickimage.annotation_session.AnnotationSession.precision_mode"><code class="docutils literal notranslate"><span class="pre">AnnotationSession.precision_mode</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#pyclickimage.annotation_session.AnnotationSession._create_click_manager"><code class="docutils literal notranslate"><span class="pre">AnnotationSession._create_click_manager()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#pyclickimage.annotation_session.AnnotationSession._current_annotation"><code class="docutils literal notranslate"><span class="pre">AnnotationSession._current_annotation</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#pyclickimage.annotation_session.AnnotationSession._current_group_index"><code class="docutils literal notranslate"><span class="pre">AnnotationSession._current_group_index</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#pyclickimage.annotation_session.AnnotationSession._current_image_index"><code class="docutils literal notranslate"><span class="pre">AnnotationSession._current_image_index</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#pyclickimage.annotation_session.AnnotationSession._find_group"><code class="docutils literal notranslate"><span class="pre">AnnotationSession._find_group()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#pyclickimage.annotation_session.AnnotationSession._find_group_index"><code class="docutils literal notranslate"><span class="pre">AnnotationSession._find_group_index()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#pyclickimage.annotation_session.AnnotationSession._find_image"><code class="docutils literal notranslate"><span class="pre">AnnotationSession._find_image()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#pyclickimage.annotation_session.AnnotationSession._find_image_index"><code class="docutils literal notranslate"><span class="pre">AnnotationSession._find_image_index()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#pyclickimage.annotation_session.AnnotationSession._natural_group_sorting_key"><code class="docutils literal notranslate"><span class="pre">AnnotationSession._natural_group_sorting_key()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#pyclickimage.annotation_session.AnnotationSession._natural_path_sorting_key"><code class="docutils literal notranslate"><span class="pre">AnnotationSession._natural_path_sorting_key()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#pyclickimage.annotation_session.AnnotationSession._restore_current_group"><code class="docutils literal notranslate"><span class="pre">AnnotationSession._restore_current_group()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#pyclickimage.annotation_session.AnnotationSession._restore_current_image"><code class="docutils literal notranslate"><span class="pre">AnnotationSession._restore_current_image()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#pyclickimage.annotation_session.AnnotationSession._sort_groups"><code class="docutils literal notranslate"><span class="pre">AnnotationSession._sort_groups()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#pyclickimage.annotation_session.AnnotationSession._sort_images"><code class="docutils literal notranslate"><span class="pre">AnnotationSession._sort_images()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#pyclickimage.annotation_session.AnnotationSession.add_click"><code class="docutils literal notranslate"><span class="pre">AnnotationSession.add_click()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#pyclickimage.annotation_session.AnnotationSession.add_group"><code class="docutils literal notranslate"><span class="pre">AnnotationSession.add_group()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#pyclickimage.annotation_session.AnnotationSession.add_image"><code class="docutils literal notranslate"><span class="pre">AnnotationSession.add_image()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#pyclickimage.annotation_session.AnnotationSession.apply_half_shift"><code class="docutils literal notranslate"><span class="pre">AnnotationSession.apply_half_shift()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#pyclickimage.annotation_session.AnnotationSession.current_click_manager"><code class="docutils literal notranslate"><span class="pre">AnnotationSession.current_click_manager</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#pyclickimage.annotation_session.AnnotationSession.current_clicks"><code class="docutils literal notranslate"><span class="pre">AnnotationSession.current_clicks</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#pyclickimage.annotation_session.AnnotationSession.current_group"><code class="docutils literal notranslate"><span class="pre">AnnotationSession.current_group</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id0"><code class="docutils literal notranslate"><span class="pre">AnnotationSession.current_group_index</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#pyclickimage.annotation_session.AnnotationSession.current_image"><code class="docutils literal notranslate"><span class="pre">AnnotationSession.current_image</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id1"><code class="docutils literal notranslate"><span class="pre">AnnotationSession.current_image_index</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#pyclickimage.annotation_session.AnnotationSession.current_image_path"><code class="docutils literal notranslate"><span class="pre">AnnotationSession.current_image_path</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#pyclickimage.annotation_session.AnnotationSession.delete_group"><code class="docutils literal notranslate"><span class="pre">AnnotationSession.delete_group()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#pyclickimage.annotation_session.AnnotationSession.from_csv"><code class="docutils literal notranslate"><span class="pre">AnnotationSession.from_csv()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#pyclickimage.annotation_session.AnnotationSession.from_file"><code class="docutils literal notranslate"><span class="pre">AnnotationSession.from_file()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#pyclickimage.annotation_session.AnnotationSession.from_json"><code class="docutils literal notranslate"><span class="pre">AnnotationSession.from_json()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#pyclickimage.annotation_session.AnnotationSession.get_clicks"><code class="docutils literal notranslate"><span class="pre">AnnotationSession.get_clicks()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id2"><code class="docutils literal notranslate"><span class="pre">AnnotationSession.groups</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id3"><code class="docutils literal notranslate"><span class="pre">AnnotationSession.images</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id4"><code class="docutils literal notranslate"><span class="pre">AnnotationSession.precision_mode</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#pyclickimage.annotation_session.AnnotationSession.remove_all_clicks"><code class="docutils literal notranslate"><span class="pre">AnnotationSession.remove_all_clicks()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#pyclickimage.annotation_session.AnnotationSession.remove_image"><code class="docutils literal notranslate"><span class="pre">AnnotationSession.remove_image()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#pyclickimage.annotation_session.AnnotationSession.remove_last_click"><code class="docutils literal notranslate"><span class="pre">AnnotationSession.remove_last_click()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#pyclickimage.annotation_session.AnnotationSession.rename_group"><code class="docutils literal notranslate"><span class="pre">AnnotationSession.rename_group()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#pyclickimage.annotation_session.AnnotationSession.select_current_group"><code class="docutils literal notranslate"><span class="pre">AnnotationSession.select_current_group()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#pyclickimage.annotation_session.AnnotationSession.select_current_group_index"><code class="docutils literal notranslate"><span class="pre">AnnotationSession.select_current_group_index()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#pyclickimage.annotation_session.AnnotationSession.select_current_image_index"><code class="docutils literal notranslate"><span class="pre">AnnotationSession.select_current_image_index()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#pyclickimage.annotation_session.AnnotationSession.select_current_image_path"><code class="docutils literal notranslate"><span class="pre">AnnotationSession.select_current_image_path()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#pyclickimage.annotation_session.AnnotationSession.set_precision_mode"><code class="docutils literal notranslate"><span class="pre">AnnotationSession.set_precision_mode()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#pyclickimage.annotation_session.AnnotationSession.sort_groups_alpha"><code class="docutils literal notranslate"><span class="pre">AnnotationSession.sort_groups_alpha()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#pyclickimage.annotation_session.AnnotationSession.sort_groups_natural"><code class="docutils literal notranslate"><span class="pre">AnnotationSession.sort_groups_natural()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#pyclickimage.annotation_session.AnnotationSession.sort_images_alpha"><code class="docutils literal notranslate"><span class="pre">AnnotationSession.sort_images_alpha()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#pyclickimage.annotation_session.AnnotationSession.sort_images_natural"><code class="docutils literal notranslate"><span class="pre">AnnotationSession.sort_images_natural()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#pyclickimage.annotation_session.AnnotationSession.to_csv"><code class="docutils literal notranslate"><span class="pre">AnnotationSession.to_csv()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#pyclickimage.annotation_session.AnnotationSession.to_json"><code class="docutils literal notranslate"><span class="pre">AnnotationSession.to_json()</span></code></a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#pyclickimage.annotation_session.ImageEntry"><code class="docutils literal notranslate"><span class="pre">ImageEntry</span></code></a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#pyclickimage.annotation_session.ImageEntry.click_manager"><code class="docutils literal notranslate"><span class="pre">ImageEntry.click_manager</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#pyclickimage.annotation_session.ImageEntry.path"><code class="docutils literal notranslate"><span class="pre">ImageEntry.path</span></code></a></li>
+</ul>
+</li>
+</ul>
+  </nav></div>
+
+  <div class="sidebar-secondary-item">
+
+  <div class="tocsection sourcelink">
+    <a href="../_sources/api_doc/annotation_session.rst.txt">
+      <i class="fa-solid fa-file-lines"></i> Show Source
+    </a>
+  </div>
+</div>
 
 </div></div>
               
@@ -398,8 +1298,8 @@
   </div>
   
   <!-- Scripts loaded after <body> so the DOM is not blocked -->
-  <script defer src="../_static/scripts/bootstrap.js?digest=8878045cc6db502f8baf"></script>
-<script defer src="../_static/scripts/pydata-sphinx-theme.js?digest=8878045cc6db502f8baf"></script>
+  <script defer src="../_static/scripts/bootstrap.js?digest=18bd87630a240e9c25be"></script>
+<script defer src="../_static/scripts/pydata-sphinx-theme.js?digest=18bd87630a240e9c25be"></script>
 
   <footer class="bd-footer">
 <div class="bd-footer__inner bd-page-width">
@@ -419,8 +1319,7 @@
         <div class="footer-item">
 
   <p class="sphinx-version">
-    Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 7.4.7.
-    <br/>
+    Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 9.0.4.
   </p>
 </div>
       
@@ -433,7 +1332,7 @@
         <div class="footer-item">
 <p class="theme-version">
   <!-- # L10n: Setting the PST URL as an argument as this does not need to be localized -->
-  Built with the <a href="https://pydata-sphinx-theme.readthedocs.io/en/stable/index.html">PyData Sphinx Theme</a> 0.16.1.
+  Built with the <a href="https://pydata-sphinx-theme.readthedocs.io/en/stable/index.html">PyData Sphinx Theme</a> 0.23.0.
 </p></div>
       
     </div>

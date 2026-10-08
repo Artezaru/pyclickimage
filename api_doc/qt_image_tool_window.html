@@ -1,0 +1,2112 @@
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="../" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>pyclickimage.qt_image_tool_window &#8212; pyclickimage 4.0.0 documentation</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  <!--
+    this give us a css class that will be invisible only if js is disabled
+  -->
+  <noscript>
+    <style>
+      .pst-js-only { display: none !important; }
+
+    </style>
+  </noscript>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../_static/styles/theme.css?digest=18bd87630a240e9c25be" rel="stylesheet" />
+<link href="../_static/styles/pydata-sphinx-theme.css?digest=18bd87630a240e9c25be" rel="stylesheet" />
+
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=8f2a1f02" />
+  
+  <!-- So that users can add custom icons -->
+  <script defer src="../_static/scripts/fontawesome.js?digest=18bd87630a240e9c25be"></script>
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../_static/scripts/bootstrap.js?digest=18bd87630a240e9c25be" />
+<link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=18bd87630a240e9c25be" />
+
+    <script src="../_static/documentation_options.js?v=3304f9e4"></script>
+    <script src="../_static/doctools.js?v=fd6eb6e6"></script>
+    <script src="../_static/sphinx_highlight.js?v=6ffebe34"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'api_doc/qt_image_tool_window';</script>
+    <script>DOCUMENTATION_OPTIONS.search_as_you_type = false;</script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="pyclickimage.qt_image_viewer" href="qt_image_viewer.html" />
+    <link rel="prev" title="pyclickimage.common" href="common.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="color-scheme" content="light dark"/>
+  <meta name="docsearch:language" content="en"/>
+  <meta name="docsearch:version" content="" />
+  
+    
+    <script src="../_static/searchtools.js"></script>
+    <script src="../_static/language_data.js"></script>
+    <script src="../searchindex.js"></script>
+  
+  </head>
+  <body data-default-mode="">
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
+  
+  
+  
+  
+  <dialog id="pst-search-dialog">
+    
+<form class="bd-search d-flex align-items-center"
+      action="../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         placeholder="Search the docs ..."
+         aria-label="Search the docs ..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form>
+  </dialog>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+
+  
+    <header id="pst-header" class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+<div class="bd-header__inner bd-page-width">
+  <button type="button" class="pst-navbar-icon sidebar-toggle primary-toggle" aria-label="Site navigation">
+    <span class="fa-solid fa-bars"></span>
+  </button>
+  
+  
+  <div class="col-lg-3 navbar-header-items__start">
+    
+      <div class="navbar-item">
+
+  
+    
+  
+
+<a class="navbar-brand logo" href="../index.html">
+  
+  
+  
+  
+  
+  
+    <p class="title logo__title">pyclickimage 4.0.0 documentation</p>
+  
+</a></div>
+    
+  </div>
+  
+  <div class="col-lg-9 navbar-header-items">
+    
+    <div class="me-auto navbar-header-items__center">
+      
+        <div class="navbar-item">
+<nav>
+  <ul class="bd-navbar-elements navbar-nav">
+    
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../installation.html">
+    Installation
+  </a>
+</li>
+
+
+<li class="nav-item current active">
+  <a class="nav-link nav-internal" href="../api.html">
+    API Reference
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../usage.html">
+    Usage
+  </a>
+</li>
+
+  </ul>
+</nav></div>
+      
+    </div>
+    
+    
+    <div class="navbar-header-items__end">
+      
+        <div class="navbar-item navbar-persistent--container">
+          
+
+<button type="button" class="btn search-button-field search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+ <i class="fa-solid fa-magnifying-glass"></i>
+ <span class="search-button__default-text">Search</span>
+ <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+</button>
+        </div>
+      
+      
+        <div class="navbar-item">
+
+<div class="theme-switch-container dropdown pst-js-only" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Color mode">
+  <button type="button" class="btn btn-sm nav-link pst-navbar-icon theme-switch-button dropdown-toggle" aria-label="Color mode" data-bs-toggle="dropdown">
+    <i class="theme-switch fa-solid fa-sun fa-lg fa-fw" data-mode="light" title="Light"></i>
+    <i class="theme-switch fa-solid fa-moon fa-lg fa-fw" data-mode="dark" title="Dark"></i>
+    <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg fa-fw" data-mode="auto" title="System Settings"></i>
+  </button>
+  <ul class="dropdown-menu dropdown-menu-end">
+    <li><button type="button" class="dropdown-item d-flex align-items-center theme-change-button" data-mode="auto"><i class="fa-solid fa-circle-half-stroke fa-lg fa-fw me-1"></i>System Settings</button></li>
+    <li><button type="button" class="dropdown-item d-flex align-items-center theme-change-button" data-mode="light"><i class="fa-solid fa-sun fa-lg fa-fw me-1"></i>Light</button></li>
+    <li><button type="button" class="dropdown-item d-flex align-items-center theme-change-button" data-mode="dark"><i class="fa-solid fa-moon fa-lg fa-fw me-1"></i>Dark</button></li>
+  </ul>
+</div></div>
+      
+    </div>
+    
+  </div>
+  
+  
+    <div class="navbar-persistent--mobile">
+
+<button type="button" class="btn search-button-field search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+ <i class="fa-solid fa-magnifying-glass"></i>
+ <span class="search-button__default-text">Search</span>
+ <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+</button>
+    </div>
+  
+
+  
+    <button type="button" class="pst-navbar-icon sidebar-toggle secondary-toggle" aria-label="On this page">
+      <span class="fa-solid fa-outdent"></span>
+    </button>
+  
+</div>
+
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+      <dialog id="pst-primary-sidebar-modal"></dialog>
+      <div id="pst-primary-sidebar" class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+      <div class="sidebar-header-items__center">
+        
+          
+          
+            <div class="navbar-item">
+<nav>
+  <ul class="bd-navbar-elements navbar-nav">
+    
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../installation.html">
+    Installation
+  </a>
+</li>
+
+
+<li class="nav-item current active">
+  <a class="nav-link nav-internal" href="../api.html">
+    API Reference
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../usage.html">
+    Usage
+  </a>
+</li>
+
+  </ul>
+</nav></div>
+          
+        
+      </div>
+    
+    
+    
+      <div class="sidebar-header-items__end">
+        
+          <div class="navbar-item">
+
+<div class="theme-switch-container dropdown pst-js-only" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Color mode">
+  <button type="button" class="btn btn-sm nav-link pst-navbar-icon theme-switch-button dropdown-toggle" aria-label="Color mode" data-bs-toggle="dropdown">
+    <i class="theme-switch fa-solid fa-sun fa-lg fa-fw" data-mode="light" title="Light"></i>
+    <i class="theme-switch fa-solid fa-moon fa-lg fa-fw" data-mode="dark" title="Dark"></i>
+    <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg fa-fw" data-mode="auto" title="System Settings"></i>
+  </button>
+  <ul class="dropdown-menu dropdown-menu-end">
+    <li><button type="button" class="dropdown-item d-flex align-items-center theme-change-button" data-mode="auto"><i class="fa-solid fa-circle-half-stroke fa-lg fa-fw me-1"></i>System Settings</button></li>
+    <li><button type="button" class="dropdown-item d-flex align-items-center theme-change-button" data-mode="light"><i class="fa-solid fa-sun fa-lg fa-fw me-1"></i>Light</button></li>
+    <li><button type="button" class="dropdown-item d-flex align-items-center theme-change-button" data-mode="dark"><i class="fa-solid fa-moon fa-lg fa-fw me-1"></i>Dark</button></li>
+  </ul>
+</div></div>
+        
+      </div>
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item pst-sidebar-collapse"><button type="button" id="pst-collapse-sidebar-button" aria-expanded="true" aria-controls="pst-primary-sidebar">
+  <svg class="pst-icon" role="img" aria-hidden="true" focusable="false" viewBox="0 0 16 16" xmlns="http://www.w3.org/2000/svg">
+    <path fill="currentColor" d="M3 15.5C2.36232 15.5 1.74874 15.2564 1.28478 14.8189C0.820828 14.3815 0.541576 13.7832 0.504167 13.1467L0.5 13L0.5 3C0.499965 2.36232 0.743605 1.74874 1.18107 1.28478C1.61854 0.820828 2.21676 0.541576 2.85333 0.504167L3 0.5L13 0.5C13.6377 0.499965 14.2513 0.743605 14.7152 1.18107C15.1792 1.61854 15.4584 2.21676 15.4958 2.85333L15.5 3L15.5 13C15.5 13.6377 15.2564 14.2513 14.8189 14.7152C14.3815 15.1792 13.7832 15.4584 13.1467 15.4958L13 15.5L3 15.5ZM3 13.8333L10.5 13.8333L10.5 2.16667L3 2.16667C2.79589 2.16669 2.59889 2.24163 2.44636 2.37726C2.29383 2.5129 2.19638 2.69979 2.1725 2.9025L2.16667 3L2.16667 13C2.16669 13.2041 2.24163 13.4011 2.37726 13.5536C2.5129 13.7062 2.69979 13.8036 2.9025 13.8275L3 13.8333ZM6.65583 10.325L6.5775 10.2558L4.91083 8.58917C4.76735 8.44567 4.68116 8.25476 4.66843 8.05223C4.65569 7.84971 4.71729 7.6495 4.84167 7.48917L4.91083 7.41083L6.5775 5.74417C6.72747 5.59471 6.9287 5.50794 7.14032 5.50148C7.35194 5.49502 7.55809 5.56935 7.7169 5.70937C7.8757 5.8494 7.97525 6.04463 7.99533 6.25539C8.01541 6.46616 7.95451 6.67667 7.825 6.84417L7.75583 6.9225L6.67917 8L7.75583 9.0775C7.89931 9.22099 7.98551 9.41191 7.99824 9.61443C8.01097 9.81695 7.94938 10.0172 7.825 10.1775L7.75583 10.2558C7.61234 10.3993 7.42142 10.4855 7.2189 10.4982C7.01638 10.511 6.81617 10.4494 6.65583 10.325Z"/>
+  </svg>
+  <span class="pst-collapse-sidebar-label">Collapse Sidebar</span>
+  <span class="pst-expand-sidebar-label">Expand Sidebar</span>
+</button></div>
+        <div class="sidebar-primary-item">
+
+<nav class="bd-docs-nav bd-links"
+     aria-label="Section Navigation">
+  <p class="bd-links__title" role="heading" aria-level="1">Section Navigation</p>
+  <div class="bd-toc-item navbar-nav"><ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="run.html">pyclickimage.run</a></li>
+<li class="toctree-l1"><a class="reference internal" href="reading_session.html">Reading session</a></li>
+</ul>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="click_image_app.html">pyclickimage.click_image_app</a></li>
+</ul>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="annotation_session.html">pyclickimage.annotation_session</a></li>
+<li class="toctree-l1"><a class="reference internal" href="click_manager.html">pyclickimage.click_manager</a></li>
+<li class="toctree-l1"><a class="reference internal" href="common.html">pyclickimage.common</a></li>
+</ul>
+<ul class="current nav bd-sidenav">
+<li class="toctree-l1 current active"><a aria-current="page" class="current reference internal" href="#">pyclickimage.qt_image_tool_window</a></li>
+<li class="toctree-l1"><a class="reference internal" href="qt_image_viewer.html">pyclickimage.qt_image_viewer</a></li>
+<li class="toctree-l1"><a class="reference internal" href="qt_histogram.html">pyclickimage.qt_histogram</a></li>
+<li class="toctree-l1"><a class="reference internal" href="qt_profile_plot.html">pyclickimage.qt_profile_plot</a></li>
+<li class="toctree-l1"><a class="reference internal" href="qt_linear_interpolator.html">pyclickimage.qt_linear_interpolator</a></li>
+</ul>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="theme.html">pyclickimage.theme</a></li>
+</ul>
+</div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+      <div class="sidebar-primary-item">
+<div id="ethical-ad-placement"
+      class="flat"
+      data-ea-publisher="readthedocs"
+      data-ea-type="readthedocs-sidebar"
+      data-ea-manual="true">
+</div></div>
+  </div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item">
+
+<nav aria-label="Breadcrumb" class="d-print-none">
+  <ul class="bd-breadcrumbs">
+    
+    <li class="breadcrumb-item breadcrumb-home">
+      <a href="../index.html" class="nav-link" aria-label="Home">
+        <i class="fa-solid fa-home"></i>
+      </a>
+    </li>
+    
+    <li class="breadcrumb-item"><a href="../api.html" class="nav-link">API Reference</a></li>
+    
+    <li class="breadcrumb-item active" aria-current="page"><span class="ellipsis">pyclickimage.qt_image_tool_window</span></li>
+  </ul>
+</nav>
+</div>
+      
+    </div>
+  
+  
+</div>
+</div>
+              
+              
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <section id="pyclickimage-qt-image-tool-window">
+<h1>pyclickimage.qt_image_tool_window<a class="headerlink" href="#pyclickimage-qt-image-tool-window" title="Link to this heading">#</a></h1>
+<dl class="py class">
+<dt class="sig sig-object py" id="pyclickimage.qt_image_tool_window.QtImageToolWindow">
+<span class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></span><span class="sig-prename descclassname"><span class="pre">pyclickimage.qt_image_tool_window.</span></span><span class="sig-name descname"><span class="pre">QtImageToolWindow</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">parent</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">QWidget</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">remove_open</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">show_profiles</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">half_shift</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">image_proportion</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">tuple</span><span class="p"><span class="pre">[</span></span><span class="pre">float</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">float</span><span class="p"><span class="pre">]</span></span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">(0.8,</span> <span class="pre">0.8)</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/pyclickimage/qt_image_tool_window.html#QtImageToolWindow"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pyclickimage.qt_image_tool_window.QtImageToolWindow" title="Link to this definition">#</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">QMainWindow</span></code></p>
+<p>Image viewer with profiles, histogram and intensity interpolation.</p>
+<p>The window displays a 2D numerical image (grayscale or color) and
+provides:</p>
+<ul class="simple">
+<li><p>zoom, pan, crosshair and markers (through <code class="xref py py-class docutils literal notranslate"><span class="pre">QtImageViewer</span></code>);</p></li>
+<li><p>horizontal and vertical intensity profiles under the cursor,
+arranged in a resizable 2 x 2 grid;</p></li>
+<li><p>a histogram of the whole image, or of a region selected with a
+right-button drag;</p></li>
+<li><p>an intensity interpolation: a piecewise-linear curve
+(<code class="xref py py-class docutils literal notranslate"><span class="pre">QtLinearInterpolator</span></code>) mapping intensities to the
+normalized display range, followed by an OpenCV colormap.</p></li>
+</ul>
+<p>It can be used on its own, or embedded in another application which
+manages the images (<code class="docutils literal notranslate"><span class="pre">set_image</span></code>) and listens to the re-emitted
+viewer signals.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>parent</strong> (<em>QWidget</em><em>, </em><em>optional</em>) – Parent widget. When given, the window is created as a plain
+child widget (<code class="docutils literal notranslate"><span class="pre">Qt.Widget</span></code> flag) so it can be inserted in a
+layout. A parentless instance inserted in a layout later is also
+turned into a child widget by Qt.</p></li>
+<li><p><strong>remove_open</strong> (<em>bool</em><em>, </em><em>default=False</em>) – If <code class="docutils literal notranslate"><span class="pre">True</span></code>, the <em>Open</em> action is not created. Use it when the
+host application manages the images.</p></li>
+<li><p><strong>show_profiles</strong> (<em>bool</em><em>, </em><em>default=False</em>) – Initial visibility of the profiles.</p></li>
+<li><p><strong>half_shift</strong> (<em>bool</em><em>, </em><em>default=True</em>) – Coordinate convention of the viewer. <code class="docutils literal notranslate"><span class="pre">True</span></code> places the center
+of the first pixel at <code class="docutils literal notranslate"><span class="pre">(0,</span> <span class="pre">0)</span></code>.</p></li>
+<li><p><strong>image_proportion</strong> (<em>tuple</em><em> of </em><em>float</em><em>, </em><em>default=</em><em>(</em><em>0.8</em><em>, </em><em>0.8</em><em>)</em>) – Initial <code class="docutils literal notranslate"><span class="pre">(horizontal,</span> <span class="pre">vertical)</span></code> fraction of the area given to
+the image cell when the profiles are visible. The profiles share
+the remaining <code class="docutils literal notranslate"><span class="pre">(0.2,</span> <span class="pre">0.2)</span></code>.</p></li>
+<li><p><strong>Signals</strong></p></li>
+<li><p><strong>-------</strong></p></li>
+<li><p><strong>mouse_entered</strong> (<em>pyqtSignal</em><em>(</em><em>float</em><em>, </em><em>float</em><em>)</em>) – Re-emitted from <code class="xref py py-attr docutils literal notranslate"><span class="pre">QtImageViewer.mouse_entered</span></code>.</p></li>
+<li><p><strong>mouse_moved</strong> (<em>pyqtSignal</em><em>(</em><em>float</em><em>, </em><em>float</em><em>)</em>) – Re-emitted from <code class="xref py py-attr docutils literal notranslate"><span class="pre">QtImageViewer.mouse_moved</span></code>.</p></li>
+<li><p><strong>mouse_left</strong> (<em>pyqtSignal</em><em>(</em><em>)</em>) – Re-emitted from <code class="xref py py-attr docutils literal notranslate"><span class="pre">QtImageViewer.mouse_left</span></code>.</p></li>
+<li><p><strong>left_pressed</strong> (<em>pyqtSignal</em><em>(</em><em>float</em><em>, </em><em>float</em><em>)</em>) – Re-emitted from the viewer.</p></li>
+<li><p><strong>left_released</strong> (<em>pyqtSignal</em><em>(</em><em>float</em><em>, </em><em>float</em><em>)</em>) – Re-emitted from the viewer.</p></li>
+<li><p><strong>right_pressed</strong> (<em>pyqtSignal</em><em>(</em><em>float</em><em>, </em><em>float</em><em>)</em>) – Re-emitted from the viewer.</p></li>
+<li><p><strong>right_released</strong> (<em>pyqtSignal</em><em>(</em><em>float</em><em>, </em><em>float</em><em>)</em>) – Re-emitted from the viewer.</p></li>
+<li><p><strong>left_click</strong> (<em>pyqtSignal</em><em>(</em><em>float</em><em>, </em><em>float</em><em>)</em>) – Re-emitted from the viewer. Emitted for clicks, not drags.</p></li>
+<li><p><strong>right_click</strong> (<em>pyqtSignal</em><em>(</em><em>float</em><em>, </em><em>float</em><em>)</em>) – Re-emitted from the viewer. Emitted for clicks, not drags.</p></li>
+<li><p><strong>rectangle_selected</strong> (<em>pyqtSignal</em><em>(</em><em>float</em><em>, </em><em>float</em><em>, </em><em>float</em><em>, </em><em>float</em><em>)</em>) – Re-emitted from the viewer (right-button drag). The window also
+uses it to show the histogram of the selected region.</p></li>
+<li><p><strong>image_changed</strong> (<em>pyqtSignal</em><em>(</em><em>)</em>) – Emitted after <a class="reference internal" href="#pyclickimage.qt_image_tool_window.QtImageToolWindow.set_image" title="pyclickimage.qt_image_tool_window.QtImageToolWindow.set_image"><code class="xref py py-meth docutils literal notranslate"><span class="pre">set_image()</span></code></a>, <a class="reference internal" href="#pyclickimage.qt_image_tool_window.QtImageToolWindow.load_image" title="pyclickimage.qt_image_tool_window.QtImageToolWindow.load_image"><code class="xref py py-meth docutils literal notranslate"><span class="pre">load_image()</span></code></a> or
+<a class="reference internal" href="#pyclickimage.qt_image_tool_window.QtImageToolWindow.clear_image" title="pyclickimage.qt_image_tool_window.QtImageToolWindow.clear_image"><code class="xref py py-meth docutils literal notranslate"><span class="pre">clear_image()</span></code></a>.</p></li>
+<li><p><strong>display_updated</strong> (<em>pyqtSignal</em><em>(</em><em>)</em>) – Emitted after the displayed pixels were recomputed (image,
+colormap, nodes or display mode change).</p></li>
+<li><p><strong>coordinates</strong> (<em>All coordinates are image</em>)</p></li>
+<li><p><strong>viewer</strong> (<em>following the</em>)</p></li>
+<li><p><strong>half_shift</strong><strong>)</strong><strong>.</strong> (<em>convention</em><em> (</em><em>see</em>)</p></li>
+</ul>
+</dd>
+</dl>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="pyclickimage.qt_image_tool_window.QtImageToolWindow.viewer">
+<span class="sig-name descname"><span class="pre">viewer</span></span><a class="headerlink" href="#pyclickimage.qt_image_tool_window.QtImageToolWindow.viewer" title="Link to this definition">#</a></dt>
+<dd><p>Underlying image viewer. Exposed for advanced customization
+(crosshair, markers…).</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><a class="reference internal" href="qt_image_viewer.html#pyclickimage.qt_image_viewer.QtImageViewer" title="pyclickimage.qt_image_viewer.QtImageViewer">QtImageViewer</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py">
+<span class="sig-name descname"><span class="pre">horizontal_profile,</span> <span class="pre">vertical_profile</span></span></dt>
+<dd><p>Profile widgets.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><a class="reference internal" href="qt_profile_plot.html#pyclickimage.qt_profile_plot.QtProfilePlot" title="pyclickimage.qt_profile_plot.QtProfilePlot">QtProfilePlot</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="pyclickimage.qt_image_tool_window.QtImageToolWindow.histogram">
+<span class="sig-name descname"><span class="pre">histogram</span></span><a class="headerlink" href="#pyclickimage.qt_image_tool_window.QtImageToolWindow.histogram" title="Link to this definition">#</a></dt>
+<dd><p>Histogram widget (displayed in a separate window).</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><a class="reference internal" href="qt_histogram.html#pyclickimage.qt_histogram.QtHistogram" title="pyclickimage.qt_histogram.QtHistogram">QtHistogram</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="pyclickimage.qt_image_tool_window.QtImageToolWindow.interpolator">
+<span class="sig-name descname"><span class="pre">interpolator</span></span><a class="headerlink" href="#pyclickimage.qt_image_tool_window.QtImageToolWindow.interpolator" title="Link to this definition">#</a></dt>
+<dd><p>Interpolation curve (displayed in a separate window).</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><a class="reference internal" href="qt_linear_interpolator.html#pyclickimage.qt_linear_interpolator.QtLinearInterpolator" title="pyclickimage.qt_linear_interpolator.QtLinearInterpolator">QtLinearInterpolator</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="pyclickimage.qt_image_tool_window.QtImageToolWindow.source_image">
+<span class="sig-name descname"><span class="pre">source_image</span></span><a class="headerlink" href="#pyclickimage.qt_image_tool_window.QtImageToolWindow.source_image" title="Link to this definition">#</a></dt>
+<dd><p>Image exactly as given to <a class="reference internal" href="#pyclickimage.qt_image_tool_window.QtImageToolWindow.set_image" title="pyclickimage.qt_image_tool_window.QtImageToolWindow.set_image"><code class="xref py py-meth docutils literal notranslate"><span class="pre">set_image()</span></code></a> (may be color).</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>numpy.ndarray or None</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="pyclickimage.qt_image_tool_window.QtImageToolWindow.original_image">
+<span class="sig-name descname"><span class="pre">original_image</span></span><a class="headerlink" href="#pyclickimage.qt_image_tool_window.QtImageToolWindow.original_image" title="Link to this definition">#</a></dt>
+<dd><p>2D scalar version of <code class="docutils literal notranslate"><span class="pre">source_image</span></code>, used for profiles,
+histogram and interpolation.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>numpy.ndarray or None</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="pyclickimage.qt_image_tool_window.QtImageToolWindow.processed_image">
+<span class="sig-name descname"><span class="pre">processed_image</span></span><a class="headerlink" href="#pyclickimage.qt_image_tool_window.QtImageToolWindow.processed_image" title="Link to this definition">#</a></dt>
+<dd><p>Result of the interpolation curve (<code class="docutils literal notranslate"><span class="pre">NaN</span></code> outside the
+domain). Computed in <em>Processed</em> mode only.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>numpy.ndarray or None</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="pyclickimage.qt_image_tool_window.QtImageToolWindow.display_image">
+<span class="sig-name descname"><span class="pre">display_image</span></span><a class="headerlink" href="#pyclickimage.qt_image_tool_window.QtImageToolWindow.display_image" title="Link to this definition">#</a></dt>
+<dd><p>Displayed <code class="docutils literal notranslate"><span class="pre">uint8</span></code> RGB image.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>numpy.ndarray or None</p>
+</dd>
+</dl>
+</dd></dl>
+
+<p class="rubric">Notes</p>
+<p><strong>Layout.</strong> The image and the two profiles are placed in a 2 x 2 grid
+built from splitters:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">+-------------+-----+</span>
+<span class="o">|</span>    <span class="n">image</span>    <span class="o">|</span>  <span class="n">V</span>  <span class="o">|</span>   <span class="n">V</span> <span class="p">:</span> <span class="n">vertical</span> <span class="n">profile</span> <span class="p">(</span><span class="n">stops</span> <span class="n">at</span> <span class="n">the</span>
+<span class="o">|</span>   <span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>    <span class="o">|</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="mi">1</span><span class="p">)</span><span class="o">|</span>       <span class="n">bottom</span> <span class="n">of</span> <span class="n">the</span> <span class="n">image</span><span class="p">)</span>
+<span class="o">+-------------+-----+</span>
+<span class="o">|</span>      <span class="n">H</span>      <span class="o">|</span>     <span class="o">|</span>   <span class="n">H</span> <span class="p">:</span> <span class="n">horizontal</span> <span class="n">profile</span>
+<span class="o">|</span>   <span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>    <span class="o">|</span>     <span class="o">|</span>   <span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span> <span class="ow">is</span> <span class="n">empty</span>
+<span class="o">+-------------+-----+</span>
+</pre></div>
+</div>
+<p>Both splitter handles can be dragged; the two rows always keep the same
+column widths. When the profiles are hidden, the image fills the whole
+area.</p>
+<p><strong>Display pipeline.</strong> <em>Original</em> mode:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">image</span> <span class="o">-&gt;</span> <span class="n">normalization</span> <span class="n">to</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">]</span>
+</pre></div>
+</div>
+<p>The colormap is never applied to the original image: a grayscale image
+is displayed in gray and a color image keeps its colors. The colormap
+selector is therefore disabled in this mode.</p>
+<p><em>Processed</em> mode:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">scalar</span> <span class="n">image</span> <span class="o">-&gt;</span> <span class="n">interpolation</span> <span class="n">curve</span> <span class="o">-&gt;</span> <span class="n">normalization</span> <span class="o">-&gt;</span> <span class="n">colormap</span>
+</pre></div>
+</div>
+<p>Values outside the curve domain are displayed in black. Profiles,
+histogram and interpolation always work on the 2D scalar
+(luminance) version of the image.</p>
+<p><strong>Integration.</strong> The window defines no keyboard shortcut, to avoid
+conflicts with the host application.</p>
+<p class="rubric">Examples</p>
+<p>Stand-alone use:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">app</span> <span class="o">=</span> <span class="n">QtWidgets</span><span class="o">.</span><span class="n">QApplication</span><span class="p">([])</span>
+<span class="n">window</span> <span class="o">=</span> <span class="n">QtImageToolWindow</span><span class="p">(</span><span class="n">show_profiles</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="n">window</span><span class="o">.</span><span class="n">load_image</span><span class="p">(</span><span class="s2">"image.tif"</span><span class="p">)</span>
+<span class="n">window</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+<span class="n">app</span><span class="o">.</span><span class="n">exec_</span><span class="p">()</span>
+</pre></div>
+</div>
+<p>Embedded use, the host managing the images:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">tool</span> <span class="o">=</span> <span class="n">QtImageToolWindow</span><span class="p">(</span><span class="n">remove_open</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="n">layout</span><span class="o">.</span><span class="n">addWidget</span><span class="p">(</span><span class="n">tool</span><span class="p">)</span>
+
+<span class="n">tool</span><span class="o">.</span><span class="n">left_click</span><span class="o">.</span><span class="n">connect</span><span class="p">(</span><span class="n">on_left_click</span><span class="p">)</span>
+<span class="n">tool</span><span class="o">.</span><span class="n">set_image</span><span class="p">(</span><span class="n">read_image</span><span class="p">(</span><span class="n">path</span><span class="p">))</span>
+<span class="n">tool</span><span class="o">.</span><span class="n">draw_cross</span><span class="p">(</span><span class="mf">10.0</span><span class="p">,</span> <span class="mf">20.0</span><span class="p">,</span> <span class="n">QtGui</span><span class="o">.</span><span class="n">QColor</span><span class="p">(</span><span class="s2">"red"</span><span class="p">),</span> <span class="mi">8</span><span class="p">)</span>
+</pre></div>
+</div>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="pyclickimage.qt_image_tool_window.QtImageToolWindow.VIEWER_SIGNALS">
+<span class="sig-name descname"><span class="pre">VIEWER_SIGNALS</span></span><span class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">('mouse_entered',</span> <span class="pre">'mouse_moved',</span> <span class="pre">'mouse_left',</span> <span class="pre">'left_pressed',</span> <span class="pre">'left_released',</span> <span class="pre">'right_pressed',</span> <span class="pre">'right_released',</span> <span class="pre">'left_click',</span> <span class="pre">'right_click',</span> <span class="pre">'rectangle_selected')</span></span><a class="headerlink" href="#pyclickimage.qt_image_tool_window.QtImageToolWindow.VIEWER_SIGNALS" title="Link to this definition">#</a></dt>
+<dd><p>Names of the viewer signals re-emitted by the window.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="pyclickimage.qt_image_tool_window.QtImageToolWindow._apply_profile_range">
+<span class="sig-name descname"><span class="pre">_apply_profile_range</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="reference internal" href="../_modules/pyclickimage/qt_image_tool_window.html#QtImageToolWindow._apply_profile_range"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pyclickimage.qt_image_tool_window.QtImageToolWindow._apply_profile_range" title="Link to this definition">#</a></dt>
+<dd><p>Set the intensity ticks of both profiles.</p>
+<p><code class="docutils literal notranslate"><span class="pre">None</span></code> lets <code class="xref py py-class docutils literal notranslate"><span class="pre">QtProfilePlot</span></code> build the ticks from the
+displayed data; explicit ticks fix the axis to their range.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="pyclickimage.qt_image_tool_window.QtImageToolWindow._apply_proportions">
+<span class="sig-name descname"><span class="pre">_apply_proportions</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="reference internal" href="../_modules/pyclickimage/qt_image_tool_window.html#QtImageToolWindow._apply_proportions"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pyclickimage.qt_image_tool_window.QtImageToolWindow._apply_proportions" title="Link to this definition">#</a></dt>
+<dd><p>Resize the splitters according to the stored proportions.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="pyclickimage.qt_image_tool_window.QtImageToolWindow._apply_x_axis_range">
+<span class="sig-name descname"><span class="pre">_apply_x_axis_range</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="reference internal" href="../_modules/pyclickimage/qt_image_tool_window.html#QtImageToolWindow._apply_x_axis_range"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pyclickimage.qt_image_tool_window.QtImageToolWindow._apply_x_axis_range" title="Link to this definition">#</a></dt>
+<dd><p>Set the visible x-range of the interpolation plot.</p>
+<p class="rubric">Notes</p>
+<ul class="simple">
+<li><p><a class="reference internal" href="#pyclickimage.qt_image_tool_window.QtImageToolWindow.is_x_axis_cropped" title="pyclickimage.qt_image_tool_window.QtImageToolWindow.is_x_axis_cropped"><code class="xref py py-meth docutils literal notranslate"><span class="pre">is_x_axis_cropped()</span></code></a> is <code class="docutils literal notranslate"><span class="pre">False</span></code>: the axis spans the
+whole interpolation domain (for example <code class="docutils literal notranslate"><span class="pre">[0,</span> <span class="pre">65535]</span></code> for
+<code class="docutils literal notranslate"><span class="pre">uint16</span></code>).</p></li>
+<li><p><a class="reference internal" href="#pyclickimage.qt_image_tool_window.QtImageToolWindow.is_x_axis_cropped" title="pyclickimage.qt_image_tool_window.QtImageToolWindow.is_x_axis_cropped"><code class="xref py py-meth docutils literal notranslate"><span class="pre">is_x_axis_cropped()</span></code></a> is <code class="docutils literal notranslate"><span class="pre">True</span></code>: the axis spans the
+actual minimum and maximum intensities of the current image.</p></li>
+</ul>
+<p>Only the display of the curve is affected, not the
+interpolation: nodes outside the cropped view are kept.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="pyclickimage.qt_image_tool_window.QtImageToolWindow._configure_interpolator">
+<span class="sig-name descname"><span class="pre">_configure_interpolator</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/pyclickimage/qt_image_tool_window.html#QtImageToolWindow._configure_interpolator"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pyclickimage.qt_image_tool_window.QtImageToolWindow._configure_interpolator" title="Link to this definition">#</a></dt>
+<dd><p>Configure the interpolator for the current image.</p>
+<p class="rubric">Notes</p>
+<dl class="simple">
+<dt>X range (interpolation domain):</dt><dd><ul class="simple">
+<li><p>Integer images: the full range of the dtype,
+<code class="docutils literal notranslate"><span class="pre">[0,</span> <span class="pre">numpy.iinfo(dtype).max]</span></code> for unsigned integers
+(<code class="docutils literal notranslate"><span class="pre">[iinfo.min,</span> <span class="pre">iinfo.max]</span></code> for signed integers). It does
+not depend on the image content.</p></li>
+<li><p>Floating-point images: there is no type range, so the
+domain is the data range of the first image, extended
+when a later image exceeds it.</p></li>
+</ul>
+</dd>
+<dt>Nodes:</dt><dd><ul class="simple">
+<li><p>Same dtype as the previous image: the curve is kept as it
+is. Integer domains never change; floating-point domains
+can only grow, which keeps every interior node.</p></li>
+<li><p>New dtype (or first image): the curve is reset to a
+straight line from <code class="docutils literal notranslate"><span class="pre">(xmin,</span> <span class="pre">0)</span></code> to <code class="docutils literal notranslate"><span class="pre">(xmax,</span> <span class="pre">1)</span></code>, because
+a <code class="docutils literal notranslate"><span class="pre">uint8</span></code> mapping applied to a <code class="docutils literal notranslate"><span class="pre">uint16</span></code> image (or the
+reverse) is wrong.</p></li>
+</ul>
+</dd>
+<dt>Y range:</dt><dd><p>Always <code class="docutils literal notranslate"><span class="pre">[0,</span> <span class="pre">1]</span></code> (normalized display level).</p>
+</dd>
+</dl>
+<p>The visible x-range is then set by <a class="reference internal" href="#pyclickimage.qt_image_tool_window.QtImageToolWindow._apply_x_axis_range" title="pyclickimage.qt_image_tool_window.QtImageToolWindow._apply_x_axis_range"><code class="xref py py-meth docutils literal notranslate"><span class="pre">_apply_x_axis_range()</span></code></a>.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="pyclickimage.qt_image_tool_window.QtImageToolWindow._connect_signals">
+<span class="sig-name descname"><span class="pre">_connect_signals</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/pyclickimage/qt_image_tool_window.html#QtImageToolWindow._connect_signals"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pyclickimage.qt_image_tool_window.QtImageToolWindow._connect_signals" title="Link to this definition">#</a></dt>
+<dd><p>Connect the internal signals.</p>
+<p class="rubric">Notes</p>
+<p>Every signal listed in <a class="reference internal" href="#pyclickimage.qt_image_tool_window.QtImageToolWindow.VIEWER_SIGNALS" title="pyclickimage.qt_image_tool_window.QtImageToolWindow.VIEWER_SIGNALS"><code class="xref py py-attr docutils literal notranslate"><span class="pre">VIEWER_SIGNALS</span></code></a> is connected to the
+signal of the same name of the window (signal-to-signal
+connection), which re-emits it unchanged.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="pyclickimage.qt_image_tool_window.QtImageToolWindow._create_interpolation_panel">
+<span class="sig-name descname"><span class="pre">_create_interpolation_panel</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">QWidget</span></span></span><a class="reference internal" href="../_modules/pyclickimage/qt_image_tool_window.html#QtImageToolWindow._create_interpolation_panel"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pyclickimage.qt_image_tool_window.QtImageToolWindow._create_interpolation_panel" title="Link to this definition">#</a></dt>
+<dd><p>Create the content of the interpolation window.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>Widget holding the interpolator curve and its controls.</p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p>QWidget</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="pyclickimage.qt_image_tool_window.QtImageToolWindow._create_layout">
+<span class="sig-name descname"><span class="pre">_create_layout</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/pyclickimage/qt_image_tool_window.html#QtImageToolWindow._create_layout"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pyclickimage.qt_image_tool_window.QtImageToolWindow._create_layout" title="Link to this definition">#</a></dt>
+<dd><p>Create the 2 x 2 splitter grid.</p>
+<p>The grid is made of one vertical splitter containing two
+horizontal splitters (one per row):</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>main_splitter (vertical)
+|-- top_splitter    : [viewer, vertical_profile]
+`-- bottom_splitter : [horizontal_profile, corner]
+</pre></div>
+</div>
+<p>The two row splitters are kept synchronized so that the columns
+stay aligned: the vertical profile therefore stops exactly at the
+bottom of the image cell.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="pyclickimage.qt_image_tool_window.QtImageToolWindow._create_toolbar">
+<span class="sig-name descname"><span class="pre">_create_toolbar</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/pyclickimage/qt_image_tool_window.html#QtImageToolWindow._create_toolbar"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pyclickimage.qt_image_tool_window.QtImageToolWindow._create_toolbar" title="Link to this definition">#</a></dt>
+<dd><p>Create the toolbar.</p>
+<p class="rubric">Notes</p>
+<ul class="simple">
+<li><p><em>Open</em> is only created when <code class="docutils literal notranslate"><span class="pre">remove_open</span></code> is <code class="docutils literal notranslate"><span class="pre">False</span></code>.</p></li>
+<li><p><em>Original</em> / <em>Processed</em> are exclusive (<code class="docutils literal notranslate"><span class="pre">QActionGroup</span></code>).</p></li>
+<li><p>The node file actions are in the interpolation window.</p></li>
+</ul>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="pyclickimage.qt_image_tool_window.QtImageToolWindow._on_main_splitter_moved">
+<span class="sig-name descname"><span class="pre">_on_main_splitter_moved</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">_</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="reference internal" href="../_modules/pyclickimage/qt_image_tool_window.html#QtImageToolWindow._on_main_splitter_moved"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pyclickimage.qt_image_tool_window.QtImageToolWindow._on_main_splitter_moved" title="Link to this definition">#</a></dt>
+<dd><p>Store the vertical proportion after a user drag.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="pyclickimage.qt_image_tool_window.QtImageToolWindow._on_processed_toggled">
+<span class="sig-name descname"><span class="pre">_on_processed_toggled</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">processed</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="reference internal" href="../_modules/pyclickimage/qt_image_tool_window.html#QtImageToolWindow._on_processed_toggled"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pyclickimage.qt_image_tool_window.QtImageToolWindow._on_processed_toggled" title="Link to this definition">#</a></dt>
+<dd><p>Enable the interpolation tools only in <em>Processed</em> mode.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>processed</strong> (<em>bool</em>) – <code class="docutils literal notranslate"><span class="pre">True</span></code> when the <em>Processed</em> display is selected.</p>
+</dd>
+</dl>
+<p class="rubric">Notes</p>
+<p>If the interpolation window is open, its content is disabled in
+<em>Original</em> mode instead of being closed.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="pyclickimage.qt_image_tool_window.QtImageToolWindow._on_row_splitter_moved">
+<span class="sig-name descname"><span class="pre">_on_row_splitter_moved</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">_</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="reference internal" href="../_modules/pyclickimage/qt_image_tool_window.html#QtImageToolWindow._on_row_splitter_moved"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pyclickimage.qt_image_tool_window.QtImageToolWindow._on_row_splitter_moved" title="Link to this definition">#</a></dt>
+<dd><p>Synchronize both rows and store the horizontal proportion.</p>
+<p>Called when the user drags the handle of the top or bottom row.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="pyclickimage.qt_image_tool_window.QtImageToolWindow._pixel_index">
+<span class="sig-name descname"><span class="pre">_pixel_index</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">coordinate</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">size</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">int</span></span></span><a class="reference internal" href="../_modules/pyclickimage/qt_image_tool_window.html#QtImageToolWindow._pixel_index"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pyclickimage.qt_image_tool_window.QtImageToolWindow._pixel_index" title="Link to this definition">#</a></dt>
+<dd><p>Convert an image coordinate to a pixel index.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>coordinate</strong> (<em>float</em>) – Image coordinate (viewer convention).</p></li>
+<li><p><strong>size</strong> (<em>int</em>) – Number of pixels along the axis.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>Index in <code class="docutils literal notranslate"><span class="pre">[0,</span> <span class="pre">size</span> <span class="pre">-</span> <span class="pre">1]</span></code>.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>int</p>
+</dd>
+</dl>
+<p class="rubric">Notes</p>
+<p>With <code class="docutils literal notranslate"><span class="pre">half_shift=True</span></code> pixel <code class="docutils literal notranslate"><span class="pre">i</span></code> covers <code class="docutils literal notranslate"><span class="pre">[i</span> <span class="pre">-</span> <span class="pre">0.5,</span> <span class="pre">i</span> <span class="pre">+</span> <span class="pre">0.5[</span></code>
+(rounding). With <code class="docutils literal notranslate"><span class="pre">half_shift=False</span></code> it covers <code class="docutils literal notranslate"><span class="pre">[i,</span> <span class="pre">i</span> <span class="pre">+</span> <span class="pre">1[</span></code>
+(floor).</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="pyclickimage.qt_image_tool_window.QtImageToolWindow._render">
+<span class="sig-name descname"><span class="pre">_render</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">reset_view</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="reference internal" href="../_modules/pyclickimage/qt_image_tool_window.html#QtImageToolWindow._render"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pyclickimage.qt_image_tool_window.QtImageToolWindow._render" title="Link to this definition">#</a></dt>
+<dd><p>Compute the displayed pixels and send them to the viewer.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>reset_view</strong> (<em>bool</em>) – Forwarded to <code class="xref py py-meth docutils literal notranslate"><span class="pre">QtImageViewer.set_image()</span></code>.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="pyclickimage.qt_image_tool_window.QtImageToolWindow._set_qimage">
+<span class="property"><span class="k"><span class="pre">static</span></span><span class="w"> </span></span><span class="sig-name descname"><span class="pre">_set_qimage</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">image</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">ndarray</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">QImage</span></span></span><a class="reference internal" href="../_modules/pyclickimage/qt_image_tool_window.html#QtImageToolWindow._set_qimage"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pyclickimage.qt_image_tool_window.QtImageToolWindow._set_qimage" title="Link to this definition">#</a></dt>
+<dd><p>Create an independent QImage from an RGB uint8 numpy array.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>image</strong> (<em>numpy.ndarray</em>) – <code class="docutils literal notranslate"><span class="pre">uint8</span></code> array of shape <code class="docutils literal notranslate"><span class="pre">(H,</span> <span class="pre">W,</span> <span class="pre">3)</span></code>.</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>Deep copy, independent of the NumPy buffer.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>QImage</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="pyclickimage.qt_image_tool_window.QtImageToolWindow._set_viewer_image">
+<span class="sig-name descname"><span class="pre">_set_viewer_image</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">image</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">ndarray</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">reset_view</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">True</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/pyclickimage/qt_image_tool_window.html#QtImageToolWindow._set_viewer_image"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pyclickimage.qt_image_tool_window.QtImageToolWindow._set_viewer_image" title="Link to this definition">#</a></dt>
+<dd><p>Send an RGB array to the viewer.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>image</strong> (<em>numpy.ndarray</em>) – <code class="docutils literal notranslate"><span class="pre">uint8</span></code> RGB image.</p></li>
+<li><p><strong>reset_view</strong> (<em>bool</em><em>, </em><em>default=True</em>) – Forwarded to <code class="xref py py-meth docutils literal notranslate"><span class="pre">QtImageViewer.set_image()</span></code>.</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="pyclickimage.qt_image_tool_window.QtImageToolWindow._update_interpolation_indicator">
+<span class="sig-name descname"><span class="pre">_update_interpolation_indicator</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">_</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="reference internal" href="../_modules/pyclickimage/qt_image_tool_window.html#QtImageToolWindow._update_interpolation_indicator"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pyclickimage.qt_image_tool_window.QtImageToolWindow._update_interpolation_indicator" title="Link to this definition">#</a></dt>
+<dd><p>Color the <em>Interpolation</em> button when the curve is customized.</p>
+<p class="rubric">Notes</p>
+<p>The button uses the <code class="docutils literal notranslate"><span class="pre">warning</span></code> colors of the active theme when
+<a class="reference internal" href="#pyclickimage.qt_image_tool_window.QtImageToolWindow.is_default_interpolation" title="pyclickimage.qt_image_tool_window.QtImageToolWindow.is_default_interpolation"><code class="xref py py-meth docutils literal notranslate"><span class="pre">is_default_interpolation()</span></code></a> is <code class="docutils literal notranslate"><span class="pre">False</span></code>, also in <em>Original</em>
+mode (semi-transparent, since the button is then disabled): the
+custom curve will apply as soon as the <em>Processed</em> display is
+selected.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="pyclickimage.qt_image_tool_window.QtImageToolWindow.apply_colormap">
+<span class="sig-name descname"><span class="pre">apply_colormap</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">values</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">ndarray</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">ndarray</span></span></span><a class="reference internal" href="../_modules/pyclickimage/qt_image_tool_window.html#QtImageToolWindow.apply_colormap"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pyclickimage.qt_image_tool_window.QtImageToolWindow.apply_colormap" title="Link to this definition">#</a></dt>
+<dd><p>Convert arbitrary numerical values to uint8 RGB.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>values</strong> (<em>numpy.ndarray</em>) – Scalar <code class="docutils literal notranslate"><span class="pre">(H,</span> <span class="pre">W)</span></code> or BGR(A) <code class="docutils literal notranslate"><span class="pre">(H,</span> <span class="pre">W,</span> <span class="pre">3|4)</span></code> values.</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p><code class="docutils literal notranslate"><span class="pre">uint8</span></code> RGB image using the selected colormap.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>numpy.ndarray</p>
+</dd>
+</dl>
+<div class="admonition seealso">
+<p class="admonition-title">See also</p>
+<p><a class="reference internal" href="#pyclickimage.qt_image_tool_window.colorize" title="pyclickimage.qt_image_tool_window.colorize"><code class="xref py py-obj docutils literal notranslate"><span class="pre">colorize</span></code></a></p>
+</div>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="pyclickimage.qt_image_tool_window.QtImageToolWindow.apply_theme">
+<span class="sig-name descname"><span class="pre">apply_theme</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">theme</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="theme.html#pyclickimage.theme.Theme" title="pyclickimage.theme.Theme"><span class="pre">Theme</span></a></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="reference internal" href="../_modules/pyclickimage/qt_image_tool_window.html#QtImageToolWindow.apply_theme"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pyclickimage.qt_image_tool_window.QtImageToolWindow.apply_theme" title="Link to this definition">#</a></dt>
+<dd><p>Apply a theme to the custom-painted plots of the window.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>theme</strong> (<a class="reference internal" href="theme.html#pyclickimage.theme.Theme" title="pyclickimage.theme.Theme"><em>Theme</em></a>) – Theme from <code class="xref py py-mod docutils literal notranslate"><span class="pre">theme</span></code>.</p>
+</dd>
+</dl>
+<p class="rubric">Notes</p>
+<p>Standard widgets follow the application stylesheet set by
+<code class="xref py py-func docutils literal notranslate"><span class="pre">theme.apply_theme()</span></code>; only the plots (profiles, histogram,
+interpolation curve) and the colors set by the window itself
+(custom-interpolation indicator) need this call.</p>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="pyclickimage.qt_image_tool_window.QtImageToolWindow.auto_marker">
+<span class="property"><span class="k"><span class="pre">property</span></span><span class="w"> </span></span><span class="sig-name descname"><span class="pre">auto_marker</span></span><span class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">bool</span></span><a class="headerlink" href="#pyclickimage.qt_image_tool_window.QtImageToolWindow.auto_marker" title="Link to this definition">#</a></dt>
+<dd><p>Whether the viewer draws a cross on each left click.</p>
+<p><code class="docutils literal notranslate"><span class="pre">False</span></code> by default in this window: markers are expected to be
+drawn by the host application.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>bool</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="pyclickimage.qt_image_tool_window.QtImageToolWindow.clear_image">
+<span class="sig-name descname"><span class="pre">clear_image</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="reference internal" href="../_modules/pyclickimage/qt_image_tool_window.html#QtImageToolWindow.clear_image"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pyclickimage.qt_image_tool_window.QtImageToolWindow.clear_image" title="Link to this definition">#</a></dt>
+<dd><p>Remove the current image.</p>
+<p>The viewer, the profiles and the histogram are cleared. The
+interpolation nodes are kept. Emits <a class="reference internal" href="#pyclickimage.qt_image_tool_window.QtImageToolWindow.image_changed" title="pyclickimage.qt_image_tool_window.QtImageToolWindow.image_changed"><code class="xref py py-attr docutils literal notranslate"><span class="pre">image_changed</span></code></a>.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="pyclickimage.qt_image_tool_window.QtImageToolWindow.clear_markers">
+<span class="sig-name descname"><span class="pre">clear_markers</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="reference internal" href="../_modules/pyclickimage/qt_image_tool_window.html#QtImageToolWindow.clear_markers"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pyclickimage.qt_image_tool_window.QtImageToolWindow.clear_markers" title="Link to this definition">#</a></dt>
+<dd><p>Remove all markers. See <code class="xref py py-meth docutils literal notranslate"><span class="pre">QtImageViewer.clear_markers()</span></code>.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="pyclickimage.qt_image_tool_window.QtImageToolWindow.clear_profiles">
+<span class="sig-name descname"><span class="pre">clear_profiles</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="reference internal" href="../_modules/pyclickimage/qt_image_tool_window.html#QtImageToolWindow.clear_profiles"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pyclickimage.qt_image_tool_window.QtImageToolWindow.clear_profiles" title="Link to this definition">#</a></dt>
+<dd><p>Clear the profiles and the cursor label.</p>
+<p>Called when the image changes and when the cursor leaves the
+image. The profiles are drawn again on the next mouse move over
+the image.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="pyclickimage.qt_image_tool_window.QtImageToolWindow.compute_histogram_on_image">
+<span class="sig-name descname"><span class="pre">compute_histogram_on_image</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="reference internal" href="../_modules/pyclickimage/qt_image_tool_window.html#QtImageToolWindow.compute_histogram_on_image"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pyclickimage.qt_image_tool_window.QtImageToolWindow.compute_histogram_on_image" title="Link to this definition">#</a></dt>
+<dd><p>Show the histogram of the whole scalar image.</p>
+<p>Connected to the <em>Histogram</em> action. The histogram is recomputed
+at each call.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="pyclickimage.qt_image_tool_window.QtImageToolWindow.compute_histogram_on_rectangle">
+<span class="sig-name descname"><span class="pre">compute_histogram_on_rectangle</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">x</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">y</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">width</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">height</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="reference internal" href="../_modules/pyclickimage/qt_image_tool_window.html#QtImageToolWindow.compute_histogram_on_rectangle"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pyclickimage.qt_image_tool_window.QtImageToolWindow.compute_histogram_on_rectangle" title="Link to this definition">#</a></dt>
+<dd><p>Show the histogram of a rectangular region.</p>
+<p>Connected to <code class="xref py py-attr docutils literal notranslate"><span class="pre">QtImageViewer.rectangle_selected</span></code>.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>x</strong> (<em>float</em>) – Image coordinates of the top-left corner (viewer convention).</p></li>
+<li><p><strong>y</strong> (<em>float</em>) – Image coordinates of the top-left corner (viewer convention).</p></li>
+<li><p><strong>width</strong> (<em>float</em>) – Size of the region in pixels.</p></li>
+<li><p><strong>height</strong> (<em>float</em>) – Size of the region in pixels.</p></li>
+</ul>
+</dd>
+</dl>
+<p class="rubric">Notes</p>
+<p>The region is converted to pixel indices with the same convention
+as the profiles, so it is consistent with <code class="docutils literal notranslate"><span class="pre">half_shift</span></code>.</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="pyclickimage.qt_image_tool_window.QtImageToolWindow.display_updated">
+<span class="sig-name descname"><span class="pre">display_updated</span></span><a class="headerlink" href="#pyclickimage.qt_image_tool_window.QtImageToolWindow.display_updated" title="Link to this definition">#</a></dt>
+<dd><p>str = …, revision: int = …, arguments: Sequence = …) -&gt; PYQT_SIGNAL</p>
+<p>types is normally a sequence of individual types.  Each type is either a
+type object or a string that is the name of a C++ type.  Alternatively
+each type could itself be a sequence of types each describing a different
+overloaded signal.
+name is the optional C++ name of the signal.  If it is not specified then
+the name of the class attribute that is bound to the signal is used.
+revision is the optional revision of the signal that is exported to QML.
+If it is not specified then 0 is used.
+arguments is the optional sequence of the names of the signal’s arguments.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>pyqtSignal(<a href="#id1"><span class="problematic" id="id2">*</span></a>types, name</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="pyclickimage.qt_image_tool_window.QtImageToolWindow.draw_cross">
+<span class="sig-name descname"><span class="pre">draw_cross</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/pyclickimage/qt_image_tool_window.html#QtImageToolWindow.draw_cross"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pyclickimage.qt_image_tool_window.QtImageToolWindow.draw_cross" title="Link to this definition">#</a></dt>
+<dd><p>Draw a cross marker. See <code class="xref py py-meth docutils literal notranslate"><span class="pre">QtImageViewer.draw_cross()</span></code>.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="pyclickimage.qt_image_tool_window.QtImageToolWindow.draw_ellipse">
+<span class="sig-name descname"><span class="pre">draw_ellipse</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/pyclickimage/qt_image_tool_window.html#QtImageToolWindow.draw_ellipse"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pyclickimage.qt_image_tool_window.QtImageToolWindow.draw_ellipse" title="Link to this definition">#</a></dt>
+<dd><p>Draw an ellipse marker. See <code class="xref py py-meth docutils literal notranslate"><span class="pre">QtImageViewer.draw_ellipse()</span></code>.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="pyclickimage.qt_image_tool_window.QtImageToolWindow.draw_rectangle">
+<span class="sig-name descname"><span class="pre">draw_rectangle</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/pyclickimage/qt_image_tool_window.html#QtImageToolWindow.draw_rectangle"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pyclickimage.qt_image_tool_window.QtImageToolWindow.draw_rectangle" title="Link to this definition">#</a></dt>
+<dd><p>Draw a rectangle marker. See <code class="xref py py-meth docutils literal notranslate"><span class="pre">QtImageViewer.draw_rectangle()</span></code>.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="pyclickimage.qt_image_tool_window.QtImageToolWindow.eventFilter">
+<span class="sig-name descname"><span class="pre">eventFilter</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">watched</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">QObject</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">event</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">QEvent</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">bool</span></span></span><a class="reference internal" href="../_modules/pyclickimage/qt_image_tool_window.html#QtImageToolWindow.eventFilter"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pyclickimage.qt_image_tool_window.QtImageToolWindow.eventFilter" title="Link to this definition">#</a></dt>
+<dd><p>Keep the grid proportions when the grid is resized.</p>
+<p>The filter is installed on <code class="xref py py-attr docutils literal notranslate"><span class="pre">main_splitter</span></code>: its resize
+event carries the final size of the grid, whereas the window’s
+own <code class="docutils literal notranslate"><span class="pre">resizeEvent</span></code> happens before the layout is updated.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>watched</strong> (<em>QObject</em>) – Object receiving the event.</p></li>
+<li><p><strong>event</strong> (<em>QEvent</em>) – Event.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>Always <code class="docutils literal notranslate"><span class="pre">False</span></code>: the event is never consumed.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>bool</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="pyclickimage.qt_image_tool_window.QtImageToolWindow.get_image">
+<span class="sig-name descname"><span class="pre">get_image</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">scalar</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">ndarray</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span></span><a class="reference internal" href="../_modules/pyclickimage/qt_image_tool_window.html#QtImageToolWindow.get_image"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pyclickimage.qt_image_tool_window.QtImageToolWindow.get_image" title="Link to this definition">#</a></dt>
+<dd><p>Return the current image.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>scalar</strong> (<em>bool</em><em>, </em><em>default=False</em>) – If <code class="docutils literal notranslate"><span class="pre">False</span></code>, return the image as given to <a class="reference internal" href="#pyclickimage.qt_image_tool_window.QtImageToolWindow.set_image" title="pyclickimage.qt_image_tool_window.QtImageToolWindow.set_image"><code class="xref py py-meth docutils literal notranslate"><span class="pre">set_image()</span></code></a>.
+If <code class="docutils literal notranslate"><span class="pre">True</span></code>, return its 2D scalar (luminance) version used
+for the analysis.</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>Current image, or <code class="docutils literal notranslate"><span class="pre">None</span></code> if no image is set.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>numpy.ndarray or None</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="pyclickimage.qt_image_tool_window.QtImageToolWindow.get_selected_colormap">
+<span class="sig-name descname"><span class="pre">get_selected_colormap</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">int</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span></span><a class="reference internal" href="../_modules/pyclickimage/qt_image_tool_window.html#QtImageToolWindow.get_selected_colormap"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pyclickimage.qt_image_tool_window.QtImageToolWindow.get_selected_colormap" title="Link to this definition">#</a></dt>
+<dd><p>Return OpenCV colormap corresponding to current selection.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>OpenCV colormap identifier, <code class="docutils literal notranslate"><span class="pre">None</span></code> for <em>B/W</em>.</p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p>int or None</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="pyclickimage.qt_image_tool_window.QtImageToolWindow.half_shift">
+<span class="property"><span class="k"><span class="pre">property</span></span><span class="w"> </span></span><span class="sig-name descname"><span class="pre">half_shift</span></span><span class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">bool</span></span><a class="headerlink" href="#pyclickimage.qt_image_tool_window.QtImageToolWindow.half_shift" title="Link to this definition">#</a></dt>
+<dd><p>Coordinate convention of the viewer.</p>
+<p><code class="docutils literal notranslate"><span class="pre">True</span></code> places the center of the first pixel at <code class="docutils literal notranslate"><span class="pre">(0,</span> <span class="pre">0)</span></code>.
+Shared with <a class="reference internal" href="#pyclickimage.qt_image_tool_window.QtImageToolWindow.viewer" title="pyclickimage.qt_image_tool_window.QtImageToolWindow.viewer"><code class="xref py py-attr docutils literal notranslate"><span class="pre">viewer</span></code></a> (setting one sets the other).</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>bool</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="pyclickimage.qt_image_tool_window.QtImageToolWindow.has_image">
+<span class="sig-name descname"><span class="pre">has_image</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">bool</span></span></span><a class="reference internal" href="../_modules/pyclickimage/qt_image_tool_window.html#QtImageToolWindow.has_image"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pyclickimage.qt_image_tool_window.QtImageToolWindow.has_image" title="Link to this definition">#</a></dt>
+<dd><p>Return whether an image is set.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p><code class="docutils literal notranslate"><span class="pre">True</span></code> if an image is currently displayed.</p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p>bool</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="pyclickimage.qt_image_tool_window.QtImageToolWindow.hide_profile_cursor">
+<span class="sig-name descname"><span class="pre">hide_profile_cursor</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/pyclickimage/qt_image_tool_window.html#QtImageToolWindow.hide_profile_cursor"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pyclickimage.qt_image_tool_window.QtImageToolWindow.hide_profile_cursor" title="Link to this definition">#</a></dt>
+<dd><p>Update the cursor label when the cursor leaves the image.</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="pyclickimage.qt_image_tool_window.QtImageToolWindow.image_changed">
+<span class="sig-name descname"><span class="pre">image_changed</span></span><a class="headerlink" href="#pyclickimage.qt_image_tool_window.QtImageToolWindow.image_changed" title="Link to this definition">#</a></dt>
+<dd><p>str = …, revision: int = …, arguments: Sequence = …) -&gt; PYQT_SIGNAL</p>
+<p>types is normally a sequence of individual types.  Each type is either a
+type object or a string that is the name of a C++ type.  Alternatively
+each type could itself be a sequence of types each describing a different
+overloaded signal.
+name is the optional C++ name of the signal.  If it is not specified then
+the name of the class attribute that is bound to the signal is used.
+revision is the optional revision of the signal that is exported to QML.
+If it is not specified then 0 is used.
+arguments is the optional sequence of the names of the signal’s arguments.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>pyqtSignal(<a href="#id3"><span class="problematic" id="id4">*</span></a>types, name</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="pyclickimage.qt_image_tool_window.QtImageToolWindow.image_proportion">
+<span class="sig-name descname"><span class="pre">image_proportion</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">tuple</span><span class="p"><span class="pre">[</span></span><span class="pre">float</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">float</span><span class="p"><span class="pre">]</span></span></span></span><a class="reference internal" href="../_modules/pyclickimage/qt_image_tool_window.html#QtImageToolWindow.image_proportion"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pyclickimage.qt_image_tool_window.QtImageToolWindow.image_proportion" title="Link to this definition">#</a></dt>
+<dd><p>Return the proportion of the image cell.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p><code class="docutils literal notranslate"><span class="pre">(horizontal,</span> <span class="pre">vertical)</span></code> fraction of the area occupied by
+the image cell when the profiles are visible.</p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p>tuple of float</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="pyclickimage.qt_image_tool_window.QtImageToolWindow.is_default_interpolation">
+<span class="sig-name descname"><span class="pre">is_default_interpolation</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">bool</span></span></span><a class="reference internal" href="../_modules/pyclickimage/qt_image_tool_window.html#QtImageToolWindow.is_default_interpolation"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pyclickimage.qt_image_tool_window.QtImageToolWindow.is_default_interpolation" title="Link to this definition">#</a></dt>
+<dd><p>Return whether the interpolation curve is the default one.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p><code class="docutils literal notranslate"><span class="pre">True</span></code> if the curve is the straight line from
+<code class="docutils literal notranslate"><span class="pre">(xmin,</span> <span class="pre">ymin)</span></code> to <code class="docutils literal notranslate"><span class="pre">(xmax,</span> <span class="pre">ymax)</span></code> without interior node,
+i.e. the curve set by <a class="reference internal" href="#pyclickimage.qt_image_tool_window.QtImageToolWindow.reset_nodes" title="pyclickimage.qt_image_tool_window.QtImageToolWindow.reset_nodes"><code class="xref py py-meth docutils literal notranslate"><span class="pre">reset_nodes()</span></code></a>.</p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p>bool</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="pyclickimage.qt_image_tool_window.QtImageToolWindow.is_profiles_fitted">
+<span class="sig-name descname"><span class="pre">is_profiles_fitted</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">bool</span></span></span><a class="reference internal" href="../_modules/pyclickimage/qt_image_tool_window.html#QtImageToolWindow.is_profiles_fitted"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pyclickimage.qt_image_tool_window.QtImageToolWindow.is_profiles_fitted" title="Link to this definition">#</a></dt>
+<dd><p>Return whether the profile intensity axis is fitted.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p><code class="docutils literal notranslate"><span class="pre">True</span></code> if the axis spans the range of the displayed
+profile, <code class="docutils literal notranslate"><span class="pre">False</span></code> if it spans the nominal range of the
+image type.</p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p>bool</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="pyclickimage.qt_image_tool_window.QtImageToolWindow.is_profiles_visible">
+<span class="sig-name descname"><span class="pre">is_profiles_visible</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">bool</span></span></span><a class="reference internal" href="../_modules/pyclickimage/qt_image_tool_window.html#QtImageToolWindow.is_profiles_visible"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pyclickimage.qt_image_tool_window.QtImageToolWindow.is_profiles_visible" title="Link to this definition">#</a></dt>
+<dd><p>Return whether the profiles are displayed.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>State of the <em>Profiles</em> action.</p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p>bool</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="pyclickimage.qt_image_tool_window.QtImageToolWindow.is_x_axis_cropped">
+<span class="sig-name descname"><span class="pre">is_x_axis_cropped</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">bool</span></span></span><a class="reference internal" href="../_modules/pyclickimage/qt_image_tool_window.html#QtImageToolWindow.is_x_axis_cropped"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pyclickimage.qt_image_tool_window.QtImageToolWindow.is_x_axis_cropped" title="Link to this definition">#</a></dt>
+<dd><p>Return whether the interpolation x-axis is cropped.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p><code class="docutils literal notranslate"><span class="pre">True</span></code> if the x-axis spans only the actual intensities of
+the image, <code class="docutils literal notranslate"><span class="pre">False</span></code> if it spans the total intensity range.</p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p>bool</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="pyclickimage.qt_image_tool_window.QtImageToolWindow.left_click">
+<span class="sig-name descname"><span class="pre">left_click</span></span><a class="headerlink" href="#pyclickimage.qt_image_tool_window.QtImageToolWindow.left_click" title="Link to this definition">#</a></dt>
+<dd><p>str = …, revision: int = …, arguments: Sequence = …) -&gt; PYQT_SIGNAL</p>
+<p>types is normally a sequence of individual types.  Each type is either a
+type object or a string that is the name of a C++ type.  Alternatively
+each type could itself be a sequence of types each describing a different
+overloaded signal.
+name is the optional C++ name of the signal.  If it is not specified then
+the name of the class attribute that is bound to the signal is used.
+revision is the optional revision of the signal that is exported to QML.
+If it is not specified then 0 is used.
+arguments is the optional sequence of the names of the signal’s arguments.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>pyqtSignal(<a href="#id5"><span class="problematic" id="id6">*</span></a>types, name</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="pyclickimage.qt_image_tool_window.QtImageToolWindow.left_pressed">
+<span class="sig-name descname"><span class="pre">left_pressed</span></span><a class="headerlink" href="#pyclickimage.qt_image_tool_window.QtImageToolWindow.left_pressed" title="Link to this definition">#</a></dt>
+<dd><p>str = …, revision: int = …, arguments: Sequence = …) -&gt; PYQT_SIGNAL</p>
+<p>types is normally a sequence of individual types.  Each type is either a
+type object or a string that is the name of a C++ type.  Alternatively
+each type could itself be a sequence of types each describing a different
+overloaded signal.
+name is the optional C++ name of the signal.  If it is not specified then
+the name of the class attribute that is bound to the signal is used.
+revision is the optional revision of the signal that is exported to QML.
+If it is not specified then 0 is used.
+arguments is the optional sequence of the names of the signal’s arguments.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>pyqtSignal(<a href="#id7"><span class="problematic" id="id8">*</span></a>types, name</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="pyclickimage.qt_image_tool_window.QtImageToolWindow.left_released">
+<span class="sig-name descname"><span class="pre">left_released</span></span><a class="headerlink" href="#pyclickimage.qt_image_tool_window.QtImageToolWindow.left_released" title="Link to this definition">#</a></dt>
+<dd><p>str = …, revision: int = …, arguments: Sequence = …) -&gt; PYQT_SIGNAL</p>
+<p>types is normally a sequence of individual types.  Each type is either a
+type object or a string that is the name of a C++ type.  Alternatively
+each type could itself be a sequence of types each describing a different
+overloaded signal.
+name is the optional C++ name of the signal.  If it is not specified then
+the name of the class attribute that is bound to the signal is used.
+revision is the optional revision of the signal that is exported to QML.
+If it is not specified then 0 is used.
+arguments is the optional sequence of the names of the signal’s arguments.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>pyqtSignal(<a href="#id9"><span class="problematic" id="id10">*</span></a>types, name</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="pyclickimage.qt_image_tool_window.QtImageToolWindow.load_image">
+<span class="sig-name descname"><span class="pre">load_image</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">filename</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">Path</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="reference internal" href="../_modules/pyclickimage/qt_image_tool_window.html#QtImageToolWindow.load_image"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pyclickimage.qt_image_tool_window.QtImageToolWindow.load_image" title="Link to this definition">#</a></dt>
+<dd><p>Read an image file and display it.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>filename</strong> (<em>str</em><em> or </em><em>pathlib.Path</em>) – Image file. Any format readable by
+<code class="docutils literal notranslate"><span class="pre">cv2.imread(...,</span> <span class="pre">cv2.IMREAD_UNCHANGED)</span></code>.</p>
+</dd>
+<dt class="field-even">Raises<span class="colon">:</span></dt>
+<dd class="field-even"><ul class="simple">
+<li><p><strong>ValueError</strong> – If the file cannot be read or the image is not supported.</p></li>
+<li><p><strong>TypeError</strong> – If the image dtype is not supported.</p></li>
+</ul>
+</dd>
+</dl>
+<p class="rubric">Notes</p>
+<p>The file is read with <a class="reference internal" href="#pyclickimage.qt_image_tool_window.read_image" title="pyclickimage.qt_image_tool_window.read_image"><code class="xref py py-func docutils literal notranslate"><span class="pre">read_image()</span></code></a>, which also supports
+non-ASCII paths on Windows (<code class="docutils literal notranslate"><span class="pre">cv2.imread</span></code> does not).</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="pyclickimage.qt_image_tool_window.QtImageToolWindow.load_nodes">
+<span class="sig-name descname"><span class="pre">load_nodes</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/pyclickimage/qt_image_tool_window.html#QtImageToolWindow.load_nodes"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pyclickimage.qt_image_tool_window.QtImageToolWindow.load_nodes" title="Link to this definition">#</a></dt>
+<dd><p>Load interpolation nodes from a JSON file.</p>
+<p class="rubric">Notes</p>
+<p>Nodes are fitted to the current interpolation domain with
+<a class="reference internal" href="#pyclickimage.qt_image_tool_window.fit_nodes_to_domain" title="pyclickimage.qt_image_tool_window.fit_nodes_to_domain"><code class="xref py py-func docutils literal notranslate"><span class="pre">fit_nodes_to_domain()</span></code></a>: absolute intensities are kept and
+nodes outside the domain are dropped. The status bar tells when
+the nodes were adjusted.</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="pyclickimage.qt_image_tool_window.QtImageToolWindow.mouse_entered">
+<span class="sig-name descname"><span class="pre">mouse_entered</span></span><a class="headerlink" href="#pyclickimage.qt_image_tool_window.QtImageToolWindow.mouse_entered" title="Link to this definition">#</a></dt>
+<dd><p>str = …, revision: int = …, arguments: Sequence = …) -&gt; PYQT_SIGNAL</p>
+<p>types is normally a sequence of individual types.  Each type is either a
+type object or a string that is the name of a C++ type.  Alternatively
+each type could itself be a sequence of types each describing a different
+overloaded signal.
+name is the optional C++ name of the signal.  If it is not specified then
+the name of the class attribute that is bound to the signal is used.
+revision is the optional revision of the signal that is exported to QML.
+If it is not specified then 0 is used.
+arguments is the optional sequence of the names of the signal’s arguments.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>pyqtSignal(<a href="#id11"><span class="problematic" id="id12">*</span></a>types, name</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="pyclickimage.qt_image_tool_window.QtImageToolWindow.mouse_left">
+<span class="sig-name descname"><span class="pre">mouse_left</span></span><a class="headerlink" href="#pyclickimage.qt_image_tool_window.QtImageToolWindow.mouse_left" title="Link to this definition">#</a></dt>
+<dd><p>str = …, revision: int = …, arguments: Sequence = …) -&gt; PYQT_SIGNAL</p>
+<p>types is normally a sequence of individual types.  Each type is either a
+type object or a string that is the name of a C++ type.  Alternatively
+each type could itself be a sequence of types each describing a different
+overloaded signal.
+name is the optional C++ name of the signal.  If it is not specified then
+the name of the class attribute that is bound to the signal is used.
+revision is the optional revision of the signal that is exported to QML.
+If it is not specified then 0 is used.
+arguments is the optional sequence of the names of the signal’s arguments.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>pyqtSignal(<a href="#id13"><span class="problematic" id="id14">*</span></a>types, name</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="pyclickimage.qt_image_tool_window.QtImageToolWindow.mouse_moved">
+<span class="sig-name descname"><span class="pre">mouse_moved</span></span><a class="headerlink" href="#pyclickimage.qt_image_tool_window.QtImageToolWindow.mouse_moved" title="Link to this definition">#</a></dt>
+<dd><p>str = …, revision: int = …, arguments: Sequence = …) -&gt; PYQT_SIGNAL</p>
+<p>types is normally a sequence of individual types.  Each type is either a
+type object or a string that is the name of a C++ type.  Alternatively
+each type could itself be a sequence of types each describing a different
+overloaded signal.
+name is the optional C++ name of the signal.  If it is not specified then
+the name of the class attribute that is bound to the signal is used.
+revision is the optional revision of the signal that is exported to QML.
+If it is not specified then 0 is used.
+arguments is the optional sequence of the names of the signal’s arguments.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>pyqtSignal(<a href="#id15"><span class="problematic" id="id16">*</span></a>types, name</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="pyclickimage.qt_image_tool_window.QtImageToolWindow.open_image">
+<span class="sig-name descname"><span class="pre">open_image</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/pyclickimage/qt_image_tool_window.html#QtImageToolWindow.open_image"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pyclickimage.qt_image_tool_window.QtImageToolWindow.open_image" title="Link to this definition">#</a></dt>
+<dd><p>Ask for an image file and display it.</p>
+<p>Connected to the <em>Open</em> action (absent when <code class="docutils literal notranslate"><span class="pre">remove_open</span></code> is
+<code class="docutils literal notranslate"><span class="pre">True</span></code>). Errors are reported in a message box.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="pyclickimage.qt_image_tool_window.QtImageToolWindow.open_interpolation">
+<span class="sig-name descname"><span class="pre">open_interpolation</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/pyclickimage/qt_image_tool_window.html#QtImageToolWindow.open_interpolation"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pyclickimage.qt_image_tool_window.QtImageToolWindow.open_interpolation" title="Link to this definition">#</a></dt>
+<dd><p>Show the interpolation window.</p>
+<p class="rubric">Notes</p>
+<p>The window is created on first use, as a child window of this
+widget.</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="pyclickimage.qt_image_tool_window.QtImageToolWindow.rectangle_selected">
+<span class="sig-name descname"><span class="pre">rectangle_selected</span></span><a class="headerlink" href="#pyclickimage.qt_image_tool_window.QtImageToolWindow.rectangle_selected" title="Link to this definition">#</a></dt>
+<dd><p>str = …, revision: int = …, arguments: Sequence = …) -&gt; PYQT_SIGNAL</p>
+<p>types is normally a sequence of individual types.  Each type is either a
+type object or a string that is the name of a C++ type.  Alternatively
+each type could itself be a sequence of types each describing a different
+overloaded signal.
+name is the optional C++ name of the signal.  If it is not specified then
+the name of the class attribute that is bound to the signal is used.
+revision is the optional revision of the signal that is exported to QML.
+If it is not specified then 0 is used.
+arguments is the optional sequence of the names of the signal’s arguments.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>pyqtSignal(<a href="#id17"><span class="problematic" id="id18">*</span></a>types, name</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="pyclickimage.qt_image_tool_window.QtImageToolWindow.reset_nodes">
+<span class="sig-name descname"><span class="pre">reset_nodes</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="reference internal" href="../_modules/pyclickimage/qt_image_tool_window.html#QtImageToolWindow.reset_nodes"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pyclickimage.qt_image_tool_window.QtImageToolWindow.reset_nodes" title="Link to this definition">#</a></dt>
+<dd><p>Reset the interpolation curve to a straight line.</p>
+<p>The curve goes from <code class="docutils literal notranslate"><span class="pre">(xmin,</span> <span class="pre">0)</span></code> to <code class="docutils literal notranslate"><span class="pre">(xmax,</span> <span class="pre">1)</span></code>, for example
+from <code class="docutils literal notranslate"><span class="pre">0</span></code> to <code class="docutils literal notranslate"><span class="pre">numpy.iinfo(dtype).max</span></code> for an unsigned integer
+image.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="pyclickimage.qt_image_tool_window.QtImageToolWindow.reset_view">
+<span class="sig-name descname"><span class="pre">reset_view</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="reference internal" href="../_modules/pyclickimage/qt_image_tool_window.html#QtImageToolWindow.reset_view"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pyclickimage.qt_image_tool_window.QtImageToolWindow.reset_view" title="Link to this definition">#</a></dt>
+<dd><p>Fit the image in the view. See <code class="xref py py-meth docutils literal notranslate"><span class="pre">QtImageViewer.reset_view()</span></code>.</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="pyclickimage.qt_image_tool_window.QtImageToolWindow.right_click">
+<span class="sig-name descname"><span class="pre">right_click</span></span><a class="headerlink" href="#pyclickimage.qt_image_tool_window.QtImageToolWindow.right_click" title="Link to this definition">#</a></dt>
+<dd><p>str = …, revision: int = …, arguments: Sequence = …) -&gt; PYQT_SIGNAL</p>
+<p>types is normally a sequence of individual types.  Each type is either a
+type object or a string that is the name of a C++ type.  Alternatively
+each type could itself be a sequence of types each describing a different
+overloaded signal.
+name is the optional C++ name of the signal.  If it is not specified then
+the name of the class attribute that is bound to the signal is used.
+revision is the optional revision of the signal that is exported to QML.
+If it is not specified then 0 is used.
+arguments is the optional sequence of the names of the signal’s arguments.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>pyqtSignal(<a href="#id19"><span class="problematic" id="id20">*</span></a>types, name</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="pyclickimage.qt_image_tool_window.QtImageToolWindow.right_pressed">
+<span class="sig-name descname"><span class="pre">right_pressed</span></span><a class="headerlink" href="#pyclickimage.qt_image_tool_window.QtImageToolWindow.right_pressed" title="Link to this definition">#</a></dt>
+<dd><p>str = …, revision: int = …, arguments: Sequence = …) -&gt; PYQT_SIGNAL</p>
+<p>types is normally a sequence of individual types.  Each type is either a
+type object or a string that is the name of a C++ type.  Alternatively
+each type could itself be a sequence of types each describing a different
+overloaded signal.
+name is the optional C++ name of the signal.  If it is not specified then
+the name of the class attribute that is bound to the signal is used.
+revision is the optional revision of the signal that is exported to QML.
+If it is not specified then 0 is used.
+arguments is the optional sequence of the names of the signal’s arguments.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>pyqtSignal(<a href="#id21"><span class="problematic" id="id22">*</span></a>types, name</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="pyclickimage.qt_image_tool_window.QtImageToolWindow.right_released">
+<span class="sig-name descname"><span class="pre">right_released</span></span><a class="headerlink" href="#pyclickimage.qt_image_tool_window.QtImageToolWindow.right_released" title="Link to this definition">#</a></dt>
+<dd><p>str = …, revision: int = …, arguments: Sequence = …) -&gt; PYQT_SIGNAL</p>
+<p>types is normally a sequence of individual types.  Each type is either a
+type object or a string that is the name of a C++ type.  Alternatively
+each type could itself be a sequence of types each describing a different
+overloaded signal.
+name is the optional C++ name of the signal.  If it is not specified then
+the name of the class attribute that is bound to the signal is used.
+revision is the optional revision of the signal that is exported to QML.
+If it is not specified then 0 is used.
+arguments is the optional sequence of the names of the signal’s arguments.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>pyqtSignal(<a href="#id23"><span class="problematic" id="id24">*</span></a>types, name</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="pyclickimage.qt_image_tool_window.QtImageToolWindow.save_nodes">
+<span class="sig-name descname"><span class="pre">save_nodes</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/pyclickimage/qt_image_tool_window.html#QtImageToolWindow.save_nodes"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pyclickimage.qt_image_tool_window.QtImageToolWindow.save_nodes" title="Link to this definition">#</a></dt>
+<dd><p>Save the interpolation nodes to a JSON file.</p>
+<p class="rubric">Notes</p>
+<p>File format:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="p">{</span>
+    <span class="s2">"version"</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span>
+    <span class="s2">"xmin"</span><span class="p">:</span> <span class="o">...</span><span class="p">,</span> <span class="s2">"xmax"</span><span class="p">:</span> <span class="o">...</span><span class="p">,</span> <span class="s2">"ymin"</span><span class="p">:</span> <span class="o">...</span><span class="p">,</span> <span class="s2">"ymax"</span><span class="p">:</span> <span class="o">...</span><span class="p">,</span>
+    <span class="s2">"nodes"</span><span class="p">:</span> <span class="p">[[</span><span class="n">x0</span><span class="p">,</span> <span class="n">y0</span><span class="p">],</span> <span class="p">[</span><span class="n">x1</span><span class="p">,</span> <span class="n">y1</span><span class="p">],</span> <span class="o">...</span><span class="p">]</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="pyclickimage.qt_image_tool_window.QtImageToolWindow.set_colormap">
+<span class="sig-name descname"><span class="pre">set_colormap</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">name</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="reference internal" href="../_modules/pyclickimage/qt_image_tool_window.html#QtImageToolWindow.set_colormap"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pyclickimage.qt_image_tool_window.QtImageToolWindow.set_colormap" title="Link to this definition">#</a></dt>
+<dd><p>Select a colormap by name.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>name</strong> (<em>str</em>) – One of the keys of <a class="reference internal" href="#pyclickimage.qt_image_tool_window.COLORMAPS" title="pyclickimage.qt_image_tool_window.COLORMAPS"><code class="xref py py-data docutils literal notranslate"><span class="pre">COLORMAPS</span></code></a>.</p>
+</dd>
+<dt class="field-even">Raises<span class="colon">:</span></dt>
+<dd class="field-even"><p><strong>KeyError</strong> – If the colormap is unknown.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="pyclickimage.qt_image_tool_window.QtImageToolWindow.set_image">
+<span class="sig-name descname"><span class="pre">set_image</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">image</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">ndarray</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">reset_view</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">True</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="reference internal" href="../_modules/pyclickimage/qt_image_tool_window.html#QtImageToolWindow.set_image"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pyclickimage.qt_image_tool_window.QtImageToolWindow.set_image" title="Link to this definition">#</a></dt>
+<dd><p>Set the image to display and analyze.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>image</strong> (<em>numpy.ndarray</em><em> or </em><em>None</em>) – <p>Image of shape <code class="docutils literal notranslate"><span class="pre">(H,</span> <span class="pre">W)</span></code>, <code class="docutils literal notranslate"><span class="pre">(H,</span> <span class="pre">W,</span> <span class="pre">1)</span></code>, <code class="docutils literal notranslate"><span class="pre">(H,</span> <span class="pre">W,</span> <span class="pre">3)</span></code> (BGR)
+or <code class="docutils literal notranslate"><span class="pre">(H,</span> <span class="pre">W,</span> <span class="pre">4)</span></code> (BGRA), as returned by
+<code class="docutils literal notranslate"><span class="pre">cv2.imread(path,</span> <span class="pre">cv2.IMREAD_UNCHANGED)</span></code>. Integer,
+floating-point and boolean dtypes are supported. <code class="docutils literal notranslate"><span class="pre">None</span></code> is
+equivalent to <a class="reference internal" href="#pyclickimage.qt_image_tool_window.QtImageToolWindow.clear_image" title="pyclickimage.qt_image_tool_window.QtImageToolWindow.clear_image"><code class="xref py py-meth docutils literal notranslate"><span class="pre">clear_image()</span></code></a>.</p>
+<p>The array is stored by reference; it must not be modified in
+place afterwards.</p>
+</p></li>
+<li><p><strong>reset_view</strong> (<em>bool</em><em>, </em><em>default=True</em>) – If <code class="docutils literal notranslate"><span class="pre">True</span></code>, markers are removed and the view is fitted to
+the image. If <code class="docutils literal notranslate"><span class="pre">False</span></code> and the new image has the same size,
+zoom, pan and markers are kept.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Raises<span class="colon">:</span></dt>
+<dd class="field-even"><ul class="simple">
+<li><p><strong>TypeError</strong> – If <code class="docutils literal notranslate"><span class="pre">image</span></code> is not a NumPy array or has an unsupported
+    dtype.</p></li>
+<li><p><strong>ValueError</strong> – If the image is empty or has an unsupported shape.</p></li>
+</ul>
+</dd>
+</dl>
+<p class="rubric">Notes</p>
+<p>The display mode (<em>Original</em> / <em>Processed</em>) and the colormap are
+kept. Emits <a class="reference internal" href="#pyclickimage.qt_image_tool_window.QtImageToolWindow.image_changed" title="pyclickimage.qt_image_tool_window.QtImageToolWindow.image_changed"><code class="xref py py-attr docutils literal notranslate"><span class="pre">image_changed</span></code></a>.</p>
+<p>Interpolation curve:</p>
+<ul class="simple">
+<li><p>integer images: the domain is the full range of the dtype
+(<code class="docutils literal notranslate"><span class="pre">[0,</span> <span class="pre">numpy.iinfo(dtype).max]</span></code> for unsigned integers), so it
+does not depend on the image content;</p></li>
+<li><p>while the dtype does not change, the curve is kept exactly as
+it is (floating-point images only extend the domain when the
+new image exceeds it);</p></li>
+<li><p>when the dtype changes (or for the first image), the curve is
+reset to a straight line from <code class="docutils literal notranslate"><span class="pre">(xmin,</span> <span class="pre">0)</span></code> to <code class="docutils literal notranslate"><span class="pre">(xmax,</span> <span class="pre">1)</span></code>.</p></li>
+</ul>
+<p>Use <a class="reference internal" href="#pyclickimage.qt_image_tool_window.QtImageToolWindow.reset_nodes" title="pyclickimage.qt_image_tool_window.QtImageToolWindow.reset_nodes"><code class="xref py py-meth docutils literal notranslate"><span class="pre">reset_nodes()</span></code></a> to reset the curve explicitly.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="pyclickimage.qt_image_tool_window.QtImageToolWindow.set_image_proportion">
+<span class="sig-name descname"><span class="pre">set_image_proportion</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">horizontal</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">vertical</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="reference internal" href="../_modules/pyclickimage/qt_image_tool_window.html#QtImageToolWindow.set_image_proportion"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pyclickimage.qt_image_tool_window.QtImageToolWindow.set_image_proportion" title="Link to this definition">#</a></dt>
+<dd><p>Set the proportion of the image cell.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>horizontal</strong> (<em>float</em>) – Fraction of the width given to column 0 (image and
+horizontal profile). Must be in <code class="docutils literal notranslate"><span class="pre">]0,</span> <span class="pre">1[</span></code>.</p></li>
+<li><p><strong>vertical</strong> (<em>float</em>) – Fraction of the height given to row 0 (image and vertical
+profile). Must be in <code class="docutils literal notranslate"><span class="pre">]0,</span> <span class="pre">1[</span></code>.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Raises<span class="colon">:</span></dt>
+<dd class="field-even"><p><strong>ValueError</strong> – If a fraction is not in <code class="docutils literal notranslate"><span class="pre">]0,</span> <span class="pre">1[</span></code>.</p>
+</dd>
+</dl>
+<p class="rubric">Examples</p>
+<p>The default layout (80 % / 20 % in both directions):</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">window</span><span class="o">.</span><span class="n">set_image_proportion</span><span class="p">(</span><span class="mf">0.8</span><span class="p">,</span> <span class="mf">0.8</span><span class="p">)</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="pyclickimage.qt_image_tool_window.QtImageToolWindow.set_profiles_fitted">
+<span class="sig-name descname"><span class="pre">set_profiles_fitted</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">value</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="reference internal" href="../_modules/pyclickimage/qt_image_tool_window.html#QtImageToolWindow.set_profiles_fitted"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pyclickimage.qt_image_tool_window.QtImageToolWindow.set_profiles_fitted" title="Link to this definition">#</a></dt>
+<dd><p>Fit (or not) the profile intensity axis to the profile.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>value</strong> (<em>bool</em>) – <p><code class="docutils literal notranslate"><span class="pre">True</span></code>: the axis spans the minimum and maximum of the
+displayed profile, recomputed at each cursor move.</p>
+<p><code class="docutils literal notranslate"><span class="pre">False</span></code> (default): the axis spans the nominal range of
+the image type, <code class="docutils literal notranslate"><span class="pre">[0,</span> <span class="pre">numpy.iinfo(dtype).max]</span></code> for unsigned
+integers and <code class="docutils literal notranslate"><span class="pre">[0,</span> <span class="pre">1]</span></code> for floating point.</p>
+</p>
+</dd>
+</dl>
+<p class="rubric">Notes</p>
+<p>The setting is kept when the image changes. The toolbar action
+is kept in sync.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="pyclickimage.qt_image_tool_window.QtImageToolWindow.set_profiles_visible">
+<span class="sig-name descname"><span class="pre">set_profiles_visible</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">visible</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/pyclickimage/qt_image_tool_window.html#QtImageToolWindow.set_profiles_visible"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pyclickimage.qt_image_tool_window.QtImageToolWindow.set_profiles_visible" title="Link to this definition">#</a></dt>
+<dd><p>Show or hide the profiles.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>visible</strong> (<em>bool</em>) – <p><code class="docutils literal notranslate"><span class="pre">True</span></code>: image in cell (0, 0), vertical profile in (0, 1),
+horizontal profile in (1, 0), cell (1, 1) empty, with the
+stored proportions.</p>
+<p><code class="docutils literal notranslate"><span class="pre">False</span></code>: the image fills the whole area.</p>
+</p>
+</dd>
+</dl>
+<p class="rubric">Notes</p>
+<p>The <em>Profiles</em> action is kept in sync, so this method can be
+called by a host application.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="pyclickimage.qt_image_tool_window.QtImageToolWindow.set_x_axis_cropped">
+<span class="sig-name descname"><span class="pre">set_x_axis_cropped</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">value</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="reference internal" href="../_modules/pyclickimage/qt_image_tool_window.html#QtImageToolWindow.set_x_axis_cropped"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pyclickimage.qt_image_tool_window.QtImageToolWindow.set_x_axis_cropped" title="Link to this definition">#</a></dt>
+<dd><p>Crop (or not) the interpolation x-axis to the useful range.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>value</strong> (<em>bool</em>) – <p><code class="docutils literal notranslate"><span class="pre">True</span></code>: the x-axis spans the actual minimum and maximum
+intensities of the current image, which gives more room to
+edit the curve.</p>
+<p><code class="docutils literal notranslate"><span class="pre">False</span></code> (default): the x-axis spans the whole
+interpolation domain (for example <code class="docutils literal notranslate"><span class="pre">[0,</span> <span class="pre">255]</span></code> for
+<code class="docutils literal notranslate"><span class="pre">uint8</span></code>).</p>
+</p>
+</dd>
+</dl>
+<p class="rubric">Notes</p>
+<p>The setting is kept when the image changes. The checkbox of the
+interpolation window is kept in sync.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="pyclickimage.qt_image_tool_window.QtImageToolWindow.showEvent">
+<span class="sig-name descname"><span class="pre">showEvent</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">event</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">QShowEvent</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="reference internal" href="../_modules/pyclickimage/qt_image_tool_window.html#QtImageToolWindow.showEvent"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pyclickimage.qt_image_tool_window.QtImageToolWindow.showEvent" title="Link to this definition">#</a></dt>
+<dd><p>Apply the grid proportions once the real size is known.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="pyclickimage.qt_image_tool_window.QtImageToolWindow.show_original">
+<span class="sig-name descname"><span class="pre">show_original</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/pyclickimage/qt_image_tool_window.html#QtImageToolWindow.show_original"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pyclickimage.qt_image_tool_window.QtImageToolWindow.show_original" title="Link to this definition">#</a></dt>
+<dd><p>Display the image values (no interpolation curve).</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="pyclickimage.qt_image_tool_window.QtImageToolWindow.show_processed">
+<span class="sig-name descname"><span class="pre">show_processed</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/pyclickimage/qt_image_tool_window.html#QtImageToolWindow.show_processed"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pyclickimage.qt_image_tool_window.QtImageToolWindow.show_processed" title="Link to this definition">#</a></dt>
+<dd><p>Display the image mapped by the interpolation curve.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="pyclickimage.qt_image_tool_window.QtImageToolWindow.update_histogram">
+<span class="sig-name descname"><span class="pre">update_histogram</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">title</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">'Histogram'</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="reference internal" href="../_modules/pyclickimage/qt_image_tool_window.html#QtImageToolWindow.update_histogram"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pyclickimage.qt_image_tool_window.QtImageToolWindow.update_histogram" title="Link to this definition">#</a></dt>
+<dd><p>Show the histogram window with its current bins.</p>
+<p>The window is created on first use, as a child window of this
+widget.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>title</strong> (<em>str</em><em>, </em><em>default=&quot;Histogram&quot;</em>) – Title of the histogram window.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="pyclickimage.qt_image_tool_window.QtImageToolWindow.update_image">
+<span class="sig-name descname"><span class="pre">update_image</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">_</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/pyclickimage/qt_image_tool_window.html#QtImageToolWindow.update_image"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pyclickimage.qt_image_tool_window.QtImageToolWindow.update_image" title="Link to this definition">#</a></dt>
+<dd><p>Update the currently displayed image.</p>
+<dl>
+<dt>Original:</dt><dd><p>numerical image -&gt; display normalization</p>
+<p>The colormap is never applied: a color image keeps its
+colors, a grayscale image is displayed in gray.</p>
+</dd>
+<dt>Processed:</dt><dd><p>scalar image -&gt; interpolation -&gt; display normalization
+-&gt; colormap</p>
+</dd>
+</dl>
+<p class="rubric">Notes</p>
+<p>Zoom, pan and markers are preserved. Emits
+<a class="reference internal" href="#pyclickimage.qt_image_tool_window.QtImageToolWindow.display_updated" title="pyclickimage.qt_image_tool_window.QtImageToolWindow.display_updated"><code class="xref py py-attr docutils literal notranslate"><span class="pre">display_updated</span></code></a>.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="pyclickimage.qt_image_tool_window.QtImageToolWindow.update_profiles">
+<span class="sig-name descname"><span class="pre">update_profiles</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">x</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">y</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/pyclickimage/qt_image_tool_window.html#QtImageToolWindow.update_profiles"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pyclickimage.qt_image_tool_window.QtImageToolWindow.update_profiles" title="Link to this definition">#</a></dt>
+<dd><p>Update the profiles and the cursor label at a position.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>x</strong> (<em>float</em>) – Image coordinates of the cursor.</p></li>
+<li><p><strong>y</strong> (<em>float</em>) – Image coordinates of the cursor.</p></li>
+</ul>
+</dd>
+</dl>
+<p class="rubric">Notes</p>
+<p>The cursor label is updated even when the profiles are hidden.
+In <em>Processed</em> mode it also shows the mapped value.</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="pyclickimage.qt_image_tool_window.read_image">
+<span class="sig-prename descclassname"><span class="pre">pyclickimage.qt_image_tool_window.</span></span><span class="sig-name descname"><span class="pre">read_image</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">path</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">Path</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">ndarray</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span></span><a class="reference internal" href="../_modules/pyclickimage/qt_image_tool_window.html#read_image"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pyclickimage.qt_image_tool_window.read_image" title="Link to this definition">#</a></dt>
+<dd><p>Read an image file as <code class="docutils literal notranslate"><span class="pre">cv2.imread(path,</span> <span class="pre">cv2.IMREAD_UNCHANGED)</span></code>.</p>
+<p>Unlike <code class="xref py py-func docutils literal notranslate"><span class="pre">cv2.imread()</span></code>, the path may contain non-ASCII characters
+on Windows (accents, typographic apostrophes, for example
+<code class="docutils literal notranslate"><span class="pre">Capture</span> <span class="pre">d’écran.png</span></code>).</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>path</strong> (<em>str</em><em> or </em><em>pathlib.Path</em>) – Image file. Any format supported by OpenCV.</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>Image with its original dtype and channels (BGR/BGRA order), or
+<code class="docutils literal notranslate"><span class="pre">None</span></code> if the file cannot be read or decoded, like
+<code class="xref py py-func docutils literal notranslate"><span class="pre">cv2.imread()</span></code>.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>numpy.ndarray or None</p>
+</dd>
+</dl>
+<p class="rubric">Notes</p>
+<p>The bytes are read with <code class="xref py py-func docutils literal notranslate"><span class="pre">numpy.fromfile()</span></code>, which uses the
+Python file API (Unicode paths), then decoded in memory with
+<code class="xref py py-func docutils literal notranslate"><span class="pre">cv2.imdecode()</span></code>.</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="pyclickimage.qt_image_tool_window.validate_image">
+<span class="sig-prename descclassname"><span class="pre">pyclickimage.qt_image_tool_window.</span></span><span class="sig-name descname"><span class="pre">validate_image</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">image</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">ndarray</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">ndarray</span></span></span><a class="reference internal" href="../_modules/pyclickimage/qt_image_tool_window.html#validate_image"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pyclickimage.qt_image_tool_window.validate_image" title="Link to this definition">#</a></dt>
+<dd><p>Check that an array can be displayed by the window.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>image</strong> (<em>numpy.ndarray</em>) – Image of shape <code class="docutils literal notranslate"><span class="pre">(H,</span> <span class="pre">W)</span></code>, <code class="docutils literal notranslate"><span class="pre">(H,</span> <span class="pre">W,</span> <span class="pre">1)</span></code>, <code class="docutils literal notranslate"><span class="pre">(H,</span> <span class="pre">W,</span> <span class="pre">3)</span></code> (BGR) or
+<code class="docutils literal notranslate"><span class="pre">(H,</span> <span class="pre">W,</span> <span class="pre">4)</span></code> (BGRA), with an integer, floating-point or boolean
+dtype.</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>The same image. Boolean images are converted to <code class="docutils literal notranslate"><span class="pre">uint8</span></code>
+(<code class="docutils literal notranslate"><span class="pre">0</span></code> / <code class="docutils literal notranslate"><span class="pre">255</span></code>).</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>numpy.ndarray</p>
+</dd>
+<dt class="field-even">Raises<span class="colon">:</span></dt>
+<dd class="field-even"><ul class="simple">
+<li><p><strong>TypeError</strong> – If <code class="docutils literal notranslate"><span class="pre">image</span></code> is not a NumPy array or has an unsupported dtype.</p></li>
+<li><p><strong>ValueError</strong> – If the image is empty or has an unsupported shape.</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="pyclickimage.qt_image_tool_window.to_scalar_image">
+<span class="sig-prename descclassname"><span class="pre">pyclickimage.qt_image_tool_window.</span></span><span class="sig-name descname"><span class="pre">to_scalar_image</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">image</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">ndarray</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">ndarray</span></span></span><a class="reference internal" href="../_modules/pyclickimage/qt_image_tool_window.html#to_scalar_image"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pyclickimage.qt_image_tool_window.to_scalar_image" title="Link to this definition">#</a></dt>
+<dd><p>Convert an OpenCV image to a 2D scalar image.</p>
+<dl class="simple">
+<dt>Supported:</dt><dd><ul class="simple">
+<li><p>grayscale images</p></li>
+<li><p>BGR images</p></li>
+<li><p>BGRA images (alpha is ignored)</p></li>
+</ul>
+</dd>
+</dl>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>image</strong> (<em>numpy.ndarray</em>) – Image of shape <code class="docutils literal notranslate"><span class="pre">(H,</span> <span class="pre">W)</span></code>, <code class="docutils literal notranslate"><span class="pre">(H,</span> <span class="pre">W,</span> <span class="pre">1)</span></code>, <code class="docutils literal notranslate"><span class="pre">(H,</span> <span class="pre">W,</span> <span class="pre">3)</span></code> or
+<code class="docutils literal notranslate"><span class="pre">(H,</span> <span class="pre">W,</span> <span class="pre">4)</span></code>.</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>2D image. The numerical dtype is preserved.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>numpy.ndarray</p>
+</dd>
+<dt class="field-even">Raises<span class="colon">:</span></dt>
+<dd class="field-even"><p><strong>ValueError</strong> – If the shape is not supported.</p>
+</dd>
+</dl>
+<p class="rubric">Notes</p>
+<p>Luminance uses the ITU-R BT.601 weights of
+<code class="xref py py-func docutils literal notranslate"><span class="pre">cv2.cvtColor()</span></code> (<code class="docutils literal notranslate"><span class="pre">0.299</span> <span class="pre">R</span> <span class="pre">+</span> <span class="pre">0.587</span> <span class="pre">G</span> <span class="pre">+</span> <span class="pre">0.114</span> <span class="pre">B</span></code>).</p>
+<p><code class="docutils literal notranslate"><span class="pre">cv2.cvtColor</span></code> is used for <code class="docutils literal notranslate"><span class="pre">uint8</span></code>, <code class="docutils literal notranslate"><span class="pre">uint16</span></code> and <code class="docutils literal notranslate"><span class="pre">float32</span></code>
+images. Other dtypes (<code class="docutils literal notranslate"><span class="pre">float64</span></code>, <code class="docutils literal notranslate"><span class="pre">int32</span></code>…), which it does not
+support, are converted with NumPy.</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="pyclickimage.qt_image_tool_window.finite_min_max">
+<span class="sig-prename descclassname"><span class="pre">pyclickimage.qt_image_tool_window.</span></span><span class="sig-name descname"><span class="pre">finite_min_max</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">image</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">ndarray</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">tuple</span><span class="p"><span class="pre">[</span></span><span class="pre">float</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">float</span><span class="p"><span class="pre">]</span></span></span></span><a class="reference internal" href="../_modules/pyclickimage/qt_image_tool_window.html#finite_min_max"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pyclickimage.qt_image_tool_window.finite_min_max" title="Link to this definition">#</a></dt>
+<dd><p>Return the finite numerical range of an image.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>image</strong> (<em>numpy.ndarray</em>) – Image of any shape and numerical dtype.</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p><code class="docutils literal notranslate"><span class="pre">(min,</span> <span class="pre">max)</span></code> over finite values. <code class="docutils literal notranslate"><span class="pre">(0.0,</span> <span class="pre">1.0)</span></code> when the image
+contains no finite value.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>tuple of float</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="pyclickimage.qt_image_tool_window.widen_range">
+<span class="sig-prename descclassname"><span class="pre">pyclickimage.qt_image_tool_window.</span></span><span class="sig-name descname"><span class="pre">widen_range</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">vmin</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">vmax</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">tuple</span><span class="p"><span class="pre">[</span></span><span class="pre">float</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">float</span><span class="p"><span class="pre">]</span></span></span></span><a class="reference internal" href="../_modules/pyclickimage/qt_image_tool_window.html#widen_range"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pyclickimage.qt_image_tool_window.widen_range" title="Link to this definition">#</a></dt>
+<dd><p>Return a non-degenerate range.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>vmin</strong> (<em>float</em>) – Range bounds.</p></li>
+<li><p><strong>vmax</strong> (<em>float</em>) – Range bounds.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p><code class="docutils literal notranslate"><span class="pre">(vmin,</span> <span class="pre">vmax)</span></code> unchanged when <code class="docutils literal notranslate"><span class="pre">vmin</span> <span class="pre">&lt;</span> <span class="pre">vmax</span></code>. Otherwise the
+range is widened by <code class="docutils literal notranslate"><span class="pre">max(|vmin|</span> <span class="pre">*</span> <span class="pre">0.01,</span> <span class="pre">1.0)</span></code> on each side.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>tuple of float</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="pyclickimage.qt_image_tool_window.intensity_range">
+<span class="sig-prename descclassname"><span class="pre">pyclickimage.qt_image_tool_window.</span></span><span class="sig-name descname"><span class="pre">intensity_range</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">image</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">ndarray</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">tuple</span><span class="p"><span class="pre">[</span></span><span class="pre">float</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">float</span><span class="p"><span class="pre">]</span></span></span></span><a class="reference internal" href="../_modules/pyclickimage/qt_image_tool_window.html#intensity_range"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pyclickimage.qt_image_tool_window.intensity_range" title="Link to this definition">#</a></dt>
+<dd><p>Return the total intensity range of an image.</p>
+<p>For integer images, this is the interpolation domain: it only
+depends on the dtype, so the nodes keep their meaning from one image
+to the next.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>image</strong> (<em>numpy.ndarray</em>) – Scalar image.</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p><ul class="simple">
+<li><p>Unsigned integers: <code class="docutils literal notranslate"><span class="pre">(0,</span> <span class="pre">numpy.iinfo(dtype).max)</span></code>.</p></li>
+<li><p>Signed integers: <code class="docutils literal notranslate"><span class="pre">(numpy.iinfo(dtype).min,</span>
+<span class="pre">numpy.iinfo(dtype).max)</span></code>.</p></li>
+<li><p>Floating point: the finite data range (widened with
+<a class="reference internal" href="#pyclickimage.qt_image_tool_window.widen_range" title="pyclickimage.qt_image_tool_window.widen_range"><code class="xref py py-func docutils literal notranslate"><span class="pre">widen_range()</span></code></a> when constant).</p></li>
+</ul>
+</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>tuple of float</p>
+</dd>
+<dt class="field-even">Raises<span class="colon">:</span></dt>
+<dd class="field-even"><p><strong>ValueError</strong> – If the dtype is not numerical.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="pyclickimage.qt_image_tool_window.normalize_for_display">
+<span class="sig-prename descclassname"><span class="pre">pyclickimage.qt_image_tool_window.</span></span><span class="sig-name descname"><span class="pre">normalize_for_display</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">image</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">ndarray</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">ndarray</span></span></span><a class="reference internal" href="../_modules/pyclickimage/qt_image_tool_window.html#normalize_for_display"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pyclickimage.qt_image_tool_window.normalize_for_display" title="Link to this definition">#</a></dt>
+<dd><p>Convert any numerical image to float64 in [0, 1].</p>
+<dl class="simple">
+<dt>Important:</dt><dd><p>This conversion is ONLY for display.</p>
+</dd>
+</dl>
+<p>The original numerical data are never modified.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>image</strong> (<em>numpy.ndarray</em>) – Image of any shape.</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p><code class="docutils literal notranslate"><span class="pre">float64</span></code> array of the same shape, in <code class="docutils literal notranslate"><span class="pre">[0,</span> <span class="pre">1]</span></code>.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>numpy.ndarray</p>
+</dd>
+</dl>
+<p class="rubric">Notes</p>
+<ul class="simple">
+<li><p>Floating-point images already in <code class="docutils literal notranslate"><span class="pre">[0,</span> <span class="pre">1]</span></code> are kept as-is;
+otherwise they are stretched from their finite min/max. Non-finite
+values become <code class="docutils literal notranslate"><span class="pre">0</span></code>.</p></li>
+<li><p>Unsigned integers are divided by the dtype maximum.</p></li>
+<li><p>Signed integers are stretched from their min/max.</p></li>
+</ul>
+<dl class="field-list simple">
+<dt class="field-odd">Raises<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>ValueError</strong> – If the dtype is not numerical.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="pyclickimage.qt_image_tool_window.colorize">
+<span class="sig-prename descclassname"><span class="pre">pyclickimage.qt_image_tool_window.</span></span><span class="sig-name descname"><span class="pre">colorize</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">values</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">ndarray</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">colormap</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">ndarray</span></span></span><a class="reference internal" href="../_modules/pyclickimage/qt_image_tool_window.html#colorize"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pyclickimage.qt_image_tool_window.colorize" title="Link to this definition">#</a></dt>
+<dd><p>Convert numerical values to a displayable uint8 RGB image.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>values</strong> (<em>numpy.ndarray</em>) – Either a scalar image <code class="docutils literal notranslate"><span class="pre">(H,</span> <span class="pre">W)</span></code>, or a color image
+<code class="docutils literal notranslate"><span class="pre">(H,</span> <span class="pre">W,</span> <span class="pre">3)</span></code> / <code class="docutils literal notranslate"><span class="pre">(H,</span> <span class="pre">W,</span> <span class="pre">4)</span></code> in OpenCV BGR(A) order.</p></li>
+<li><p><strong>colormap</strong> (<em>int</em><em>, </em><em>optional</em>) – OpenCV colormap identifier. Only used for scalar images.
+<code class="docutils literal notranslate"><span class="pre">None</span></code> displays a gray image.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>C-contiguous <code class="docutils literal notranslate"><span class="pre">uint8</span></code> array of shape <code class="docutils literal notranslate"><span class="pre">(H,</span> <span class="pre">W,</span> <span class="pre">3)</span></code> in RGB order.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>numpy.ndarray</p>
+</dd>
+</dl>
+<p class="rubric">Notes</p>
+<p>Color images are normalized with <a class="reference internal" href="#pyclickimage.qt_image_tool_window.normalize_for_display" title="pyclickimage.qt_image_tool_window.normalize_for_display"><code class="xref py py-func docutils literal notranslate"><span class="pre">normalize_for_display()</span></code></a>
+(globally over all channels, which keeps the color balance) and their
+alpha channel is dropped.</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="pyclickimage.qt_image_tool_window.histogram_counts">
+<span class="sig-prename descclassname"><span class="pre">pyclickimage.qt_image_tool_window.</span></span><span class="sig-name descname"><span class="pre">histogram_counts</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">values</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">ndarray</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">number_of_bins</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">256</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">tuple</span><span class="p"><span class="pre">[</span></span><span class="pre">ndarray</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">ndarray</span><span class="p"><span class="pre">]</span></span></span></span><a class="reference internal" href="../_modules/pyclickimage/qt_image_tool_window.html#histogram_counts"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pyclickimage.qt_image_tool_window.histogram_counts" title="Link to this definition">#</a></dt>
+<dd><p>Compute a histogram over the finite values of an array.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>values</strong> (<em>numpy.ndarray</em>) – Values of any shape.</p></li>
+<li><p><strong>number_of_bins</strong> (<em>int</em><em>, </em><em>default=256</em>) – Number of equally spaced bins.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p><ul class="simple">
+<li><p><strong>counts</strong> (<em>numpy.ndarray</em>) – <code class="docutils literal notranslate"><span class="pre">float64</span></code> array of length <code class="docutils literal notranslate"><span class="pre">number_of_bins</span></code>.</p></li>
+<li><p><strong>edges</strong> (<em>numpy.ndarray</em>) – <code class="docutils literal notranslate"><span class="pre">float64</span></code> array of length <code class="docutils literal notranslate"><span class="pre">number_of_bins</span> <span class="pre">+</span> <span class="pre">1</span></code>.</p></li>
+</ul>
+</p>
+</dd>
+</dl>
+<p class="rubric">Notes</p>
+<p>The result is meant for <code class="xref py py-meth docutils literal notranslate"><span class="pre">QtHistogram.set_bins()</span></code>. Binning with
+<code class="xref py py-func docutils literal notranslate"><span class="pre">numpy.histogram()</span></code> keeps large images fast.</p>
+<p>A constant array produces a range widened with <a class="reference internal" href="#pyclickimage.qt_image_tool_window.widen_range" title="pyclickimage.qt_image_tool_window.widen_range"><code class="xref py py-func docutils literal notranslate"><span class="pre">widen_range()</span></code></a>.
+An array without finite values produces zero counts on <code class="docutils literal notranslate"><span class="pre">[0,</span> <span class="pre">1]</span></code>.</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="pyclickimage.qt_image_tool_window.fit_nodes_to_domain">
+<span class="sig-prename descclassname"><span class="pre">pyclickimage.qt_image_tool_window.</span></span><span class="sig-name descname"><span class="pre">fit_nodes_to_domain</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">nodes</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Sequence</span><span class="p"><span class="pre">[</span></span><span class="pre">Sequence</span><span class="p"><span class="pre">[</span></span><span class="pre">float</span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span></span></em>, <em class="sig-param"><span class="n"><span class="pre">xmin</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">xmax</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">ymin</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">ymax</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">tuple</span><span class="p"><span class="pre">[</span></span><span class="pre">list</span><span class="p"><span class="pre">[</span></span><span class="pre">tuple</span><span class="p"><span class="pre">[</span></span><span class="pre">float</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">float</span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">bool</span><span class="p"><span class="pre">]</span></span></span></span><a class="reference internal" href="../_modules/pyclickimage/qt_image_tool_window.html#fit_nodes_to_domain"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pyclickimage.qt_image_tool_window.fit_nodes_to_domain" title="Link to this definition">#</a></dt>
+<dd><p>Fit interpolation nodes to an interpolation domain.</p>
+<p>Intensities keep their absolute meaning: nodes are not rescaled.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>nodes</strong> (<em>sequence</em><em> of </em><em>(</em><em>float</em><em>, </em><em>float</em><em>)</em>) – Nodes as <code class="docutils literal notranslate"><span class="pre">(x,</span> <span class="pre">y)</span></code> pairs, in any order. At least two nodes.</p></li>
+<li><p><strong>xmin</strong> (<em>float</em>) – Target x-domain.</p></li>
+<li><p><strong>xmax</strong> (<em>float</em>) – Target x-domain.</p></li>
+<li><p><strong>ymin</strong> (<em>float</em>) – Target y-range.</p></li>
+<li><p><strong>ymax</strong> (<em>float</em>) – Target y-range.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p><ul class="simple">
+<li><p><strong>nodes</strong> (<em>list of tuple of float</em>) – Valid nodes: sorted, strictly increasing in x, first node at
+<code class="docutils literal notranslate"><span class="pre">xmin</span></code>, last node at <code class="docutils literal notranslate"><span class="pre">xmax</span></code>, every y in <code class="docutils literal notranslate"><span class="pre">[ymin,</span> <span class="pre">ymax]</span></code>.</p></li>
+<li><p><strong>adjusted</strong> (<em>bool</em>) – <code class="docutils literal notranslate"><span class="pre">True</span></code> if the nodes had to be modified.</p></li>
+</ul>
+</p>
+</dd>
+<dt class="field-odd">Raises<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>ValueError</strong> – If fewer than two nodes are given or a coordinate is not finite.</p>
+</dd>
+</dl>
+<p class="rubric">Notes</p>
+<ul class="simple">
+<li><p>Interior nodes outside <code class="docutils literal notranslate"><span class="pre">]xmin,</span> <span class="pre">xmax[</span></code> are dropped.</p></li>
+<li><p>The first (resp. last) node is moved to <code class="docutils literal notranslate"><span class="pre">xmin</span></code> (resp. <code class="docutils literal notranslate"><span class="pre">xmax</span></code>),
+keeping its y-coordinate.</p></li>
+<li><p>Nodes sharing the same x keep only the last one.</p></li>
+<li><p>y-coordinates are clipped to <code class="docutils literal notranslate"><span class="pre">[ymin,</span> <span class="pre">ymax]</span></code>.</p></li>
+</ul>
+</dd></dl>
+
+<dl class="py data">
+<dt class="sig sig-object py" id="pyclickimage.qt_image_tool_window.COLORMAPS">
+<span class="sig-prename descclassname"><span class="pre">pyclickimage.qt_image_tool_window.</span></span><span class="sig-name descname"><span class="pre">COLORMAPS</span></span><a class="headerlink" href="#pyclickimage.qt_image_tool_window.COLORMAPS" title="Link to this definition">#</a></dt>
+<dd><p>Colormaps proposed by the window.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>dict[str, int or None]</p>
+</dd>
+</dl>
+</dd></dl>
+
+</section>
+
+
+                </article>
+              
+              
+              
+              
+              
+                <footer class="prev-next-footer d-print-none">
+                  
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="common.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title">pyclickimage.common</p>
+      </div>
+    </a>
+    <a class="right-next"
+       href="qt_image_viewer.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">pyclickimage.qt_image_viewer</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <dialog id="pst-secondary-sidebar-modal"></dialog>
+                <div id="pst-secondary-sidebar" class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item">
+<div
+    id="pst-page-navigation-heading-2"
+    class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> On this page
+  </div>
+  <nav id="pst-page-toc-nav" class="page-toc" aria-labelledby="pst-page-navigation-heading-2">
+    <ul class="pst-show_toc_level nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#pyclickimage.qt_image_tool_window.QtImageToolWindow"><code class="docutils literal notranslate"><span class="pre">QtImageToolWindow</span></code></a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#pyclickimage.qt_image_tool_window.QtImageToolWindow.viewer"><code class="docutils literal notranslate"><span class="pre">QtImageToolWindow.viewer</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#pyclickimage.qt_image_tool_window.QtImageToolWindow.histogram"><code class="docutils literal notranslate"><span class="pre">QtImageToolWindow.histogram</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#pyclickimage.qt_image_tool_window.QtImageToolWindow.interpolator"><code class="docutils literal notranslate"><span class="pre">QtImageToolWindow.interpolator</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#pyclickimage.qt_image_tool_window.QtImageToolWindow.source_image"><code class="docutils literal notranslate"><span class="pre">QtImageToolWindow.source_image</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#pyclickimage.qt_image_tool_window.QtImageToolWindow.original_image"><code class="docutils literal notranslate"><span class="pre">QtImageToolWindow.original_image</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#pyclickimage.qt_image_tool_window.QtImageToolWindow.processed_image"><code class="docutils literal notranslate"><span class="pre">QtImageToolWindow.processed_image</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#pyclickimage.qt_image_tool_window.QtImageToolWindow.display_image"><code class="docutils literal notranslate"><span class="pre">QtImageToolWindow.display_image</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#pyclickimage.qt_image_tool_window.QtImageToolWindow.VIEWER_SIGNALS"><code class="docutils literal notranslate"><span class="pre">QtImageToolWindow.VIEWER_SIGNALS</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#pyclickimage.qt_image_tool_window.QtImageToolWindow._apply_profile_range"><code class="docutils literal notranslate"><span class="pre">QtImageToolWindow._apply_profile_range()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#pyclickimage.qt_image_tool_window.QtImageToolWindow._apply_proportions"><code class="docutils literal notranslate"><span class="pre">QtImageToolWindow._apply_proportions()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#pyclickimage.qt_image_tool_window.QtImageToolWindow._apply_x_axis_range"><code class="docutils literal notranslate"><span class="pre">QtImageToolWindow._apply_x_axis_range()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#pyclickimage.qt_image_tool_window.QtImageToolWindow._configure_interpolator"><code class="docutils literal notranslate"><span class="pre">QtImageToolWindow._configure_interpolator()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#pyclickimage.qt_image_tool_window.QtImageToolWindow._connect_signals"><code class="docutils literal notranslate"><span class="pre">QtImageToolWindow._connect_signals()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#pyclickimage.qt_image_tool_window.QtImageToolWindow._create_interpolation_panel"><code class="docutils literal notranslate"><span class="pre">QtImageToolWindow._create_interpolation_panel()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#pyclickimage.qt_image_tool_window.QtImageToolWindow._create_layout"><code class="docutils literal notranslate"><span class="pre">QtImageToolWindow._create_layout()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#pyclickimage.qt_image_tool_window.QtImageToolWindow._create_toolbar"><code class="docutils literal notranslate"><span class="pre">QtImageToolWindow._create_toolbar()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#pyclickimage.qt_image_tool_window.QtImageToolWindow._on_main_splitter_moved"><code class="docutils literal notranslate"><span class="pre">QtImageToolWindow._on_main_splitter_moved()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#pyclickimage.qt_image_tool_window.QtImageToolWindow._on_processed_toggled"><code class="docutils literal notranslate"><span class="pre">QtImageToolWindow._on_processed_toggled()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#pyclickimage.qt_image_tool_window.QtImageToolWindow._on_row_splitter_moved"><code class="docutils literal notranslate"><span class="pre">QtImageToolWindow._on_row_splitter_moved()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#pyclickimage.qt_image_tool_window.QtImageToolWindow._pixel_index"><code class="docutils literal notranslate"><span class="pre">QtImageToolWindow._pixel_index()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#pyclickimage.qt_image_tool_window.QtImageToolWindow._render"><code class="docutils literal notranslate"><span class="pre">QtImageToolWindow._render()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#pyclickimage.qt_image_tool_window.QtImageToolWindow._set_qimage"><code class="docutils literal notranslate"><span class="pre">QtImageToolWindow._set_qimage()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#pyclickimage.qt_image_tool_window.QtImageToolWindow._set_viewer_image"><code class="docutils literal notranslate"><span class="pre">QtImageToolWindow._set_viewer_image()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#pyclickimage.qt_image_tool_window.QtImageToolWindow._update_interpolation_indicator"><code class="docutils literal notranslate"><span class="pre">QtImageToolWindow._update_interpolation_indicator()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#pyclickimage.qt_image_tool_window.QtImageToolWindow.apply_colormap"><code class="docutils literal notranslate"><span class="pre">QtImageToolWindow.apply_colormap()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#pyclickimage.qt_image_tool_window.QtImageToolWindow.apply_theme"><code class="docutils literal notranslate"><span class="pre">QtImageToolWindow.apply_theme()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#pyclickimage.qt_image_tool_window.QtImageToolWindow.auto_marker"><code class="docutils literal notranslate"><span class="pre">QtImageToolWindow.auto_marker</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#pyclickimage.qt_image_tool_window.QtImageToolWindow.clear_image"><code class="docutils literal notranslate"><span class="pre">QtImageToolWindow.clear_image()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#pyclickimage.qt_image_tool_window.QtImageToolWindow.clear_markers"><code class="docutils literal notranslate"><span class="pre">QtImageToolWindow.clear_markers()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#pyclickimage.qt_image_tool_window.QtImageToolWindow.clear_profiles"><code class="docutils literal notranslate"><span class="pre">QtImageToolWindow.clear_profiles()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#pyclickimage.qt_image_tool_window.QtImageToolWindow.compute_histogram_on_image"><code class="docutils literal notranslate"><span class="pre">QtImageToolWindow.compute_histogram_on_image()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#pyclickimage.qt_image_tool_window.QtImageToolWindow.compute_histogram_on_rectangle"><code class="docutils literal notranslate"><span class="pre">QtImageToolWindow.compute_histogram_on_rectangle()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#pyclickimage.qt_image_tool_window.QtImageToolWindow.display_updated"><code class="docutils literal notranslate"><span class="pre">QtImageToolWindow.display_updated</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#pyclickimage.qt_image_tool_window.QtImageToolWindow.draw_cross"><code class="docutils literal notranslate"><span class="pre">QtImageToolWindow.draw_cross()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#pyclickimage.qt_image_tool_window.QtImageToolWindow.draw_ellipse"><code class="docutils literal notranslate"><span class="pre">QtImageToolWindow.draw_ellipse()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#pyclickimage.qt_image_tool_window.QtImageToolWindow.draw_rectangle"><code class="docutils literal notranslate"><span class="pre">QtImageToolWindow.draw_rectangle()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#pyclickimage.qt_image_tool_window.QtImageToolWindow.eventFilter"><code class="docutils literal notranslate"><span class="pre">QtImageToolWindow.eventFilter()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#pyclickimage.qt_image_tool_window.QtImageToolWindow.get_image"><code class="docutils literal notranslate"><span class="pre">QtImageToolWindow.get_image()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#pyclickimage.qt_image_tool_window.QtImageToolWindow.get_selected_colormap"><code class="docutils literal notranslate"><span class="pre">QtImageToolWindow.get_selected_colormap()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#pyclickimage.qt_image_tool_window.QtImageToolWindow.half_shift"><code class="docutils literal notranslate"><span class="pre">QtImageToolWindow.half_shift</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#pyclickimage.qt_image_tool_window.QtImageToolWindow.has_image"><code class="docutils literal notranslate"><span class="pre">QtImageToolWindow.has_image()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#pyclickimage.qt_image_tool_window.QtImageToolWindow.hide_profile_cursor"><code class="docutils literal notranslate"><span class="pre">QtImageToolWindow.hide_profile_cursor()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#pyclickimage.qt_image_tool_window.QtImageToolWindow.image_changed"><code class="docutils literal notranslate"><span class="pre">QtImageToolWindow.image_changed</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#pyclickimage.qt_image_tool_window.QtImageToolWindow.image_proportion"><code class="docutils literal notranslate"><span class="pre">QtImageToolWindow.image_proportion()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#pyclickimage.qt_image_tool_window.QtImageToolWindow.is_default_interpolation"><code class="docutils literal notranslate"><span class="pre">QtImageToolWindow.is_default_interpolation()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#pyclickimage.qt_image_tool_window.QtImageToolWindow.is_profiles_fitted"><code class="docutils literal notranslate"><span class="pre">QtImageToolWindow.is_profiles_fitted()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#pyclickimage.qt_image_tool_window.QtImageToolWindow.is_profiles_visible"><code class="docutils literal notranslate"><span class="pre">QtImageToolWindow.is_profiles_visible()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#pyclickimage.qt_image_tool_window.QtImageToolWindow.is_x_axis_cropped"><code class="docutils literal notranslate"><span class="pre">QtImageToolWindow.is_x_axis_cropped()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#pyclickimage.qt_image_tool_window.QtImageToolWindow.left_click"><code class="docutils literal notranslate"><span class="pre">QtImageToolWindow.left_click</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#pyclickimage.qt_image_tool_window.QtImageToolWindow.left_pressed"><code class="docutils literal notranslate"><span class="pre">QtImageToolWindow.left_pressed</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#pyclickimage.qt_image_tool_window.QtImageToolWindow.left_released"><code class="docutils literal notranslate"><span class="pre">QtImageToolWindow.left_released</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#pyclickimage.qt_image_tool_window.QtImageToolWindow.load_image"><code class="docutils literal notranslate"><span class="pre">QtImageToolWindow.load_image()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#pyclickimage.qt_image_tool_window.QtImageToolWindow.load_nodes"><code class="docutils literal notranslate"><span class="pre">QtImageToolWindow.load_nodes()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#pyclickimage.qt_image_tool_window.QtImageToolWindow.mouse_entered"><code class="docutils literal notranslate"><span class="pre">QtImageToolWindow.mouse_entered</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#pyclickimage.qt_image_tool_window.QtImageToolWindow.mouse_left"><code class="docutils literal notranslate"><span class="pre">QtImageToolWindow.mouse_left</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#pyclickimage.qt_image_tool_window.QtImageToolWindow.mouse_moved"><code class="docutils literal notranslate"><span class="pre">QtImageToolWindow.mouse_moved</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#pyclickimage.qt_image_tool_window.QtImageToolWindow.open_image"><code class="docutils literal notranslate"><span class="pre">QtImageToolWindow.open_image()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#pyclickimage.qt_image_tool_window.QtImageToolWindow.open_interpolation"><code class="docutils literal notranslate"><span class="pre">QtImageToolWindow.open_interpolation()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#pyclickimage.qt_image_tool_window.QtImageToolWindow.rectangle_selected"><code class="docutils literal notranslate"><span class="pre">QtImageToolWindow.rectangle_selected</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#pyclickimage.qt_image_tool_window.QtImageToolWindow.reset_nodes"><code class="docutils literal notranslate"><span class="pre">QtImageToolWindow.reset_nodes()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#pyclickimage.qt_image_tool_window.QtImageToolWindow.reset_view"><code class="docutils literal notranslate"><span class="pre">QtImageToolWindow.reset_view()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#pyclickimage.qt_image_tool_window.QtImageToolWindow.right_click"><code class="docutils literal notranslate"><span class="pre">QtImageToolWindow.right_click</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#pyclickimage.qt_image_tool_window.QtImageToolWindow.right_pressed"><code class="docutils literal notranslate"><span class="pre">QtImageToolWindow.right_pressed</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#pyclickimage.qt_image_tool_window.QtImageToolWindow.right_released"><code class="docutils literal notranslate"><span class="pre">QtImageToolWindow.right_released</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#pyclickimage.qt_image_tool_window.QtImageToolWindow.save_nodes"><code class="docutils literal notranslate"><span class="pre">QtImageToolWindow.save_nodes()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#pyclickimage.qt_image_tool_window.QtImageToolWindow.set_colormap"><code class="docutils literal notranslate"><span class="pre">QtImageToolWindow.set_colormap()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#pyclickimage.qt_image_tool_window.QtImageToolWindow.set_image"><code class="docutils literal notranslate"><span class="pre">QtImageToolWindow.set_image()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#pyclickimage.qt_image_tool_window.QtImageToolWindow.set_image_proportion"><code class="docutils literal notranslate"><span class="pre">QtImageToolWindow.set_image_proportion()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#pyclickimage.qt_image_tool_window.QtImageToolWindow.set_profiles_fitted"><code class="docutils literal notranslate"><span class="pre">QtImageToolWindow.set_profiles_fitted()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#pyclickimage.qt_image_tool_window.QtImageToolWindow.set_profiles_visible"><code class="docutils literal notranslate"><span class="pre">QtImageToolWindow.set_profiles_visible()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#pyclickimage.qt_image_tool_window.QtImageToolWindow.set_x_axis_cropped"><code class="docutils literal notranslate"><span class="pre">QtImageToolWindow.set_x_axis_cropped()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#pyclickimage.qt_image_tool_window.QtImageToolWindow.showEvent"><code class="docutils literal notranslate"><span class="pre">QtImageToolWindow.showEvent()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#pyclickimage.qt_image_tool_window.QtImageToolWindow.show_original"><code class="docutils literal notranslate"><span class="pre">QtImageToolWindow.show_original()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#pyclickimage.qt_image_tool_window.QtImageToolWindow.show_processed"><code class="docutils literal notranslate"><span class="pre">QtImageToolWindow.show_processed()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#pyclickimage.qt_image_tool_window.QtImageToolWindow.update_histogram"><code class="docutils literal notranslate"><span class="pre">QtImageToolWindow.update_histogram()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#pyclickimage.qt_image_tool_window.QtImageToolWindow.update_image"><code class="docutils literal notranslate"><span class="pre">QtImageToolWindow.update_image()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#pyclickimage.qt_image_tool_window.QtImageToolWindow.update_profiles"><code class="docutils literal notranslate"><span class="pre">QtImageToolWindow.update_profiles()</span></code></a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#pyclickimage.qt_image_tool_window.read_image"><code class="docutils literal notranslate"><span class="pre">read_image()</span></code></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#pyclickimage.qt_image_tool_window.validate_image"><code class="docutils literal notranslate"><span class="pre">validate_image()</span></code></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#pyclickimage.qt_image_tool_window.to_scalar_image"><code class="docutils literal notranslate"><span class="pre">to_scalar_image()</span></code></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#pyclickimage.qt_image_tool_window.finite_min_max"><code class="docutils literal notranslate"><span class="pre">finite_min_max()</span></code></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#pyclickimage.qt_image_tool_window.widen_range"><code class="docutils literal notranslate"><span class="pre">widen_range()</span></code></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#pyclickimage.qt_image_tool_window.intensity_range"><code class="docutils literal notranslate"><span class="pre">intensity_range()</span></code></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#pyclickimage.qt_image_tool_window.normalize_for_display"><code class="docutils literal notranslate"><span class="pre">normalize_for_display()</span></code></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#pyclickimage.qt_image_tool_window.colorize"><code class="docutils literal notranslate"><span class="pre">colorize()</span></code></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#pyclickimage.qt_image_tool_window.histogram_counts"><code class="docutils literal notranslate"><span class="pre">histogram_counts()</span></code></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#pyclickimage.qt_image_tool_window.fit_nodes_to_domain"><code class="docutils literal notranslate"><span class="pre">fit_nodes_to_domain()</span></code></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#pyclickimage.qt_image_tool_window.COLORMAPS"><code class="docutils literal notranslate"><span class="pre">COLORMAPS</span></code></a></li>
+</ul>
+  </nav></div>
+
+  <div class="sidebar-secondary-item">
+
+  <div class="tocsection sourcelink">
+    <a href="../_sources/api_doc/qt_image_tool_window.rst.txt">
+      <i class="fa-solid fa-file-lines"></i> Show Source
+    </a>
+  </div>
+</div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+          </footer>
+        
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script defer src="../_static/scripts/bootstrap.js?digest=18bd87630a240e9c25be"></script>
+<script defer src="../_static/scripts/pydata-sphinx-theme.js?digest=18bd87630a240e9c25be"></script>
+
+  <footer class="bd-footer">
+<div class="bd-footer__inner bd-page-width">
+  
+    <div class="footer-items__start">
+      
+        <div class="footer-item">
+
+  <p class="copyright">
+    
+      © Copyright 2025-2026, Artezaru.
+      <br/>
+    
+  </p>
+</div>
+      
+        <div class="footer-item">
+
+  <p class="sphinx-version">
+    Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 9.0.4.
+  </p>
+</div>
+      
+    </div>
+  
+  
+  
+    <div class="footer-items__end">
+      
+        <div class="footer-item">
+<p class="theme-version">
+  <!-- # L10n: Setting the PST URL as an argument as this does not need to be localized -->
+  Built with the <a href="https://pydata-sphinx-theme.readthedocs.io/en/stable/index.html">PyData Sphinx Theme</a> 0.23.0.
+</p></div>
+      
+    </div>
+  
+</div>
+
+  </footer>
+  </body>
+</html>

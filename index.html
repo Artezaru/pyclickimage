@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 
 
@@ -8,7 +7,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
-    <title>Welcome to pyclickimage’s documentation! &#8212; pyclickimage 3.2.1 documentation</title>
+    <title>Welcome to pyclickimage’s documentation! &#8212; pyclickimage 4.0.0 documentation</title>
   
   
   
@@ -27,41 +26,49 @@
   </noscript>
   
   <!-- Loaded before other Sphinx assets -->
-  <link href="_static/styles/theme.css?digest=8878045cc6db502f8baf" rel="stylesheet" />
-<link href="_static/styles/pydata-sphinx-theme.css?digest=8878045cc6db502f8baf" rel="stylesheet" />
+  <link href="_static/styles/theme.css?digest=18bd87630a240e9c25be" rel="stylesheet" />
+<link href="_static/styles/pydata-sphinx-theme.css?digest=18bd87630a240e9c25be" rel="stylesheet" />
 
     <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=8f2a1f02" />
   
   <!-- So that users can add custom icons -->
-  <script src="_static/scripts/fontawesome.js?digest=8878045cc6db502f8baf"></script>
+  <script defer src="_static/scripts/fontawesome.js?digest=18bd87630a240e9c25be"></script>
   <!-- Pre-loaded scripts that we'll load fully later -->
-  <link rel="preload" as="script" href="_static/scripts/bootstrap.js?digest=8878045cc6db502f8baf" />
-<link rel="preload" as="script" href="_static/scripts/pydata-sphinx-theme.js?digest=8878045cc6db502f8baf" />
+  <link rel="preload" as="script" href="_static/scripts/bootstrap.js?digest=18bd87630a240e9c25be" />
+<link rel="preload" as="script" href="_static/scripts/pydata-sphinx-theme.js?digest=18bd87630a240e9c25be" />
 
-    <script src="_static/documentation_options.js?v=eb155f5e"></script>
-    <script src="_static/doctools.js?v=9a2dae69"></script>
-    <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="_static/documentation_options.js?v=3304f9e4"></script>
+    <script src="_static/doctools.js?v=fd6eb6e6"></script>
+    <script src="_static/sphinx_highlight.js?v=6ffebe34"></script>
     <script>DOCUMENTATION_OPTIONS.pagename = 'index';</script>
+    <script>DOCUMENTATION_OPTIONS.search_as_you_type = false;</script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
     <link rel="next" title="Installation" href="installation.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="color-scheme" content="light dark"/>
   <meta name="docsearch:language" content="en"/>
   <meta name="docsearch:version" content="" />
+  
+    
+    <script src="_static/searchtools.js"></script>
+    <script src="_static/language_data.js"></script>
+    <script src="searchindex.js"></script>
+  
   </head>
-  
-  
-  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
-
+  <body data-default-mode="">
   
   
   <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+
   
   <div id="pst-scroll-pixel-helper"></div>
   
   <button type="button" class="btn rounded-pill" id="pst-back-to-top">
     <i class="fa-solid fa-arrow-up"></i>Back to top</button>
-
+  
+  
+  
   
   <dialog id="pst-search-dialog">
     
@@ -87,9 +94,9 @@
 </div>
 
   
-    <header class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+    <header id="pst-header" class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
 <div class="bd-header__inner bd-page-width">
-  <button class="pst-navbar-icon sidebar-toggle primary-toggle" aria-label="Site navigation">
+  <button type="button" class="pst-navbar-icon sidebar-toggle primary-toggle" aria-label="Site navigation">
     <span class="fa-solid fa-bars"></span>
   </button>
   
@@ -109,7 +116,7 @@
   
   
   
-    <p class="title logo__title">pyclickimage 3.2.1 documentation</p>
+    <p class="title logo__title">pyclickimage 4.0.0 documentation</p>
   
 </a></div>
     
@@ -154,7 +161,7 @@
         <div class="navbar-item navbar-persistent--container">
           
 
-<button class="btn search-button-field search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+<button type="button" class="btn search-button-field search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
  <i class="fa-solid fa-magnifying-glass"></i>
  <span class="search-button__default-text">Search</span>
  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
@@ -164,11 +171,18 @@
       
         <div class="navbar-item">
 
-<button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button pst-js-only" aria-label="Color mode" data-bs-title="Color mode"  data-bs-placement="bottom" data-bs-toggle="tooltip">
-  <i class="theme-switch fa-solid fa-sun                fa-lg" data-mode="light" title="Light"></i>
-  <i class="theme-switch fa-solid fa-moon               fa-lg" data-mode="dark"  title="Dark"></i>
-  <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"  title="System Settings"></i>
-</button></div>
+<div class="theme-switch-container dropdown pst-js-only" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Color mode">
+  <button type="button" class="btn btn-sm nav-link pst-navbar-icon theme-switch-button dropdown-toggle" aria-label="Color mode" data-bs-toggle="dropdown">
+    <i class="theme-switch fa-solid fa-sun fa-lg fa-fw" data-mode="light" title="Light"></i>
+    <i class="theme-switch fa-solid fa-moon fa-lg fa-fw" data-mode="dark" title="Dark"></i>
+    <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg fa-fw" data-mode="auto" title="System Settings"></i>
+  </button>
+  <ul class="dropdown-menu dropdown-menu-end">
+    <li><button type="button" class="dropdown-item d-flex align-items-center theme-change-button" data-mode="auto"><i class="fa-solid fa-circle-half-stroke fa-lg fa-fw me-1"></i>System Settings</button></li>
+    <li><button type="button" class="dropdown-item d-flex align-items-center theme-change-button" data-mode="light"><i class="fa-solid fa-sun fa-lg fa-fw me-1"></i>Light</button></li>
+    <li><button type="button" class="dropdown-item d-flex align-items-center theme-change-button" data-mode="dark"><i class="fa-solid fa-moon fa-lg fa-fw me-1"></i>Dark</button></li>
+  </ul>
+</div></div>
       
     </div>
     
@@ -177,7 +191,7 @@
   
     <div class="navbar-persistent--mobile">
 
-<button class="btn search-button-field search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+<button type="button" class="btn search-button-field search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
  <i class="fa-solid fa-magnifying-glass"></i>
  <span class="search-button__default-text">Search</span>
  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
@@ -186,7 +200,7 @@
   
 
   
-    <button class="pst-navbar-icon sidebar-toggle secondary-toggle" aria-label="On this page">
+    <button type="button" class="pst-navbar-icon sidebar-toggle secondary-toggle" aria-label="On this page">
       <span class="fa-solid fa-outdent"></span>
     </button>
   
@@ -250,11 +264,18 @@
         
           <div class="navbar-item">
 
-<button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button pst-js-only" aria-label="Color mode" data-bs-title="Color mode"  data-bs-placement="bottom" data-bs-toggle="tooltip">
-  <i class="theme-switch fa-solid fa-sun                fa-lg" data-mode="light" title="Light"></i>
-  <i class="theme-switch fa-solid fa-moon               fa-lg" data-mode="dark"  title="Dark"></i>
-  <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"  title="System Settings"></i>
-</button></div>
+<div class="theme-switch-container dropdown pst-js-only" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Color mode">
+  <button type="button" class="btn btn-sm nav-link pst-navbar-icon theme-switch-button dropdown-toggle" aria-label="Color mode" data-bs-toggle="dropdown">
+    <i class="theme-switch fa-solid fa-sun fa-lg fa-fw" data-mode="light" title="Light"></i>
+    <i class="theme-switch fa-solid fa-moon fa-lg fa-fw" data-mode="dark" title="Dark"></i>
+    <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg fa-fw" data-mode="auto" title="System Settings"></i>
+  </button>
+  <ul class="dropdown-menu dropdown-menu-end">
+    <li><button type="button" class="dropdown-item d-flex align-items-center theme-change-button" data-mode="auto"><i class="fa-solid fa-circle-half-stroke fa-lg fa-fw me-1"></i>System Settings</button></li>
+    <li><button type="button" class="dropdown-item d-flex align-items-center theme-change-button" data-mode="light"><i class="fa-solid fa-sun fa-lg fa-fw me-1"></i>Light</button></li>
+    <li><button type="button" class="dropdown-item d-flex align-items-center theme-change-button" data-mode="dark"><i class="fa-solid fa-moon fa-lg fa-fw me-1"></i>Dark</button></li>
+  </ul>
+</div></div>
         
       </div>
     
@@ -299,7 +320,7 @@ collect 2D coordinates of points on images.</p>
 <li><p>multiple images per annotation session,</p></li>
 <li><p>multiple annotation groups,</p></li>
 <li><p>subpixel floating-point coordinates,</p></li>
-<li><p>CSV session import/export,</p></li>
+<li><p>JSON session save/restore (default format) and CSV export,</p></li>
 <li><p>visualization and display controls,</p></li>
 <li><p>programmatic extraction of annotations.</p></li>
 </ul>
@@ -336,11 +357,118 @@ interface:</p>
 </div>
 <img alt="_images/app.png" class="align-center" src="_images/app.png" />
 </section>
+<section id="releases-standalone-application">
+<h2>Releases (standalone application)<a class="headerlink" href="#releases-standalone-application" title="Link to this heading">#</a></h2>
+<p>Ready-to-use executables are published for each version on the
+<a class="reference external" href="https://github.com/Artezaru/pyclickimage/releases">GitHub Releases page</a>.
+No Python installation is required.</p>
+<div class="pst-scrollable-table-container"><table class="table">
+<colgroup>
+<col style="width: 30.0%" />
+<col style="width: 40.0%" />
+<col style="width: 30.0%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>Platform</p></th>
+<th class="head"><p>File</p></th>
+<th class="head"><p>Download</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>Windows</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">pyclickimage-windows.exe</span></code></p></td>
+<td><p><a class="reference external" href="https://github.com/Artezaru/pyclickimage/releases/latest/download/pyclickimage-windows.exe">latest</a></p></td>
+</tr>
+<tr class="row-odd"><td><p>Linux (any distribution)</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">pyclickimage-linux</span></code></p></td>
+<td><p><a class="reference external" href="https://github.com/Artezaru/pyclickimage/releases/latest/download/pyclickimage-linux">latest</a></p></td>
+</tr>
+<tr class="row-even"><td><p>Debian / Ubuntu</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">pyclickimage_X.Y.Z_amd64.deb</span></code></p></td>
+<td><p><a class="reference external" href="https://github.com/Artezaru/pyclickimage/releases/latest">releases page</a></p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<p><strong>Windows</strong></p>
+<p>Download <code class="docutils literal notranslate"><span class="pre">pyclickimage-windows.exe</span></code> and double-click it.</p>
+<p>Windows SmartScreen may display a warning because the executable is not
+signed: click <strong>More info</strong> then <strong>Run anyway</strong>.</p>
+<p><strong>Linux (standalone executable)</strong></p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>chmod<span class="w"> </span>+x<span class="w"> </span>pyclickimage-linux
+./pyclickimage-linux
+</pre></div>
+</div>
+<p><strong>Debian / Ubuntu (.deb package)</strong></p>
+<p>Installing the <code class="docutils literal notranslate"><span class="pre">.deb</span></code> package adds <code class="docutils literal notranslate"><span class="pre">pyclickimage</span></code> to the applications
+menu and installs the required system libraries:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>sudo<span class="w"> </span>apt<span class="w"> </span>install<span class="w"> </span>./pyclickimage_X.Y.Z_amd64.deb
+</pre></div>
+</div>
+<p>Replace <code class="docutils literal notranslate"><span class="pre">X.Y.Z</span></code> with the downloaded version. To uninstall:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>sudo<span class="w"> </span>apt<span class="w"> </span>remove<span class="w"> </span>pyclickimage
+</pre></div>
+</div>
+<p>Once the <code class="docutils literal notranslate"><span class="pre">.deb</span></code> package is installed, the application accepts the same
+options as the Python command:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>pyclickimage<span class="w"> </span>-i<span class="w"> </span>image1.tif<span class="w"> </span>image2.tif
+pyclickimage<span class="w"> </span>-s<span class="w"> </span>annotations.json
+</pre></div>
+</div>
+</section>
 <section id="annotation-sessions">
 <h2>Annotation sessions<a class="headerlink" href="#annotation-sessions" title="Link to this heading">#</a></h2>
 <p>Annotations are stored as complete sessions.</p>
-<p>A session can contain multiple images and multiple annotation groups.
-The CSV format is:</p>
+<p>A session can contain multiple images and multiple annotation groups.</p>
+<p>Two file formats are supported:</p>
+<ul class="simple">
+<li><p><strong>JSON</strong> (default): complete session backup and restoration.</p></li>
+<li><p><strong>CSV</strong>: annotation export to external tools.</p></li>
+</ul>
+<section id="json-session-format">
+<h3>JSON session format<a class="headerlink" href="#json-session-format" title="Link to this heading">#</a></h3>
+<p>The JSON format is the default and recommended format for saving and
+restoring annotation projects.</p>
+<p>It stores the complete state of the annotation session, including:</p>
+<ul class="simple">
+<li><p>image paths,</p></li>
+<li><p>annotation groups,</p></li>
+<li><p>click coordinates,</p></li>
+<li><p>current selections,</p></li>
+<li><p>session options.</p></li>
+</ul>
+<p>A JSON session can be loaded later to restore the project exactly as it
+was saved:</p>
+<div class="highlight-json notranslate"><div class="highlight"><pre><span></span><span class="p">{</span>
+<span class="w">    </span><span class="nt">"precision_mode"</span><span class="p">:</span><span class="w"> </span><span class="s2">"float"</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">"current_image_index"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">"current_group_index"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">"groups"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span>
+<span class="w">        </span><span class="s2">"default"</span><span class="p">,</span>
+<span class="w">        </span><span class="s2">"Coco"</span>
+<span class="w">    </span><span class="p">],</span>
+<span class="w">    </span><span class="nt">"images"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span>
+<span class="w">        </span><span class="p">{</span>
+<span class="w">            </span><span class="nt">"path"</span><span class="p">:</span><span class="w"> </span><span class="s2">"image_1.png"</span><span class="p">,</span>
+<span class="w">            </span><span class="nt">"groups"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">                </span><span class="nt">"default"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span>
+<span class="w">                    </span><span class="p">[</span><span class="mf">128.5</span><span class="p">,</span><span class="w"> </span><span class="mf">102.0</span><span class="p">],</span>
+<span class="w">                    </span><span class="p">[</span><span class="mf">115.2</span><span class="p">,</span><span class="w"> </span><span class="mf">153.7</span><span class="p">]</span>
+<span class="w">                </span><span class="p">],</span>
+<span class="w">                </span><span class="nt">"Coco"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span>
+<span class="w">                    </span><span class="p">[</span><span class="mf">201.0</span><span class="p">,</span><span class="w"> </span><span class="mf">126.5</span><span class="p">]</span>
+<span class="w">                </span><span class="p">]</span>
+<span class="w">            </span><span class="p">}</span>
+<span class="w">        </span><span class="p">}</span>
+<span class="w">    </span><span class="p">]</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</section>
+<section id="csv-export-format">
+<h3>CSV export format<a class="headerlink" href="#csv-export-format" title="Link to this heading">#</a></h3>
+<p>The CSV format is intended for exporting annotations to external tools
+such as spreadsheets or data processing pipelines:</p>
 <div class="highlight-text notranslate"><div class="highlight"><pre><span></span>Image,Group,Index,X,Y
 image_1.png,default,0,128.5,102.0
 image_1.png,default,1,115.2,153.7
@@ -348,6 +476,24 @@ image_1.png,Coco,0,201.0,126.5
 image_2.png,default,0,80.0,45.3
 </pre></div>
 </div>
+<p>The CSV columns are:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">Image</span></code>: image file path.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">Group</span></code>: annotation group name.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">Index</span></code>: point index inside the group.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">X</span></code>: horizontal coordinate.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">Y</span></code>: vertical coordinate.</p></li>
+</ul>
+<p>Empty points can also be stored when a click is intentionally skipped:</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>Image,Group,Index,X,Y
+image_1.png,default,2,,
+</pre></div>
+</div>
+<p>CSV files do not store the complete application state. For saving and
+restoring complete projects, use the JSON format.</p>
+</section>
+<section id="coordinates">
+<h3>Coordinates<a class="headerlink" href="#coordinates" title="Link to this heading">#</a></h3>
 <p>Coordinates are stored as floating-point values to preserve subpixel
 precision.</p>
 <p>The coordinates follow NumPy image indexing conventions:</p>
@@ -359,6 +505,7 @@ precision.</p>
 <li><p><code class="docutils literal notranslate"><span class="pre">X</span></code> is the horizontal coordinate (column index),</p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">Y</span></code> is the vertical coordinate (row index).</p></li>
 </ul>
+</section>
 </section>
 <section id="author">
 <h2>Author<a class="headerlink" href="#author" title="Link to this heading">#</a></h2>
@@ -373,6 +520,8 @@ precision.</p>
 <ul class="simple">
 <li><p><strong>GitHub repository</strong>:
 <a class="github reference external" href="https://github.com/Artezaru/pyclickimage">Artezaru/pyclickimage</a></p></li>
+<li><p><strong>Releases (executables)</strong>:
+<a class="github reference external" href="https://github.com/Artezaru/pyclickimage/releases">Artezaru/pyclickimage</a></p></li>
 <li><p><strong>Online documentation</strong>:
 <a class="reference external" href="https://Artezaru.github.io/pyclickimage">https://Artezaru.github.io/pyclickimage</a></p></li>
 </ul>
@@ -421,12 +570,18 @@ version 3 or later (GPL-3.0-or-later).</p>
     class="page-toc tocsection onthispage">
     <i class="fa-solid fa-list"></i> On this page
   </div>
-  <nav class="bd-toc-nav page-toc" aria-labelledby="pst-page-navigation-heading-2">
-    <ul class="visible nav section-nav flex-column">
+  <nav id="pst-page-toc-nav" class="page-toc" aria-labelledby="pst-page-navigation-heading-2">
+    <ul class="pst-show_toc_level nav section-nav flex-column">
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#description-of-the-package">Description of the package</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#contents">Contents</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#running-the-application">Running the application</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#annotation-sessions">Annotation sessions</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#releases-standalone-application">Releases (standalone application)</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#annotation-sessions">Annotation sessions</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#json-session-format">JSON session format</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#csv-export-format">CSV export format</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#coordinates">Coordinates</a></li>
+</ul>
+</li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#author">Author</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#resources">Resources</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#license">License</a></li>
@@ -434,13 +589,13 @@ version 3 or later (GPL-3.0-or-later).</p>
   </nav></div>
 
   <div class="sidebar-secondary-item">
-  <div role="note" aria-label="source link">
-    <h3>This Page</h3>
-    <ul class="this-page-menu">
-      <li><a href="_sources/index.rst.txt"
-            rel="nofollow">Show Source</a></li>
-    </ul>
-   </div></div>
+
+  <div class="tocsection sourcelink">
+    <a href="_sources/index.rst.txt">
+      <i class="fa-solid fa-file-lines"></i> Show Source
+    </a>
+  </div>
+</div>
 
 </div></div>
               
@@ -455,8 +610,8 @@ version 3 or later (GPL-3.0-or-later).</p>
   </div>
   
   <!-- Scripts loaded after <body> so the DOM is not blocked -->
-  <script defer src="_static/scripts/bootstrap.js?digest=8878045cc6db502f8baf"></script>
-<script defer src="_static/scripts/pydata-sphinx-theme.js?digest=8878045cc6db502f8baf"></script>
+  <script defer src="_static/scripts/bootstrap.js?digest=18bd87630a240e9c25be"></script>
+<script defer src="_static/scripts/pydata-sphinx-theme.js?digest=18bd87630a240e9c25be"></script>
 
   <footer class="bd-footer">
 <div class="bd-footer__inner bd-page-width">
@@ -476,8 +631,7 @@ version 3 or later (GPL-3.0-or-later).</p>
         <div class="footer-item">
 
   <p class="sphinx-version">
-    Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 7.4.7.
-    <br/>
+    Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 9.0.4.
   </p>
 </div>
       
@@ -490,7 +644,7 @@ version 3 or later (GPL-3.0-or-later).</p>
         <div class="footer-item">
 <p class="theme-version">
   <!-- # L10n: Setting the PST URL as an argument as this does not need to be localized -->
-  Built with the <a href="https://pydata-sphinx-theme.readthedocs.io/en/stable/index.html">PyData Sphinx Theme</a> 0.16.1.
+  Built with the <a href="https://pydata-sphinx-theme.readthedocs.io/en/stable/index.html">PyData Sphinx Theme</a> 0.23.0.
 </p></div>
       
     </div>

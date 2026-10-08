@@ -1,0 +1,1437 @@
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="../../" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>pyclickimage.theme &#8212; pyclickimage 4.0.0 documentation</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  <!--
+    this give us a css class that will be invisible only if js is disabled
+  -->
+  <noscript>
+    <style>
+      .pst-js-only { display: none !important; }
+
+    </style>
+  </noscript>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../../_static/styles/theme.css?digest=18bd87630a240e9c25be" rel="stylesheet" />
+<link href="../../_static/styles/pydata-sphinx-theme.css?digest=18bd87630a240e9c25be" rel="stylesheet" />
+
+    <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=8f2a1f02" />
+  
+  <!-- So that users can add custom icons -->
+  <script defer src="../../_static/scripts/fontawesome.js?digest=18bd87630a240e9c25be"></script>
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../../_static/scripts/bootstrap.js?digest=18bd87630a240e9c25be" />
+<link rel="preload" as="script" href="../../_static/scripts/pydata-sphinx-theme.js?digest=18bd87630a240e9c25be" />
+
+    <script src="../../_static/documentation_options.js?v=3304f9e4"></script>
+    <script src="../../_static/doctools.js?v=fd6eb6e6"></script>
+    <script src="../../_static/sphinx_highlight.js?v=6ffebe34"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = '_modules/pyclickimage/theme';</script>
+    <script>DOCUMENTATION_OPTIONS.search_as_you_type = false;</script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="color-scheme" content="light dark"/>
+  <meta name="docsearch:language" content="en"/>
+  <meta name="docsearch:version" content="" />
+  
+    
+    <script src="../../_static/searchtools.js"></script>
+    <script src="../../_static/language_data.js"></script>
+    <script src="../../searchindex.js"></script>
+  
+  </head>
+  <body data-default-mode="">
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
+  
+  
+  
+  
+  <dialog id="pst-search-dialog">
+    
+<form class="bd-search d-flex align-items-center"
+      action="../../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         placeholder="Search the docs ..."
+         aria-label="Search the docs ..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form>
+  </dialog>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+
+  
+    <header id="pst-header" class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+<div class="bd-header__inner bd-page-width">
+  <button type="button" class="pst-navbar-icon sidebar-toggle primary-toggle" aria-label="Site navigation">
+    <span class="fa-solid fa-bars"></span>
+  </button>
+  
+  
+  <div class="col-lg-3 navbar-header-items__start">
+    
+      <div class="navbar-item">
+
+  
+    
+  
+
+<a class="navbar-brand logo" href="../../index.html">
+  
+  
+  
+  
+  
+  
+    <p class="title logo__title">pyclickimage 4.0.0 documentation</p>
+  
+</a></div>
+    
+  </div>
+  
+  <div class="col-lg-9 navbar-header-items">
+    
+    <div class="me-auto navbar-header-items__center">
+      
+        <div class="navbar-item">
+<nav>
+  <ul class="bd-navbar-elements navbar-nav">
+    
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../installation.html">
+    Installation
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../api.html">
+    API Reference
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../usage.html">
+    Usage
+  </a>
+</li>
+
+  </ul>
+</nav></div>
+      
+    </div>
+    
+    
+    <div class="navbar-header-items__end">
+      
+        <div class="navbar-item navbar-persistent--container">
+          
+
+<button type="button" class="btn search-button-field search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+ <i class="fa-solid fa-magnifying-glass"></i>
+ <span class="search-button__default-text">Search</span>
+ <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+</button>
+        </div>
+      
+      
+        <div class="navbar-item">
+
+<div class="theme-switch-container dropdown pst-js-only" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Color mode">
+  <button type="button" class="btn btn-sm nav-link pst-navbar-icon theme-switch-button dropdown-toggle" aria-label="Color mode" data-bs-toggle="dropdown">
+    <i class="theme-switch fa-solid fa-sun fa-lg fa-fw" data-mode="light" title="Light"></i>
+    <i class="theme-switch fa-solid fa-moon fa-lg fa-fw" data-mode="dark" title="Dark"></i>
+    <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg fa-fw" data-mode="auto" title="System Settings"></i>
+  </button>
+  <ul class="dropdown-menu dropdown-menu-end">
+    <li><button type="button" class="dropdown-item d-flex align-items-center theme-change-button" data-mode="auto"><i class="fa-solid fa-circle-half-stroke fa-lg fa-fw me-1"></i>System Settings</button></li>
+    <li><button type="button" class="dropdown-item d-flex align-items-center theme-change-button" data-mode="light"><i class="fa-solid fa-sun fa-lg fa-fw me-1"></i>Light</button></li>
+    <li><button type="button" class="dropdown-item d-flex align-items-center theme-change-button" data-mode="dark"><i class="fa-solid fa-moon fa-lg fa-fw me-1"></i>Dark</button></li>
+  </ul>
+</div></div>
+      
+    </div>
+    
+  </div>
+  
+  
+    <div class="navbar-persistent--mobile">
+
+<button type="button" class="btn search-button-field search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+ <i class="fa-solid fa-magnifying-glass"></i>
+ <span class="search-button__default-text">Search</span>
+ <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+</button>
+    </div>
+  
+
+  
+</div>
+
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+        
+      
+      <dialog id="pst-primary-sidebar-modal"></dialog>
+      <div id="pst-primary-sidebar" class="bd-sidebar-primary bd-sidebar hide-on-wide">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+      <div class="sidebar-header-items__center">
+        
+          
+          
+            <div class="navbar-item">
+<nav>
+  <ul class="bd-navbar-elements navbar-nav">
+    
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../installation.html">
+    Installation
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../api.html">
+    API Reference
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../usage.html">
+    Usage
+  </a>
+</li>
+
+  </ul>
+</nav></div>
+          
+        
+      </div>
+    
+    
+    
+      <div class="sidebar-header-items__end">
+        
+          <div class="navbar-item">
+
+<div class="theme-switch-container dropdown pst-js-only" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Color mode">
+  <button type="button" class="btn btn-sm nav-link pst-navbar-icon theme-switch-button dropdown-toggle" aria-label="Color mode" data-bs-toggle="dropdown">
+    <i class="theme-switch fa-solid fa-sun fa-lg fa-fw" data-mode="light" title="Light"></i>
+    <i class="theme-switch fa-solid fa-moon fa-lg fa-fw" data-mode="dark" title="Dark"></i>
+    <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg fa-fw" data-mode="auto" title="System Settings"></i>
+  </button>
+  <ul class="dropdown-menu dropdown-menu-end">
+    <li><button type="button" class="dropdown-item d-flex align-items-center theme-change-button" data-mode="auto"><i class="fa-solid fa-circle-half-stroke fa-lg fa-fw me-1"></i>System Settings</button></li>
+    <li><button type="button" class="dropdown-item d-flex align-items-center theme-change-button" data-mode="light"><i class="fa-solid fa-sun fa-lg fa-fw me-1"></i>Light</button></li>
+    <li><button type="button" class="dropdown-item d-flex align-items-center theme-change-button" data-mode="dark"><i class="fa-solid fa-moon fa-lg fa-fw me-1"></i>Dark</button></li>
+  </ul>
+</div></div>
+        
+      </div>
+    
+  </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+      <div class="sidebar-primary-item">
+<div id="ethical-ad-placement"
+      class="flat"
+      data-ea-publisher="readthedocs"
+      data-ea-type="readthedocs-sidebar"
+      data-ea-manual="true">
+</div></div>
+  </div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item">
+
+<nav aria-label="Breadcrumb" class="d-print-none">
+  <ul class="bd-breadcrumbs">
+    
+    <li class="breadcrumb-item breadcrumb-home">
+      <a href="../../index.html" class="nav-link" aria-label="Home">
+        <i class="fa-solid fa-home"></i>
+      </a>
+    </li>
+    
+    <li class="breadcrumb-item"><a href="../index.html" class="nav-link">Module code</a></li>
+    
+    <li class="breadcrumb-item active" aria-current="page"><span class="ellipsis">pyclickimage.theme</span></li>
+  </ul>
+</nav>
+</div>
+      
+    </div>
+  
+  
+</div>
+</div>
+              
+              
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <h1>Source code for pyclickimage.theme</h1><div class="highlight"><pre>
+<span></span><span class="sd">"""</span>
+<span class="sd">pyclickimage - Python library to select points on a image [pyqt5 GUI]</span>
+<span class="sd">Copyright (C) 2025-2026 Artezaru, artezaru.github@proton.me</span>
+
+<span class="sd">This program is free software: you can redistribute it and/or modify</span>
+<span class="sd">it under the terms of the GNU General Public License as published by</span>
+<span class="sd">the Free Software Foundation, either version 3 of the License, or</span>
+<span class="sd">(at your option) any later version.</span>
+
+<span class="sd">This program is distributed in the hope that it will be useful,</span>
+<span class="sd">but WITHOUT ANY WARRANTY; without even the implied warranty of</span>
+<span class="sd">MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the</span>
+<span class="sd">GNU General Public License for more details.</span>
+
+<span class="sd">You should have received a copy of the GNU General Public License</span>
+<span class="sd">along with this program.  If not, see &lt;https://www.gnu.org/licenses/&gt;.</span>
+<span class="sd">"""</span>
+
+<span class="kn">from</span><span class="w"> </span><span class="nn">__future__</span><span class="w"> </span><span class="kn">import</span> <span class="n">annotations</span>
+
+<span class="kn">from</span><span class="w"> </span><span class="nn">dataclasses</span><span class="w"> </span><span class="kn">import</span> <span class="n">dataclass</span><span class="p">,</span> <span class="n">fields</span><span class="p">,</span> <span class="n">replace</span> <span class="k">as</span> <span class="n">dataclass_replace</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">typing</span><span class="w"> </span><span class="kn">import</span> <span class="n">Iterable</span>
+
+<span class="kn">from</span><span class="w"> </span><span class="nn">PyQt5</span><span class="w"> </span><span class="kn">import</span> <span class="n">QtGui</span><span class="p">,</span> <span class="n">QtWidgets</span>
+
+
+<span class="c1"># ==========================================================================</span>
+<span class="c1"># Theme definition</span>
+<span class="c1"># ==========================================================================</span>
+
+<div class="viewcode-block" id="Theme">
+<a class="viewcode-back" href="../../api_doc/theme.html#pyclickimage.theme.Theme">[docs]</a>
+<span class="nd">@dataclass</span><span class="p">(</span><span class="n">frozen</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="k">class</span><span class="w"> </span><span class="nc">Theme</span><span class="p">:</span>
+<span class="w">    </span><span class="sa">r</span><span class="sd">"""Complete description of a visual theme.</span>
+
+<span class="sd">    All colors are CSS-like strings accepted by :class:`QColor`</span>
+<span class="sd">    (``"#RRGGBB"``, ``"#AARRGGBB"`` or color names).</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    name : str</span>
+<span class="sd">        Human-readable theme name.</span>
+<span class="sd">    dark : bool</span>
+<span class="sd">        Whether the theme is dark. Used for a few contrast decisions.</span>
+
+<span class="sd">    window : str</span>
+<span class="sd">        Background of windows and main surfaces.</span>
+<span class="sd">    surface : str</span>
+<span class="sd">        Background of raised elements (toolbar, group boxes, menus).</span>
+<span class="sd">    base : str</span>
+<span class="sd">        Background of input and content widgets (text edits, tables,</span>
+<span class="sd">        combo boxes, plots).</span>
+<span class="sd">    alternate_base : str</span>
+<span class="sd">        Alternate row color of tables and lists.</span>
+<span class="sd">    border : str</span>
+<span class="sd">        Default border color.</span>
+<span class="sd">    border_strong : str</span>
+<span class="sd">        Border color of hovered or focused elements.</span>
+
+<span class="sd">    text : str</span>
+<span class="sd">        Main text color.</span>
+<span class="sd">    text_muted : str</span>
+<span class="sd">        Secondary text color (labels, disabled text, placeholders).</span>
+
+<span class="sd">    accent : str</span>
+<span class="sd">        Main accent color (selection, checked buttons, focus).</span>
+<span class="sd">    accent_hover : str</span>
+<span class="sd">        Accent color under the mouse.</span>
+<span class="sd">    accent_text : str</span>
+<span class="sd">        Text color displayed on top of ``accent``.</span>
+<span class="sd">    danger : str</span>
+<span class="sd">        Color used for destructive or error states.</span>
+<span class="sd">    warning : str</span>
+<span class="sd">        Color used to flag a non-default state that needs attention</span>
+<span class="sd">        (for instance a custom interpolation curve).</span>
+<span class="sd">    warning_hover : str</span>
+<span class="sd">        Warning color under the mouse.</span>
+<span class="sd">    warning_text : str</span>
+<span class="sd">        Text color displayed on top of ``warning``.</span>
+
+<span class="sd">    plot_background : str</span>
+<span class="sd">        Background of custom-painted plots.</span>
+<span class="sd">    plot_grid : str</span>
+<span class="sd">        Major grid line color of plots.</span>
+<span class="sd">    plot_minor_grid : str</span>
+<span class="sd">        Minor grid line color of plots.</span>
+<span class="sd">    plot_axis : str</span>
+<span class="sd">        Axis and tick color of plots.</span>
+<span class="sd">    plot_text : str</span>
+<span class="sd">        Tick label and axis title color of plots.</span>
+<span class="sd">    plot_line : str</span>
+<span class="sd">        Data line, curve, node and histogram bar color.</span>
+<span class="sd">    plot_overlay : str</span>
+<span class="sd">        Background of overlays drawn inside plots (for instance the</span>
+<span class="sd">        mouse-coordinate box of :class:`QtLinearInterpolator`).</span>
+
+<span class="sd">    font_family : str</span>
+<span class="sd">        Application font family. An empty string keeps the system font.</span>
+<span class="sd">    font_size : int</span>
+<span class="sd">        Application font size in points.</span>
+<span class="sd">    plot_font_size : int</span>
+<span class="sd">        Font size used inside plots, in points.</span>
+<span class="sd">    radius : int</span>
+<span class="sd">        Corner radius of buttons, inputs and frames, in pixels.</span>
+<span class="sd">    padding : int</span>
+<span class="sd">        Base inner padding of buttons and inputs, in pixels.</span>
+<span class="sd">    splitter_width : int</span>
+<span class="sd">        Width of splitter handles, in pixels.</span>
+
+<span class="sd">    Notes</span>
+<span class="sd">    -----</span>
+<span class="sd">    The class is immutable. Use :meth:`replace` to derive a new theme.</span>
+<span class="sd">    """</span>
+
+    <span class="n">name</span><span class="p">:</span> <span class="nb">str</span>
+    <span class="n">dark</span><span class="p">:</span> <span class="nb">bool</span>
+
+    <span class="n">window</span><span class="p">:</span> <span class="nb">str</span>
+    <span class="n">surface</span><span class="p">:</span> <span class="nb">str</span>
+    <span class="n">base</span><span class="p">:</span> <span class="nb">str</span>
+    <span class="n">alternate_base</span><span class="p">:</span> <span class="nb">str</span>
+    <span class="n">border</span><span class="p">:</span> <span class="nb">str</span>
+    <span class="n">border_strong</span><span class="p">:</span> <span class="nb">str</span>
+
+    <span class="n">text</span><span class="p">:</span> <span class="nb">str</span>
+    <span class="n">text_muted</span><span class="p">:</span> <span class="nb">str</span>
+
+    <span class="n">accent</span><span class="p">:</span> <span class="nb">str</span>
+    <span class="n">accent_hover</span><span class="p">:</span> <span class="nb">str</span>
+    <span class="n">accent_text</span><span class="p">:</span> <span class="nb">str</span>
+    <span class="n">danger</span><span class="p">:</span> <span class="nb">str</span>
+    <span class="n">warning</span><span class="p">:</span> <span class="nb">str</span>
+    <span class="n">warning_hover</span><span class="p">:</span> <span class="nb">str</span>
+    <span class="n">warning_text</span><span class="p">:</span> <span class="nb">str</span>
+
+    <span class="n">plot_background</span><span class="p">:</span> <span class="nb">str</span>
+    <span class="n">plot_grid</span><span class="p">:</span> <span class="nb">str</span>
+    <span class="n">plot_minor_grid</span><span class="p">:</span> <span class="nb">str</span>
+    <span class="n">plot_axis</span><span class="p">:</span> <span class="nb">str</span>
+    <span class="n">plot_text</span><span class="p">:</span> <span class="nb">str</span>
+    <span class="n">plot_line</span><span class="p">:</span> <span class="nb">str</span>
+    <span class="n">plot_overlay</span><span class="p">:</span> <span class="nb">str</span>
+
+    <span class="n">font_family</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">""</span>
+    <span class="n">font_size</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">10</span>
+    <span class="n">plot_font_size</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">8</span>
+    <span class="n">radius</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">6</span>
+    <span class="n">padding</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">5</span>
+    <span class="n">splitter_width</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">6</span>
+
+<div class="viewcode-block" id="Theme.replace">
+<a class="viewcode-back" href="../../api_doc/theme.html#pyclickimage.theme.Theme.replace">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">replace</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">**</span><span class="n">changes</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="s2">"Theme"</span><span class="p">:</span>
+<span class="w">        </span><span class="sa">r</span><span class="sd">"""Return a copy of the theme with some fields replaced.</span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        **changes</span>
+<span class="sd">            Field names and their new values.</span>
+
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        Theme</span>
+<span class="sd">            New theme instance.</span>
+
+<span class="sd">        Raises</span>
+<span class="sd">        ------</span>
+<span class="sd">        TypeError</span>
+<span class="sd">            If a key is not a field of :class:`Theme`.</span>
+
+<span class="sd">        Examples</span>
+<span class="sd">        --------</span>
+<span class="sd">        &gt;&gt;&gt; compact = DARK_THEME.replace(font_size=9, padding=3)</span>
+<span class="sd">        """</span>
+        <span class="k">return</span> <span class="n">dataclass_replace</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">**</span><span class="n">changes</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="Theme.to_dict">
+<a class="viewcode-back" href="../../api_doc/theme.html#pyclickimage.theme.Theme.to_dict">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">to_dict</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">dict</span><span class="p">:</span>
+<span class="w">        </span><span class="sa">r</span><span class="sd">"""Return the theme as a plain dictionary.</span>
+
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        dict</span>
+<span class="sd">            Mapping ``field name -&gt; value``. Useful to save a theme to</span>
+<span class="sd">            JSON; :meth:`from_dict` performs the inverse operation.</span>
+<span class="sd">        """</span>
+        <span class="k">return</span> <span class="p">{</span>
+            <span class="n">field</span><span class="o">.</span><span class="n">name</span><span class="p">:</span> <span class="nb">getattr</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">field</span><span class="o">.</span><span class="n">name</span><span class="p">)</span>
+            <span class="k">for</span> <span class="n">field</span> <span class="ow">in</span> <span class="n">fields</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span>
+        <span class="p">}</span></div>
+
+
+<div class="viewcode-block" id="Theme.from_dict">
+<a class="viewcode-back" href="../../api_doc/theme.html#pyclickimage.theme.Theme.from_dict">[docs]</a>
+    <span class="nd">@classmethod</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">from_dict</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="n">data</span><span class="p">:</span> <span class="nb">dict</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="s2">"Theme"</span><span class="p">:</span>
+<span class="w">        </span><span class="sa">r</span><span class="sd">"""Create a theme from a dictionary.</span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        data : dict</span>
+<span class="sd">            Mapping ``field name -&gt; value``, as produced by</span>
+<span class="sd">            :meth:`to_dict`. Unknown keys are ignored.</span>
+
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        Theme</span>
+<span class="sd">            New theme instance.</span>
+
+<span class="sd">        Raises</span>
+<span class="sd">        ------</span>
+<span class="sd">        TypeError</span>
+<span class="sd">            If a required field is missing.</span>
+<span class="sd">        """</span>
+        <span class="n">names</span> <span class="o">=</span> <span class="p">{</span><span class="n">field</span><span class="o">.</span><span class="n">name</span> <span class="k">for</span> <span class="n">field</span> <span class="ow">in</span> <span class="n">fields</span><span class="p">(</span><span class="bp">cls</span><span class="p">)}</span>
+
+        <span class="k">return</span> <span class="bp">cls</span><span class="p">(</span><span class="o">**</span><span class="p">{</span>
+            <span class="n">key</span><span class="p">:</span> <span class="n">value</span>
+            <span class="k">for</span> <span class="n">key</span><span class="p">,</span> <span class="n">value</span> <span class="ow">in</span> <span class="n">data</span><span class="o">.</span><span class="n">items</span><span class="p">()</span>
+            <span class="k">if</span> <span class="n">key</span> <span class="ow">in</span> <span class="n">names</span>
+        <span class="p">})</span></div>
+</div>
+
+
+
+<span class="c1"># ==========================================================================</span>
+<span class="c1"># Built-in themes</span>
+<span class="c1"># ==========================================================================</span>
+
+<span class="n">DARK_THEME</span> <span class="o">=</span> <span class="n">Theme</span><span class="p">(</span>
+    <span class="n">name</span><span class="o">=</span><span class="s2">"Dark"</span><span class="p">,</span>
+    <span class="n">dark</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+
+    <span class="n">window</span><span class="o">=</span><span class="s2">"#16181d"</span><span class="p">,</span>
+    <span class="n">surface</span><span class="o">=</span><span class="s2">"#1d2027"</span><span class="p">,</span>
+    <span class="n">base</span><span class="o">=</span><span class="s2">"#22262e"</span><span class="p">,</span>
+    <span class="n">alternate_base</span><span class="o">=</span><span class="s2">"#262a33"</span><span class="p">,</span>
+    <span class="n">border</span><span class="o">=</span><span class="s2">"#2f343e"</span><span class="p">,</span>
+    <span class="n">border_strong</span><span class="o">=</span><span class="s2">"#454c59"</span><span class="p">,</span>
+
+    <span class="n">text</span><span class="o">=</span><span class="s2">"#e6e8ec"</span><span class="p">,</span>
+    <span class="n">text_muted</span><span class="o">=</span><span class="s2">"#8f98a8"</span><span class="p">,</span>
+
+    <span class="n">accent</span><span class="o">=</span><span class="s2">"#5b9cff"</span><span class="p">,</span>
+    <span class="n">accent_hover</span><span class="o">=</span><span class="s2">"#7cb0ff"</span><span class="p">,</span>
+    <span class="n">accent_text</span><span class="o">=</span><span class="s2">"#0d1117"</span><span class="p">,</span>
+    <span class="n">danger</span><span class="o">=</span><span class="s2">"#ff6b6b"</span><span class="p">,</span>
+    <span class="n">warning</span><span class="o">=</span><span class="s2">"#f0a030"</span><span class="p">,</span>
+    <span class="n">warning_hover</span><span class="o">=</span><span class="s2">"#f5b555"</span><span class="p">,</span>
+    <span class="n">warning_text</span><span class="o">=</span><span class="s2">"#0d1117"</span><span class="p">,</span>
+
+    <span class="n">plot_background</span><span class="o">=</span><span class="s2">"#1b1e25"</span><span class="p">,</span>
+    <span class="n">plot_grid</span><span class="o">=</span><span class="s2">"#2c313b"</span><span class="p">,</span>
+    <span class="n">plot_minor_grid</span><span class="o">=</span><span class="s2">"#23272f"</span><span class="p">,</span>
+    <span class="n">plot_axis</span><span class="o">=</span><span class="s2">"#7d8696"</span><span class="p">,</span>
+    <span class="n">plot_text</span><span class="o">=</span><span class="s2">"#b4bcc9"</span><span class="p">,</span>
+    <span class="n">plot_line</span><span class="o">=</span><span class="s2">"#5b9cff"</span><span class="p">,</span>
+    <span class="n">plot_overlay</span><span class="o">=</span><span class="s2">"#dc22262e"</span><span class="p">,</span>
+<span class="p">)</span>
+<span class="sd">"""Theme: modern dark theme (default)."""</span>
+
+
+<span class="n">LIGHT_THEME</span> <span class="o">=</span> <span class="n">Theme</span><span class="p">(</span>
+    <span class="n">name</span><span class="o">=</span><span class="s2">"Light"</span><span class="p">,</span>
+    <span class="n">dark</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
+
+    <span class="n">window</span><span class="o">=</span><span class="s2">"#f4f5f7"</span><span class="p">,</span>
+    <span class="n">surface</span><span class="o">=</span><span class="s2">"#ffffff"</span><span class="p">,</span>
+    <span class="n">base</span><span class="o">=</span><span class="s2">"#ffffff"</span><span class="p">,</span>
+    <span class="n">alternate_base</span><span class="o">=</span><span class="s2">"#f7f8fa"</span><span class="p">,</span>
+    <span class="n">border</span><span class="o">=</span><span class="s2">"#d9dde4"</span><span class="p">,</span>
+    <span class="n">border_strong</span><span class="o">=</span><span class="s2">"#b3bac6"</span><span class="p">,</span>
+
+    <span class="n">text</span><span class="o">=</span><span class="s2">"#1d2129"</span><span class="p">,</span>
+    <span class="n">text_muted</span><span class="o">=</span><span class="s2">"#6b7280"</span><span class="p">,</span>
+
+    <span class="n">accent</span><span class="o">=</span><span class="s2">"#2f6fe4"</span><span class="p">,</span>
+    <span class="n">accent_hover</span><span class="o">=</span><span class="s2">"#4a84ec"</span><span class="p">,</span>
+    <span class="n">accent_text</span><span class="o">=</span><span class="s2">"#ffffff"</span><span class="p">,</span>
+    <span class="n">danger</span><span class="o">=</span><span class="s2">"#d64545"</span><span class="p">,</span>
+    <span class="n">warning</span><span class="o">=</span><span class="s2">"#e8890c"</span><span class="p">,</span>
+    <span class="n">warning_hover</span><span class="o">=</span><span class="s2">"#f59f2a"</span><span class="p">,</span>
+    <span class="n">warning_text</span><span class="o">=</span><span class="s2">"#1d2129"</span><span class="p">,</span>
+
+    <span class="n">plot_background</span><span class="o">=</span><span class="s2">"#ffffff"</span><span class="p">,</span>
+    <span class="n">plot_grid</span><span class="o">=</span><span class="s2">"#e3e6eb"</span><span class="p">,</span>
+    <span class="n">plot_minor_grid</span><span class="o">=</span><span class="s2">"#f0f2f5"</span><span class="p">,</span>
+    <span class="n">plot_axis</span><span class="o">=</span><span class="s2">"#5f6672"</span><span class="p">,</span>
+    <span class="n">plot_text</span><span class="o">=</span><span class="s2">"#4b5260"</span><span class="p">,</span>
+    <span class="n">plot_line</span><span class="o">=</span><span class="s2">"#2f6fe4"</span><span class="p">,</span>
+    <span class="n">plot_overlay</span><span class="o">=</span><span class="s2">"#dcffffff"</span><span class="p">,</span>
+<span class="p">)</span>
+<span class="sd">"""Theme: modern light theme."""</span>
+
+
+<span class="n">THEMES</span><span class="p">:</span> <span class="nb">dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Theme</span><span class="p">]</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="n">DARK_THEME</span><span class="o">.</span><span class="n">name</span><span class="o">.</span><span class="n">lower</span><span class="p">():</span> <span class="n">DARK_THEME</span><span class="p">,</span>
+    <span class="n">LIGHT_THEME</span><span class="o">.</span><span class="n">name</span><span class="o">.</span><span class="n">lower</span><span class="p">():</span> <span class="n">LIGHT_THEME</span><span class="p">,</span>
+<span class="p">}</span>
+<span class="sd">"""dict[str, Theme]: Built-in themes indexed by lower-case name."""</span>
+
+
+<div class="viewcode-block" id="get_theme">
+<a class="viewcode-back" href="../../api_doc/theme.html#pyclickimage.theme.get_theme">[docs]</a>
+<span class="k">def</span><span class="w"> </span><span class="nf">get_theme</span><span class="p">(</span><span class="n">name</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Theme</span><span class="p">:</span>
+<span class="w">    </span><span class="sa">r</span><span class="sd">"""Return a built-in theme by name.</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    name : str</span>
+<span class="sd">        Theme name, case-insensitive (``"dark"`` or ``"light"``).</span>
+
+<span class="sd">    Returns</span>
+<span class="sd">    -------</span>
+<span class="sd">    Theme</span>
+<span class="sd">        The requested theme.</span>
+
+<span class="sd">    Raises</span>
+<span class="sd">    ------</span>
+<span class="sd">    KeyError</span>
+<span class="sd">        If no built-in theme has this name.</span>
+<span class="sd">    """</span>
+    <span class="n">key</span> <span class="o">=</span> <span class="nb">str</span><span class="p">(</span><span class="n">name</span><span class="p">)</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span>
+
+    <span class="k">if</span> <span class="n">key</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">THEMES</span><span class="p">:</span>
+        <span class="k">raise</span> <span class="ne">KeyError</span><span class="p">(</span>
+            <span class="sa">f</span><span class="s2">"Unknown theme '</span><span class="si">{</span><span class="n">name</span><span class="si">}</span><span class="s2">'. "</span>
+            <span class="sa">f</span><span class="s2">"Available themes: </span><span class="si">{</span><span class="s1">', '</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="nb">sorted</span><span class="p">(</span><span class="n">THEMES</span><span class="p">))</span><span class="si">}</span><span class="s2">."</span>
+        <span class="p">)</span>
+
+    <span class="k">return</span> <span class="n">THEMES</span><span class="p">[</span><span class="n">key</span><span class="p">]</span></div>
+
+
+
+<span class="c1"># ==========================================================================</span>
+<span class="c1"># Palette</span>
+<span class="c1"># ==========================================================================</span>
+
+<div class="viewcode-block" id="build_palette">
+<a class="viewcode-back" href="../../api_doc/theme.html#pyclickimage.theme.build_palette">[docs]</a>
+<span class="k">def</span><span class="w"> </span><span class="nf">build_palette</span><span class="p">(</span><span class="n">theme</span><span class="p">:</span> <span class="n">Theme</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">QtGui</span><span class="o">.</span><span class="n">QPalette</span><span class="p">:</span>
+<span class="w">    </span><span class="sa">r</span><span class="sd">"""Build a :class:`QPalette` from a theme.</span>
+
+<span class="sd">    The palette matters even with a stylesheet: widgets that paint</span>
+<span class="sd">    themselves (and the default colors of the custom plots) read it.</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    theme : Theme</span>
+<span class="sd">        Source theme.</span>
+
+<span class="sd">    Returns</span>
+<span class="sd">    -------</span>
+<span class="sd">    QPalette</span>
+<span class="sd">        Palette for the active and inactive groups, with muted colors for</span>
+<span class="sd">        the disabled group.</span>
+<span class="sd">    """</span>
+    <span class="n">palette</span> <span class="o">=</span> <span class="n">QtGui</span><span class="o">.</span><span class="n">QPalette</span><span class="p">()</span>
+
+    <span class="n">role</span> <span class="o">=</span> <span class="n">QtGui</span><span class="o">.</span><span class="n">QPalette</span>
+    <span class="n">color</span> <span class="o">=</span> <span class="n">QtGui</span><span class="o">.</span><span class="n">QColor</span>
+
+    <span class="n">entries</span> <span class="o">=</span> <span class="p">{</span>
+        <span class="n">role</span><span class="o">.</span><span class="n">Window</span><span class="p">:</span> <span class="n">theme</span><span class="o">.</span><span class="n">window</span><span class="p">,</span>
+        <span class="n">role</span><span class="o">.</span><span class="n">WindowText</span><span class="p">:</span> <span class="n">theme</span><span class="o">.</span><span class="n">text</span><span class="p">,</span>
+        <span class="n">role</span><span class="o">.</span><span class="n">Base</span><span class="p">:</span> <span class="n">theme</span><span class="o">.</span><span class="n">base</span><span class="p">,</span>
+        <span class="n">role</span><span class="o">.</span><span class="n">AlternateBase</span><span class="p">:</span> <span class="n">theme</span><span class="o">.</span><span class="n">alternate_base</span><span class="p">,</span>
+        <span class="n">role</span><span class="o">.</span><span class="n">ToolTipBase</span><span class="p">:</span> <span class="n">theme</span><span class="o">.</span><span class="n">surface</span><span class="p">,</span>
+        <span class="n">role</span><span class="o">.</span><span class="n">ToolTipText</span><span class="p">:</span> <span class="n">theme</span><span class="o">.</span><span class="n">text</span><span class="p">,</span>
+        <span class="n">role</span><span class="o">.</span><span class="n">PlaceholderText</span><span class="p">:</span> <span class="n">theme</span><span class="o">.</span><span class="n">text_muted</span><span class="p">,</span>
+        <span class="n">role</span><span class="o">.</span><span class="n">Text</span><span class="p">:</span> <span class="n">theme</span><span class="o">.</span><span class="n">text</span><span class="p">,</span>
+        <span class="n">role</span><span class="o">.</span><span class="n">Button</span><span class="p">:</span> <span class="n">theme</span><span class="o">.</span><span class="n">surface</span><span class="p">,</span>
+        <span class="n">role</span><span class="o">.</span><span class="n">ButtonText</span><span class="p">:</span> <span class="n">theme</span><span class="o">.</span><span class="n">text</span><span class="p">,</span>
+        <span class="n">role</span><span class="o">.</span><span class="n">BrightText</span><span class="p">:</span> <span class="n">theme</span><span class="o">.</span><span class="n">danger</span><span class="p">,</span>
+        <span class="n">role</span><span class="o">.</span><span class="n">Highlight</span><span class="p">:</span> <span class="n">theme</span><span class="o">.</span><span class="n">accent</span><span class="p">,</span>
+        <span class="n">role</span><span class="o">.</span><span class="n">HighlightedText</span><span class="p">:</span> <span class="n">theme</span><span class="o">.</span><span class="n">accent_text</span><span class="p">,</span>
+        <span class="n">role</span><span class="o">.</span><span class="n">Link</span><span class="p">:</span> <span class="n">theme</span><span class="o">.</span><span class="n">accent</span><span class="p">,</span>
+        <span class="n">role</span><span class="o">.</span><span class="n">LinkVisited</span><span class="p">:</span> <span class="n">theme</span><span class="o">.</span><span class="n">accent_hover</span><span class="p">,</span>
+        <span class="n">role</span><span class="o">.</span><span class="n">Light</span><span class="p">:</span> <span class="n">theme</span><span class="o">.</span><span class="n">border_strong</span><span class="p">,</span>
+        <span class="n">role</span><span class="o">.</span><span class="n">Midlight</span><span class="p">:</span> <span class="n">theme</span><span class="o">.</span><span class="n">border_strong</span><span class="p">,</span>
+        <span class="n">role</span><span class="o">.</span><span class="n">Mid</span><span class="p">:</span> <span class="n">theme</span><span class="o">.</span><span class="n">border</span><span class="p">,</span>
+        <span class="n">role</span><span class="o">.</span><span class="n">Dark</span><span class="p">:</span> <span class="n">theme</span><span class="o">.</span><span class="n">window</span><span class="p">,</span>
+        <span class="n">role</span><span class="o">.</span><span class="n">Shadow</span><span class="p">:</span> <span class="s2">"#000000"</span><span class="p">,</span>
+    <span class="p">}</span>
+
+    <span class="k">for</span> <span class="n">palette_role</span><span class="p">,</span> <span class="n">value</span> <span class="ow">in</span> <span class="n">entries</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+        <span class="n">palette</span><span class="o">.</span><span class="n">setColor</span><span class="p">(</span><span class="n">palette_role</span><span class="p">,</span> <span class="n">color</span><span class="p">(</span><span class="n">value</span><span class="p">))</span>
+
+    <span class="k">for</span> <span class="n">palette_role</span> <span class="ow">in</span> <span class="p">(</span>
+        <span class="n">role</span><span class="o">.</span><span class="n">WindowText</span><span class="p">,</span>
+        <span class="n">role</span><span class="o">.</span><span class="n">Text</span><span class="p">,</span>
+        <span class="n">role</span><span class="o">.</span><span class="n">ButtonText</span><span class="p">,</span>
+    <span class="p">):</span>
+        <span class="n">palette</span><span class="o">.</span><span class="n">setColor</span><span class="p">(</span>
+            <span class="n">role</span><span class="o">.</span><span class="n">Disabled</span><span class="p">,</span>
+            <span class="n">palette_role</span><span class="p">,</span>
+            <span class="n">color</span><span class="p">(</span><span class="n">theme</span><span class="o">.</span><span class="n">text_muted</span><span class="p">),</span>
+        <span class="p">)</span>
+
+    <span class="n">palette</span><span class="o">.</span><span class="n">setColor</span><span class="p">(</span>
+        <span class="n">role</span><span class="o">.</span><span class="n">Disabled</span><span class="p">,</span>
+        <span class="n">role</span><span class="o">.</span><span class="n">Highlight</span><span class="p">,</span>
+        <span class="n">color</span><span class="p">(</span><span class="n">theme</span><span class="o">.</span><span class="n">border_strong</span><span class="p">),</span>
+    <span class="p">)</span>
+
+    <span class="k">return</span> <span class="n">palette</span></div>
+
+
+
+<span class="c1"># ==========================================================================</span>
+<span class="c1"># Stylesheet</span>
+<span class="c1"># ==========================================================================</span>
+
+<div class="viewcode-block" id="build_stylesheet">
+<a class="viewcode-back" href="../../api_doc/theme.html#pyclickimage.theme.build_stylesheet">[docs]</a>
+<span class="k">def</span><span class="w"> </span><span class="nf">build_stylesheet</span><span class="p">(</span><span class="n">theme</span><span class="p">:</span> <span class="n">Theme</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+<span class="w">    </span><span class="sa">r</span><span class="sd">"""Generate the Qt stylesheet of a theme.</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    theme : Theme</span>
+<span class="sd">        Source theme.</span>
+
+<span class="sd">    Returns</span>
+<span class="sd">    -------</span>
+<span class="sd">    str</span>
+<span class="sd">        Qt stylesheet (QSS) covering the standard widgets used by the</span>
+<span class="sd">        application: windows, toolbars, buttons, inputs, combo boxes,</span>
+<span class="sd">        check boxes, group boxes, tables, scroll bars, splitters, menus,</span>
+<span class="sd">        tabs, sliders, status bars and tooltips.</span>
+
+<span class="sd">    Notes</span>
+<span class="sd">    -----</span>
+<span class="sd">    The stylesheet is a plain string: it can be edited, saved to a</span>
+<span class="sd">    ``.qss`` file or extended before being applied with</span>
+<span class="sd">    :func:`apply_theme`.</span>
+<span class="sd">    """</span>
+    <span class="n">t</span> <span class="o">=</span> <span class="n">theme</span>
+    <span class="n">r</span> <span class="o">=</span> <span class="n">t</span><span class="o">.</span><span class="n">radius</span>
+    <span class="n">p</span> <span class="o">=</span> <span class="n">t</span><span class="o">.</span><span class="n">padding</span>
+
+    <span class="k">return</span> <span class="sa">f</span><span class="s2">"""</span>
+<span class="s2">/* ================================================================== */</span>
+<span class="s2">/* Theme: </span><span class="si">{</span><span class="n">t</span><span class="o">.</span><span class="n">name</span><span class="si">}</span><span class="s2">                                                     */</span>
+<span class="s2">/* ================================================================== */</span>
+
+<span class="s2">QWidget </span><span class="se">{{</span>
+<span class="s2">    color: </span><span class="si">{</span><span class="n">t</span><span class="o">.</span><span class="n">text</span><span class="si">}</span><span class="s2">;</span>
+<span class="s2">    selection-background-color: </span><span class="si">{</span><span class="n">t</span><span class="o">.</span><span class="n">accent</span><span class="si">}</span><span class="s2">;</span>
+<span class="s2">    selection-color: </span><span class="si">{</span><span class="n">t</span><span class="o">.</span><span class="n">accent_text</span><span class="si">}</span><span class="s2">;</span>
+<span class="se">}}</span>
+
+<span class="s2">QMainWindow, QDialog </span><span class="se">{{</span>
+<span class="s2">    background-color: </span><span class="si">{</span><span class="n">t</span><span class="o">.</span><span class="n">window</span><span class="si">}</span><span class="s2">;</span>
+<span class="se">}}</span>
+
+<span class="s2">QMainWindow::separator </span><span class="se">{{</span>
+<span class="s2">    background: </span><span class="si">{</span><span class="n">t</span><span class="o">.</span><span class="n">border</span><span class="si">}</span><span class="s2">;</span>
+<span class="s2">    width: 1px;</span>
+<span class="s2">    height: 1px;</span>
+<span class="se">}}</span>
+
+<span class="s2">/* ---------------------------- Tooltips ---------------------------- */</span>
+
+<span class="s2">QToolTip </span><span class="se">{{</span>
+<span class="s2">    color: </span><span class="si">{</span><span class="n">t</span><span class="o">.</span><span class="n">text</span><span class="si">}</span><span class="s2">;</span>
+<span class="s2">    background-color: </span><span class="si">{</span><span class="n">t</span><span class="o">.</span><span class="n">surface</span><span class="si">}</span><span class="s2">;</span>
+<span class="s2">    border: 1px solid </span><span class="si">{</span><span class="n">t</span><span class="o">.</span><span class="n">border_strong</span><span class="si">}</span><span class="s2">;</span>
+<span class="s2">    border-radius: </span><span class="si">{</span><span class="n">r</span><span class="si">}</span><span class="s2">px;</span>
+<span class="s2">    padding: </span><span class="si">{</span><span class="n">p</span><span class="si">}</span><span class="s2">px;</span>
+<span class="se">}}</span>
+
+<span class="s2">/* ---------------------------- Toolbars ---------------------------- */</span>
+
+<span class="s2">QToolBar </span><span class="se">{{</span>
+<span class="s2">    background-color: </span><span class="si">{</span><span class="n">t</span><span class="o">.</span><span class="n">surface</span><span class="si">}</span><span class="s2">;</span>
+<span class="s2">    border: none;</span>
+<span class="s2">    border-bottom: 1px solid </span><span class="si">{</span><span class="n">t</span><span class="o">.</span><span class="n">border</span><span class="si">}</span><span class="s2">;</span>
+<span class="s2">    padding: 4px;</span>
+<span class="s2">    spacing: 4px;</span>
+<span class="se">}}</span>
+
+<span class="s2">QToolBar::separator </span><span class="se">{{</span>
+<span class="s2">    background-color: </span><span class="si">{</span><span class="n">t</span><span class="o">.</span><span class="n">border</span><span class="si">}</span><span class="s2">;</span>
+<span class="s2">    width: 1px;</span>
+<span class="s2">    margin: 4px 6px;</span>
+<span class="se">}}</span>
+
+<span class="s2">QToolButton </span><span class="se">{{</span>
+<span class="s2">    background-color: transparent;</span>
+<span class="s2">    border: 1px solid transparent;</span>
+<span class="s2">    border-radius: </span><span class="si">{</span><span class="n">r</span><span class="si">}</span><span class="s2">px;</span>
+<span class="s2">    padding: </span><span class="si">{</span><span class="n">p</span><span class="si">}</span><span class="s2">px </span><span class="si">{</span><span class="n">p</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="mi">4</span><span class="si">}</span><span class="s2">px;</span>
+<span class="se">}}</span>
+
+<span class="s2">QToolButton:hover </span><span class="se">{{</span>
+<span class="s2">    background-color: </span><span class="si">{</span><span class="n">t</span><span class="o">.</span><span class="n">base</span><span class="si">}</span><span class="s2">;</span>
+<span class="s2">    border-color: </span><span class="si">{</span><span class="n">t</span><span class="o">.</span><span class="n">border</span><span class="si">}</span><span class="s2">;</span>
+<span class="se">}}</span>
+
+<span class="s2">QToolButton:pressed </span><span class="se">{{</span>
+<span class="s2">    background-color: </span><span class="si">{</span><span class="n">t</span><span class="o">.</span><span class="n">border</span><span class="si">}</span><span class="s2">;</span>
+<span class="se">}}</span>
+
+<span class="s2">QToolButton:checked </span><span class="se">{{</span>
+<span class="s2">    background-color: </span><span class="si">{</span><span class="n">t</span><span class="o">.</span><span class="n">accent</span><span class="si">}</span><span class="s2">;</span>
+<span class="s2">    border-color: </span><span class="si">{</span><span class="n">t</span><span class="o">.</span><span class="n">accent</span><span class="si">}</span><span class="s2">;</span>
+<span class="s2">    color: </span><span class="si">{</span><span class="n">t</span><span class="o">.</span><span class="n">accent_text</span><span class="si">}</span><span class="s2">;</span>
+<span class="se">}}</span>
+
+<span class="s2">QToolButton:checked:hover </span><span class="se">{{</span>
+<span class="s2">    background-color: </span><span class="si">{</span><span class="n">t</span><span class="o">.</span><span class="n">accent_hover</span><span class="si">}</span><span class="s2">;</span>
+<span class="s2">    border-color: </span><span class="si">{</span><span class="n">t</span><span class="o">.</span><span class="n">accent_hover</span><span class="si">}</span><span class="s2">;</span>
+<span class="se">}}</span>
+
+<span class="s2">QToolButton::menu-indicator </span><span class="se">{{</span>
+<span class="s2">    subcontrol-position: right center;</span>
+<span class="s2">    right: 4px;</span>
+<span class="se">}}</span>
+
+<span class="s2">QToolButton[popupMode="2"] </span><span class="se">{{</span>
+<span class="s2">    padding-right: </span><span class="si">{</span><span class="n">p</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="mi">14</span><span class="si">}</span><span class="s2">px;</span>
+<span class="se">}}</span>
+
+<span class="s2">/* ---------------------------- Buttons ----------------------------- */</span>
+
+<span class="s2">QPushButton </span><span class="se">{{</span>
+<span class="s2">    background-color: </span><span class="si">{</span><span class="n">t</span><span class="o">.</span><span class="n">base</span><span class="si">}</span><span class="s2">;</span>
+<span class="s2">    border: 1px solid </span><span class="si">{</span><span class="n">t</span><span class="o">.</span><span class="n">border</span><span class="si">}</span><span class="s2">;</span>
+<span class="s2">    border-radius: </span><span class="si">{</span><span class="n">r</span><span class="si">}</span><span class="s2">px;</span>
+<span class="s2">    padding: </span><span class="si">{</span><span class="n">p</span><span class="si">}</span><span class="s2">px </span><span class="si">{</span><span class="n">p</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="mi">7</span><span class="si">}</span><span class="s2">px;</span>
+<span class="s2">    min-height: 18px;</span>
+<span class="se">}}</span>
+
+<span class="s2">QPushButton:hover </span><span class="se">{{</span>
+<span class="s2">    border-color: </span><span class="si">{</span><span class="n">t</span><span class="o">.</span><span class="n">border_strong</span><span class="si">}</span><span class="s2">;</span>
+<span class="s2">    background-color: </span><span class="si">{</span><span class="n">t</span><span class="o">.</span><span class="n">alternate_base</span><span class="si">}</span><span class="s2">;</span>
+<span class="se">}}</span>
+
+<span class="s2">QPushButton:pressed </span><span class="se">{{</span>
+<span class="s2">    background-color: </span><span class="si">{</span><span class="n">t</span><span class="o">.</span><span class="n">border</span><span class="si">}</span><span class="s2">;</span>
+<span class="se">}}</span>
+
+<span class="s2">QPushButton:checked, QPushButton:default </span><span class="se">{{</span>
+<span class="s2">    background-color: </span><span class="si">{</span><span class="n">t</span><span class="o">.</span><span class="n">accent</span><span class="si">}</span><span class="s2">;</span>
+<span class="s2">    border-color: </span><span class="si">{</span><span class="n">t</span><span class="o">.</span><span class="n">accent</span><span class="si">}</span><span class="s2">;</span>
+<span class="s2">    color: </span><span class="si">{</span><span class="n">t</span><span class="o">.</span><span class="n">accent_text</span><span class="si">}</span><span class="s2">;</span>
+<span class="se">}}</span>
+
+<span class="s2">QPushButton:disabled, QToolButton:disabled </span><span class="se">{{</span>
+<span class="s2">    color: </span><span class="si">{</span><span class="n">t</span><span class="o">.</span><span class="n">text_muted</span><span class="si">}</span><span class="s2">;</span>
+<span class="s2">    border-color: </span><span class="si">{</span><span class="n">t</span><span class="o">.</span><span class="n">border</span><span class="si">}</span><span class="s2">;</span>
+<span class="s2">    background-color: </span><span class="si">{</span><span class="n">t</span><span class="o">.</span><span class="n">surface</span><span class="si">}</span><span class="s2">;</span>
+<span class="se">}}</span>
+
+<span class="s2">/* ----------------------------- Inputs ----------------------------- */</span>
+
+<span class="s2">QLineEdit, QTextEdit, QPlainTextEdit, QSpinBox, QDoubleSpinBox </span><span class="se">{{</span>
+<span class="s2">    background-color: </span><span class="si">{</span><span class="n">t</span><span class="o">.</span><span class="n">base</span><span class="si">}</span><span class="s2">;</span>
+<span class="s2">    border: 1px solid </span><span class="si">{</span><span class="n">t</span><span class="o">.</span><span class="n">border</span><span class="si">}</span><span class="s2">;</span>
+<span class="s2">    border-radius: </span><span class="si">{</span><span class="n">r</span><span class="si">}</span><span class="s2">px;</span>
+<span class="s2">    padding: </span><span class="si">{</span><span class="nb">max</span><span class="p">(</span><span class="n">p</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span><span class="w"> </span><span class="mi">2</span><span class="p">)</span><span class="si">}</span><span class="s2">px;</span>
+<span class="se">}}</span>
+
+<span class="s2">QLineEdit:focus, QTextEdit:focus, QPlainTextEdit:focus,</span>
+<span class="s2">QSpinBox:focus, QDoubleSpinBox:focus </span><span class="se">{{</span>
+<span class="s2">    border-color: </span><span class="si">{</span><span class="n">t</span><span class="o">.</span><span class="n">accent</span><span class="si">}</span><span class="s2">;</span>
+<span class="se">}}</span>
+
+<span class="s2">/* --------------------------- Combo boxes -------------------------- */</span>
+
+<span class="s2">QComboBox </span><span class="se">{{</span>
+<span class="s2">    background-color: </span><span class="si">{</span><span class="n">t</span><span class="o">.</span><span class="n">base</span><span class="si">}</span><span class="s2">;</span>
+<span class="s2">    border: 1px solid </span><span class="si">{</span><span class="n">t</span><span class="o">.</span><span class="n">border</span><span class="si">}</span><span class="s2">;</span>
+<span class="s2">    border-radius: </span><span class="si">{</span><span class="n">r</span><span class="si">}</span><span class="s2">px;</span>
+<span class="s2">    padding: </span><span class="si">{</span><span class="nb">max</span><span class="p">(</span><span class="n">p</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span><span class="w"> </span><span class="mi">2</span><span class="p">)</span><span class="si">}</span><span class="s2">px </span><span class="si">{</span><span class="n">p</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="mi">2</span><span class="si">}</span><span class="s2">px;</span>
+<span class="s2">    min-height: 18px;</span>
+<span class="se">}}</span>
+
+<span class="s2">QComboBox:hover </span><span class="se">{{</span>
+<span class="s2">    border-color: </span><span class="si">{</span><span class="n">t</span><span class="o">.</span><span class="n">border_strong</span><span class="si">}</span><span class="s2">;</span>
+<span class="se">}}</span>
+
+<span class="s2">QComboBox:focus </span><span class="se">{{</span>
+<span class="s2">    border-color: </span><span class="si">{</span><span class="n">t</span><span class="o">.</span><span class="n">accent</span><span class="si">}</span><span class="s2">;</span>
+<span class="se">}}</span>
+
+<span class="s2">QComboBox::drop-down </span><span class="se">{{</span>
+<span class="s2">    border: none;</span>
+<span class="s2">    width: 20px;</span>
+<span class="se">}}</span>
+
+<span class="s2">QComboBox QAbstractItemView </span><span class="se">{{</span>
+<span class="s2">    background-color: </span><span class="si">{</span><span class="n">t</span><span class="o">.</span><span class="n">surface</span><span class="si">}</span><span class="s2">;</span>
+<span class="s2">    border: 1px solid </span><span class="si">{</span><span class="n">t</span><span class="o">.</span><span class="n">border_strong</span><span class="si">}</span><span class="s2">;</span>
+<span class="s2">    border-radius: </span><span class="si">{</span><span class="n">r</span><span class="si">}</span><span class="s2">px;</span>
+<span class="s2">    padding: 4px;</span>
+<span class="s2">    outline: none;</span>
+<span class="se">}}</span>
+
+<span class="s2">/* --------------------------- Check boxes -------------------------- */</span>
+
+<span class="s2">QCheckBox, QRadioButton </span><span class="se">{{</span>
+<span class="s2">    spacing: 8px;</span>
+<span class="s2">    background: transparent;</span>
+<span class="se">}}</span>
+
+<span class="s2">QCheckBox::indicator, QRadioButton::indicator </span><span class="se">{{</span>
+<span class="s2">    width: 16px;</span>
+<span class="s2">    height: 16px;</span>
+<span class="s2">    border: 1px solid </span><span class="si">{</span><span class="n">t</span><span class="o">.</span><span class="n">border_strong</span><span class="si">}</span><span class="s2">;</span>
+<span class="s2">    background-color: </span><span class="si">{</span><span class="n">t</span><span class="o">.</span><span class="n">base</span><span class="si">}</span><span class="s2">;</span>
+<span class="se">}}</span>
+
+<span class="s2">QCheckBox::indicator </span><span class="se">{{</span>
+<span class="s2">    border-radius: 4px;</span>
+<span class="se">}}</span>
+
+<span class="s2">QRadioButton::indicator </span><span class="se">{{</span>
+<span class="s2">    border-radius: 8px;</span>
+<span class="se">}}</span>
+
+<span class="s2">QCheckBox::indicator:hover, QRadioButton::indicator:hover </span><span class="se">{{</span>
+<span class="s2">    border-color: </span><span class="si">{</span><span class="n">t</span><span class="o">.</span><span class="n">accent</span><span class="si">}</span><span class="s2">;</span>
+<span class="se">}}</span>
+
+<span class="s2">QCheckBox::indicator:checked, QRadioButton::indicator:checked </span><span class="se">{{</span>
+<span class="s2">    background-color: </span><span class="si">{</span><span class="n">t</span><span class="o">.</span><span class="n">accent</span><span class="si">}</span><span class="s2">;</span>
+<span class="s2">    border-color: </span><span class="si">{</span><span class="n">t</span><span class="o">.</span><span class="n">accent</span><span class="si">}</span><span class="s2">;</span>
+<span class="se">}}</span>
+
+<span class="s2">/* --------------------------- Group boxes -------------------------- */</span>
+
+<span class="s2">QGroupBox </span><span class="se">{{</span>
+<span class="s2">    background-color: </span><span class="si">{</span><span class="n">t</span><span class="o">.</span><span class="n">surface</span><span class="si">}</span><span class="s2">;</span>
+<span class="s2">    border: 1px solid </span><span class="si">{</span><span class="n">t</span><span class="o">.</span><span class="n">border</span><span class="si">}</span><span class="s2">;</span>
+<span class="s2">    border-radius: </span><span class="si">{</span><span class="n">r</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="mi">2</span><span class="si">}</span><span class="s2">px;</span>
+<span class="s2">    margin-top: 14px;</span>
+<span class="s2">    padding: </span><span class="si">{</span><span class="n">p</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="mi">6</span><span class="si">}</span><span class="s2">px </span><span class="si">{</span><span class="n">p</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="mi">2</span><span class="si">}</span><span class="s2">px </span><span class="si">{</span><span class="n">p</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="mi">2</span><span class="si">}</span><span class="s2">px </span><span class="si">{</span><span class="n">p</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="mi">2</span><span class="si">}</span><span class="s2">px;</span>
+<span class="s2">    font-weight: 600;</span>
+<span class="se">}}</span>
+
+<span class="s2">QGroupBox::title </span><span class="se">{{</span>
+<span class="s2">    subcontrol-origin: margin;</span>
+<span class="s2">    subcontrol-position: top left;</span>
+<span class="s2">    left: 10px;</span>
+<span class="s2">    padding: 0 4px;</span>
+<span class="s2">    color: </span><span class="si">{</span><span class="n">t</span><span class="o">.</span><span class="n">text_muted</span><span class="si">}</span><span class="s2">;</span>
+<span class="se">}}</span>
+
+<span class="s2">QGroupBox QWidget </span><span class="se">{{</span>
+<span class="s2">    font-weight: normal;</span>
+<span class="se">}}</span>
+
+<span class="s2">/* ------------------------- Tables &amp; lists ------------------------- */</span>
+
+<span class="s2">QTableView, QTableWidget, QListView, QTreeView </span><span class="se">{{</span>
+<span class="s2">    background-color: </span><span class="si">{</span><span class="n">t</span><span class="o">.</span><span class="n">base</span><span class="si">}</span><span class="s2">;</span>
+<span class="s2">    alternate-background-color: </span><span class="si">{</span><span class="n">t</span><span class="o">.</span><span class="n">alternate_base</span><span class="si">}</span><span class="s2">;</span>
+<span class="s2">    border: 1px solid </span><span class="si">{</span><span class="n">t</span><span class="o">.</span><span class="n">border</span><span class="si">}</span><span class="s2">;</span>
+<span class="s2">    border-radius: </span><span class="si">{</span><span class="n">r</span><span class="si">}</span><span class="s2">px;</span>
+<span class="s2">    gridline-color: </span><span class="si">{</span><span class="n">t</span><span class="o">.</span><span class="n">border</span><span class="si">}</span><span class="s2">;</span>
+<span class="se">}}</span>
+
+<span class="s2">QHeaderView::section </span><span class="se">{{</span>
+<span class="s2">    background-color: </span><span class="si">{</span><span class="n">t</span><span class="o">.</span><span class="n">surface</span><span class="si">}</span><span class="s2">;</span>
+<span class="s2">    color: </span><span class="si">{</span><span class="n">t</span><span class="o">.</span><span class="n">text_muted</span><span class="si">}</span><span class="s2">;</span>
+<span class="s2">    border: none;</span>
+<span class="s2">    border-bottom: 1px solid </span><span class="si">{</span><span class="n">t</span><span class="o">.</span><span class="n">border</span><span class="si">}</span><span class="s2">;</span>
+<span class="s2">    border-right: 1px solid </span><span class="si">{</span><span class="n">t</span><span class="o">.</span><span class="n">border</span><span class="si">}</span><span class="s2">;</span>
+<span class="s2">    padding: 4px 6px;</span>
+<span class="s2">    font-weight: 600;</span>
+<span class="se">}}</span>
+
+<span class="s2">QTableCornerButton::section </span><span class="se">{{</span>
+<span class="s2">    background-color: </span><span class="si">{</span><span class="n">t</span><span class="o">.</span><span class="n">surface</span><span class="si">}</span><span class="s2">;</span>
+<span class="s2">    border: none;</span>
+<span class="se">}}</span>
+
+<span class="s2">/* --------------------------- Scroll bars -------------------------- */</span>
+
+<span class="s2">QScrollArea </span><span class="se">{{</span>
+<span class="s2">    border: none;</span>
+<span class="s2">    background: transparent;</span>
+<span class="se">}}</span>
+
+<span class="s2">QScrollArea &gt; QWidget &gt; QWidget </span><span class="se">{{</span>
+<span class="s2">    background: transparent;</span>
+<span class="se">}}</span>
+
+<span class="s2">QScrollBar:vertical </span><span class="se">{{</span>
+<span class="s2">    background: transparent;</span>
+<span class="s2">    width: 10px;</span>
+<span class="s2">    margin: 2px;</span>
+<span class="se">}}</span>
+
+<span class="s2">QScrollBar:horizontal </span><span class="se">{{</span>
+<span class="s2">    background: transparent;</span>
+<span class="s2">    height: 10px;</span>
+<span class="s2">    margin: 2px;</span>
+<span class="se">}}</span>
+
+<span class="s2">QScrollBar::handle:vertical, QScrollBar::handle:horizontal </span><span class="se">{{</span>
+<span class="s2">    background-color: </span><span class="si">{</span><span class="n">t</span><span class="o">.</span><span class="n">border_strong</span><span class="si">}</span><span class="s2">;</span>
+<span class="s2">    border-radius: 3px;</span>
+<span class="s2">    min-height: 24px;</span>
+<span class="s2">    min-width: 24px;</span>
+<span class="se">}}</span>
+
+<span class="s2">QScrollBar::handle:hover </span><span class="se">{{</span>
+<span class="s2">    background-color: </span><span class="si">{</span><span class="n">t</span><span class="o">.</span><span class="n">text_muted</span><span class="si">}</span><span class="s2">;</span>
+<span class="se">}}</span>
+
+<span class="s2">QScrollBar::add-line, QScrollBar::sub-line,</span>
+<span class="s2">QScrollBar::add-page, QScrollBar::sub-page </span><span class="se">{{</span>
+<span class="s2">    background: none;</span>
+<span class="s2">    border: none;</span>
+<span class="s2">    width: 0px;</span>
+<span class="s2">    height: 0px;</span>
+<span class="se">}}</span>
+
+<span class="s2">/* ---------------------------- Splitters --------------------------- */</span>
+
+<span class="s2">QSplitter::handle </span><span class="se">{{</span>
+<span class="s2">    background-color: </span><span class="si">{</span><span class="n">t</span><span class="o">.</span><span class="n">window</span><span class="si">}</span><span class="s2">;</span>
+<span class="se">}}</span>
+
+<span class="s2">QSplitter::handle:horizontal </span><span class="se">{{</span>
+<span class="s2">    width: </span><span class="si">{</span><span class="n">t</span><span class="o">.</span><span class="n">splitter_width</span><span class="si">}</span><span class="s2">px;</span>
+<span class="s2">    border-left: 1px solid </span><span class="si">{</span><span class="n">t</span><span class="o">.</span><span class="n">border</span><span class="si">}</span><span class="s2">;</span>
+<span class="se">}}</span>
+
+<span class="s2">QSplitter::handle:vertical </span><span class="se">{{</span>
+<span class="s2">    height: </span><span class="si">{</span><span class="n">t</span><span class="o">.</span><span class="n">splitter_width</span><span class="si">}</span><span class="s2">px;</span>
+<span class="s2">    border-top: 1px solid </span><span class="si">{</span><span class="n">t</span><span class="o">.</span><span class="n">border</span><span class="si">}</span><span class="s2">;</span>
+<span class="se">}}</span>
+
+<span class="s2">QSplitter::handle:hover </span><span class="se">{{</span>
+<span class="s2">    background-color: </span><span class="si">{</span><span class="n">t</span><span class="o">.</span><span class="n">accent</span><span class="si">}</span><span class="s2">;</span>
+<span class="se">}}</span>
+
+<span class="s2">/* ------------------------------ Menus ----------------------------- */</span>
+
+<span class="s2">QMenuBar </span><span class="se">{{</span>
+<span class="s2">    background-color: </span><span class="si">{</span><span class="n">t</span><span class="o">.</span><span class="n">surface</span><span class="si">}</span><span class="s2">;</span>
+<span class="s2">    border-bottom: 1px solid </span><span class="si">{</span><span class="n">t</span><span class="o">.</span><span class="n">border</span><span class="si">}</span><span class="s2">;</span>
+<span class="se">}}</span>
+
+<span class="s2">QMenuBar::item:selected </span><span class="se">{{</span>
+<span class="s2">    background-color: </span><span class="si">{</span><span class="n">t</span><span class="o">.</span><span class="n">base</span><span class="si">}</span><span class="s2">;</span>
+<span class="s2">    border-radius: </span><span class="si">{</span><span class="n">r</span><span class="si">}</span><span class="s2">px;</span>
+<span class="se">}}</span>
+
+<span class="s2">QMenu </span><span class="se">{{</span>
+<span class="s2">    background-color: </span><span class="si">{</span><span class="n">t</span><span class="o">.</span><span class="n">surface</span><span class="si">}</span><span class="s2">;</span>
+<span class="s2">    border: 1px solid </span><span class="si">{</span><span class="n">t</span><span class="o">.</span><span class="n">border_strong</span><span class="si">}</span><span class="s2">;</span>
+<span class="s2">    border-radius: </span><span class="si">{</span><span class="n">r</span><span class="si">}</span><span class="s2">px;</span>
+<span class="s2">    padding: 6px;</span>
+<span class="se">}}</span>
+
+<span class="s2">QMenu::item </span><span class="se">{{</span>
+<span class="s2">    padding: 5px 18px;</span>
+<span class="s2">    border-radius: </span><span class="si">{</span><span class="n">r</span><span class="si">}</span><span class="s2">px;</span>
+<span class="se">}}</span>
+
+<span class="s2">QMenu::item:selected </span><span class="se">{{</span>
+<span class="s2">    background-color: </span><span class="si">{</span><span class="n">t</span><span class="o">.</span><span class="n">accent</span><span class="si">}</span><span class="s2">;</span>
+<span class="s2">    color: </span><span class="si">{</span><span class="n">t</span><span class="o">.</span><span class="n">accent_text</span><span class="si">}</span><span class="s2">;</span>
+<span class="se">}}</span>
+
+<span class="s2">QMenu::separator </span><span class="se">{{</span>
+<span class="s2">    height: 1px;</span>
+<span class="s2">    background: </span><span class="si">{</span><span class="n">t</span><span class="o">.</span><span class="n">border</span><span class="si">}</span><span class="s2">;</span>
+<span class="s2">    margin: 4px 8px;</span>
+<span class="se">}}</span>
+
+<span class="s2">/* ------------------------------ Tabs ------------------------------ */</span>
+
+<span class="s2">QTabWidget::pane </span><span class="se">{{</span>
+<span class="s2">    border: 1px solid </span><span class="si">{</span><span class="n">t</span><span class="o">.</span><span class="n">border</span><span class="si">}</span><span class="s2">;</span>
+<span class="s2">    border-radius: </span><span class="si">{</span><span class="n">r</span><span class="si">}</span><span class="s2">px;</span>
+<span class="s2">    background-color: </span><span class="si">{</span><span class="n">t</span><span class="o">.</span><span class="n">surface</span><span class="si">}</span><span class="s2">;</span>
+<span class="s2">    top: -1px;</span>
+<span class="se">}}</span>
+
+<span class="s2">QTabBar::tab </span><span class="se">{{</span>
+<span class="s2">    background-color: transparent;</span>
+<span class="s2">    color: </span><span class="si">{</span><span class="n">t</span><span class="o">.</span><span class="n">text_muted</span><span class="si">}</span><span class="s2">;</span>
+<span class="s2">    padding: 6px 12px;</span>
+<span class="s2">    border: none;</span>
+<span class="s2">    border-bottom: 2px solid transparent;</span>
+<span class="se">}}</span>
+
+<span class="s2">QTabBar::tab:hover </span><span class="se">{{</span>
+<span class="s2">    color: </span><span class="si">{</span><span class="n">t</span><span class="o">.</span><span class="n">text</span><span class="si">}</span><span class="s2">;</span>
+<span class="se">}}</span>
+
+<span class="s2">QTabBar::tab:selected </span><span class="se">{{</span>
+<span class="s2">    color: </span><span class="si">{</span><span class="n">t</span><span class="o">.</span><span class="n">text</span><span class="si">}</span><span class="s2">;</span>
+<span class="s2">    border-bottom: 2px solid </span><span class="si">{</span><span class="n">t</span><span class="o">.</span><span class="n">accent</span><span class="si">}</span><span class="s2">;</span>
+<span class="se">}}</span>
+
+<span class="s2">/* ----------------------------- Sliders ---------------------------- */</span>
+
+<span class="s2">QSlider::groove:horizontal </span><span class="se">{{</span>
+<span class="s2">    height: 4px;</span>
+<span class="s2">    background-color: </span><span class="si">{</span><span class="n">t</span><span class="o">.</span><span class="n">border</span><span class="si">}</span><span class="s2">;</span>
+<span class="s2">    border-radius: 2px;</span>
+<span class="se">}}</span>
+
+<span class="s2">QSlider::sub-page:horizontal </span><span class="se">{{</span>
+<span class="s2">    background-color: </span><span class="si">{</span><span class="n">t</span><span class="o">.</span><span class="n">accent</span><span class="si">}</span><span class="s2">;</span>
+<span class="s2">    border-radius: 2px;</span>
+<span class="se">}}</span>
+
+<span class="s2">QSlider::handle:horizontal </span><span class="se">{{</span>
+<span class="s2">    background-color: </span><span class="si">{</span><span class="n">t</span><span class="o">.</span><span class="n">text</span><span class="si">}</span><span class="s2">;</span>
+<span class="s2">    width: 14px;</span>
+<span class="s2">    height: 14px;</span>
+<span class="s2">    margin: -5px 0;</span>
+<span class="s2">    border-radius: 7px;</span>
+<span class="se">}}</span>
+
+<span class="s2">/* --------------------------- Status bar --------------------------- */</span>
+
+<span class="s2">QStatusBar </span><span class="se">{{</span>
+<span class="s2">    background-color: </span><span class="si">{</span><span class="n">t</span><span class="o">.</span><span class="n">surface</span><span class="si">}</span><span class="s2">;</span>
+<span class="s2">    border-top: 1px solid </span><span class="si">{</span><span class="n">t</span><span class="o">.</span><span class="n">border</span><span class="si">}</span><span class="s2">;</span>
+<span class="s2">    color: </span><span class="si">{</span><span class="n">t</span><span class="o">.</span><span class="n">text_muted</span><span class="si">}</span><span class="s2">;</span>
+<span class="se">}}</span>
+
+<span class="s2">QStatusBar::item </span><span class="se">{{</span>
+<span class="s2">    border: none;</span>
+<span class="se">}}</span>
+
+<span class="s2">QStatusBar QLabel </span><span class="se">{{</span>
+<span class="s2">    color: </span><span class="si">{</span><span class="n">t</span><span class="o">.</span><span class="n">text_muted</span><span class="si">}</span><span class="s2">;</span>
+<span class="s2">    padding: 0 6px;</span>
+<span class="se">}}</span>
+
+<span class="s2">/* -------------------------- Image viewer -------------------------- */</span>
+
+<span class="s2">QGraphicsView </span><span class="se">{{</span>
+<span class="s2">    background-color: </span><span class="si">{</span><span class="n">t</span><span class="o">.</span><span class="n">window</span><span class="si">}</span><span class="s2">;</span>
+<span class="s2">    border: none;</span>
+<span class="se">}}</span>
+<span class="s2">"""</span></div>
+
+
+
+<span class="c1"># ==========================================================================</span>
+<span class="c1"># Application</span>
+<span class="c1"># ==========================================================================</span>
+
+<div class="viewcode-block" id="apply_theme">
+<a class="viewcode-back" href="../../api_doc/theme.html#pyclickimage.theme.apply_theme">[docs]</a>
+<span class="k">def</span><span class="w"> </span><span class="nf">apply_theme</span><span class="p">(</span>
+    <span class="n">app</span><span class="p">:</span> <span class="n">QtWidgets</span><span class="o">.</span><span class="n">QApplication</span><span class="p">,</span>
+    <span class="n">theme</span><span class="p">:</span> <span class="n">Theme</span> <span class="o">=</span> <span class="n">LIGHT_THEME</span><span class="p">,</span>
+    <span class="n">extra_stylesheet</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">""</span><span class="p">,</span>
+    <span class="n">use_fusion</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">True</span><span class="p">,</span>
+<span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+<span class="w">    </span><span class="sa">r</span><span class="sd">"""Apply a theme to a whole application.</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    app : QApplication</span>
+<span class="sd">        Application to style.</span>
+<span class="sd">    theme : Theme, default=LIGHT_THEME</span>
+<span class="sd">        Theme to apply.</span>
+<span class="sd">    extra_stylesheet : str, default=""</span>
+<span class="sd">        Additional QSS appended after the generated stylesheet. Rules</span>
+<span class="sd">        defined here take precedence over the theme rules.</span>
+<span class="sd">    use_fusion : bool, default=True</span>
+<span class="sd">        Whether to switch to the ``Fusion`` style, which gives a</span>
+<span class="sd">        consistent look on every platform and fully honors palettes.</span>
+
+<span class="sd">    Notes</span>
+<span class="sd">    -----</span>
+<span class="sd">    Call this function before creating the widgets when possible.</span>
+<span class="sd">    Custom-painted plots (:class:`QtHistogram`, :class:`QtProfilePlot`,</span>
+<span class="sd">    :class:`QtLinearInterpolator`) store their colors when they are</span>
+<span class="sd">    created and are not affected by stylesheets: restyle them with</span>
+<span class="sd">    :func:`style_plot_widget` (or :meth:`QtImageToolWindow.apply_theme`).</span>
+
+<span class="sd">    Examples</span>
+<span class="sd">    --------</span>
+<span class="sd">    Apply the dark theme to a whole application::</span>
+
+<span class="sd">        from PyQt5 import QtWidgets</span>
+<span class="sd">        from theme import DARK_THEME, apply_theme</span>
+
+<span class="sd">        app = QtWidgets.QApplication([])</span>
+<span class="sd">        apply_theme(app, DARK_THEME)</span>
+
+<span class="sd">    Derive a custom theme from an existing one::</span>
+
+<span class="sd">        my_theme = DARK_THEME.replace(</span>
+<span class="sd">            name="Dark green",</span>
+<span class="sd">            accent="#3ecf8e",</span>
+<span class="sd">            accent_hover="#5ee0a5",</span>
+<span class="sd">        )</span>
+
+<span class="sd">    Append custom rules to the generated stylesheet::</span>
+
+<span class="sd">        apply_theme(</span>
+<span class="sd">            app,</span>
+<span class="sd">            LIGHT_THEME,</span>
+<span class="sd">            extra_stylesheet="QPushButton { font-weight: 600; }",</span>
+<span class="sd">        )</span>
+<span class="sd">    """</span>
+    <span class="k">if</span> <span class="n">use_fusion</span><span class="p">:</span>
+        <span class="n">app</span><span class="o">.</span><span class="n">setStyle</span><span class="p">(</span><span class="s2">"Fusion"</span><span class="p">)</span>
+
+    <span class="n">app</span><span class="o">.</span><span class="n">setPalette</span><span class="p">(</span><span class="n">build_palette</span><span class="p">(</span><span class="n">theme</span><span class="p">))</span>
+
+    <span class="n">font</span> <span class="o">=</span> <span class="n">QtGui</span><span class="o">.</span><span class="n">QFont</span><span class="p">(</span><span class="n">app</span><span class="o">.</span><span class="n">font</span><span class="p">())</span>
+
+    <span class="k">if</span> <span class="n">theme</span><span class="o">.</span><span class="n">font_family</span><span class="p">:</span>
+        <span class="n">font</span><span class="o">.</span><span class="n">setFamily</span><span class="p">(</span><span class="n">theme</span><span class="o">.</span><span class="n">font_family</span><span class="p">)</span>
+
+    <span class="n">font</span><span class="o">.</span><span class="n">setPointSize</span><span class="p">(</span><span class="n">theme</span><span class="o">.</span><span class="n">font_size</span><span class="p">)</span>
+    <span class="n">app</span><span class="o">.</span><span class="n">setFont</span><span class="p">(</span><span class="n">font</span><span class="p">)</span>
+
+    <span class="n">app</span><span class="o">.</span><span class="n">setStyleSheet</span><span class="p">(</span>
+        <span class="n">build_stylesheet</span><span class="p">(</span><span class="n">theme</span><span class="p">)</span> <span class="o">+</span> <span class="s2">"</span><span class="se">\n</span><span class="s2">"</span> <span class="o">+</span> <span class="n">extra_stylesheet</span>
+    <span class="p">)</span>
+
+    <span class="c1"># Keep a reference so widgets can query the active theme.</span>
+    <span class="n">app</span><span class="o">.</span><span class="n">setProperty</span><span class="p">(</span><span class="s2">"theme_name"</span><span class="p">,</span> <span class="n">theme</span><span class="o">.</span><span class="n">name</span><span class="p">)</span></div>
+
+
+
+<span class="c1"># ==========================================================================</span>
+<span class="c1"># Custom-painted plots</span>
+<span class="c1"># ==========================================================================</span>
+
+<span class="c1"># Private attribute -&gt; Theme field. Only attributes that exist on a given</span>
+<span class="c1"># widget are modified, so the same table serves every plot class.</span>
+<span class="n">_PLOT_COLOR_ATTRIBUTES</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="s2">"_background_color"</span><span class="p">:</span> <span class="s2">"plot_background"</span><span class="p">,</span>
+    <span class="s2">"_border_color"</span><span class="p">:</span> <span class="s2">"border_strong"</span><span class="p">,</span>
+    <span class="s2">"_grid_color"</span><span class="p">:</span> <span class="s2">"plot_grid"</span><span class="p">,</span>
+    <span class="s2">"_minor_grid_color"</span><span class="p">:</span> <span class="s2">"plot_minor_grid"</span><span class="p">,</span>
+    <span class="s2">"_axis_color"</span><span class="p">:</span> <span class="s2">"plot_axis"</span><span class="p">,</span>
+    <span class="s2">"_text_color"</span><span class="p">:</span> <span class="s2">"plot_text"</span><span class="p">,</span>
+    <span class="s2">"_line_color"</span><span class="p">:</span> <span class="s2">"plot_line"</span><span class="p">,</span>
+    <span class="s2">"_curve_color"</span><span class="p">:</span> <span class="s2">"plot_line"</span><span class="p">,</span>
+    <span class="s2">"_node_color"</span><span class="p">:</span> <span class="s2">"plot_line"</span><span class="p">,</span>
+    <span class="s2">"_bar_color"</span><span class="p">:</span> <span class="s2">"plot_line"</span><span class="p">,</span>
+    <span class="s2">"_bar_border_color"</span><span class="p">:</span> <span class="s2">"plot_line"</span><span class="p">,</span>
+    <span class="s2">"_coordinate_background_color"</span><span class="p">:</span> <span class="s2">"plot_overlay"</span><span class="p">,</span>
+<span class="p">}</span>
+
+
+<div class="viewcode-block" id="style_plot_widget">
+<a class="viewcode-back" href="../../api_doc/theme.html#pyclickimage.theme.style_plot_widget">[docs]</a>
+<span class="k">def</span><span class="w"> </span><span class="nf">style_plot_widget</span><span class="p">(</span>
+    <span class="n">widget</span><span class="p">:</span> <span class="n">QtWidgets</span><span class="o">.</span><span class="n">QWidget</span><span class="p">,</span>
+    <span class="n">theme</span><span class="p">:</span> <span class="n">Theme</span> <span class="o">=</span> <span class="n">LIGHT_THEME</span><span class="p">,</span>
+<span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+<span class="w">    </span><span class="sa">r</span><span class="sd">"""Apply a theme to a custom-painted plot widget.</span>
+
+<span class="sd">    Supported widgets are :class:`QtHistogram`, :class:`QtProfilePlot`</span>
+<span class="sd">    and :class:`QtLinearInterpolator`. Their colors are stored in private</span>
+<span class="sd">    attributes read by ``paintEvent``; QSS does not reach them.</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    widget : QWidget</span>
+<span class="sd">        Plot widget to restyle. Attributes the widget does not define</span>
+<span class="sd">        are skipped, so any widget can be passed safely.</span>
+<span class="sd">    theme : Theme, default=LIGHT_THEME</span>
+<span class="sd">        Theme to apply.</span>
+
+<span class="sd">    Notes</span>
+<span class="sd">    -----</span>
+<span class="sd">    Histogram bars are drawn with a semi-transparent version of</span>
+<span class="sd">    ``plot_line`` so that dense histograms stay readable.</span>
+
+<span class="sd">    The plot font size is set to ``theme.plot_font_size``.</span>
+<span class="sd">    """</span>
+    <span class="k">for</span> <span class="n">attribute</span><span class="p">,</span> <span class="n">field_name</span> <span class="ow">in</span> <span class="n">_PLOT_COLOR_ATTRIBUTES</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="nb">hasattr</span><span class="p">(</span><span class="n">widget</span><span class="p">,</span> <span class="n">attribute</span><span class="p">):</span>
+            <span class="k">continue</span>
+
+        <span class="n">color</span> <span class="o">=</span> <span class="n">QtGui</span><span class="o">.</span><span class="n">QColor</span><span class="p">(</span><span class="nb">getattr</span><span class="p">(</span><span class="n">theme</span><span class="p">,</span> <span class="n">field_name</span><span class="p">))</span>
+
+        <span class="k">if</span> <span class="n">attribute</span> <span class="o">==</span> <span class="s2">"_bar_color"</span><span class="p">:</span>
+            <span class="n">color</span><span class="o">.</span><span class="n">setAlpha</span><span class="p">(</span><span class="mi">170</span><span class="p">)</span>
+
+        <span class="nb">setattr</span><span class="p">(</span><span class="n">widget</span><span class="p">,</span> <span class="n">attribute</span><span class="p">,</span> <span class="n">color</span><span class="p">)</span>
+
+    <span class="k">if</span> <span class="nb">hasattr</span><span class="p">(</span><span class="n">widget</span><span class="p">,</span> <span class="s2">"_font"</span><span class="p">):</span>
+        <span class="n">font</span> <span class="o">=</span> <span class="n">QtGui</span><span class="o">.</span><span class="n">QFont</span><span class="p">(</span><span class="n">widget</span><span class="o">.</span><span class="n">_font</span><span class="p">)</span>
+        <span class="n">font</span><span class="o">.</span><span class="n">setPointSize</span><span class="p">(</span><span class="n">theme</span><span class="o">.</span><span class="n">plot_font_size</span><span class="p">)</span>
+
+        <span class="k">if</span> <span class="n">theme</span><span class="o">.</span><span class="n">font_family</span><span class="p">:</span>
+            <span class="n">font</span><span class="o">.</span><span class="n">setFamily</span><span class="p">(</span><span class="n">theme</span><span class="o">.</span><span class="n">font_family</span><span class="p">)</span>
+
+        <span class="n">widget</span><span class="o">.</span><span class="n">_font</span> <span class="o">=</span> <span class="n">font</span>
+
+    <span class="n">widget</span><span class="o">.</span><span class="n">update</span><span class="p">()</span></div>
+
+
+
+<div class="viewcode-block" id="style_plot_widgets">
+<a class="viewcode-back" href="../../api_doc/theme.html#pyclickimage.theme.style_plot_widgets">[docs]</a>
+<span class="k">def</span><span class="w"> </span><span class="nf">style_plot_widgets</span><span class="p">(</span>
+    <span class="n">widgets</span><span class="p">:</span> <span class="n">Iterable</span><span class="p">[</span><span class="n">QtWidgets</span><span class="o">.</span><span class="n">QWidget</span><span class="p">],</span>
+    <span class="n">theme</span><span class="p">:</span> <span class="n">Theme</span> <span class="o">=</span> <span class="n">LIGHT_THEME</span><span class="p">,</span>
+<span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+<span class="w">    </span><span class="sa">r</span><span class="sd">"""Apply a theme to several custom-painted plot widgets.</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    widgets : iterable of QWidget</span>
+<span class="sd">        Plot widgets to restyle.</span>
+<span class="sd">    theme : Theme, default=LIGHT_THEME</span>
+<span class="sd">        Theme to apply.</span>
+
+<span class="sd">    See Also</span>
+<span class="sd">    --------</span>
+<span class="sd">    style_plot_widget</span>
+<span class="sd">    """</span>
+    <span class="k">for</span> <span class="n">widget</span> <span class="ow">in</span> <span class="n">widgets</span><span class="p">:</span>
+        <span class="n">style_plot_widget</span><span class="p">(</span><span class="n">widget</span><span class="p">,</span> <span class="n">theme</span><span class="p">)</span></div>
+
+</pre></div>
+
+                </article>
+              
+              
+              
+              
+              
+                <footer class="prev-next-footer d-print-none">
+                  
+<div class="prev-next-area">
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+          </footer>
+        
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script defer src="../../_static/scripts/bootstrap.js?digest=18bd87630a240e9c25be"></script>
+<script defer src="../../_static/scripts/pydata-sphinx-theme.js?digest=18bd87630a240e9c25be"></script>
+
+  <footer class="bd-footer">
+<div class="bd-footer__inner bd-page-width">
+  
+    <div class="footer-items__start">
+      
+        <div class="footer-item">
+
+  <p class="copyright">
+    
+      © Copyright 2025-2026, Artezaru.
+      <br/>
+    
+  </p>
+</div>
+      
+        <div class="footer-item">
+
+  <p class="sphinx-version">
+    Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 9.0.4.
+  </p>
+</div>
+      
+    </div>
+  
+  
+  
+    <div class="footer-items__end">
+      
+        <div class="footer-item">
+<p class="theme-version">
+  <!-- # L10n: Setting the PST URL as an argument as this does not need to be localized -->
+  Built with the <a href="https://pydata-sphinx-theme.readthedocs.io/en/stable/index.html">PyData Sphinx Theme</a> 0.23.0.
+</p></div>
+      
+    </div>
+  
+</div>
+
+  </footer>
+  </body>
+</html>

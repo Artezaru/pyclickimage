@@ -19,9 +19,6 @@ Then, go to the directory and run the following command:
 
     pip install -e .
 
-Use ``-e .[dev]`` to install it with the development dependencies.
-
-
 .. warning::
 
     This package use ``PyQt5`` to display the GUI. 

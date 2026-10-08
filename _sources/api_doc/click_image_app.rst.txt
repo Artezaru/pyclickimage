@@ -1,7 +1,7 @@
-pyclickimage.ClickImageApp
-==========================
+pyclickimage.click_image_app
+============================
 
-.. autoclass:: pyclickimage.ClickImageApp
+.. autoclass:: pyclickimage.click_image_app.ClickImageApp
    :members:
    :undoc-members:
    :show-inheritance:

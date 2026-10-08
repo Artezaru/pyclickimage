@@ -1,0 +1,2339 @@
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="../../" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>pyclickimage.qt_profile_plot &#8212; pyclickimage 4.0.0 documentation</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  <!--
+    this give us a css class that will be invisible only if js is disabled
+  -->
+  <noscript>
+    <style>
+      .pst-js-only { display: none !important; }
+
+    </style>
+  </noscript>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../../_static/styles/theme.css?digest=18bd87630a240e9c25be" rel="stylesheet" />
+<link href="../../_static/styles/pydata-sphinx-theme.css?digest=18bd87630a240e9c25be" rel="stylesheet" />
+
+    <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=8f2a1f02" />
+  
+  <!-- So that users can add custom icons -->
+  <script defer src="../../_static/scripts/fontawesome.js?digest=18bd87630a240e9c25be"></script>
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../../_static/scripts/bootstrap.js?digest=18bd87630a240e9c25be" />
+<link rel="preload" as="script" href="../../_static/scripts/pydata-sphinx-theme.js?digest=18bd87630a240e9c25be" />
+
+    <script src="../../_static/documentation_options.js?v=3304f9e4"></script>
+    <script src="../../_static/doctools.js?v=fd6eb6e6"></script>
+    <script src="../../_static/sphinx_highlight.js?v=6ffebe34"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = '_modules/pyclickimage/qt_profile_plot';</script>
+    <script>DOCUMENTATION_OPTIONS.search_as_you_type = false;</script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="color-scheme" content="light dark"/>
+  <meta name="docsearch:language" content="en"/>
+  <meta name="docsearch:version" content="" />
+  
+    
+    <script src="../../_static/searchtools.js"></script>
+    <script src="../../_static/language_data.js"></script>
+    <script src="../../searchindex.js"></script>
+  
+  </head>
+  <body data-default-mode="">
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
+  
+  
+  
+  
+  <dialog id="pst-search-dialog">
+    
+<form class="bd-search d-flex align-items-center"
+      action="../../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         placeholder="Search the docs ..."
+         aria-label="Search the docs ..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form>
+  </dialog>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+
+  
+    <header id="pst-header" class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+<div class="bd-header__inner bd-page-width">
+  <button type="button" class="pst-navbar-icon sidebar-toggle primary-toggle" aria-label="Site navigation">
+    <span class="fa-solid fa-bars"></span>
+  </button>
+  
+  
+  <div class="col-lg-3 navbar-header-items__start">
+    
+      <div class="navbar-item">
+
+  
+    
+  
+
+<a class="navbar-brand logo" href="../../index.html">
+  
+  
+  
+  
+  
+  
+    <p class="title logo__title">pyclickimage 4.0.0 documentation</p>
+  
+</a></div>
+    
+  </div>
+  
+  <div class="col-lg-9 navbar-header-items">
+    
+    <div class="me-auto navbar-header-items__center">
+      
+        <div class="navbar-item">
+<nav>
+  <ul class="bd-navbar-elements navbar-nav">
+    
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../installation.html">
+    Installation
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../api.html">
+    API Reference
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../usage.html">
+    Usage
+  </a>
+</li>
+
+  </ul>
+</nav></div>
+      
+    </div>
+    
+    
+    <div class="navbar-header-items__end">
+      
+        <div class="navbar-item navbar-persistent--container">
+          
+
+<button type="button" class="btn search-button-field search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+ <i class="fa-solid fa-magnifying-glass"></i>
+ <span class="search-button__default-text">Search</span>
+ <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+</button>
+        </div>
+      
+      
+        <div class="navbar-item">
+
+<div class="theme-switch-container dropdown pst-js-only" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Color mode">
+  <button type="button" class="btn btn-sm nav-link pst-navbar-icon theme-switch-button dropdown-toggle" aria-label="Color mode" data-bs-toggle="dropdown">
+    <i class="theme-switch fa-solid fa-sun fa-lg fa-fw" data-mode="light" title="Light"></i>
+    <i class="theme-switch fa-solid fa-moon fa-lg fa-fw" data-mode="dark" title="Dark"></i>
+    <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg fa-fw" data-mode="auto" title="System Settings"></i>
+  </button>
+  <ul class="dropdown-menu dropdown-menu-end">
+    <li><button type="button" class="dropdown-item d-flex align-items-center theme-change-button" data-mode="auto"><i class="fa-solid fa-circle-half-stroke fa-lg fa-fw me-1"></i>System Settings</button></li>
+    <li><button type="button" class="dropdown-item d-flex align-items-center theme-change-button" data-mode="light"><i class="fa-solid fa-sun fa-lg fa-fw me-1"></i>Light</button></li>
+    <li><button type="button" class="dropdown-item d-flex align-items-center theme-change-button" data-mode="dark"><i class="fa-solid fa-moon fa-lg fa-fw me-1"></i>Dark</button></li>
+  </ul>
+</div></div>
+      
+    </div>
+    
+  </div>
+  
+  
+    <div class="navbar-persistent--mobile">
+
+<button type="button" class="btn search-button-field search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+ <i class="fa-solid fa-magnifying-glass"></i>
+ <span class="search-button__default-text">Search</span>
+ <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+</button>
+    </div>
+  
+
+  
+</div>
+
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+        
+      
+      <dialog id="pst-primary-sidebar-modal"></dialog>
+      <div id="pst-primary-sidebar" class="bd-sidebar-primary bd-sidebar hide-on-wide">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+      <div class="sidebar-header-items__center">
+        
+          
+          
+            <div class="navbar-item">
+<nav>
+  <ul class="bd-navbar-elements navbar-nav">
+    
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../installation.html">
+    Installation
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../api.html">
+    API Reference
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../usage.html">
+    Usage
+  </a>
+</li>
+
+  </ul>
+</nav></div>
+          
+        
+      </div>
+    
+    
+    
+      <div class="sidebar-header-items__end">
+        
+          <div class="navbar-item">
+
+<div class="theme-switch-container dropdown pst-js-only" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Color mode">
+  <button type="button" class="btn btn-sm nav-link pst-navbar-icon theme-switch-button dropdown-toggle" aria-label="Color mode" data-bs-toggle="dropdown">
+    <i class="theme-switch fa-solid fa-sun fa-lg fa-fw" data-mode="light" title="Light"></i>
+    <i class="theme-switch fa-solid fa-moon fa-lg fa-fw" data-mode="dark" title="Dark"></i>
+    <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg fa-fw" data-mode="auto" title="System Settings"></i>
+  </button>
+  <ul class="dropdown-menu dropdown-menu-end">
+    <li><button type="button" class="dropdown-item d-flex align-items-center theme-change-button" data-mode="auto"><i class="fa-solid fa-circle-half-stroke fa-lg fa-fw me-1"></i>System Settings</button></li>
+    <li><button type="button" class="dropdown-item d-flex align-items-center theme-change-button" data-mode="light"><i class="fa-solid fa-sun fa-lg fa-fw me-1"></i>Light</button></li>
+    <li><button type="button" class="dropdown-item d-flex align-items-center theme-change-button" data-mode="dark"><i class="fa-solid fa-moon fa-lg fa-fw me-1"></i>Dark</button></li>
+  </ul>
+</div></div>
+        
+      </div>
+    
+  </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+      <div class="sidebar-primary-item">
+<div id="ethical-ad-placement"
+      class="flat"
+      data-ea-publisher="readthedocs"
+      data-ea-type="readthedocs-sidebar"
+      data-ea-manual="true">
+</div></div>
+  </div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item">
+
+<nav aria-label="Breadcrumb" class="d-print-none">
+  <ul class="bd-breadcrumbs">
+    
+    <li class="breadcrumb-item breadcrumb-home">
+      <a href="../../index.html" class="nav-link" aria-label="Home">
+        <i class="fa-solid fa-home"></i>
+      </a>
+    </li>
+    
+    <li class="breadcrumb-item"><a href="../index.html" class="nav-link">Module code</a></li>
+    
+    <li class="breadcrumb-item active" aria-current="page"><span class="ellipsis">pyclickimage.qt_profile_plot</span></li>
+  </ul>
+</nav>
+</div>
+      
+    </div>
+  
+  
+</div>
+</div>
+              
+              
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <h1>Source code for pyclickimage.qt_profile_plot</h1><div class="highlight"><pre>
+<span></span><span class="sd">"""</span>
+<span class="sd">pyclickimage - Python library to select points on a image [pyqt5 GUI]</span>
+<span class="sd">Copyright (C) 2025-2026 Artezaru, artezaru.github@proton.me</span>
+
+<span class="sd">This program is free software: you can redistribute it and/or modify</span>
+<span class="sd">it under the terms of the GNU General Public License as published by</span>
+<span class="sd">the Free Software Foundation, either version 3 of the License, or</span>
+<span class="sd">(at your option) any later version.</span>
+
+<span class="sd">This program is distributed in the hope that it will be useful,</span>
+<span class="sd">but WITHOUT ANY WARRANTY; without even the implied warranty of</span>
+<span class="sd">MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the</span>
+<span class="sd">GNU General Public License for more details.</span>
+
+<span class="sd">You should have received a copy of the GNU General Public License</span>
+<span class="sd">along with this program.  If not, see &lt;https://www.gnu.org/licenses/&gt;.</span>
+<span class="sd">"""</span>
+
+<span class="kn">from</span><span class="w"> </span><span class="nn">__future__</span><span class="w"> </span><span class="kn">import</span> <span class="n">annotations</span>
+
+<span class="kn">import</span><span class="w"> </span><span class="nn">math</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">typing</span><span class="w"> </span><span class="kn">import</span> <span class="n">Callable</span><span class="p">,</span> <span class="n">Sequence</span>
+
+<span class="kn">from</span><span class="w"> </span><span class="nn">PyQt5.QtCore</span><span class="w"> </span><span class="kn">import</span> <span class="n">Qt</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">PyQt5.QtGui</span><span class="w"> </span><span class="kn">import</span> <span class="n">QColor</span><span class="p">,</span> <span class="n">QFont</span><span class="p">,</span> <span class="n">QPainter</span><span class="p">,</span> <span class="n">QPen</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">PyQt5.QtWidgets</span><span class="w"> </span><span class="kn">import</span> <span class="n">QSizePolicy</span><span class="p">,</span> <span class="n">QWidget</span>
+
+
+<div class="viewcode-block" id="QtProfilePlot">
+<a class="viewcode-back" href="../../api_doc/qt_profile_plot.html#pyclickimage.qt_profile_plot.QtProfilePlot">[docs]</a>
+<span class="k">class</span><span class="w"> </span><span class="nc">QtProfilePlot</span><span class="p">(</span><span class="n">QWidget</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">"""Interactive 1D line-profile plot widget.</span>
+
+<span class="sd">    ``QtProfilePlot`` is a lightweight Qt widget for displaying a sampled</span>
+<span class="sd">    one-dimensional profile using only Qt painting primitives.</span>
+
+<span class="sd">    Two display orientations are supported. The orientation describes</span>
+<span class="sd">    where the profile is intended to be placed relative to an image.</span>
+
+<span class="sd">    ``"horizontal"``</span>
+<span class="sd">        Profile associated with the horizontal image direction.</span>
+
+<span class="sd">        The data coordinates are mapped as follows:</span>
+
+<span class="sd">        * X is mapped to the horizontal screen direction.</span>
+<span class="sd">        * Y is mapped to the vertical screen direction.</span>
+<span class="sd">        * X ticks and labels are displayed at the bottom.</span>
+<span class="sd">        * Y ticks and labels are displayed on the left.</span>
+
+<span class="sd">        This mode is therefore suitable for a profile displayed below</span>
+<span class="sd">        an image.</span>
+
+<span class="sd">        The resulting coordinate system is the conventional Cartesian</span>
+<span class="sd">        representation::</span>
+
+<span class="sd">            Y</span>
+<span class="sd">            ^</span>
+<span class="sd">            |</span>
+<span class="sd">            |       /</span>
+<span class="sd">            |     /</span>
+<span class="sd">            |   /</span>
+<span class="sd">            +-----------------&gt; X</span>
+
+<span class="sd">    ``"vertical"``</span>
+<span class="sd">        Profile associated with the vertical image direction.</span>
+
+<span class="sd">        The data coordinates are mapped as follows:</span>
+
+<span class="sd">        * X is mapped to the vertical screen direction, increasing</span>
+<span class="sd">          from top to bottom (image convention).</span>
+<span class="sd">        * Y is mapped to the horizontal screen direction.</span>
+<span class="sd">        * X ticks and labels are displayed on the right.</span>
+<span class="sd">        * Y ticks and labels are displayed at the bottom.</span>
+
+<span class="sd">        This mode is suitable for a profile displayed to the right of</span>
+<span class="sd">        an image. All text remains horizontal and readable.</span>
+
+<span class="sd">    The widget does not physically rotate itself using</span>
+<span class="sd">    ``QPainter.rotate()``. Instead, the data-to-screen coordinate</span>
+<span class="sd">    mapping is changed.</span>
+
+<span class="sd">    This approach has several advantages:</span>
+
+<span class="sd">    * the QWidget keeps its normal Qt geometry;</span>
+<span class="sd">    * the widget can be inserted normally into Qt layouts;</span>
+<span class="sd">    * text remains horizontal and readable;</span>
+<span class="sd">    * tick labels do not need to be rotated;</span>
+<span class="sd">    * the same widget can be used below or beside an image;</span>
+<span class="sd">    * mouse interaction can later use the same coordinate mapping.</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    x : Sequence[float], optional</span>
+<span class="sd">        X coordinates of the sampled profile.</span>
+<span class="sd">    y : Sequence[float], optional</span>
+<span class="sd">        Y values corresponding to ``x``.</span>
+<span class="sd">    parent : QWidget, optional</span>
+<span class="sd">        Parent Qt widget.</span>
+
+<span class="sd">    Raises</span>
+<span class="sd">    ------</span>
+<span class="sd">    ValueError</span>
+<span class="sd">        If only one of ``x`` or ``y`` is provided.</span>
+<span class="sd">    ValueError</span>
+<span class="sd">        If ``x`` and ``y`` have different lengths.</span>
+<span class="sd">    ValueError</span>
+<span class="sd">        If an invalid orientation is specified.</span>
+
+<span class="sd">    Examples</span>
+<span class="sd">    --------</span>
+<span class="sd">    Create a standard horizontal profile::</span>
+
+<span class="sd">        plot = QtProfilePlot(</span>
+<span class="sd">            x=[0, 1, 2, 3],</span>
+<span class="sd">            y=[0, 2, 1, 4],</span>
+<span class="sd">        )</span>
+
+<span class="sd">        plot.orientation = "horizontal"</span>
+
+<span class="sd">    In this mode the profile is intended to be placed below an image.</span>
+
+<span class="sd">    Create a vertical profile::</span>
+
+<span class="sd">        plot.orientation = "vertical"</span>
+
+<span class="sd">    In this mode X is vertical and Y is horizontal, so the profile can</span>
+<span class="sd">    be placed to the right of an image.</span>
+
+<span class="sd">    Configure axis titles::</span>
+
+<span class="sd">        plot.x_title = "Position"</span>
+<span class="sd">        plot.y_title = "Intensity"</span>
+
+<span class="sd">    Fix the Y axis with explicit ticks (the axis spans</span>
+<span class="sd">    ``[min(ticks), max(ticks)]``)::</span>
+
+<span class="sd">        plot.y_ticks = [0, 51, 102, 153, 204, 255]</span>
+
+<span class="sd">    Go back to automatic ticks computed from the data::</span>
+
+<span class="sd">        plot.y_ticks = None</span>
+
+<span class="sd">    Sample a function::</span>
+
+<span class="sd">        plot.set_function(</span>
+<span class="sd">            lambda x: x * x,</span>
+<span class="sd">            0.0,</span>
+<span class="sd">            10.0,</span>
+<span class="sd">            samples=200,</span>
+<span class="sd">        )</span>
+
+<span class="sd">    Notes</span>
+<span class="sd">    -----</span>
+<span class="sd">    The widget intentionally performs its own drawing rather than using</span>
+<span class="sd">    Qt Charts or another plotting library.</span>
+
+<span class="sd">    The current implementation uses linear mappings for both axes.</span>
+
+<span class="sd">    **Ticks and axis range.** For each axis:</span>
+
+<span class="sd">    * explicit ticks (a sequence of at least two distinct values) are</span>
+<span class="sd">      used as given, and the axis spans ``[min(ticks), max(ticks)]``;</span>
+<span class="sd">      data outside this range are clipped to the plot area;</span>
+<span class="sd">    * otherwise the axis spans the finite data range and</span>
+<span class="sd">      ``grid + 1`` equally spaced ticks are built.</span>
+
+<span class="sd">    The major grid lines are drawn at the tick positions.</span>
+
+<span class="sd">    See Also</span>
+<span class="sd">    --------</span>
+<span class="sd">    set_data</span>
+<span class="sd">        Set sampled profile data.</span>
+<span class="sd">    set_function</span>
+<span class="sd">        Sample and display a mathematical function.</span>
+<span class="sd">    set_orientation</span>
+<span class="sd">        Change the profile orientation.</span>
+<span class="sd">    """</span>
+
+    <span class="n">HORIZONTAL</span> <span class="o">=</span> <span class="s2">"horizontal"</span>
+    <span class="n">VERTICAL</span> <span class="o">=</span> <span class="s2">"vertical"</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span>
+        <span class="bp">self</span><span class="p">,</span>
+        <span class="n">x</span><span class="p">:</span> <span class="n">Sequence</span><span class="p">[</span><span class="nb">float</span><span class="p">]</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+        <span class="n">y</span><span class="p">:</span> <span class="n">Sequence</span><span class="p">[</span><span class="nb">float</span><span class="p">]</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+        <span class="n">parent</span><span class="p">:</span> <span class="n">QWidget</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+    <span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">"""Initialize the line plot widget.</span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        x : Sequence[float], optional</span>
+<span class="sd">            X coordinates.</span>
+<span class="sd">        y : Sequence[float], optional</span>
+<span class="sd">            Y values.</span>
+<span class="sd">        parent : QWidget, optional</span>
+<span class="sd">            Parent Qt widget.</span>
+
+<span class="sd">        Raises</span>
+<span class="sd">        ------</span>
+<span class="sd">        ValueError</span>
+<span class="sd">            If only one of ``x`` or ``y`` is provided.</span>
+<span class="sd">        """</span>
+        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="n">parent</span><span class="p">)</span>
+
+        <span class="c1"># ==============================================================</span>
+        <span class="c1"># Data</span>
+        <span class="c1"># ==============================================================</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">_x</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="nb">float</span><span class="p">]</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_y</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="nb">float</span><span class="p">]</span> <span class="o">=</span> <span class="p">[]</span>
+
+        <span class="c1"># ==============================================================</span>
+        <span class="c1"># Orientation</span>
+        <span class="c1"># ==============================================================</span>
+
+        <span class="c1"># Horizontal:</span>
+        <span class="c1">#     X -&gt; screen X</span>
+        <span class="c1">#     Y -&gt; screen Y</span>
+        <span class="c1">#</span>
+        <span class="c1"># Vertical:</span>
+        <span class="c1">#     X -&gt; screen Y</span>
+        <span class="c1">#     Y -&gt; screen X</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_orientation</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">HORIZONTAL</span>
+
+        <span class="c1"># ==============================================================</span>
+        <span class="c1"># Margins</span>
+        <span class="c1"># ==============================================================</span>
+
+        <span class="c1"># These margins are deliberately large enough for tick labels.</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_margin_left</span> <span class="o">=</span> <span class="mi">55</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_margin_top</span> <span class="o">=</span> <span class="mi">25</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_margin_right</span> <span class="o">=</span> <span class="mi">55</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_margin_bottom</span> <span class="o">=</span> <span class="mi">55</span>
+
+        <span class="c1"># ==============================================================</span>
+        <span class="c1"># Colors</span>
+        <span class="c1"># ==============================================================</span>
+
+        <span class="n">palette</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">palette</span><span class="p">()</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">_background_color</span> <span class="o">=</span> <span class="n">palette</span><span class="o">.</span><span class="n">base</span><span class="p">()</span><span class="o">.</span><span class="n">color</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_border_color</span> <span class="o">=</span> <span class="n">palette</span><span class="o">.</span><span class="n">mid</span><span class="p">()</span><span class="o">.</span><span class="n">color</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_line_color</span> <span class="o">=</span> <span class="n">palette</span><span class="o">.</span><span class="n">highlight</span><span class="p">()</span><span class="o">.</span><span class="n">color</span><span class="p">()</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">_grid_color</span> <span class="o">=</span> <span class="n">QColor</span><span class="p">(</span><span class="mi">210</span><span class="p">,</span> <span class="mi">210</span><span class="p">,</span> <span class="mi">210</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_minor_grid_color</span> <span class="o">=</span> <span class="n">QColor</span><span class="p">(</span><span class="mi">235</span><span class="p">,</span> <span class="mi">235</span><span class="p">,</span> <span class="mi">235</span><span class="p">)</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">_axis_color</span> <span class="o">=</span> <span class="n">QColor</span><span class="p">(</span><span class="mi">80</span><span class="p">,</span> <span class="mi">80</span><span class="p">,</span> <span class="mi">80</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_text_color</span> <span class="o">=</span> <span class="n">QColor</span><span class="p">(</span><span class="mi">80</span><span class="p">,</span> <span class="mi">80</span><span class="p">,</span> <span class="mi">80</span><span class="p">)</span>
+
+        <span class="c1"># ==============================================================</span>
+        <span class="c1"># Line and drawing widths</span>
+        <span class="c1"># ==============================================================</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">_line_width</span> <span class="o">=</span> <span class="mi">2</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">_border_width</span> <span class="o">=</span> <span class="mi">1</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_grid_width</span> <span class="o">=</span> <span class="mi">1</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_minor_grid_width</span> <span class="o">=</span> <span class="mi">1</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_axis_width</span> <span class="o">=</span> <span class="mi">1</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_tick_width</span> <span class="o">=</span> <span class="mi">1</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">_tick_length</span> <span class="o">=</span> <span class="mi">4</span>
+
+        <span class="c1"># ==============================================================</span>
+        <span class="c1"># Grid configuration</span>
+        <span class="c1"># ==============================================================</span>
+
+        <span class="c1"># Number of intervals of the automatic ticks.</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_grid_x</span> <span class="o">=</span> <span class="mi">5</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_grid_y</span> <span class="o">=</span> <span class="mi">5</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">_minor_grid</span> <span class="o">=</span> <span class="mi">0</span>
+
+        <span class="c1"># ==============================================================</span>
+        <span class="c1"># Font</span>
+        <span class="c1"># ==============================================================</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">_font</span> <span class="o">=</span> <span class="n">QFont</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_font</span><span class="o">.</span><span class="n">setPointSize</span><span class="p">(</span><span class="mi">8</span><span class="p">)</span>
+
+        <span class="c1"># ==============================================================</span>
+        <span class="c1"># Visibility</span>
+        <span class="c1"># ==============================================================</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">_show_grid</span> <span class="o">=</span> <span class="kc">True</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_show_minor_grid</span> <span class="o">=</span> <span class="kc">False</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_show_axes</span> <span class="o">=</span> <span class="kc">True</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_show_ticks</span> <span class="o">=</span> <span class="kc">True</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_show_labels</span> <span class="o">=</span> <span class="kc">True</span>
+
+        <span class="c1"># ==============================================================</span>
+        <span class="c1"># Axis titles</span>
+        <span class="c1"># ==============================================================</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">_x_title</span> <span class="o">=</span> <span class="s2">"pixels"</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_y_title</span> <span class="o">=</span> <span class="s2">"Intensity"</span>
+
+        <span class="c1"># ==============================================================</span>
+        <span class="c1"># Explicit ticks</span>
+        <span class="c1"># ==============================================================</span>
+
+        <span class="c1"># None, or a list of floats. Used only when it holds at least</span>
+        <span class="c1"># two distinct values (see _resolve_axis).</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_x_ticks</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="nb">float</span><span class="p">]</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="kc">None</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_y_ticks</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="nb">float</span><span class="p">]</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="kc">None</span>
+
+        <span class="c1"># ==============================================================</span>
+        <span class="c1"># Formatters</span>
+        <span class="c1"># ==============================================================</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">_x_formatter</span><span class="p">:</span> <span class="n">Callable</span><span class="p">[[</span><span class="nb">float</span><span class="p">],</span> <span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="p">(</span>
+            <span class="k">lambda</span> <span class="n">value</span><span class="p">:</span> <span class="sa">f</span><span class="s2">"</span><span class="si">{</span><span class="n">value</span><span class="si">:</span><span class="s2">g</span><span class="si">}</span><span class="s2">"</span>
+        <span class="p">)</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">_y_formatter</span><span class="p">:</span> <span class="n">Callable</span><span class="p">[[</span><span class="nb">float</span><span class="p">],</span> <span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="p">(</span>
+            <span class="k">lambda</span> <span class="n">value</span><span class="p">:</span> <span class="sa">f</span><span class="s2">"</span><span class="si">{</span><span class="n">value</span><span class="si">:</span><span class="s2">g</span><span class="si">}</span><span class="s2">"</span>
+        <span class="p">)</span>
+
+        <span class="c1"># ==============================================================</span>
+        <span class="c1"># Qt configuration</span>
+        <span class="c1"># ==============================================================</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">setMinimumSize</span><span class="p">(</span><span class="mi">120</span><span class="p">,</span> <span class="mi">80</span><span class="p">)</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">setSizePolicy</span><span class="p">(</span>
+            <span class="n">QSizePolicy</span><span class="o">.</span><span class="n">Expanding</span><span class="p">,</span>
+            <span class="n">QSizePolicy</span><span class="o">.</span><span class="n">Expanding</span><span class="p">,</span>
+        <span class="p">)</span>
+
+        <span class="c1"># ==============================================================</span>
+        <span class="c1"># Initial data</span>
+        <span class="c1"># ==============================================================</span>
+
+        <span class="k">if</span> <span class="n">x</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span> <span class="ow">or</span> <span class="n">y</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="k">if</span> <span class="n">x</span> <span class="ow">is</span> <span class="kc">None</span> <span class="ow">or</span> <span class="n">y</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+                <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span>
+                    <span class="s2">"x and y must be provided together."</span>
+                <span class="p">)</span>
+
+            <span class="bp">self</span><span class="o">.</span><span class="n">set_data</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">)</span>
+
+    <span class="c1"># ==================================================================</span>
+    <span class="c1"># Data</span>
+    <span class="c1"># ==================================================================</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">x</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">list</span><span class="p">[</span><span class="nb">float</span><span class="p">]:</span>
+<span class="w">        </span><span class="sd">"""list[float]: Copy of the X coordinates."""</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_x</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">y</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">list</span><span class="p">[</span><span class="nb">float</span><span class="p">]:</span>
+<span class="w">        </span><span class="sd">"""list[float]: Copy of the Y values."""</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_y</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
+
+<div class="viewcode-block" id="QtProfilePlot.set_data">
+<a class="viewcode-back" href="../../api_doc/qt_profile_plot.html#pyclickimage.qt_profile_plot.QtProfilePlot.set_data">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">set_data</span><span class="p">(</span>
+        <span class="bp">self</span><span class="p">,</span>
+        <span class="n">x</span><span class="p">:</span> <span class="n">Sequence</span><span class="p">[</span><span class="nb">float</span><span class="p">],</span>
+        <span class="n">y</span><span class="p">:</span> <span class="n">Sequence</span><span class="p">[</span><span class="nb">float</span><span class="p">],</span>
+    <span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">"""Set the sampled profile data.</span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        x : Sequence[float]</span>
+<span class="sd">            X coordinates.</span>
+<span class="sd">        y : Sequence[float]</span>
+<span class="sd">            Y values.</span>
+
+<span class="sd">        Raises</span>
+<span class="sd">        ------</span>
+<span class="sd">        ValueError</span>
+<span class="sd">            If ``x`` and ``y`` contain different numbers of values.</span>
+
+<span class="sd">        Notes</span>
+<span class="sd">        -----</span>
+<span class="sd">        Values are converted to ``float`` before being stored.</span>
+<span class="sd">        Non-finite values (``NaN``, ``inf``) are allowed: they are</span>
+<span class="sd">        ignored when computing the automatic range and break the line.</span>
+<span class="sd">        """</span>
+        <span class="n">x_values</span> <span class="o">=</span> <span class="p">[</span><span class="nb">float</span><span class="p">(</span><span class="n">value</span><span class="p">)</span> <span class="k">for</span> <span class="n">value</span> <span class="ow">in</span> <span class="n">x</span><span class="p">]</span>
+        <span class="n">y_values</span> <span class="o">=</span> <span class="p">[</span><span class="nb">float</span><span class="p">(</span><span class="n">value</span><span class="p">)</span> <span class="k">for</span> <span class="n">value</span> <span class="ow">in</span> <span class="n">y</span><span class="p">]</span>
+
+        <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">x_values</span><span class="p">)</span> <span class="o">!=</span> <span class="nb">len</span><span class="p">(</span><span class="n">y_values</span><span class="p">):</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span>
+                <span class="s2">"x and y must contain the same number of values."</span>
+            <span class="p">)</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">_x</span> <span class="o">=</span> <span class="n">x_values</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_y</span> <span class="o">=</span> <span class="n">y_values</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">update</span><span class="p">()</span></div>
+
+
+<div class="viewcode-block" id="QtProfilePlot.set_function">
+<a class="viewcode-back" href="../../api_doc/qt_profile_plot.html#pyclickimage.qt_profile_plot.QtProfilePlot.set_function">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">set_function</span><span class="p">(</span>
+        <span class="bp">self</span><span class="p">,</span>
+        <span class="n">function</span><span class="p">:</span> <span class="n">Callable</span><span class="p">[[</span><span class="nb">float</span><span class="p">],</span> <span class="nb">float</span><span class="p">],</span>
+        <span class="n">x_min</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span>
+        <span class="n">x_max</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span>
+        <span class="n">samples</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">500</span><span class="p">,</span>
+    <span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">"""Sample a function and display it.</span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        function : Callable[[float], float]</span>
+<span class="sd">            Function to evaluate.</span>
+<span class="sd">        x_min : float</span>
+<span class="sd">            Minimum X value.</span>
+<span class="sd">        x_max : float</span>
+<span class="sd">            Maximum X value.</span>
+<span class="sd">        samples : int, default=500</span>
+<span class="sd">            Number of uniformly spaced samples.</span>
+
+<span class="sd">        Raises</span>
+<span class="sd">        ------</span>
+<span class="sd">        ValueError</span>
+<span class="sd">            If ``samples &lt; 2``.</span>
+<span class="sd">        ValueError</span>
+<span class="sd">            If ``x_max &lt;= x_min``.</span>
+<span class="sd">        """</span>
+        <span class="k">if</span> <span class="n">samples</span> <span class="o">&lt;</span> <span class="mi">2</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span>
+                <span class="s2">"samples must be greater than or equal to 2."</span>
+            <span class="p">)</span>
+
+        <span class="k">if</span> <span class="n">x_max</span> <span class="o">&lt;=</span> <span class="n">x_min</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span>
+                <span class="s2">"x_max must be greater than x_min."</span>
+            <span class="p">)</span>
+
+        <span class="n">step</span> <span class="o">=</span> <span class="p">(</span><span class="n">x_max</span> <span class="o">-</span> <span class="n">x_min</span><span class="p">)</span> <span class="o">/</span> <span class="p">(</span><span class="n">samples</span> <span class="o">-</span> <span class="mi">1</span><span class="p">)</span>
+
+        <span class="n">x_values</span> <span class="o">=</span> <span class="p">[</span>
+            <span class="n">x_min</span> <span class="o">+</span> <span class="n">index</span> <span class="o">*</span> <span class="n">step</span>
+            <span class="k">for</span> <span class="n">index</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">samples</span><span class="p">)</span>
+        <span class="p">]</span>
+
+        <span class="n">y_values</span> <span class="o">=</span> <span class="p">[</span>
+            <span class="nb">float</span><span class="p">(</span><span class="n">function</span><span class="p">(</span><span class="n">value</span><span class="p">))</span>
+            <span class="k">for</span> <span class="n">value</span> <span class="ow">in</span> <span class="n">x_values</span>
+        <span class="p">]</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">set_data</span><span class="p">(</span><span class="n">x_values</span><span class="p">,</span> <span class="n">y_values</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="QtProfilePlot.clear">
+<a class="viewcode-back" href="../../api_doc/qt_profile_plot.html#pyclickimage.qt_profile_plot.QtProfilePlot.clear">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">clear</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">"""Remove all plotted data.</span>
+
+<span class="sd">        The widget itself remains visible, but the profile is removed.</span>
+<span class="sd">        """</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_x</span><span class="o">.</span><span class="n">clear</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_y</span><span class="o">.</span><span class="n">clear</span><span class="p">()</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">update</span><span class="p">()</span></div>
+
+
+    <span class="c1"># ==================================================================</span>
+    <span class="c1"># Orientation</span>
+    <span class="c1"># ==================================================================</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">orientation</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">"""str: Current plot orientation.</span>
+
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        str</span>
+<span class="sd">            Either ``"horizontal"`` or ``"vertical"``.</span>
+
+<span class="sd">        Notes</span>
+<span class="sd">        -----</span>
+<span class="sd">        ``"horizontal"`` means:</span>
+
+<span class="sd">        * X is horizontal.</span>
+<span class="sd">        * Y is vertical.</span>
+<span class="sd">        * X axis is at the bottom.</span>
+<span class="sd">        * Y axis is at the left.</span>
+
+<span class="sd">        ``"vertical"`` means:</span>
+
+<span class="sd">        * X is vertical (increasing from top to bottom).</span>
+<span class="sd">        * Y is horizontal.</span>
+<span class="sd">        * X axis is at the right.</span>
+<span class="sd">        * Y axis is at the bottom.</span>
+<span class="sd">        """</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_orientation</span>
+
+    <span class="nd">@orientation</span><span class="o">.</span><span class="n">setter</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">orientation</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">value</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">"""Set the plot orientation."""</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">set_orientation</span><span class="p">(</span><span class="n">value</span><span class="p">)</span>
+
+<div class="viewcode-block" id="QtProfilePlot.set_orientation">
+<a class="viewcode-back" href="../../api_doc/qt_profile_plot.html#pyclickimage.qt_profile_plot.QtProfilePlot.set_orientation">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">set_orientation</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">value</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">"""Set the logical orientation of the profile.</span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        value : str</span>
+<span class="sd">            Either ``"horizontal"`` or ``"vertical"``.</span>
+
+<span class="sd">        Raises</span>
+<span class="sd">        ------</span>
+<span class="sd">        ValueError</span>
+<span class="sd">            If ``value`` is not a supported orientation.</span>
+
+<span class="sd">        Notes</span>
+<span class="sd">        -----</span>
+<span class="sd">        The QWidget itself is never rotated.</span>
+
+<span class="sd">        In ``horizontal`` mode::</span>
+
+<span class="sd">            screen_x = X</span>
+<span class="sd">            screen_y = Y</span>
+
+<span class="sd">        In ``vertical`` mode::</span>
+
+<span class="sd">            screen_x = Y</span>
+<span class="sd">            screen_y = X</span>
+
+<span class="sd">        This makes the vertical mode suitable for a profile displayed</span>
+<span class="sd">        beside the right side of an image.</span>
+<span class="sd">        """</span>
+        <span class="n">value</span> <span class="o">=</span> <span class="nb">str</span><span class="p">(</span><span class="n">value</span><span class="p">)</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span>
+
+        <span class="k">if</span> <span class="n">value</span> <span class="ow">not</span> <span class="ow">in</span> <span class="p">(</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">HORIZONTAL</span><span class="p">,</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">VERTICAL</span><span class="p">,</span>
+        <span class="p">):</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span>
+                <span class="s2">"orientation must be 'horizontal' or 'vertical'."</span>
+            <span class="p">)</span>
+
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_orientation</span> <span class="o">==</span> <span class="n">value</span><span class="p">:</span>
+            <span class="k">return</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">_orientation</span> <span class="o">=</span> <span class="n">value</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">update</span><span class="p">()</span></div>
+
+
+    <span class="c1"># ==================================================================</span>
+    <span class="c1"># Appearance</span>
+    <span class="c1"># ==================================================================</span>
+
+<div class="viewcode-block" id="QtProfilePlot._color_property">
+<a class="viewcode-back" href="../../api_doc/qt_profile_plot.html#pyclickimage.qt_profile_plot.QtProfilePlot._color_property">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">_color_property</span><span class="p">(</span><span class="n">name</span><span class="p">:</span> <span class="nb">str</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">"""Create a QColor property."""</span>
+
+        <span class="k">def</span><span class="w"> </span><span class="nf">getter</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+            <span class="k">return</span> <span class="nb">getattr</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="sa">f</span><span class="s2">"_</span><span class="si">{</span><span class="n">name</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
+
+        <span class="k">def</span><span class="w"> </span><span class="nf">setter</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">value</span><span class="p">):</span>
+            <span class="nb">setattr</span><span class="p">(</span>
+                <span class="bp">self</span><span class="p">,</span>
+                <span class="sa">f</span><span class="s2">"_</span><span class="si">{</span><span class="n">name</span><span class="si">}</span><span class="s2">"</span><span class="p">,</span>
+                <span class="n">QColor</span><span class="p">(</span><span class="n">value</span><span class="p">),</span>
+            <span class="p">)</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">update</span><span class="p">()</span>
+
+        <span class="k">return</span> <span class="nb">property</span><span class="p">(</span><span class="n">getter</span><span class="p">,</span> <span class="n">setter</span><span class="p">)</span></div>
+
+
+    <span class="n">background_color</span> <span class="o">=</span> <span class="n">_color_property</span><span class="p">(</span>
+        <span class="s2">"background_color"</span>
+    <span class="p">)</span>
+
+    <span class="n">line_color</span> <span class="o">=</span> <span class="n">_color_property</span><span class="p">(</span>
+        <span class="s2">"line_color"</span>
+    <span class="p">)</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">line_width</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">int</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">"""int: Width of the plotted line in pixels."""</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_line_width</span>
+
+    <span class="nd">@line_width</span><span class="o">.</span><span class="n">setter</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">line_width</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">value</span><span class="p">:</span> <span class="nb">int</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="n">value</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">value</span><span class="p">)</span>
+
+        <span class="k">if</span> <span class="n">value</span> <span class="o">&lt;=</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span>
+                <span class="s2">"line_width must be greater than zero."</span>
+            <span class="p">)</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">_line_width</span> <span class="o">=</span> <span class="n">value</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">update</span><span class="p">()</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">show_grid</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bool</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">"""bool: Whether major grid lines are displayed."""</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_show_grid</span>
+
+    <span class="nd">@show_grid</span><span class="o">.</span><span class="n">setter</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">show_grid</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">value</span><span class="p">:</span> <span class="nb">bool</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_show_grid</span> <span class="o">=</span> <span class="nb">bool</span><span class="p">(</span><span class="n">value</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">update</span><span class="p">()</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">show_minor_grid</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bool</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">"""bool: Whether minor grid lines are displayed."""</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_show_minor_grid</span>
+
+    <span class="nd">@show_minor_grid</span><span class="o">.</span><span class="n">setter</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">show_minor_grid</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">value</span><span class="p">:</span> <span class="nb">bool</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_show_minor_grid</span> <span class="o">=</span> <span class="nb">bool</span><span class="p">(</span><span class="n">value</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">update</span><span class="p">()</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">show_axes</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bool</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">"""bool: Whether the main axes are displayed."""</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_show_axes</span>
+
+    <span class="nd">@show_axes</span><span class="o">.</span><span class="n">setter</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">show_axes</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">value</span><span class="p">:</span> <span class="nb">bool</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_show_axes</span> <span class="o">=</span> <span class="nb">bool</span><span class="p">(</span><span class="n">value</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">update</span><span class="p">()</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">show_ticks</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bool</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">"""bool: Whether tick marks are displayed."""</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_show_ticks</span>
+
+    <span class="nd">@show_ticks</span><span class="o">.</span><span class="n">setter</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">show_ticks</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">value</span><span class="p">:</span> <span class="nb">bool</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_show_ticks</span> <span class="o">=</span> <span class="nb">bool</span><span class="p">(</span><span class="n">value</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">update</span><span class="p">()</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">show_labels</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bool</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">"""bool: Whether tick labels are displayed."""</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_show_labels</span>
+
+    <span class="nd">@show_labels</span><span class="o">.</span><span class="n">setter</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">show_labels</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">value</span><span class="p">:</span> <span class="nb">bool</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_show_labels</span> <span class="o">=</span> <span class="nb">bool</span><span class="p">(</span><span class="n">value</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">update</span><span class="p">()</span>
+
+    <span class="c1"># ==================================================================</span>
+    <span class="c1"># Axis configuration</span>
+    <span class="c1"># ==================================================================</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">x_title</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">"""str: Title associated with the X data axis."""</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_x_title</span>
+
+    <span class="nd">@x_title</span><span class="o">.</span><span class="n">setter</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">x_title</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">value</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_x_title</span> <span class="o">=</span> <span class="nb">str</span><span class="p">(</span><span class="n">value</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">update</span><span class="p">()</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">y_title</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">"""str: Title associated with the Y data axis."""</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_y_title</span>
+
+    <span class="nd">@y_title</span><span class="o">.</span><span class="n">setter</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">y_title</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">value</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_y_title</span> <span class="o">=</span> <span class="nb">str</span><span class="p">(</span><span class="n">value</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">update</span><span class="p">()</span>
+
+<div class="viewcode-block" id="QtProfilePlot._parse_ticks">
+<a class="viewcode-back" href="../../api_doc/qt_profile_plot.html#pyclickimage.qt_profile_plot.QtProfilePlot._parse_ticks">[docs]</a>
+    <span class="nd">@staticmethod</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">_parse_ticks</span><span class="p">(</span>
+        <span class="n">value</span><span class="p">:</span> <span class="n">Sequence</span><span class="p">[</span><span class="nb">float</span><span class="p">]</span> <span class="o">|</span> <span class="kc">None</span><span class="p">,</span>
+    <span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">list</span><span class="p">[</span><span class="nb">float</span><span class="p">]</span> <span class="o">|</span> <span class="kc">None</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">"""Convert a tick sequence to a list of floats.</span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        value : Sequence[float] or None</span>
+<span class="sd">            Tick positions.</span>
+
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        list of float or None</span>
+<span class="sd">            ``None`` if ``value`` is ``None``, otherwise the values as</span>
+<span class="sd">            floats.</span>
+
+<span class="sd">        Raises</span>
+<span class="sd">        ------</span>
+<span class="sd">        ValueError</span>
+<span class="sd">            If a tick is not finite.</span>
+<span class="sd">        """</span>
+        <span class="k">if</span> <span class="n">value</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="k">return</span> <span class="kc">None</span>
+
+        <span class="n">ticks</span> <span class="o">=</span> <span class="p">[</span><span class="nb">float</span><span class="p">(</span><span class="n">tick</span><span class="p">)</span> <span class="k">for</span> <span class="n">tick</span> <span class="ow">in</span> <span class="n">value</span><span class="p">]</span>
+
+        <span class="k">if</span> <span class="ow">not</span> <span class="nb">all</span><span class="p">(</span><span class="n">math</span><span class="o">.</span><span class="n">isfinite</span><span class="p">(</span><span class="n">tick</span><span class="p">)</span> <span class="k">for</span> <span class="n">tick</span> <span class="ow">in</span> <span class="n">ticks</span><span class="p">):</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span>
+                <span class="s2">"Tick positions must be finite."</span>
+            <span class="p">)</span>
+
+        <span class="k">return</span> <span class="n">ticks</span></div>
+
+
+    <span class="nd">@property</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">x_ticks</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">list</span><span class="p">[</span><span class="nb">float</span><span class="p">]</span> <span class="o">|</span> <span class="kc">None</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">"""list[float] or None: Explicit X-axis tick positions.</span>
+
+<span class="sd">        A sequence of at least two distinct values is used as given:</span>
+<span class="sd">        the X axis then spans ``[min(x_ticks), max(x_ticks)]``.</span>
+<span class="sd">        Otherwise (``None``, fewer than two values, or all values</span>
+<span class="sd">        equal), equally spaced ticks are built from the data range.</span>
+<span class="sd">        """</span>
+        <span class="k">return</span> <span class="kc">None</span> <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_x_ticks</span> <span class="ow">is</span> <span class="kc">None</span> <span class="k">else</span> <span class="bp">self</span><span class="o">.</span><span class="n">_x_ticks</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
+
+    <span class="nd">@x_ticks</span><span class="o">.</span><span class="n">setter</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">x_ticks</span><span class="p">(</span>
+        <span class="bp">self</span><span class="p">,</span>
+        <span class="n">value</span><span class="p">:</span> <span class="n">Sequence</span><span class="p">[</span><span class="nb">float</span><span class="p">]</span> <span class="o">|</span> <span class="kc">None</span><span class="p">,</span>
+    <span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_x_ticks</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_parse_ticks</span><span class="p">(</span><span class="n">value</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">update</span><span class="p">()</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">y_ticks</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">list</span><span class="p">[</span><span class="nb">float</span><span class="p">]</span> <span class="o">|</span> <span class="kc">None</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">"""list[float] or None: Explicit Y-axis tick positions.</span>
+
+<span class="sd">        A sequence of at least two distinct values is used as given:</span>
+<span class="sd">        the Y axis then spans ``[min(y_ticks), max(y_ticks)]``, and</span>
+<span class="sd">        values outside are clipped to the plot area. Otherwise</span>
+<span class="sd">        (``None``, fewer than two values, or all values equal),</span>
+<span class="sd">        equally spaced ticks are built from the data range.</span>
+<span class="sd">        """</span>
+        <span class="k">return</span> <span class="kc">None</span> <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_y_ticks</span> <span class="ow">is</span> <span class="kc">None</span> <span class="k">else</span> <span class="bp">self</span><span class="o">.</span><span class="n">_y_ticks</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
+
+    <span class="nd">@y_ticks</span><span class="o">.</span><span class="n">setter</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">y_ticks</span><span class="p">(</span>
+        <span class="bp">self</span><span class="p">,</span>
+        <span class="n">value</span><span class="p">:</span> <span class="n">Sequence</span><span class="p">[</span><span class="nb">float</span><span class="p">]</span> <span class="o">|</span> <span class="kc">None</span><span class="p">,</span>
+    <span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_y_ticks</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_parse_ticks</span><span class="p">(</span><span class="n">value</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">update</span><span class="p">()</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">x_formatter</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Callable</span><span class="p">[[</span><span class="nb">float</span><span class="p">],</span> <span class="nb">str</span><span class="p">]:</span>
+<span class="w">        </span><span class="sd">"""Callable[[float], str]: Formatter for X tick labels."""</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_x_formatter</span>
+
+    <span class="nd">@x_formatter</span><span class="o">.</span><span class="n">setter</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">x_formatter</span><span class="p">(</span>
+        <span class="bp">self</span><span class="p">,</span>
+        <span class="n">value</span><span class="p">:</span> <span class="n">Callable</span><span class="p">[[</span><span class="nb">float</span><span class="p">],</span> <span class="nb">str</span><span class="p">],</span>
+    <span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="nb">callable</span><span class="p">(</span><span class="n">value</span><span class="p">):</span>
+            <span class="k">raise</span> <span class="ne">TypeError</span><span class="p">(</span>
+                <span class="s2">"x_formatter must be callable."</span>
+            <span class="p">)</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">_x_formatter</span> <span class="o">=</span> <span class="n">value</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">update</span><span class="p">()</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">y_formatter</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Callable</span><span class="p">[[</span><span class="nb">float</span><span class="p">],</span> <span class="nb">str</span><span class="p">]:</span>
+<span class="w">        </span><span class="sd">"""Callable[[float], str]: Formatter for Y tick labels."""</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_y_formatter</span>
+
+    <span class="nd">@y_formatter</span><span class="o">.</span><span class="n">setter</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">y_formatter</span><span class="p">(</span>
+        <span class="bp">self</span><span class="p">,</span>
+        <span class="n">value</span><span class="p">:</span> <span class="n">Callable</span><span class="p">[[</span><span class="nb">float</span><span class="p">],</span> <span class="nb">str</span><span class="p">],</span>
+    <span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="nb">callable</span><span class="p">(</span><span class="n">value</span><span class="p">):</span>
+            <span class="k">raise</span> <span class="ne">TypeError</span><span class="p">(</span>
+                <span class="s2">"y_formatter must be callable."</span>
+            <span class="p">)</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">_y_formatter</span> <span class="o">=</span> <span class="n">value</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">update</span><span class="p">()</span>
+
+    <span class="c1"># ==================================================================</span>
+    <span class="c1"># Ticks and range</span>
+    <span class="c1"># ==================================================================</span>
+
+<div class="viewcode-block" id="QtProfilePlot._resolve_axis">
+<a class="viewcode-back" href="../../api_doc/qt_profile_plot.html#pyclickimage.qt_profile_plot.QtProfilePlot._resolve_axis">[docs]</a>
+    <span class="nd">@staticmethod</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">_resolve_axis</span><span class="p">(</span>
+        <span class="n">ticks</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="nb">float</span><span class="p">]</span> <span class="o">|</span> <span class="kc">None</span><span class="p">,</span>
+        <span class="n">values</span><span class="p">:</span> <span class="n">Sequence</span><span class="p">[</span><span class="nb">float</span><span class="p">],</span>
+        <span class="n">intervals</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span>
+    <span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">tuple</span><span class="p">[</span><span class="nb">list</span><span class="p">[</span><span class="nb">float</span><span class="p">],</span> <span class="nb">float</span><span class="p">,</span> <span class="nb">float</span><span class="p">]:</span>
+<span class="w">        </span><span class="sd">"""Return the ticks and the range of one axis.</span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        ticks : list of float or None</span>
+<span class="sd">            Explicit ticks.</span>
+<span class="sd">        values : Sequence[float]</span>
+<span class="sd">            Data values along the axis.</span>
+<span class="sd">        intervals : int</span>
+<span class="sd">            Number of intervals of the automatic ticks.</span>
+
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        ticks : list of float</span>
+<span class="sd">            Sorted tick positions.</span>
+<span class="sd">        vmin, vmax : float</span>
+<span class="sd">            Axis range, with ``vmin &lt; vmax``.</span>
+
+<span class="sd">        Raises</span>
+<span class="sd">        ------</span>
+<span class="sd">        ValueError</span>
+<span class="sd">            If automatic ticks are needed and ``intervals &lt;= 0``.</span>
+
+<span class="sd">        Notes</span>
+<span class="sd">        -----</span>
+<span class="sd">        - Explicit ticks with at least two distinct values: used as</span>
+<span class="sd">          given, the range is ``[min(ticks), max(ticks)]``.</span>
+<span class="sd">        - Otherwise: the range is the finite data range (widened by</span>
+<span class="sd">          ``0.5`` on each side when constant, ``[0, 1]`` without</span>
+<span class="sd">          finite value) and ``intervals + 1`` equally spaced ticks are</span>
+<span class="sd">          built.</span>
+<span class="sd">        """</span>
+        <span class="k">if</span> <span class="n">ticks</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span> <span class="ow">and</span> <span class="nb">len</span><span class="p">(</span><span class="n">ticks</span><span class="p">)</span> <span class="o">&gt;=</span> <span class="mi">2</span><span class="p">:</span>
+            <span class="n">ordered</span> <span class="o">=</span> <span class="nb">sorted</span><span class="p">(</span><span class="n">ticks</span><span class="p">)</span>
+
+            <span class="k">if</span> <span class="n">ordered</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">&lt;</span> <span class="n">ordered</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]:</span>
+                <span class="k">return</span> <span class="n">ordered</span><span class="p">,</span> <span class="n">ordered</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">ordered</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
+
+        <span class="k">if</span> <span class="n">intervals</span> <span class="o">&lt;=</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span>
+                <span class="s2">"The number of grid intervals must be greater than zero."</span>
+            <span class="p">)</span>
+
+        <span class="n">finite</span> <span class="o">=</span> <span class="p">[</span><span class="n">value</span> <span class="k">for</span> <span class="n">value</span> <span class="ow">in</span> <span class="n">values</span> <span class="k">if</span> <span class="n">math</span><span class="o">.</span><span class="n">isfinite</span><span class="p">(</span><span class="n">value</span><span class="p">)]</span>
+
+        <span class="k">if</span> <span class="n">finite</span><span class="p">:</span>
+            <span class="n">vmin</span> <span class="o">=</span> <span class="nb">min</span><span class="p">(</span><span class="n">finite</span><span class="p">)</span>
+            <span class="n">vmax</span> <span class="o">=</span> <span class="nb">max</span><span class="p">(</span><span class="n">finite</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">vmin</span><span class="p">,</span> <span class="n">vmax</span> <span class="o">=</span> <span class="mf">0.0</span><span class="p">,</span> <span class="mf">1.0</span>
+
+        <span class="k">if</span> <span class="n">vmin</span> <span class="o">==</span> <span class="n">vmax</span><span class="p">:</span>
+            <span class="n">vmin</span> <span class="o">-=</span> <span class="mf">0.5</span>
+            <span class="n">vmax</span> <span class="o">+=</span> <span class="mf">0.5</span>
+
+        <span class="n">step</span> <span class="o">=</span> <span class="p">(</span><span class="n">vmax</span> <span class="o">-</span> <span class="n">vmin</span><span class="p">)</span> <span class="o">/</span> <span class="n">intervals</span>
+
+        <span class="n">built</span> <span class="o">=</span> <span class="p">[</span><span class="n">vmin</span> <span class="o">+</span> <span class="n">index</span> <span class="o">*</span> <span class="n">step</span> <span class="k">for</span> <span class="n">index</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">intervals</span><span class="p">)]</span>
+        <span class="n">built</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">vmax</span><span class="p">)</span>
+
+        <span class="k">return</span> <span class="n">built</span><span class="p">,</span> <span class="n">vmin</span><span class="p">,</span> <span class="n">vmax</span></div>
+
+
+    <span class="c1"># ==================================================================</span>
+    <span class="c1"># Painting</span>
+    <span class="c1"># ==================================================================</span>
+
+<div class="viewcode-block" id="QtProfilePlot.paintEvent">
+<a class="viewcode-back" href="../../api_doc/qt_profile_plot.html#pyclickimage.qt_profile_plot.QtProfilePlot.paintEvent">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">paintEvent</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">event</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">"""Paint the complete widget.</span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        event : QPaintEvent</span>
+<span class="sd">            Qt paint event.</span>
+<span class="sd">        """</span>
+        <span class="k">del</span> <span class="n">event</span>
+
+        <span class="n">painter</span> <span class="o">=</span> <span class="n">QPainter</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span>
+
+        <span class="n">painter</span><span class="o">.</span><span class="n">setRenderHint</span><span class="p">(</span>
+            <span class="n">QPainter</span><span class="o">.</span><span class="n">Antialiasing</span>
+        <span class="p">)</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">_paint_plot</span><span class="p">(</span><span class="n">painter</span><span class="p">)</span>
+
+        <span class="n">painter</span><span class="o">.</span><span class="n">end</span><span class="p">()</span></div>
+
+
+<div class="viewcode-block" id="QtProfilePlot._paint_plot">
+<a class="viewcode-back" href="../../api_doc/qt_profile_plot.html#pyclickimage.qt_profile_plot.QtProfilePlot._paint_plot">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">_paint_plot</span><span class="p">(</span>
+        <span class="bp">self</span><span class="p">,</span>
+        <span class="n">painter</span><span class="p">:</span> <span class="n">QPainter</span><span class="p">,</span>
+    <span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">"""Paint the complete plotting area."""</span>
+        <span class="n">painter</span><span class="o">.</span><span class="n">fillRect</span><span class="p">(</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">rect</span><span class="p">(),</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_background_color</span><span class="p">,</span>
+        <span class="p">)</span>
+
+        <span class="n">left</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_margin_left</span>
+        <span class="n">top</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_margin_top</span>
+
+        <span class="n">right</span> <span class="o">=</span> <span class="p">(</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">width</span><span class="p">()</span>
+            <span class="o">-</span> <span class="bp">self</span><span class="o">.</span><span class="n">_margin_right</span>
+        <span class="p">)</span>
+
+        <span class="n">bottom</span> <span class="o">=</span> <span class="p">(</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">height</span><span class="p">()</span>
+            <span class="o">-</span> <span class="bp">self</span><span class="o">.</span><span class="n">_margin_bottom</span>
+        <span class="p">)</span>
+
+        <span class="k">if</span> <span class="n">right</span> <span class="o">&lt;=</span> <span class="n">left</span> <span class="ow">or</span> <span class="n">bottom</span> <span class="o">&lt;=</span> <span class="n">top</span><span class="p">:</span>
+            <span class="k">return</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">_frame</span><span class="p">(</span>
+            <span class="n">painter</span><span class="p">,</span>
+            <span class="n">left</span><span class="p">,</span>
+            <span class="n">top</span><span class="p">,</span>
+            <span class="n">right</span><span class="p">,</span>
+            <span class="n">bottom</span><span class="p">,</span>
+        <span class="p">)</span>
+
+        <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_x</span><span class="p">)</span> <span class="o">&lt;</span> <span class="mi">2</span><span class="p">:</span>
+            <span class="k">return</span>
+
+        <span class="n">x_ticks</span><span class="p">,</span> <span class="n">x_min</span><span class="p">,</span> <span class="n">x_max</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_resolve_axis</span><span class="p">(</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_x_ticks</span><span class="p">,</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_x</span><span class="p">,</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_grid_x</span><span class="p">,</span>
+        <span class="p">)</span>
+
+        <span class="n">y_ticks</span><span class="p">,</span> <span class="n">y_min</span><span class="p">,</span> <span class="n">y_max</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_resolve_axis</span><span class="p">(</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_y_ticks</span><span class="p">,</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_y</span><span class="p">,</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_grid_y</span><span class="p">,</span>
+        <span class="p">)</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">_grid</span><span class="p">(</span>
+            <span class="n">painter</span><span class="p">,</span>
+            <span class="n">left</span><span class="p">,</span>
+            <span class="n">top</span><span class="p">,</span>
+            <span class="n">right</span><span class="p">,</span>
+            <span class="n">bottom</span><span class="p">,</span>
+            <span class="n">x_min</span><span class="p">,</span>
+            <span class="n">x_max</span><span class="p">,</span>
+            <span class="n">y_min</span><span class="p">,</span>
+            <span class="n">y_max</span><span class="p">,</span>
+            <span class="n">x_ticks</span><span class="p">,</span>
+            <span class="n">y_ticks</span><span class="p">,</span>
+        <span class="p">)</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">_line</span><span class="p">(</span>
+            <span class="n">painter</span><span class="p">,</span>
+            <span class="n">left</span><span class="p">,</span>
+            <span class="n">top</span><span class="p">,</span>
+            <span class="n">right</span><span class="p">,</span>
+            <span class="n">bottom</span><span class="p">,</span>
+            <span class="n">x_min</span><span class="p">,</span>
+            <span class="n">x_max</span><span class="p">,</span>
+            <span class="n">y_min</span><span class="p">,</span>
+            <span class="n">y_max</span><span class="p">,</span>
+        <span class="p">)</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">_axes</span><span class="p">(</span>
+            <span class="n">painter</span><span class="p">,</span>
+            <span class="n">left</span><span class="p">,</span>
+            <span class="n">top</span><span class="p">,</span>
+            <span class="n">right</span><span class="p">,</span>
+            <span class="n">bottom</span><span class="p">,</span>
+            <span class="n">x_min</span><span class="p">,</span>
+            <span class="n">x_max</span><span class="p">,</span>
+            <span class="n">y_min</span><span class="p">,</span>
+            <span class="n">y_max</span><span class="p">,</span>
+            <span class="n">x_ticks</span><span class="p">,</span>
+            <span class="n">y_ticks</span><span class="p">,</span>
+        <span class="p">)</span></div>
+
+
+    <span class="c1"># ==================================================================</span>
+    <span class="c1"># Coordinate mapping</span>
+    <span class="c1"># ==================================================================</span>
+
+<div class="viewcode-block" id="QtProfilePlot._map_x">
+<a class="viewcode-back" href="../../api_doc/qt_profile_plot.html#pyclickimage.qt_profile_plot.QtProfilePlot._map_x">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">_map_x</span><span class="p">(</span>
+        <span class="bp">self</span><span class="p">,</span>
+        <span class="n">value</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span>
+        <span class="n">left</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span>
+        <span class="n">right</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span>
+        <span class="n">top</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span>
+        <span class="n">bottom</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span>
+        <span class="n">x_min</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span>
+        <span class="n">x_max</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span>
+    <span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">float</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">"""Map an X data value to its screen coordinate.</span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        value : float</span>
+<span class="sd">            X data value.</span>
+<span class="sd">        left, right, top, bottom : int</span>
+<span class="sd">            Plot boundaries.</span>
+<span class="sd">        x_min, x_max : float</span>
+<span class="sd">            X data range.</span>
+
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        float</span>
+<span class="sd">            Horizontal screen coordinate in ``horizontal`` mode,</span>
+<span class="sd">            vertical screen coordinate in ``vertical`` mode.</span>
+
+<span class="sd">        Notes</span>
+<span class="sd">        -----</span>
+<span class="sd">        ``vertical`` mode follows the image convention: ``x_min`` at</span>
+<span class="sd">        the top, ``x_max`` at the bottom.</span>
+<span class="sd">        """</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_orientation</span> <span class="o">==</span> <span class="bp">self</span><span class="o">.</span><span class="n">HORIZONTAL</span><span class="p">:</span>
+            <span class="k">return</span> <span class="p">(</span>
+                <span class="n">left</span>
+                <span class="o">+</span> <span class="p">(</span><span class="n">value</span> <span class="o">-</span> <span class="n">x_min</span><span class="p">)</span>
+                <span class="o">/</span> <span class="p">(</span><span class="n">x_max</span> <span class="o">-</span> <span class="n">x_min</span><span class="p">)</span>
+                <span class="o">*</span> <span class="p">(</span><span class="n">right</span> <span class="o">-</span> <span class="n">left</span><span class="p">)</span>
+            <span class="p">)</span>
+
+        <span class="k">return</span> <span class="p">(</span>
+            <span class="n">top</span>
+            <span class="o">+</span> <span class="p">(</span><span class="n">value</span> <span class="o">-</span> <span class="n">x_min</span><span class="p">)</span>
+            <span class="o">/</span> <span class="p">(</span><span class="n">x_max</span> <span class="o">-</span> <span class="n">x_min</span><span class="p">)</span>
+            <span class="o">*</span> <span class="p">(</span><span class="n">bottom</span> <span class="o">-</span> <span class="n">top</span><span class="p">)</span>
+        <span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="QtProfilePlot._map_y">
+<a class="viewcode-back" href="../../api_doc/qt_profile_plot.html#pyclickimage.qt_profile_plot.QtProfilePlot._map_y">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">_map_y</span><span class="p">(</span>
+        <span class="bp">self</span><span class="p">,</span>
+        <span class="n">value</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span>
+        <span class="n">left</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span>
+        <span class="n">right</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span>
+        <span class="n">top</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span>
+        <span class="n">bottom</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span>
+        <span class="n">y_min</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span>
+        <span class="n">y_max</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span>
+    <span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">float</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">"""Map a Y data value to its screen coordinate.</span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        value : float</span>
+<span class="sd">            Y data value.</span>
+<span class="sd">        left, right, top, bottom : int</span>
+<span class="sd">            Plot boundaries.</span>
+<span class="sd">        y_min, y_max : float</span>
+<span class="sd">            Y data range.</span>
+
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        float</span>
+<span class="sd">            Vertical screen coordinate in ``horizontal`` mode,</span>
+<span class="sd">            horizontal screen coordinate in ``vertical`` mode.</span>
+<span class="sd">        """</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_orientation</span> <span class="o">==</span> <span class="bp">self</span><span class="o">.</span><span class="n">HORIZONTAL</span><span class="p">:</span>
+            <span class="k">return</span> <span class="p">(</span>
+                <span class="n">bottom</span>
+                <span class="o">-</span> <span class="p">(</span><span class="n">value</span> <span class="o">-</span> <span class="n">y_min</span><span class="p">)</span>
+                <span class="o">/</span> <span class="p">(</span><span class="n">y_max</span> <span class="o">-</span> <span class="n">y_min</span><span class="p">)</span>
+                <span class="o">*</span> <span class="p">(</span><span class="n">bottom</span> <span class="o">-</span> <span class="n">top</span><span class="p">)</span>
+            <span class="p">)</span>
+
+        <span class="k">return</span> <span class="p">(</span>
+            <span class="n">left</span>
+            <span class="o">+</span> <span class="p">(</span><span class="n">value</span> <span class="o">-</span> <span class="n">y_min</span><span class="p">)</span>
+            <span class="o">/</span> <span class="p">(</span><span class="n">y_max</span> <span class="o">-</span> <span class="n">y_min</span><span class="p">)</span>
+            <span class="o">*</span> <span class="p">(</span><span class="n">right</span> <span class="o">-</span> <span class="n">left</span><span class="p">)</span>
+        <span class="p">)</span></div>
+
+
+    <span class="c1"># ==================================================================</span>
+    <span class="c1"># Grid</span>
+    <span class="c1"># ==================================================================</span>
+
+<div class="viewcode-block" id="QtProfilePlot._grid">
+<a class="viewcode-back" href="../../api_doc/qt_profile_plot.html#pyclickimage.qt_profile_plot.QtProfilePlot._grid">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">_grid</span><span class="p">(</span>
+        <span class="bp">self</span><span class="p">,</span>
+        <span class="n">painter</span><span class="p">:</span> <span class="n">QPainter</span><span class="p">,</span>
+        <span class="n">left</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span>
+        <span class="n">top</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span>
+        <span class="n">right</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span>
+        <span class="n">bottom</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span>
+        <span class="n">x_min</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span>
+        <span class="n">x_max</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span>
+        <span class="n">y_min</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span>
+        <span class="n">y_max</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span>
+        <span class="n">x_ticks</span><span class="p">:</span> <span class="n">Sequence</span><span class="p">[</span><span class="nb">float</span><span class="p">],</span>
+        <span class="n">y_ticks</span><span class="p">:</span> <span class="n">Sequence</span><span class="p">[</span><span class="nb">float</span><span class="p">],</span>
+    <span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">"""Draw the minor and major grid.</span>
+
+<span class="sd">        The minor grid is made of equally spaced lines. The major grid</span>
+<span class="sd">        lines are drawn at the tick positions, so they always match the</span>
+<span class="sd">        ticks and labels.</span>
+<span class="sd">        """</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_show_minor_grid</span> <span class="ow">and</span> <span class="bp">self</span><span class="o">.</span><span class="n">_minor_grid</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_draw_vertical_grid</span><span class="p">(</span>
+                <span class="n">painter</span><span class="p">,</span>
+                <span class="n">left</span><span class="p">,</span>
+                <span class="n">right</span><span class="p">,</span>
+                <span class="n">top</span><span class="p">,</span>
+                <span class="n">bottom</span><span class="p">,</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">_minor_grid</span><span class="p">,</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">_minor_grid_color</span><span class="p">,</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">_minor_grid_width</span><span class="p">,</span>
+            <span class="p">)</span>
+
+            <span class="bp">self</span><span class="o">.</span><span class="n">_draw_horizontal_grid</span><span class="p">(</span>
+                <span class="n">painter</span><span class="p">,</span>
+                <span class="n">left</span><span class="p">,</span>
+                <span class="n">right</span><span class="p">,</span>
+                <span class="n">top</span><span class="p">,</span>
+                <span class="n">bottom</span><span class="p">,</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">_minor_grid</span><span class="p">,</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">_minor_grid_color</span><span class="p">,</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">_minor_grid_width</span><span class="p">,</span>
+            <span class="p">)</span>
+
+        <span class="k">if</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">_show_grid</span><span class="p">:</span>
+            <span class="k">return</span>
+
+        <span class="n">painter</span><span class="o">.</span><span class="n">setPen</span><span class="p">(</span>
+            <span class="n">QPen</span><span class="p">(</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">_grid_color</span><span class="p">,</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">_grid_width</span><span class="p">,</span>
+            <span class="p">)</span>
+        <span class="p">)</span>
+
+        <span class="n">horizontal</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_orientation</span> <span class="o">==</span> <span class="bp">self</span><span class="o">.</span><span class="n">HORIZONTAL</span>
+
+        <span class="k">for</span> <span class="n">value</span> <span class="ow">in</span> <span class="n">x_ticks</span><span class="p">:</span>
+            <span class="k">if</span> <span class="ow">not</span> <span class="n">x_min</span> <span class="o">&lt;=</span> <span class="n">value</span> <span class="o">&lt;=</span> <span class="n">x_max</span><span class="p">:</span>
+                <span class="k">continue</span>
+
+            <span class="n">position</span> <span class="o">=</span> <span class="nb">round</span><span class="p">(</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">_map_x</span><span class="p">(</span><span class="n">value</span><span class="p">,</span> <span class="n">left</span><span class="p">,</span> <span class="n">right</span><span class="p">,</span> <span class="n">top</span><span class="p">,</span> <span class="n">bottom</span><span class="p">,</span> <span class="n">x_min</span><span class="p">,</span> <span class="n">x_max</span><span class="p">)</span>
+            <span class="p">)</span>
+
+            <span class="k">if</span> <span class="n">horizontal</span><span class="p">:</span>
+                <span class="n">painter</span><span class="o">.</span><span class="n">drawLine</span><span class="p">(</span><span class="n">position</span><span class="p">,</span> <span class="n">top</span><span class="p">,</span> <span class="n">position</span><span class="p">,</span> <span class="n">bottom</span><span class="p">)</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="n">painter</span><span class="o">.</span><span class="n">drawLine</span><span class="p">(</span><span class="n">left</span><span class="p">,</span> <span class="n">position</span><span class="p">,</span> <span class="n">right</span><span class="p">,</span> <span class="n">position</span><span class="p">)</span>
+
+        <span class="k">for</span> <span class="n">value</span> <span class="ow">in</span> <span class="n">y_ticks</span><span class="p">:</span>
+            <span class="k">if</span> <span class="ow">not</span> <span class="n">y_min</span> <span class="o">&lt;=</span> <span class="n">value</span> <span class="o">&lt;=</span> <span class="n">y_max</span><span class="p">:</span>
+                <span class="k">continue</span>
+
+            <span class="n">position</span> <span class="o">=</span> <span class="nb">round</span><span class="p">(</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">_map_y</span><span class="p">(</span><span class="n">value</span><span class="p">,</span> <span class="n">left</span><span class="p">,</span> <span class="n">right</span><span class="p">,</span> <span class="n">top</span><span class="p">,</span> <span class="n">bottom</span><span class="p">,</span> <span class="n">y_min</span><span class="p">,</span> <span class="n">y_max</span><span class="p">)</span>
+            <span class="p">)</span>
+
+            <span class="k">if</span> <span class="n">horizontal</span><span class="p">:</span>
+                <span class="n">painter</span><span class="o">.</span><span class="n">drawLine</span><span class="p">(</span><span class="n">left</span><span class="p">,</span> <span class="n">position</span><span class="p">,</span> <span class="n">right</span><span class="p">,</span> <span class="n">position</span><span class="p">)</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="n">painter</span><span class="o">.</span><span class="n">drawLine</span><span class="p">(</span><span class="n">position</span><span class="p">,</span> <span class="n">top</span><span class="p">,</span> <span class="n">position</span><span class="p">,</span> <span class="n">bottom</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="QtProfilePlot._draw_vertical_grid">
+<a class="viewcode-back" href="../../api_doc/qt_profile_plot.html#pyclickimage.qt_profile_plot.QtProfilePlot._draw_vertical_grid">[docs]</a>
+    <span class="nd">@staticmethod</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">_draw_vertical_grid</span><span class="p">(</span>
+        <span class="n">painter</span><span class="p">:</span> <span class="n">QPainter</span><span class="p">,</span>
+        <span class="n">left</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span>
+        <span class="n">right</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span>
+        <span class="n">top</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span>
+        <span class="n">bottom</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span>
+        <span class="n">line_count</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span>
+        <span class="n">color</span><span class="p">:</span> <span class="n">QColor</span><span class="p">,</span>
+        <span class="n">width</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span>
+    <span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">"""Draw equally spaced vertical grid lines.</span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        painter : QPainter</span>
+<span class="sd">            Painter used for rendering.</span>
+<span class="sd">        left, right, top, bottom : int</span>
+<span class="sd">            Plot boundaries.</span>
+<span class="sd">        line_count : int</span>
+<span class="sd">            Number of intervals.</span>
+<span class="sd">        color : QColor</span>
+<span class="sd">            Grid line color.</span>
+<span class="sd">        width : int</span>
+<span class="sd">            Grid line width.</span>
+
+<span class="sd">        Raises</span>
+<span class="sd">        ------</span>
+<span class="sd">        ValueError</span>
+<span class="sd">            If ``line_count &lt;= 0``.</span>
+<span class="sd">        """</span>
+        <span class="k">if</span> <span class="n">line_count</span> <span class="o">&lt;=</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span>
+                <span class="s2">"line_count must be greater than zero."</span>
+            <span class="p">)</span>
+
+        <span class="n">painter</span><span class="o">.</span><span class="n">setPen</span><span class="p">(</span>
+            <span class="n">QPen</span><span class="p">(</span><span class="n">color</span><span class="p">,</span> <span class="n">width</span><span class="p">)</span>
+        <span class="p">)</span>
+
+        <span class="n">plot_width</span> <span class="o">=</span> <span class="n">right</span> <span class="o">-</span> <span class="n">left</span>
+
+        <span class="k">for</span> <span class="n">index</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">line_count</span> <span class="o">+</span> <span class="mi">1</span><span class="p">):</span>
+            <span class="n">x</span> <span class="o">=</span> <span class="nb">round</span><span class="p">(</span>
+                <span class="n">left</span>
+                <span class="o">+</span> <span class="n">index</span> <span class="o">*</span> <span class="n">plot_width</span> <span class="o">/</span> <span class="n">line_count</span>
+            <span class="p">)</span>
+
+            <span class="n">painter</span><span class="o">.</span><span class="n">drawLine</span><span class="p">(</span>
+                <span class="n">x</span><span class="p">,</span>
+                <span class="n">top</span><span class="p">,</span>
+                <span class="n">x</span><span class="p">,</span>
+                <span class="n">bottom</span><span class="p">,</span>
+            <span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="QtProfilePlot._draw_horizontal_grid">
+<a class="viewcode-back" href="../../api_doc/qt_profile_plot.html#pyclickimage.qt_profile_plot.QtProfilePlot._draw_horizontal_grid">[docs]</a>
+    <span class="nd">@staticmethod</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">_draw_horizontal_grid</span><span class="p">(</span>
+        <span class="n">painter</span><span class="p">:</span> <span class="n">QPainter</span><span class="p">,</span>
+        <span class="n">left</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span>
+        <span class="n">right</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span>
+        <span class="n">top</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span>
+        <span class="n">bottom</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span>
+        <span class="n">line_count</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span>
+        <span class="n">color</span><span class="p">:</span> <span class="n">QColor</span><span class="p">,</span>
+        <span class="n">width</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span>
+    <span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">"""Draw equally spaced horizontal grid lines.</span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        painter : QPainter</span>
+<span class="sd">            Painter used for rendering.</span>
+<span class="sd">        left, right, top, bottom : int</span>
+<span class="sd">            Plot boundaries.</span>
+<span class="sd">        line_count : int</span>
+<span class="sd">            Number of intervals.</span>
+<span class="sd">        color : QColor</span>
+<span class="sd">            Grid line color.</span>
+<span class="sd">        width : int</span>
+<span class="sd">            Grid line width.</span>
+
+<span class="sd">        Raises</span>
+<span class="sd">        ------</span>
+<span class="sd">        ValueError</span>
+<span class="sd">            If ``line_count &lt;= 0``.</span>
+<span class="sd">        """</span>
+        <span class="k">if</span> <span class="n">line_count</span> <span class="o">&lt;=</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span>
+                <span class="s2">"line_count must be greater than zero."</span>
+            <span class="p">)</span>
+
+        <span class="n">painter</span><span class="o">.</span><span class="n">setPen</span><span class="p">(</span>
+            <span class="n">QPen</span><span class="p">(</span><span class="n">color</span><span class="p">,</span> <span class="n">width</span><span class="p">)</span>
+        <span class="p">)</span>
+
+        <span class="n">plot_height</span> <span class="o">=</span> <span class="n">bottom</span> <span class="o">-</span> <span class="n">top</span>
+
+        <span class="k">for</span> <span class="n">index</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">line_count</span> <span class="o">+</span> <span class="mi">1</span><span class="p">):</span>
+            <span class="n">y</span> <span class="o">=</span> <span class="nb">round</span><span class="p">(</span>
+                <span class="n">bottom</span>
+                <span class="o">-</span> <span class="n">index</span> <span class="o">*</span> <span class="n">plot_height</span> <span class="o">/</span> <span class="n">line_count</span>
+            <span class="p">)</span>
+
+            <span class="n">painter</span><span class="o">.</span><span class="n">drawLine</span><span class="p">(</span>
+                <span class="n">left</span><span class="p">,</span>
+                <span class="n">y</span><span class="p">,</span>
+                <span class="n">right</span><span class="p">,</span>
+                <span class="n">y</span><span class="p">,</span>
+            <span class="p">)</span></div>
+
+
+    <span class="c1"># ==================================================================</span>
+    <span class="c1"># Profile line</span>
+    <span class="c1"># ==================================================================</span>
+
+<div class="viewcode-block" id="QtProfilePlot._line">
+<a class="viewcode-back" href="../../api_doc/qt_profile_plot.html#pyclickimage.qt_profile_plot.QtProfilePlot._line">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">_line</span><span class="p">(</span>
+        <span class="bp">self</span><span class="p">,</span>
+        <span class="n">painter</span><span class="p">:</span> <span class="n">QPainter</span><span class="p">,</span>
+        <span class="n">left</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span>
+        <span class="n">top</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span>
+        <span class="n">right</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span>
+        <span class="n">bottom</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span>
+        <span class="n">x_min</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span>
+        <span class="n">x_max</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span>
+        <span class="n">y_min</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span>
+        <span class="n">y_max</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span>
+    <span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">"""Draw the sampled profile.</span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        painter : QPainter</span>
+<span class="sd">            Painter used for rendering.</span>
+<span class="sd">        left, top, right, bottom : int</span>
+<span class="sd">            Plot boundaries.</span>
+<span class="sd">        x_min, x_max : float</span>
+<span class="sd">            X axis range.</span>
+<span class="sd">        y_min, y_max : float</span>
+<span class="sd">            Y axis range.</span>
+
+<span class="sd">        Notes</span>
+<span class="sd">        -----</span>
+<span class="sd">        The line is clipped to the plot area, so values outside an</span>
+<span class="sd">        explicit tick range do not overflow on the labels. Non-finite</span>
+<span class="sd">        samples break the line.</span>
+<span class="sd">        """</span>
+        <span class="k">if</span> <span class="n">x_max</span> <span class="o">&lt;=</span> <span class="n">x_min</span> <span class="ow">or</span> <span class="n">y_max</span> <span class="o">&lt;=</span> <span class="n">y_min</span><span class="p">:</span>
+            <span class="k">return</span>
+
+        <span class="n">painter</span><span class="o">.</span><span class="n">save</span><span class="p">()</span>
+
+        <span class="n">painter</span><span class="o">.</span><span class="n">setClipRect</span><span class="p">(</span>
+            <span class="n">left</span><span class="p">,</span>
+            <span class="n">top</span><span class="p">,</span>
+            <span class="n">right</span> <span class="o">-</span> <span class="n">left</span><span class="p">,</span>
+            <span class="n">bottom</span> <span class="o">-</span> <span class="n">top</span><span class="p">,</span>
+        <span class="p">)</span>
+
+        <span class="n">painter</span><span class="o">.</span><span class="n">setPen</span><span class="p">(</span>
+            <span class="n">QPen</span><span class="p">(</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">_line_color</span><span class="p">,</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">_line_width</span><span class="p">,</span>
+            <span class="p">)</span>
+        <span class="p">)</span>
+
+        <span class="n">horizontal</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_orientation</span> <span class="o">==</span> <span class="bp">self</span><span class="o">.</span><span class="n">HORIZONTAL</span>
+
+        <span class="n">previous</span><span class="p">:</span> <span class="nb">tuple</span><span class="p">[</span><span class="nb">int</span><span class="p">,</span> <span class="nb">int</span><span class="p">]</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="kc">None</span>
+
+        <span class="k">for</span> <span class="n">x_value</span><span class="p">,</span> <span class="n">y_value</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_x</span><span class="p">,</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_y</span><span class="p">,</span>
+        <span class="p">):</span>
+            <span class="k">if</span> <span class="ow">not</span> <span class="p">(</span><span class="n">math</span><span class="o">.</span><span class="n">isfinite</span><span class="p">(</span><span class="n">x_value</span><span class="p">)</span> <span class="ow">and</span> <span class="n">math</span><span class="o">.</span><span class="n">isfinite</span><span class="p">(</span><span class="n">y_value</span><span class="p">)):</span>
+                <span class="n">previous</span> <span class="o">=</span> <span class="kc">None</span>
+                <span class="k">continue</span>
+
+            <span class="n">along_x</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_map_x</span><span class="p">(</span>
+                <span class="n">x_value</span><span class="p">,</span> <span class="n">left</span><span class="p">,</span> <span class="n">right</span><span class="p">,</span> <span class="n">top</span><span class="p">,</span> <span class="n">bottom</span><span class="p">,</span> <span class="n">x_min</span><span class="p">,</span> <span class="n">x_max</span>
+            <span class="p">)</span>
+            <span class="n">along_y</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_map_y</span><span class="p">(</span>
+                <span class="n">y_value</span><span class="p">,</span> <span class="n">left</span><span class="p">,</span> <span class="n">right</span><span class="p">,</span> <span class="n">top</span><span class="p">,</span> <span class="n">bottom</span><span class="p">,</span> <span class="n">y_min</span><span class="p">,</span> <span class="n">y_max</span>
+            <span class="p">)</span>
+
+            <span class="k">if</span> <span class="n">horizontal</span><span class="p">:</span>
+                <span class="n">point</span> <span class="o">=</span> <span class="p">(</span><span class="nb">round</span><span class="p">(</span><span class="n">along_x</span><span class="p">),</span> <span class="nb">round</span><span class="p">(</span><span class="n">along_y</span><span class="p">))</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="n">point</span> <span class="o">=</span> <span class="p">(</span><span class="nb">round</span><span class="p">(</span><span class="n">along_y</span><span class="p">),</span> <span class="nb">round</span><span class="p">(</span><span class="n">along_x</span><span class="p">))</span>
+
+            <span class="k">if</span> <span class="n">previous</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+                <span class="n">painter</span><span class="o">.</span><span class="n">drawLine</span><span class="p">(</span>
+                    <span class="n">previous</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span>
+                    <span class="n">previous</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span>
+                    <span class="n">point</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span>
+                    <span class="n">point</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span>
+                <span class="p">)</span>
+
+            <span class="n">previous</span> <span class="o">=</span> <span class="n">point</span>
+
+        <span class="n">painter</span><span class="o">.</span><span class="n">restore</span><span class="p">()</span></div>
+
+
+    <span class="c1"># ==================================================================</span>
+    <span class="c1"># Axes</span>
+    <span class="c1"># ==================================================================</span>
+
+<div class="viewcode-block" id="QtProfilePlot._axes">
+<a class="viewcode-back" href="../../api_doc/qt_profile_plot.html#pyclickimage.qt_profile_plot.QtProfilePlot._axes">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">_axes</span><span class="p">(</span>
+        <span class="bp">self</span><span class="p">,</span>
+        <span class="n">painter</span><span class="p">:</span> <span class="n">QPainter</span><span class="p">,</span>
+        <span class="n">left</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span>
+        <span class="n">top</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span>
+        <span class="n">right</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span>
+        <span class="n">bottom</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span>
+        <span class="n">x_min</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span>
+        <span class="n">x_max</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span>
+        <span class="n">y_min</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span>
+        <span class="n">y_max</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span>
+        <span class="n">x_ticks</span><span class="p">:</span> <span class="n">Sequence</span><span class="p">[</span><span class="nb">float</span><span class="p">],</span>
+        <span class="n">y_ticks</span><span class="p">:</span> <span class="n">Sequence</span><span class="p">[</span><span class="nb">float</span><span class="p">],</span>
+    <span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">"""Draw axes, ticks, labels and titles.</span>
+
+<span class="sd">        ``horizontal`` mode</span>
+<span class="sd">            X axis is at the bottom.</span>
+<span class="sd">            Y axis is at the left.</span>
+
+<span class="sd">        ``vertical`` mode</span>
+<span class="sd">            X axis is at the right.</span>
+<span class="sd">            Y axis is at the bottom.</span>
+<span class="sd">        """</span>
+        <span class="n">painter</span><span class="o">.</span><span class="n">setFont</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_font</span><span class="p">)</span>
+
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_show_axes</span><span class="p">:</span>
+            <span class="n">painter</span><span class="o">.</span><span class="n">setPen</span><span class="p">(</span>
+                <span class="n">QPen</span><span class="p">(</span>
+                    <span class="bp">self</span><span class="o">.</span><span class="n">_axis_color</span><span class="p">,</span>
+                    <span class="bp">self</span><span class="o">.</span><span class="n">_axis_width</span><span class="p">,</span>
+                <span class="p">)</span>
+            <span class="p">)</span>
+
+            <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_orientation</span> <span class="o">==</span> <span class="bp">self</span><span class="o">.</span><span class="n">HORIZONTAL</span><span class="p">:</span>
+                <span class="c1"># X axis: bottom</span>
+                <span class="n">painter</span><span class="o">.</span><span class="n">drawLine</span><span class="p">(</span>
+                    <span class="n">left</span><span class="p">,</span>
+                    <span class="n">bottom</span><span class="p">,</span>
+                    <span class="n">right</span><span class="p">,</span>
+                    <span class="n">bottom</span><span class="p">,</span>
+                <span class="p">)</span>
+
+                <span class="c1"># Y axis: left</span>
+                <span class="n">painter</span><span class="o">.</span><span class="n">drawLine</span><span class="p">(</span>
+                    <span class="n">left</span><span class="p">,</span>
+                    <span class="n">top</span><span class="p">,</span>
+                    <span class="n">left</span><span class="p">,</span>
+                    <span class="n">bottom</span><span class="p">,</span>
+                <span class="p">)</span>
+
+            <span class="k">else</span><span class="p">:</span>
+                <span class="c1"># X axis: right</span>
+                <span class="n">painter</span><span class="o">.</span><span class="n">drawLine</span><span class="p">(</span>
+                    <span class="n">right</span><span class="p">,</span>
+                    <span class="n">top</span><span class="p">,</span>
+                    <span class="n">right</span><span class="p">,</span>
+                    <span class="n">bottom</span><span class="p">,</span>
+                <span class="p">)</span>
+
+                <span class="c1"># Y axis: bottom</span>
+                <span class="n">painter</span><span class="o">.</span><span class="n">drawLine</span><span class="p">(</span>
+                    <span class="n">left</span><span class="p">,</span>
+                    <span class="n">bottom</span><span class="p">,</span>
+                    <span class="n">right</span><span class="p">,</span>
+                    <span class="n">bottom</span><span class="p">,</span>
+                <span class="p">)</span>
+
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_show_ticks</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_ticks_x</span><span class="p">(</span>
+                <span class="n">painter</span><span class="p">,</span>
+                <span class="n">left</span><span class="p">,</span>
+                <span class="n">top</span><span class="p">,</span>
+                <span class="n">right</span><span class="p">,</span>
+                <span class="n">bottom</span><span class="p">,</span>
+                <span class="n">x_min</span><span class="p">,</span>
+                <span class="n">x_max</span><span class="p">,</span>
+                <span class="n">x_ticks</span><span class="p">,</span>
+            <span class="p">)</span>
+
+            <span class="bp">self</span><span class="o">.</span><span class="n">_ticks_y</span><span class="p">(</span>
+                <span class="n">painter</span><span class="p">,</span>
+                <span class="n">left</span><span class="p">,</span>
+                <span class="n">top</span><span class="p">,</span>
+                <span class="n">right</span><span class="p">,</span>
+                <span class="n">bottom</span><span class="p">,</span>
+                <span class="n">y_min</span><span class="p">,</span>
+                <span class="n">y_max</span><span class="p">,</span>
+                <span class="n">y_ticks</span><span class="p">,</span>
+            <span class="p">)</span>
+
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_show_labels</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_labels_x</span><span class="p">(</span>
+                <span class="n">painter</span><span class="p">,</span>
+                <span class="n">left</span><span class="p">,</span>
+                <span class="n">top</span><span class="p">,</span>
+                <span class="n">right</span><span class="p">,</span>
+                <span class="n">bottom</span><span class="p">,</span>
+                <span class="n">x_min</span><span class="p">,</span>
+                <span class="n">x_max</span><span class="p">,</span>
+                <span class="n">x_ticks</span><span class="p">,</span>
+            <span class="p">)</span>
+
+            <span class="bp">self</span><span class="o">.</span><span class="n">_labels_y</span><span class="p">(</span>
+                <span class="n">painter</span><span class="p">,</span>
+                <span class="n">left</span><span class="p">,</span>
+                <span class="n">top</span><span class="p">,</span>
+                <span class="n">right</span><span class="p">,</span>
+                <span class="n">bottom</span><span class="p">,</span>
+                <span class="n">y_min</span><span class="p">,</span>
+                <span class="n">y_max</span><span class="p">,</span>
+                <span class="n">y_ticks</span><span class="p">,</span>
+            <span class="p">)</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">_titles</span><span class="p">(</span>
+            <span class="n">painter</span><span class="p">,</span>
+            <span class="n">left</span><span class="p">,</span>
+            <span class="n">top</span><span class="p">,</span>
+            <span class="n">right</span><span class="p">,</span>
+            <span class="n">bottom</span><span class="p">,</span>
+        <span class="p">)</span></div>
+
+
+    <span class="c1"># ==================================================================</span>
+    <span class="c1"># X ticks</span>
+    <span class="c1"># ==================================================================</span>
+
+<div class="viewcode-block" id="QtProfilePlot._ticks_x">
+<a class="viewcode-back" href="../../api_doc/qt_profile_plot.html#pyclickimage.qt_profile_plot.QtProfilePlot._ticks_x">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">_ticks_x</span><span class="p">(</span>
+        <span class="bp">self</span><span class="p">,</span>
+        <span class="n">painter</span><span class="p">:</span> <span class="n">QPainter</span><span class="p">,</span>
+        <span class="n">left</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span>
+        <span class="n">top</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span>
+        <span class="n">right</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span>
+        <span class="n">bottom</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span>
+        <span class="n">x_min</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span>
+        <span class="n">x_max</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span>
+        <span class="n">ticks</span><span class="p">:</span> <span class="n">Sequence</span><span class="p">[</span><span class="nb">float</span><span class="p">],</span>
+    <span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">"""Draw ticks associated with the X data axis.</span>
+
+<span class="sd">        In ``horizontal`` mode, X ticks are displayed at the bottom.</span>
+
+<span class="sd">        In ``vertical`` mode, X ticks are displayed on the right.</span>
+<span class="sd">        """</span>
+        <span class="k">if</span> <span class="n">x_max</span> <span class="o">&lt;=</span> <span class="n">x_min</span><span class="p">:</span>
+            <span class="k">return</span>
+
+        <span class="n">painter</span><span class="o">.</span><span class="n">setPen</span><span class="p">(</span>
+            <span class="n">QPen</span><span class="p">(</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">_axis_color</span><span class="p">,</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">_tick_width</span><span class="p">,</span>
+            <span class="p">)</span>
+        <span class="p">)</span>
+
+        <span class="k">for</span> <span class="n">value</span> <span class="ow">in</span> <span class="n">ticks</span><span class="p">:</span>
+            <span class="k">if</span> <span class="ow">not</span> <span class="n">x_min</span> <span class="o">&lt;=</span> <span class="n">value</span> <span class="o">&lt;=</span> <span class="n">x_max</span><span class="p">:</span>
+                <span class="k">continue</span>
+
+            <span class="n">position</span> <span class="o">=</span> <span class="nb">round</span><span class="p">(</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">_map_x</span><span class="p">(</span><span class="n">value</span><span class="p">,</span> <span class="n">left</span><span class="p">,</span> <span class="n">right</span><span class="p">,</span> <span class="n">top</span><span class="p">,</span> <span class="n">bottom</span><span class="p">,</span> <span class="n">x_min</span><span class="p">,</span> <span class="n">x_max</span><span class="p">)</span>
+            <span class="p">)</span>
+
+            <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_orientation</span> <span class="o">==</span> <span class="bp">self</span><span class="o">.</span><span class="n">HORIZONTAL</span><span class="p">:</span>
+                <span class="n">painter</span><span class="o">.</span><span class="n">drawLine</span><span class="p">(</span>
+                    <span class="n">position</span><span class="p">,</span>
+                    <span class="n">bottom</span><span class="p">,</span>
+                    <span class="n">position</span><span class="p">,</span>
+                    <span class="n">bottom</span> <span class="o">+</span> <span class="bp">self</span><span class="o">.</span><span class="n">_tick_length</span><span class="p">,</span>
+                <span class="p">)</span>
+
+            <span class="k">else</span><span class="p">:</span>
+                <span class="n">painter</span><span class="o">.</span><span class="n">drawLine</span><span class="p">(</span>
+                    <span class="n">right</span><span class="p">,</span>
+                    <span class="n">position</span><span class="p">,</span>
+                    <span class="n">right</span> <span class="o">+</span> <span class="bp">self</span><span class="o">.</span><span class="n">_tick_length</span><span class="p">,</span>
+                    <span class="n">position</span><span class="p">,</span>
+                <span class="p">)</span></div>
+
+
+    <span class="c1"># ==================================================================</span>
+    <span class="c1"># Y ticks</span>
+    <span class="c1"># ==================================================================</span>
+
+<div class="viewcode-block" id="QtProfilePlot._ticks_y">
+<a class="viewcode-back" href="../../api_doc/qt_profile_plot.html#pyclickimage.qt_profile_plot.QtProfilePlot._ticks_y">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">_ticks_y</span><span class="p">(</span>
+        <span class="bp">self</span><span class="p">,</span>
+        <span class="n">painter</span><span class="p">:</span> <span class="n">QPainter</span><span class="p">,</span>
+        <span class="n">left</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span>
+        <span class="n">top</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span>
+        <span class="n">right</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span>
+        <span class="n">bottom</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span>
+        <span class="n">y_min</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span>
+        <span class="n">y_max</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span>
+        <span class="n">ticks</span><span class="p">:</span> <span class="n">Sequence</span><span class="p">[</span><span class="nb">float</span><span class="p">],</span>
+    <span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">"""Draw ticks associated with the Y data axis.</span>
+
+<span class="sd">        In ``horizontal`` mode, Y ticks are displayed on the left.</span>
+
+<span class="sd">        In ``vertical`` mode, Y ticks are displayed at the bottom.</span>
+<span class="sd">        """</span>
+        <span class="k">if</span> <span class="n">y_max</span> <span class="o">&lt;=</span> <span class="n">y_min</span><span class="p">:</span>
+            <span class="k">return</span>
+
+        <span class="n">painter</span><span class="o">.</span><span class="n">setPen</span><span class="p">(</span>
+            <span class="n">QPen</span><span class="p">(</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">_axis_color</span><span class="p">,</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">_tick_width</span><span class="p">,</span>
+            <span class="p">)</span>
+        <span class="p">)</span>
+
+        <span class="k">for</span> <span class="n">value</span> <span class="ow">in</span> <span class="n">ticks</span><span class="p">:</span>
+            <span class="k">if</span> <span class="ow">not</span> <span class="n">y_min</span> <span class="o">&lt;=</span> <span class="n">value</span> <span class="o">&lt;=</span> <span class="n">y_max</span><span class="p">:</span>
+                <span class="k">continue</span>
+
+            <span class="n">position</span> <span class="o">=</span> <span class="nb">round</span><span class="p">(</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">_map_y</span><span class="p">(</span><span class="n">value</span><span class="p">,</span> <span class="n">left</span><span class="p">,</span> <span class="n">right</span><span class="p">,</span> <span class="n">top</span><span class="p">,</span> <span class="n">bottom</span><span class="p">,</span> <span class="n">y_min</span><span class="p">,</span> <span class="n">y_max</span><span class="p">)</span>
+            <span class="p">)</span>
+
+            <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_orientation</span> <span class="o">==</span> <span class="bp">self</span><span class="o">.</span><span class="n">HORIZONTAL</span><span class="p">:</span>
+                <span class="n">painter</span><span class="o">.</span><span class="n">drawLine</span><span class="p">(</span>
+                    <span class="n">left</span> <span class="o">-</span> <span class="bp">self</span><span class="o">.</span><span class="n">_tick_length</span><span class="p">,</span>
+                    <span class="n">position</span><span class="p">,</span>
+                    <span class="n">left</span><span class="p">,</span>
+                    <span class="n">position</span><span class="p">,</span>
+                <span class="p">)</span>
+
+            <span class="k">else</span><span class="p">:</span>
+                <span class="n">painter</span><span class="o">.</span><span class="n">drawLine</span><span class="p">(</span>
+                    <span class="n">position</span><span class="p">,</span>
+                    <span class="n">bottom</span><span class="p">,</span>
+                    <span class="n">position</span><span class="p">,</span>
+                    <span class="n">bottom</span> <span class="o">+</span> <span class="bp">self</span><span class="o">.</span><span class="n">_tick_length</span><span class="p">,</span>
+                <span class="p">)</span></div>
+
+
+    <span class="c1"># ==================================================================</span>
+    <span class="c1"># X labels</span>
+    <span class="c1"># ==================================================================</span>
+
+<div class="viewcode-block" id="QtProfilePlot._labels_x">
+<a class="viewcode-back" href="../../api_doc/qt_profile_plot.html#pyclickimage.qt_profile_plot.QtProfilePlot._labels_x">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">_labels_x</span><span class="p">(</span>
+        <span class="bp">self</span><span class="p">,</span>
+        <span class="n">painter</span><span class="p">:</span> <span class="n">QPainter</span><span class="p">,</span>
+        <span class="n">left</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span>
+        <span class="n">top</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span>
+        <span class="n">right</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span>
+        <span class="n">bottom</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span>
+        <span class="n">x_min</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span>
+        <span class="n">x_max</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span>
+        <span class="n">ticks</span><span class="p">:</span> <span class="n">Sequence</span><span class="p">[</span><span class="nb">float</span><span class="p">],</span>
+    <span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">"""Draw labels associated with the X data axis.</span>
+
+<span class="sd">        In ``horizontal`` mode, labels are displayed below the plot.</span>
+
+<span class="sd">        In ``vertical`` mode, labels are displayed to the right of the</span>
+<span class="sd">        plot, ``x_min`` at the top and ``x_max`` at the bottom.</span>
+<span class="sd">        """</span>
+        <span class="k">if</span> <span class="n">x_max</span> <span class="o">&lt;=</span> <span class="n">x_min</span><span class="p">:</span>
+            <span class="k">return</span>
+
+        <span class="n">painter</span><span class="o">.</span><span class="n">setPen</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_text_color</span><span class="p">)</span>
+
+        <span class="n">metrics</span> <span class="o">=</span> <span class="n">painter</span><span class="o">.</span><span class="n">fontMetrics</span><span class="p">()</span>
+
+        <span class="k">for</span> <span class="n">value</span> <span class="ow">in</span> <span class="n">ticks</span><span class="p">:</span>
+            <span class="k">if</span> <span class="ow">not</span> <span class="n">x_min</span> <span class="o">&lt;=</span> <span class="n">value</span> <span class="o">&lt;=</span> <span class="n">x_max</span><span class="p">:</span>
+                <span class="k">continue</span>
+
+            <span class="n">label</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_x_formatter</span><span class="p">(</span><span class="n">value</span><span class="p">)</span>
+
+            <span class="n">position</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_map_x</span><span class="p">(</span>
+                <span class="n">value</span><span class="p">,</span> <span class="n">left</span><span class="p">,</span> <span class="n">right</span><span class="p">,</span> <span class="n">top</span><span class="p">,</span> <span class="n">bottom</span><span class="p">,</span> <span class="n">x_min</span><span class="p">,</span> <span class="n">x_max</span>
+            <span class="p">)</span>
+
+            <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_orientation</span> <span class="o">==</span> <span class="bp">self</span><span class="o">.</span><span class="n">HORIZONTAL</span><span class="p">:</span>
+                <span class="n">width</span> <span class="o">=</span> <span class="n">metrics</span><span class="o">.</span><span class="n">horizontalAdvance</span><span class="p">(</span><span class="n">label</span><span class="p">)</span>
+
+                <span class="n">painter</span><span class="o">.</span><span class="n">drawText</span><span class="p">(</span>
+                    <span class="nb">round</span><span class="p">(</span><span class="n">position</span> <span class="o">-</span> <span class="n">width</span> <span class="o">/</span> <span class="mi">2</span><span class="p">),</span>
+                    <span class="nb">round</span><span class="p">(</span>
+                        <span class="n">bottom</span>
+                        <span class="o">+</span> <span class="bp">self</span><span class="o">.</span><span class="n">_tick_length</span>
+                        <span class="o">+</span> <span class="n">metrics</span><span class="o">.</span><span class="n">ascent</span><span class="p">()</span>
+                        <span class="o">+</span> <span class="mi">4</span>
+                    <span class="p">),</span>
+                    <span class="n">label</span><span class="p">,</span>
+                <span class="p">)</span>
+
+            <span class="k">else</span><span class="p">:</span>
+                <span class="n">baseline</span> <span class="o">=</span> <span class="p">(</span>
+                    <span class="n">position</span>
+                    <span class="o">+</span> <span class="p">(</span>
+                        <span class="n">metrics</span><span class="o">.</span><span class="n">ascent</span><span class="p">()</span>
+                        <span class="o">-</span> <span class="n">metrics</span><span class="o">.</span><span class="n">descent</span><span class="p">()</span>
+                    <span class="p">)</span> <span class="o">/</span> <span class="mi">2</span>
+                <span class="p">)</span>
+
+                <span class="n">painter</span><span class="o">.</span><span class="n">drawText</span><span class="p">(</span>
+                    <span class="nb">round</span><span class="p">(</span>
+                        <span class="n">right</span>
+                        <span class="o">+</span> <span class="bp">self</span><span class="o">.</span><span class="n">_tick_length</span>
+                        <span class="o">+</span> <span class="mi">6</span>
+                    <span class="p">),</span>
+                    <span class="nb">round</span><span class="p">(</span><span class="n">baseline</span><span class="p">),</span>
+                    <span class="n">label</span><span class="p">,</span>
+                <span class="p">)</span></div>
+
+
+    <span class="c1"># ==================================================================</span>
+    <span class="c1"># Y labels</span>
+    <span class="c1"># ==================================================================</span>
+
+<div class="viewcode-block" id="QtProfilePlot._labels_y">
+<a class="viewcode-back" href="../../api_doc/qt_profile_plot.html#pyclickimage.qt_profile_plot.QtProfilePlot._labels_y">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">_labels_y</span><span class="p">(</span>
+        <span class="bp">self</span><span class="p">,</span>
+        <span class="n">painter</span><span class="p">:</span> <span class="n">QPainter</span><span class="p">,</span>
+        <span class="n">left</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span>
+        <span class="n">top</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span>
+        <span class="n">right</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span>
+        <span class="n">bottom</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span>
+        <span class="n">y_min</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span>
+        <span class="n">y_max</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span>
+        <span class="n">ticks</span><span class="p">:</span> <span class="n">Sequence</span><span class="p">[</span><span class="nb">float</span><span class="p">],</span>
+    <span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">"""Draw labels associated with the Y data axis.</span>
+
+<span class="sd">        In ``horizontal`` mode, labels are displayed to the left.</span>
+
+<span class="sd">        In ``vertical`` mode, labels are displayed below the plot.</span>
+<span class="sd">        """</span>
+        <span class="k">if</span> <span class="n">y_max</span> <span class="o">&lt;=</span> <span class="n">y_min</span><span class="p">:</span>
+            <span class="k">return</span>
+
+        <span class="n">painter</span><span class="o">.</span><span class="n">setPen</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_text_color</span><span class="p">)</span>
+
+        <span class="n">metrics</span> <span class="o">=</span> <span class="n">painter</span><span class="o">.</span><span class="n">fontMetrics</span><span class="p">()</span>
+
+        <span class="k">for</span> <span class="n">value</span> <span class="ow">in</span> <span class="n">ticks</span><span class="p">:</span>
+            <span class="k">if</span> <span class="ow">not</span> <span class="n">y_min</span> <span class="o">&lt;=</span> <span class="n">value</span> <span class="o">&lt;=</span> <span class="n">y_max</span><span class="p">:</span>
+                <span class="k">continue</span>
+
+            <span class="n">label</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_y_formatter</span><span class="p">(</span><span class="n">value</span><span class="p">)</span>
+
+            <span class="n">width</span> <span class="o">=</span> <span class="n">metrics</span><span class="o">.</span><span class="n">horizontalAdvance</span><span class="p">(</span><span class="n">label</span><span class="p">)</span>
+
+            <span class="n">position</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_map_y</span><span class="p">(</span>
+                <span class="n">value</span><span class="p">,</span> <span class="n">left</span><span class="p">,</span> <span class="n">right</span><span class="p">,</span> <span class="n">top</span><span class="p">,</span> <span class="n">bottom</span><span class="p">,</span> <span class="n">y_min</span><span class="p">,</span> <span class="n">y_max</span>
+            <span class="p">)</span>
+
+            <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_orientation</span> <span class="o">==</span> <span class="bp">self</span><span class="o">.</span><span class="n">HORIZONTAL</span><span class="p">:</span>
+                <span class="n">baseline</span> <span class="o">=</span> <span class="p">(</span>
+                    <span class="n">position</span>
+                    <span class="o">+</span> <span class="p">(</span>
+                        <span class="n">metrics</span><span class="o">.</span><span class="n">ascent</span><span class="p">()</span>
+                        <span class="o">-</span> <span class="n">metrics</span><span class="o">.</span><span class="n">descent</span><span class="p">()</span>
+                    <span class="p">)</span> <span class="o">/</span> <span class="mi">2</span>
+                <span class="p">)</span>
+
+                <span class="n">painter</span><span class="o">.</span><span class="n">drawText</span><span class="p">(</span>
+                    <span class="nb">round</span><span class="p">(</span>
+                        <span class="n">left</span>
+                        <span class="o">-</span> <span class="bp">self</span><span class="o">.</span><span class="n">_tick_length</span>
+                        <span class="o">-</span> <span class="n">width</span>
+                        <span class="o">-</span> <span class="mi">6</span>
+                    <span class="p">),</span>
+                    <span class="nb">round</span><span class="p">(</span><span class="n">baseline</span><span class="p">),</span>
+                    <span class="n">label</span><span class="p">,</span>
+                <span class="p">)</span>
+
+            <span class="k">else</span><span class="p">:</span>
+                <span class="n">painter</span><span class="o">.</span><span class="n">drawText</span><span class="p">(</span>
+                    <span class="nb">round</span><span class="p">(</span><span class="n">position</span> <span class="o">-</span> <span class="n">width</span> <span class="o">/</span> <span class="mi">2</span><span class="p">),</span>
+                    <span class="nb">round</span><span class="p">(</span>
+                        <span class="n">bottom</span>
+                        <span class="o">+</span> <span class="bp">self</span><span class="o">.</span><span class="n">_tick_length</span>
+                        <span class="o">+</span> <span class="n">metrics</span><span class="o">.</span><span class="n">ascent</span><span class="p">()</span>
+                        <span class="o">+</span> <span class="mi">4</span>
+                    <span class="p">),</span>
+                    <span class="n">label</span><span class="p">,</span>
+                <span class="p">)</span></div>
+
+
+    <span class="c1"># ==================================================================</span>
+    <span class="c1"># Titles</span>
+    <span class="c1"># ==================================================================</span>
+
+<div class="viewcode-block" id="QtProfilePlot._titles">
+<a class="viewcode-back" href="../../api_doc/qt_profile_plot.html#pyclickimage.qt_profile_plot.QtProfilePlot._titles">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">_titles</span><span class="p">(</span>
+        <span class="bp">self</span><span class="p">,</span>
+        <span class="n">painter</span><span class="p">:</span> <span class="n">QPainter</span><span class="p">,</span>
+        <span class="n">left</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span>
+        <span class="n">top</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span>
+        <span class="n">right</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span>
+        <span class="n">bottom</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span>
+    <span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">"""Draw X and Y axis titles.</span>
+
+<span class="sd">        ``horizontal`` mode</span>
+<span class="sd">            * X title: centered below the plot.</span>
+<span class="sd">            * Y title: horizontal, centered above the Y axis.</span>
+
+<span class="sd">        ``vertical`` mode</span>
+<span class="sd">            * X title: vertical, rotated 90 degrees, to the right</span>
+<span class="sd">              of the plot.</span>
+<span class="sd">            * Y title: horizontal, centered below the plot.</span>
+<span class="sd">        """</span>
+        <span class="n">painter</span><span class="o">.</span><span class="n">setPen</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_text_color</span><span class="p">)</span>
+
+        <span class="n">metrics</span> <span class="o">=</span> <span class="n">painter</span><span class="o">.</span><span class="n">fontMetrics</span><span class="p">()</span>
+
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_orientation</span> <span class="o">==</span> <span class="bp">self</span><span class="o">.</span><span class="n">HORIZONTAL</span><span class="p">:</span>
+
+            <span class="c1"># ----------------------------------------------------------</span>
+            <span class="c1"># X title: centered below the plot</span>
+            <span class="c1"># ----------------------------------------------------------</span>
+
+            <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_x_title</span><span class="p">:</span>
+                <span class="n">width</span> <span class="o">=</span> <span class="n">metrics</span><span class="o">.</span><span class="n">horizontalAdvance</span><span class="p">(</span>
+                    <span class="bp">self</span><span class="o">.</span><span class="n">_x_title</span>
+                <span class="p">)</span>
+
+                <span class="n">painter</span><span class="o">.</span><span class="n">drawText</span><span class="p">(</span>
+                    <span class="nb">round</span><span class="p">(</span>
+                        <span class="p">(</span><span class="n">left</span> <span class="o">+</span> <span class="n">right</span> <span class="o">-</span> <span class="n">width</span><span class="p">)</span> <span class="o">/</span> <span class="mi">2</span>
+                    <span class="p">),</span>
+                    <span class="nb">round</span><span class="p">(</span>
+                        <span class="n">bottom</span>
+                        <span class="o">+</span> <span class="bp">self</span><span class="o">.</span><span class="n">_tick_length</span>
+                        <span class="o">+</span> <span class="n">metrics</span><span class="o">.</span><span class="n">height</span><span class="p">()</span>
+                        <span class="o">+</span> <span class="mi">14</span>
+                    <span class="p">),</span>
+                    <span class="bp">self</span><span class="o">.</span><span class="n">_x_title</span><span class="p">,</span>
+                <span class="p">)</span>
+
+            <span class="c1"># ----------------------------------------------------------</span>
+            <span class="c1"># Y title: centered above the Y axis (located at ``left``)</span>
+            <span class="c1"># ----------------------------------------------------------</span>
+
+            <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_y_title</span><span class="p">:</span>
+                <span class="n">width</span> <span class="o">=</span> <span class="n">metrics</span><span class="o">.</span><span class="n">horizontalAdvance</span><span class="p">(</span>
+                    <span class="bp">self</span><span class="o">.</span><span class="n">_y_title</span>
+                <span class="p">)</span>
+
+                <span class="n">painter</span><span class="o">.</span><span class="n">drawText</span><span class="p">(</span>
+                    <span class="nb">round</span><span class="p">(</span><span class="n">left</span> <span class="o">-</span> <span class="n">width</span> <span class="o">/</span> <span class="mi">2</span><span class="p">),</span>
+                    <span class="nb">round</span><span class="p">(</span><span class="n">top</span> <span class="o">-</span> <span class="mi">8</span><span class="p">),</span>
+                    <span class="bp">self</span><span class="o">.</span><span class="n">_y_title</span><span class="p">,</span>
+                <span class="p">)</span>
+
+        <span class="k">else</span><span class="p">:</span>
+
+            <span class="c1"># ----------------------------------------------------------</span>
+            <span class="c1"># X title: rotated, to the right of the plot</span>
+            <span class="c1"># ----------------------------------------------------------</span>
+
+            <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_x_title</span><span class="p">:</span>
+                <span class="n">painter</span><span class="o">.</span><span class="n">save</span><span class="p">()</span>
+
+                <span class="n">painter</span><span class="o">.</span><span class="n">translate</span><span class="p">(</span>
+                    <span class="n">right</span>
+                    <span class="o">+</span> <span class="bp">self</span><span class="o">.</span><span class="n">_tick_length</span>
+                    <span class="o">+</span> <span class="n">metrics</span><span class="o">.</span><span class="n">height</span><span class="p">()</span>
+                    <span class="o">+</span> <span class="mi">12</span><span class="p">,</span>
+                    <span class="p">(</span><span class="n">top</span> <span class="o">+</span> <span class="n">bottom</span><span class="p">)</span> <span class="o">/</span> <span class="mi">2</span><span class="p">,</span>
+                <span class="p">)</span>
+
+                <span class="n">painter</span><span class="o">.</span><span class="n">rotate</span><span class="p">(</span><span class="o">-</span><span class="mi">90</span><span class="p">)</span>
+
+                <span class="n">width</span> <span class="o">=</span> <span class="n">metrics</span><span class="o">.</span><span class="n">horizontalAdvance</span><span class="p">(</span>
+                    <span class="bp">self</span><span class="o">.</span><span class="n">_x_title</span>
+                <span class="p">)</span>
+
+                <span class="n">painter</span><span class="o">.</span><span class="n">drawText</span><span class="p">(</span>
+                    <span class="nb">round</span><span class="p">(</span><span class="o">-</span><span class="n">width</span> <span class="o">/</span> <span class="mi">2</span><span class="p">),</span>
+                    <span class="nb">round</span><span class="p">(</span><span class="n">metrics</span><span class="o">.</span><span class="n">ascent</span><span class="p">()</span> <span class="o">/</span> <span class="mi">2</span><span class="p">),</span>
+                    <span class="bp">self</span><span class="o">.</span><span class="n">_x_title</span><span class="p">,</span>
+                <span class="p">)</span>
+
+                <span class="n">painter</span><span class="o">.</span><span class="n">restore</span><span class="p">()</span>
+
+            <span class="c1"># ----------------------------------------------------------</span>
+            <span class="c1"># Y title: centered below the plot</span>
+            <span class="c1"># ----------------------------------------------------------</span>
+
+            <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_y_title</span><span class="p">:</span>
+                <span class="n">width</span> <span class="o">=</span> <span class="n">metrics</span><span class="o">.</span><span class="n">horizontalAdvance</span><span class="p">(</span>
+                    <span class="bp">self</span><span class="o">.</span><span class="n">_y_title</span>
+                <span class="p">)</span>
+
+                <span class="n">painter</span><span class="o">.</span><span class="n">drawText</span><span class="p">(</span>
+                    <span class="nb">round</span><span class="p">(</span>
+                        <span class="p">(</span><span class="n">left</span> <span class="o">+</span> <span class="n">right</span> <span class="o">-</span> <span class="n">width</span><span class="p">)</span> <span class="o">/</span> <span class="mi">2</span>
+                    <span class="p">),</span>
+                    <span class="nb">round</span><span class="p">(</span>
+                        <span class="n">bottom</span>
+                        <span class="o">+</span> <span class="bp">self</span><span class="o">.</span><span class="n">_tick_length</span>
+                        <span class="o">+</span> <span class="n">metrics</span><span class="o">.</span><span class="n">height</span><span class="p">()</span>
+                        <span class="o">+</span> <span class="mi">14</span>
+                    <span class="p">),</span>
+                    <span class="bp">self</span><span class="o">.</span><span class="n">_y_title</span><span class="p">,</span>
+                <span class="p">)</span></div>
+
+
+    <span class="c1"># ==================================================================</span>
+    <span class="c1"># Frame</span>
+    <span class="c1"># ==================================================================</span>
+
+<div class="viewcode-block" id="QtProfilePlot._frame">
+<a class="viewcode-back" href="../../api_doc/qt_profile_plot.html#pyclickimage.qt_profile_plot.QtProfilePlot._frame">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">_frame</span><span class="p">(</span>
+        <span class="bp">self</span><span class="p">,</span>
+        <span class="n">painter</span><span class="p">:</span> <span class="n">QPainter</span><span class="p">,</span>
+        <span class="n">left</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span>
+        <span class="n">top</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span>
+        <span class="n">right</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span>
+        <span class="n">bottom</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span>
+    <span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">"""Draw the border around the plotting area.</span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        painter : QPainter</span>
+<span class="sd">            Painter used for rendering.</span>
+<span class="sd">        left, top, right, bottom : int</span>
+<span class="sd">            Plot boundaries.</span>
+<span class="sd">        """</span>
+        <span class="n">painter</span><span class="o">.</span><span class="n">setBrush</span><span class="p">(</span><span class="n">Qt</span><span class="o">.</span><span class="n">NoBrush</span><span class="p">)</span>
+
+        <span class="n">painter</span><span class="o">.</span><span class="n">setPen</span><span class="p">(</span>
+            <span class="n">QPen</span><span class="p">(</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">_border_color</span><span class="p">,</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">_border_width</span><span class="p">,</span>
+            <span class="p">)</span>
+        <span class="p">)</span>
+
+        <span class="n">painter</span><span class="o">.</span><span class="n">drawRect</span><span class="p">(</span>
+            <span class="n">left</span><span class="p">,</span>
+            <span class="n">top</span><span class="p">,</span>
+            <span class="n">right</span> <span class="o">-</span> <span class="n">left</span><span class="p">,</span>
+            <span class="n">bottom</span> <span class="o">-</span> <span class="n">top</span><span class="p">,</span>
+        <span class="p">)</span></div>
+</div>
+
+</pre></div>
+
+                </article>
+              
+              
+              
+              
+              
+                <footer class="prev-next-footer d-print-none">
+                  
+<div class="prev-next-area">
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+          </footer>
+        
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script defer src="../../_static/scripts/bootstrap.js?digest=18bd87630a240e9c25be"></script>
+<script defer src="../../_static/scripts/pydata-sphinx-theme.js?digest=18bd87630a240e9c25be"></script>
+
+  <footer class="bd-footer">
+<div class="bd-footer__inner bd-page-width">
+  
+    <div class="footer-items__start">
+      
+        <div class="footer-item">
+
+  <p class="copyright">
+    
+      © Copyright 2025-2026, Artezaru.
+      <br/>
+    
+  </p>
+</div>
+      
+        <div class="footer-item">
+
+  <p class="sphinx-version">
+    Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 9.0.4.
+  </p>
+</div>
+      
+    </div>
+  
+  
+  
+    <div class="footer-items__end">
+      
+        <div class="footer-item">
+<p class="theme-version">
+  <!-- # L10n: Setting the PST URL as an argument as this does not need to be localized -->
+  Built with the <a href="https://pydata-sphinx-theme.readthedocs.io/en/stable/index.html">PyData Sphinx Theme</a> 0.23.0.
+</p></div>
+      
+    </div>
+  
+</div>
+
+  </footer>
+  </body>
+</html>
